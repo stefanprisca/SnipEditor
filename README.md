@@ -2,7 +2,7 @@ SnipEditor_MavenBuild
 =====================
 This is the first try at a maven build. It includes an update site from which the user can simply install the <br>
 snippet editor.<br>
-The meaning of the projects is teh following:<br>
+The meaning of the projects is the following:<br>
   -> org.eclipse.recommenders.snipeditor.releng: the release project. It contains the project pom file, describing <br>
   all the other projects.<br>
   -> org.eclipse.recommenders.snipeditor.updatesite: the update site for this project.<br>
