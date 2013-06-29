@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/org.eclipse.recommenders.snipeditor.sdk_1.0.0.qualifier.jar" id="org.eclipse.recommenders.snipeditor.sdk" version="1.0.0.qualifier">
+      <category name="org.eclipse.recommenders.snipeditor"/>
+   </feature>
+   <category-def name="org.eclipse.recommenders.snipeditor" label="SnipEditor"/>
+</site>
