@@ -43,7 +43,7 @@ method:
 	(visibility=Visibility)? 'static'? jType = JvmTypeReference
 	name=ValidID'('(params+=parameter
 		(','params+=parameter)*)?')'
-	body=XExpressionInsideBlock
+	body=myBlockExpression
 ;
 
 
@@ -56,9 +56,6 @@ attribute :
  	'${' ValidID '}'
  ;
 
-XExpressionInsideBlock returns xbase::XExpression:
-	XExpression | myBlockExpression;
-
 myBlockExpression returns xbase::XExpression:
 	{myBlockExpression}
 	'{'
@@ -67,9 +64,8 @@ myBlockExpression returns xbase::XExpression:
 ;
 
 blockFeature returns xbase::XExpression:
-	attribute
+	attribute | XPrimaryExpression 
 ;
-
 
 enum Visibility :
 	 protected | public | private
