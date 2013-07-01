@@ -12,5 +12,5 @@
   <artifactId>org.eclipse.recommenders.snipeditor.sdk</artifactId>
   <packaging>eclipse-feature</packaging>
 
-  <name>MyDSL core language services</name>
+  <name>MyDSL SDK</name>
 </project>
