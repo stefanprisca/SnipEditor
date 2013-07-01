@@ -10,7 +10,7 @@ The meaning of the projects is the following:<br>
   -> the rest of the projects are the XText projects. Note that this have not been modified, they are fresh projects.<br>
 <br>
 In order to open the projects in eclipse, simply clone the repo on the local computer and import the projects<br>
-in eclipse.
+in eclipse. You will also need to generate the language artifacts.
 <br>
 <br>
 
