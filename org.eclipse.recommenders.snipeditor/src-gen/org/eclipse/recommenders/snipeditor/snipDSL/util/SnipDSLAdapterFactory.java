@@ -11,6 +11,8 @@ import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.recommenders.snipeditor.snipDSL.*;
 
+import org.eclipse.xtext.xbase.XExpression;
+
 /**
  * <!-- begin-user-doc -->
  * The <b>Adapter Factory</b> for the model.
@@ -75,14 +77,49 @@ public class SnipDSLAdapterFactory extends AdapterFactoryImpl
     new SnipDSLSwitch<Adapter>()
     {
       @Override
-      public Adapter caseModel(Model object)
+      public Adapter casedomainmodel(domainmodel object)
       {
-        return createModelAdapter();
+        return createdomainmodelAdapter();
       }
       @Override
-      public Adapter caseGreeting(Greeting object)
+      public Adapter caseimportDeclare(importDeclare object)
       {
-        return createGreetingAdapter();
+        return createimportDeclareAdapter();
+      }
+      @Override
+      public Adapter casepackageDeclare(packageDeclare object)
+      {
+        return createpackageDeclareAdapter();
+      }
+      @Override
+      public Adapter caseentity(entity object)
+      {
+        return createentityAdapter();
+      }
+      @Override
+      public Adapter caseparameter(parameter object)
+      {
+        return createparameterAdapter();
+      }
+      @Override
+      public Adapter casemethod(method object)
+      {
+        return createmethodAdapter();
+      }
+      @Override
+      public Adapter caseattribute(attribute object)
+      {
+        return createattributeAdapter();
+      }
+      @Override
+      public Adapter casemyBlockExpression(myBlockExpression object)
+      {
+        return createmyBlockExpressionAdapter();
+      }
+      @Override
+      public Adapter caseXExpression(XExpression object)
+      {
+        return createXExpressionAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -107,31 +144,136 @@ public class SnipDSLAdapterFactory extends AdapterFactoryImpl
 
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.recommenders.snipeditor.snipDSL.Model <em>Model</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipse.recommenders.snipeditor.snipDSL.domainmodel <em>domainmodel</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipse.recommenders.snipeditor.snipDSL.Model
+   * @see org.eclipse.recommenders.snipeditor.snipDSL.domainmodel
    * @generated
    */
-  public Adapter createModelAdapter()
+  public Adapter createdomainmodelAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.recommenders.snipeditor.snipDSL.Greeting <em>Greeting</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipse.recommenders.snipeditor.snipDSL.importDeclare <em>import Declare</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipse.recommenders.snipeditor.snipDSL.Greeting
+   * @see org.eclipse.recommenders.snipeditor.snipDSL.importDeclare
    * @generated
    */
-  public Adapter createGreetingAdapter()
+  public Adapter createimportDeclareAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.recommenders.snipeditor.snipDSL.packageDeclare <em>package Declare</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.recommenders.snipeditor.snipDSL.packageDeclare
+   * @generated
+   */
+  public Adapter createpackageDeclareAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.recommenders.snipeditor.snipDSL.entity <em>entity</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.recommenders.snipeditor.snipDSL.entity
+   * @generated
+   */
+  public Adapter createentityAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.recommenders.snipeditor.snipDSL.parameter <em>parameter</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.recommenders.snipeditor.snipDSL.parameter
+   * @generated
+   */
+  public Adapter createparameterAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.recommenders.snipeditor.snipDSL.method <em>method</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.recommenders.snipeditor.snipDSL.method
+   * @generated
+   */
+  public Adapter createmethodAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.recommenders.snipeditor.snipDSL.attribute <em>attribute</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.recommenders.snipeditor.snipDSL.attribute
+   * @generated
+   */
+  public Adapter createattributeAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.recommenders.snipeditor.snipDSL.myBlockExpression <em>my Block Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.recommenders.snipeditor.snipDSL.myBlockExpression
+   * @generated
+   */
+  public Adapter createmyBlockExpressionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xbase.XExpression <em>XExpression</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.xbase.XExpression
+   * @generated
+   */
+  public Adapter createXExpressionAdapter()
   {
     return null;
   }
