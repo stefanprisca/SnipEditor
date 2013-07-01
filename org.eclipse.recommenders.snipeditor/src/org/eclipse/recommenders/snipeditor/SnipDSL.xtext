@@ -1,0 +1,9 @@
+grammar org.eclipse.recommenders.snipeditor.SnipDSL with org.eclipse.xtext.common.Terminals
+
+generate snipDSL "http://www.eclipse.org/recommenders/snipeditor/SnipDSL"
+
+Model:
+	greetings+=Greeting*;
+	
+Greeting:
+	'Hello' name=ID '!';
