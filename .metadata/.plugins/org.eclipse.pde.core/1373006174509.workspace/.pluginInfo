@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<map>
-	<bundle bundleID="604" localization="OSGI-INF/l10n/bundle" name="org.eclipse.recommenders.snipeditor" project="org.eclipse.recommenders.snipeditor" provider="My Company"/>
-	<bundle bundleID="605" localization="OSGI-INF/l10n/bundle" name="org.eclipse.recommenders.snipeditor.tests" project="org.eclipse.recommenders.snipeditor.tests" provider="My Company"/>
-	<bundle bundleID="606" class="org.eclipse.recommenders.snipeditor.ui.internal.SnipDSLActivator" localization="OSGI-INF/l10n/bundle" name="org.eclipse.recommenders.snipeditor.ui" project="org.eclipse.recommenders.snipeditor.ui" provider="My Company"/>
-</map>
