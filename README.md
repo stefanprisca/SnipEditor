@@ -1,6 +1,7 @@
 SnipEditor_MavenBuild
 =====================
-Working maven build and a part of the JFace grammar. The update site will be deployed in a different repository.<br>  
+Working maven build and a part of the JFace grammar. The update site can be found here[1]. In order to use, please<br> 
+follow the instructions provided in the update site readme file. It does not work directly from eclipse IDE(yet).<br>  
 This build supports syntax for class declarations, method declarations and attribute declarations and assignments.<br>
 The meaning of the projects is the following:<br>
   -> org.eclipse.recommenders.snipeditor.releng: the release project. It contains the project pom file, describing <br>
@@ -19,3 +20,5 @@ In order to build this, follow the steps:<br>
  (3)go to ../org.eclipse.recommenders.snipeditor.releng<br>
  (4)run the command mvn clean install.<br>
 <br>
+
+[1]https://github.com/stefanprisca/SnipEditor_UpdateSite
