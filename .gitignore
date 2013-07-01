@@ -14,7 +14,7 @@ tmp/
 *~.nib
 local.properties
 
-target
+target/
 *-gen/
 .settings/
 .loadpath
