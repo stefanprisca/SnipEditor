@@ -4,15 +4,27 @@ package org.eclipse.recommenders.snipeditor.snipDSL.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
-import org.eclipse.recommenders.snipeditor.snipDSL.Greeting;
-import org.eclipse.recommenders.snipeditor.snipDSL.Model;
 import org.eclipse.recommenders.snipeditor.snipDSL.SnipDSLFactory;
 import org.eclipse.recommenders.snipeditor.snipDSL.SnipDSLPackage;
+import org.eclipse.recommenders.snipeditor.snipDSL.Visibility;
+import org.eclipse.recommenders.snipeditor.snipDSL.attribute;
+import org.eclipse.recommenders.snipeditor.snipDSL.domainmodel;
+import org.eclipse.recommenders.snipeditor.snipDSL.entity;
+import org.eclipse.recommenders.snipeditor.snipDSL.importDeclare;
+import org.eclipse.recommenders.snipeditor.snipDSL.method;
+import org.eclipse.recommenders.snipeditor.snipDSL.myBlockExpression;
+import org.eclipse.recommenders.snipeditor.snipDSL.packageDeclare;
+import org.eclipse.recommenders.snipeditor.snipDSL.parameter;
+
+import org.eclipse.xtext.common.types.TypesPackage;
+
+import org.eclipse.xtext.xbase.XbasePackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,14 +39,63 @@ public class SnipDSLPackageImpl extends EPackageImpl implements SnipDSLPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass modelEClass = null;
+  private EClass domainmodelEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass greetingEClass = null;
+  private EClass importDeclareEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass packageDeclareEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass entityEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass parameterEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass methodEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass attributeEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass myBlockExpressionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EEnum visibilityEEnum = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -84,6 +145,9 @@ public class SnipDSLPackageImpl extends EPackageImpl implements SnipDSLPackage
 
     isInited = true;
 
+    // Initialize simple dependencies
+    XbasePackage.eINSTANCE.eClass();
+
     // Create package meta-data objects
     theSnipDSLPackage.createPackageContents();
 
@@ -104,9 +168,9 @@ public class SnipDSLPackageImpl extends EPackageImpl implements SnipDSLPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getModel()
+  public EClass getdomainmodel()
   {
-    return modelEClass;
+    return domainmodelEClass;
   }
 
   /**
@@ -114,9 +178,9 @@ public class SnipDSLPackageImpl extends EPackageImpl implements SnipDSLPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getModel_Greetings()
+  public EReference getdomainmodel_ImportSection()
   {
-    return (EReference)modelEClass.getEStructuralFeatures().get(0);
+    return (EReference)domainmodelEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -124,9 +188,9 @@ public class SnipDSLPackageImpl extends EPackageImpl implements SnipDSLPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getGreeting()
+  public EReference getdomainmodel_Elements()
   {
-    return greetingEClass;
+    return (EReference)domainmodelEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -134,9 +198,269 @@ public class SnipDSLPackageImpl extends EPackageImpl implements SnipDSLPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getGreeting_Name()
+  public EClass getimportDeclare()
   {
-    return (EAttribute)greetingEClass.getEStructuralFeatures().get(0);
+    return importDeclareEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getimportDeclare_Name()
+  {
+    return (EAttribute)importDeclareEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getpackageDeclare()
+  {
+    return packageDeclareEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getpackageDeclare_Name()
+  {
+    return (EAttribute)packageDeclareEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getpackageDeclare_Elements()
+  {
+    return (EReference)packageDeclareEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getentity()
+  {
+    return entityEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getentity_Visibility()
+  {
+    return (EAttribute)entityEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getentity_Name()
+  {
+    return (EAttribute)entityEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getentity_SuperType()
+  {
+    return (EReference)entityEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getentity_Features()
+  {
+    return (EReference)entityEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getparameter()
+  {
+    return parameterEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getparameter_ParameterType()
+  {
+    return (EReference)parameterEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getparameter_Name()
+  {
+    return (EAttribute)parameterEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getmethod()
+  {
+    return methodEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getmethod_Visibility()
+  {
+    return (EAttribute)methodEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getmethod_JType()
+  {
+    return (EReference)methodEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getmethod_Name()
+  {
+    return (EAttribute)methodEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getmethod_Params()
+  {
+    return (EReference)methodEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getmethod_Body()
+  {
+    return (EReference)methodEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getattribute()
+  {
+    return attributeEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getattribute_Visible()
+  {
+    return (EAttribute)attributeEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getattribute_JType()
+  {
+    return (EReference)attributeEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getattribute_Name()
+  {
+    return (EAttribute)attributeEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getattribute_Value()
+  {
+    return (EReference)attributeEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getmyBlockExpression()
+  {
+    return myBlockExpressionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getmyBlockExpression_Expressions()
+  {
+    return (EReference)myBlockExpressionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EEnum getVisibility()
+  {
+    return visibilityEEnum;
   }
 
   /**
@@ -169,11 +493,45 @@ public class SnipDSLPackageImpl extends EPackageImpl implements SnipDSLPackage
     isCreated = true;
 
     // Create classes and their features
-    modelEClass = createEClass(MODEL);
-    createEReference(modelEClass, MODEL__GREETINGS);
+    domainmodelEClass = createEClass(DOMAINMODEL);
+    createEReference(domainmodelEClass, DOMAINMODEL__IMPORT_SECTION);
+    createEReference(domainmodelEClass, DOMAINMODEL__ELEMENTS);
 
-    greetingEClass = createEClass(GREETING);
-    createEAttribute(greetingEClass, GREETING__NAME);
+    importDeclareEClass = createEClass(IMPORT_DECLARE);
+    createEAttribute(importDeclareEClass, IMPORT_DECLARE__NAME);
+
+    packageDeclareEClass = createEClass(PACKAGE_DECLARE);
+    createEAttribute(packageDeclareEClass, PACKAGE_DECLARE__NAME);
+    createEReference(packageDeclareEClass, PACKAGE_DECLARE__ELEMENTS);
+
+    entityEClass = createEClass(ENTITY);
+    createEAttribute(entityEClass, ENTITY__VISIBILITY);
+    createEAttribute(entityEClass, ENTITY__NAME);
+    createEReference(entityEClass, ENTITY__SUPER_TYPE);
+    createEReference(entityEClass, ENTITY__FEATURES);
+
+    parameterEClass = createEClass(PARAMETER);
+    createEReference(parameterEClass, PARAMETER__PARAMETER_TYPE);
+    createEAttribute(parameterEClass, PARAMETER__NAME);
+
+    methodEClass = createEClass(METHOD);
+    createEAttribute(methodEClass, METHOD__VISIBILITY);
+    createEReference(methodEClass, METHOD__JTYPE);
+    createEAttribute(methodEClass, METHOD__NAME);
+    createEReference(methodEClass, METHOD__PARAMS);
+    createEReference(methodEClass, METHOD__BODY);
+
+    attributeEClass = createEClass(ATTRIBUTE);
+    createEAttribute(attributeEClass, ATTRIBUTE__VISIBLE);
+    createEReference(attributeEClass, ATTRIBUTE__JTYPE);
+    createEAttribute(attributeEClass, ATTRIBUTE__NAME);
+    createEReference(attributeEClass, ATTRIBUTE__VALUE);
+
+    myBlockExpressionEClass = createEClass(MY_BLOCK_EXPRESSION);
+    createEReference(myBlockExpressionEClass, MY_BLOCK_EXPRESSION__EXPRESSIONS);
+
+    // Create enums
+    visibilityEEnum = createEEnum(VISIBILITY);
   }
 
   /**
@@ -200,18 +558,64 @@ public class SnipDSLPackageImpl extends EPackageImpl implements SnipDSLPackage
     setNsPrefix(eNS_PREFIX);
     setNsURI(eNS_URI);
 
+    // Obtain other dependent packages
+    XbasePackage theXbasePackage = (XbasePackage)EPackage.Registry.INSTANCE.getEPackage(XbasePackage.eNS_URI);
+    TypesPackage theTypesPackage = (TypesPackage)EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI);
+
     // Create type parameters
 
     // Set bounds for type parameters
 
     // Add supertypes to classes
+    packageDeclareEClass.getESuperTypes().add(theXbasePackage.getXExpression());
+    entityEClass.getESuperTypes().add(theXbasePackage.getXExpression());
+    methodEClass.getESuperTypes().add(theXbasePackage.getXExpression());
+    attributeEClass.getESuperTypes().add(theXbasePackage.getXExpression());
+    myBlockExpressionEClass.getESuperTypes().add(theXbasePackage.getXExpression());
 
     // Initialize classes and features; add operations and parameters
-    initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getModel_Greetings(), this.getGreeting(), null, "greetings", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(domainmodelEClass, domainmodel.class, "domainmodel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getdomainmodel_ImportSection(), this.getimportDeclare(), null, "importSection", null, 0, -1, domainmodel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getdomainmodel_Elements(), theXbasePackage.getXExpression(), null, "elements", null, 0, -1, domainmodel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(greetingEClass, Greeting.class, "Greeting", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getGreeting_Name(), ecorePackage.getEString(), "name", null, 0, 1, Greeting.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(importDeclareEClass, importDeclare.class, "importDeclare", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getimportDeclare_Name(), ecorePackage.getEString(), "name", null, 0, 1, importDeclare.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(packageDeclareEClass, packageDeclare.class, "packageDeclare", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getpackageDeclare_Name(), ecorePackage.getEString(), "name", null, 0, 1, packageDeclare.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getpackageDeclare_Elements(), theXbasePackage.getXExpression(), null, "elements", null, 0, -1, packageDeclare.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(entityEClass, entity.class, "entity", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getentity_Visibility(), this.getVisibility(), "visibility", null, 0, 1, entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getentity_Name(), ecorePackage.getEString(), "name", null, 0, 1, entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getentity_SuperType(), theTypesPackage.getJvmTypeReference(), null, "superType", null, 0, 1, entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getentity_Features(), theXbasePackage.getXExpression(), null, "features", null, 0, -1, entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(parameterEClass, parameter.class, "parameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getparameter_ParameterType(), theTypesPackage.getJvmTypeReference(), null, "parameterType", null, 0, 1, parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getparameter_Name(), ecorePackage.getEString(), "name", null, 0, 1, parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(methodEClass, method.class, "method", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getmethod_Visibility(), this.getVisibility(), "visibility", null, 0, 1, method.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getmethod_JType(), theTypesPackage.getJvmTypeReference(), null, "jType", null, 0, 1, method.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getmethod_Name(), ecorePackage.getEString(), "name", null, 0, 1, method.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getmethod_Params(), this.getparameter(), null, "params", null, 0, -1, method.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getmethod_Body(), theXbasePackage.getXExpression(), null, "body", null, 0, 1, method.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(attributeEClass, attribute.class, "attribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getattribute_Visible(), this.getVisibility(), "visible", null, 0, 1, attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getattribute_JType(), theTypesPackage.getJvmTypeReference(), null, "jType", null, 0, 1, attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getattribute_Name(), ecorePackage.getEString(), "name", null, 0, 1, attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getattribute_Value(), theXbasePackage.getXExpression(), null, "value", null, 0, 1, attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(myBlockExpressionEClass, myBlockExpression.class, "myBlockExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getmyBlockExpression_Expressions(), theXbasePackage.getXExpression(), null, "expressions", null, 0, -1, myBlockExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    // Initialize enums and add enum literals
+    initEEnum(visibilityEEnum, Visibility.class, "Visibility");
+    addEEnumLiteral(visibilityEEnum, Visibility.PROTECTED);
+    addEEnumLiteral(visibilityEEnum, Visibility.PUBLIC);
+    addEEnumLiteral(visibilityEEnum, Visibility.PRIVATE);
 
     // Create resource
     createResource(eNS_URI);

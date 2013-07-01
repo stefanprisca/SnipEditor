@@ -4,14 +4,51 @@
     editorDirectory="/org.eclipse.recommenders.snipeditor.editor/src" modelPluginID="org.eclipse.recommenders.snipeditor"
     forceOverwrite="true" modelName="SnipDSL" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.recommenders.snipeditor.edit"
-    editorPluginID="org.eclipse.recommenders.snipeditor.editor" runtimeVersion="2.9">
+    editorPluginID="org.eclipse.recommenders.snipeditor.editor" runtimeVersion="2.9"
+    usedGenPackages="../../../../../../org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types ../../../../../../org.eclipse.xtext.xbase/model/Xbase.genmodel#//xbase">
   <genPackages prefix="SnipDSL" basePackage="org.eclipse.recommenders.snipeditor"
       disposableProviderFactory="true" fileExtensions="cSnip" ecorePackage="SnipDSL.ecore#/">
-    <genClasses ecoreClass="SnipDSL.ecore#//Model">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SnipDSL.ecore#//Model/greetings"/>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="SnipDSL.ecore#//Visibility">
+      <genEnumLiterals ecoreEnumLiteral="SnipDSL.ecore#//Visibility/protected"/>
+      <genEnumLiterals ecoreEnumLiteral="SnipDSL.ecore#//Visibility/public"/>
+      <genEnumLiterals ecoreEnumLiteral="SnipDSL.ecore#//Visibility/private"/>
+    </genEnums>
+    <genClasses ecoreClass="SnipDSL.ecore#//domainmodel">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SnipDSL.ecore#//domainmodel/importSection"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SnipDSL.ecore#//domainmodel/elements"/>
     </genClasses>
-    <genClasses ecoreClass="SnipDSL.ecore#//Greeting">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SnipDSL.ecore#//Greeting/name"/>
+    <genClasses ecoreClass="SnipDSL.ecore#//importDeclare">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SnipDSL.ecore#//importDeclare/name"/>
+    </genClasses>
+    <genClasses ecoreClass="SnipDSL.ecore#//packageDeclare">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SnipDSL.ecore#//packageDeclare/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SnipDSL.ecore#//packageDeclare/elements"/>
+    </genClasses>
+    <genClasses ecoreClass="SnipDSL.ecore#//entity">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SnipDSL.ecore#//entity/visibility"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SnipDSL.ecore#//entity/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SnipDSL.ecore#//entity/superType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SnipDSL.ecore#//entity/features"/>
+    </genClasses>
+    <genClasses ecoreClass="SnipDSL.ecore#//parameter">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SnipDSL.ecore#//parameter/parameterType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SnipDSL.ecore#//parameter/name"/>
+    </genClasses>
+    <genClasses ecoreClass="SnipDSL.ecore#//method">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SnipDSL.ecore#//method/visibility"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SnipDSL.ecore#//method/jType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SnipDSL.ecore#//method/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SnipDSL.ecore#//method/params"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SnipDSL.ecore#//method/body"/>
+    </genClasses>
+    <genClasses ecoreClass="SnipDSL.ecore#//attribute">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SnipDSL.ecore#//attribute/visible"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SnipDSL.ecore#//attribute/jType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SnipDSL.ecore#//attribute/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SnipDSL.ecore#//attribute/value"/>
+    </genClasses>
+    <genClasses ecoreClass="SnipDSL.ecore#//myBlockExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SnipDSL.ecore#//myBlockExpression/expressions"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

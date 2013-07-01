@@ -9,6 +9,8 @@ import org.eclipse.emf.ecore.util.Switch;
 
 import org.eclipse.recommenders.snipeditor.snipDSL.*;
 
+import org.eclipse.xtext.xbase.XExpression;
+
 /**
  * <!-- begin-user-doc -->
  * The <b>Switch</b> for the model's inheritance hierarchy.
@@ -72,17 +74,64 @@ public class SnipDSLSwitch<T> extends Switch<T>
   {
     switch (classifierID)
     {
-      case SnipDSLPackage.MODEL:
+      case SnipDSLPackage.DOMAINMODEL:
       {
-        Model model = (Model)theEObject;
-        T result = caseModel(model);
+        domainmodel domainmodel = (domainmodel)theEObject;
+        T result = casedomainmodel(domainmodel);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case SnipDSLPackage.GREETING:
+      case SnipDSLPackage.IMPORT_DECLARE:
       {
-        Greeting greeting = (Greeting)theEObject;
-        T result = caseGreeting(greeting);
+        importDeclare importDeclare = (importDeclare)theEObject;
+        T result = caseimportDeclare(importDeclare);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SnipDSLPackage.PACKAGE_DECLARE:
+      {
+        packageDeclare packageDeclare = (packageDeclare)theEObject;
+        T result = casepackageDeclare(packageDeclare);
+        if (result == null) result = caseXExpression(packageDeclare);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SnipDSLPackage.ENTITY:
+      {
+        entity entity = (entity)theEObject;
+        T result = caseentity(entity);
+        if (result == null) result = caseXExpression(entity);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SnipDSLPackage.PARAMETER:
+      {
+        parameter parameter = (parameter)theEObject;
+        T result = caseparameter(parameter);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SnipDSLPackage.METHOD:
+      {
+        method method = (method)theEObject;
+        T result = casemethod(method);
+        if (result == null) result = caseXExpression(method);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SnipDSLPackage.ATTRIBUTE:
+      {
+        attribute attribute = (attribute)theEObject;
+        T result = caseattribute(attribute);
+        if (result == null) result = caseXExpression(attribute);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SnipDSLPackage.MY_BLOCK_EXPRESSION:
+      {
+        myBlockExpression myBlockExpression = (myBlockExpression)theEObject;
+        T result = casemyBlockExpression(myBlockExpression);
+        if (result == null) result = caseXExpression(myBlockExpression);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -91,33 +140,145 @@ public class SnipDSLSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Model</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>domainmodel</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Model</em>'.
+   * @return the result of interpreting the object as an instance of '<em>domainmodel</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseModel(Model object)
+  public T casedomainmodel(domainmodel object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Greeting</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>import Declare</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Greeting</em>'.
+   * @return the result of interpreting the object as an instance of '<em>import Declare</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseGreeting(Greeting object)
+  public T caseimportDeclare(importDeclare object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>package Declare</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>package Declare</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T casepackageDeclare(packageDeclare object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>entity</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>entity</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseentity(entity object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>parameter</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>parameter</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseparameter(parameter object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>method</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>method</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T casemethod(method object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>attribute</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>attribute</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseattribute(attribute object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>my Block Expression</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>my Block Expression</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T casemyBlockExpression(myBlockExpression object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>XExpression</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>XExpression</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseXExpression(XExpression object)
   {
     return null;
   }

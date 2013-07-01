@@ -25,7 +25,7 @@ public class SnipDSLParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrP
 	
 	@Override 
 	protected String getDefaultRuleName() {
-		return "Model";
+		return "domainmodel";
 	}
 	
 	public SnipDSLGrammarAccess getGrammarAccess() {

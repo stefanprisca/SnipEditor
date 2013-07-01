@@ -23,22 +23,76 @@ public interface SnipDSLFactory extends EFactory
   SnipDSLFactory eINSTANCE = org.eclipse.recommenders.snipeditor.snipDSL.impl.SnipDSLFactoryImpl.init();
 
   /**
-   * Returns a new object of class '<em>Model</em>'.
+   * Returns a new object of class '<em>domainmodel</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Model</em>'.
+   * @return a new object of class '<em>domainmodel</em>'.
    * @generated
    */
-  Model createModel();
+  domainmodel createdomainmodel();
 
   /**
-   * Returns a new object of class '<em>Greeting</em>'.
+   * Returns a new object of class '<em>import Declare</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Greeting</em>'.
+   * @return a new object of class '<em>import Declare</em>'.
    * @generated
    */
-  Greeting createGreeting();
+  importDeclare createimportDeclare();
+
+  /**
+   * Returns a new object of class '<em>package Declare</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>package Declare</em>'.
+   * @generated
+   */
+  packageDeclare createpackageDeclare();
+
+  /**
+   * Returns a new object of class '<em>entity</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>entity</em>'.
+   * @generated
+   */
+  entity createentity();
+
+  /**
+   * Returns a new object of class '<em>parameter</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>parameter</em>'.
+   * @generated
+   */
+  parameter createparameter();
+
+  /**
+   * Returns a new object of class '<em>method</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>method</em>'.
+   * @generated
+   */
+  method createmethod();
+
+  /**
+   * Returns a new object of class '<em>attribute</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>attribute</em>'.
+   * @generated
+   */
+  attribute createattribute();
+
+  /**
+   * Returns a new object of class '<em>my Block Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>my Block Expression</em>'.
+   * @generated
+   */
+  myBlockExpression createmyBlockExpression();
 
   /**
    * Returns the package supported by this factory.
