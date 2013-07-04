@@ -79,7 +79,7 @@ myBlockExpression returns xbase::XExpression:
 ;
 
 blockFeature returns xbase::XExpression:
- 			(attributeDeclaration |  abstractOperation | XPrimaryExpression |  featureCall ';')
+ 			(operandWithDeclaration ';' |  abstractOperation ';' | XPrimaryExpression |  featureCall ';')
 ;
 
 abstractOperation:
@@ -88,13 +88,13 @@ abstractOperation:
 
 binaryOperation:
 	result= featureCall "=" 
-		operands+=featureCall ((operators+=binaryOperator operands+=( featureCall | literal))*) ? ";"
+		operands+=featureCall ((operators+=binaryOperator operands+=( featureCall | literal))*) ?
 ;
 
 
 unaryOperation:
 	result=featureCall
-	operator= ( unaryOperator | unaryOperatorWithLiteral ) ";"?
+	operator= ( unaryOperator | unaryOperatorWithLiteral ) 
 	;
 
 conditionalExpression:
@@ -211,7 +211,7 @@ enum Visibility :
 ;
 
  myID:
- 	'${' ValidID ':freename('ValidID')'? '}'
+ 	'${' ValidID (':freeName('ValidID')')? '}'
  ;
 
 literal:

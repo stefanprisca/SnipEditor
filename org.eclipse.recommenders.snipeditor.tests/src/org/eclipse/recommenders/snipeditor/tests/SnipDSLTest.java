@@ -10,5 +10,4 @@ public class SnipDSLTest {
 	public void test() {
 		assertTrue(true);
 	}
-
 }
