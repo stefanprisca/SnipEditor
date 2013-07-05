@@ -5,15 +5,16 @@ generate snipDSL "http://www.eclipse.org/recommenders/snipeditor/SnipDSL"
 
 domainmodel:
 	importSection += (importDeclare)?
-	elements += abstractElement*;
-
+	elements += abstractElement*
+	(annotations+=annotation*)?
+;
 importDeclare:
 	'${import' '('name = (QualifiedNameWithWildcard | QualifiedName) ')}'
 ;
 
 
 abstractElement returns xbase::XExpression:
-	packageDeclare | entity | feature
+	packageDeclare | entity | feature | blockFeature
 ;
 
 packageDeclare:
@@ -25,30 +26,32 @@ packageDeclare:
 
 entity:
 	(visibility=Visibility)? 'class' name = ValidID 
-		('extends' superType=JvmTypeReference )?
+		('extends' ( superType=JvmTypeReference | abstractTypeName  ) )?
 	'{'
 		features += feature*
+		(annotations+=annotation*)?
 	'}'
 ;
 
 feature returns xbase::XExpression:
 	attributeDeclaration | method 
+
 ;
 
 
 parameter :
-	parameterType=JvmTypeReference  name = myID;
+	(parameterType=JvmTypeReference | abstractTypeName)  name = declarativeID;
 
 
 method:
-	(visibility=Visibility)? 'static'? jType = JvmTypeReference
+	(visibility=Visibility)? 'static'?  (abstractTypeName | "void")
 	name=ValidID'('(params+=parameter
 		(','params+=parameter)*)?')'
 	body=myBlockExpression
 ;
 
 attributeAssignment returns xbase::XExpression:
-	 arrayAssignment | blockAssignment | XConstructorCall | directValueAssignment
+	 arrayAssignment | blockAssignment | XConstructorCall | binaryOperation
 ;
 
 blockAssignment:
@@ -57,17 +60,21 @@ blockAssignment:
 ;
 
 arrayAssignment:
-	"new" jType=JvmTypeReference "[" Number "]"
+	{arrayAssignment}
+	"new" (abstractTypeName | jType=JvmTypeReference)"[" (value=simpleOperand | Number) "]"
 ;
 
-directValueAssignment:
-	value = literal |
-	value = featureCall ((binaryOperator featureCall)*)?
+
+binaryOperation:
+	'('?
+	operands+= ( featureCall | literal) ')'?
+		((binaryOperator operands+=binaryOperation)*) ?
+	
 ;
 
 attributeDeclaration :
-	(visible=Visibility)? 'static'? jType = JvmTypeReference
-	 name = myID ('=' value=attributeAssignment)? ";"
+	(visible=Visibility)? 'static'?   abstractTypeName '[]'?
+	name = declarativeID ('=' value=attributeAssignment)? ";"
 ;
 
 
@@ -75,74 +82,68 @@ myBlockExpression returns xbase::XExpression:
 	{myBlockExpression}
 	'{'
 		(expressions+=blockFeature)* 
+		(annotations+=annotation*)?
 	'}'
 ;
 
 blockFeature returns xbase::XExpression:
- 			(operandWithDeclaration ';' |  abstractOperation ';' | XPrimaryExpression |  featureCall ';')
+ 			(operandWithDeclaration ';' |  abstractOperation ';' | XPrimaryExpression ';'?
+ 				|  featureCall ';'
+ 			)
 ;
 
 abstractOperation:
-	binaryOperation | unaryOperation
+	operandAssignment | unaryOperation
 ;
 
-binaryOperation:
-	result= featureCall "=" 
-		operands+=featureCall ((operators+=binaryOperator operands+=( featureCall | literal))*) ?
+operandAssignment:
+	result=simpleOperand valueAssignmentOperator
+		value=binaryOperation
 ;
 
 
 unaryOperation:
-	result=featureCall
-	operator= ( unaryOperator | unaryOperatorWithLiteral ) 
+	result=simpleOperand
+		operator=unaryOperator
 	;
 
 conditionalExpression:
-	(value=booleanLiteral) | 
-	(operands+=featureCall (condOperator+=conditionOperator operands+=(featureCall | literal ))? 
-	(( ("&&" | "||") condOperator+=conditionOperator operands+=(featureCall | literal))* )?)
+	operands+=simpleOperand (conditionOperator operands+=( featureCall | literal ))?
+	((('&&' | '||')expressions+=conditionalExpression)*) ?
 ;
 
 
 
 
 operandWithDeclaration returns operand:
-	(jType=JvmTypeReference)? name=myID ('=' value = (directValueAssignment | XConstructorCall ))?
+	(abstractTypeName | jType = JvmTypeReference)
+	name=declarativeID ('=' value = attributeAssignment)?
 ;
 
 
-simpleOperand returns operand:
-	name = myID
-;
-
-
-calledParameter :
-	localMethodCall | simpleOperand | 
-	name=QualifiedMethodName
+calledParameter returns xbase::XExpression:
+	
+	localMethodCall | simpleOperand | XConstructorCall
 ;
 
 featureCall returns operand:
-	localMethodCall |
 	featureCalls+=calledParameter
-	('.' featureCalls+=calledParameter ('.' featureCalls+=calledParameter)*)?
+	(('.' featureCalls+=calledParameter)*)?
 ;
 
 localMethodCall:
-	name = myID '('
-	(parameters+=calledParameter (',' parameters+=calledParameter)*)?
+	name = declarativeID '('
+	(parameters+=(featureCall | literal) (',' parameters+=(featureCall | literal))*)?
 	')' 
 ;
-
-
-unaryOperator returns unaryOperator:
-{unaryOperator}
-	("++" | "--")
+simpleOperand returns operand:
+	name = declarativeID
 ;
 
-unaryOperatorWithLiteral returns unaryOperator:
-	{unaryOperatorWithLiteral}
-	( "+=" | "-=" ) value= (literal | featureCall)
+unaryOperator:
+	"++" | "--"
 ;
+
 binaryOperator:
 	"+" | "-" | "*" | "/" 
 ;
@@ -150,7 +151,9 @@ binaryOperator:
 conditionOperator:
 	'==' | '!=' | '>=' | '<=' | '>' | '<'
 	;
-
+valueAssignmentOperator:
+	"="|"+="|"-="
+;
 
 
 XIfExpression returns XExpression:
@@ -161,10 +164,10 @@ XIfExpression returns XExpression:
 
 XSwitchExpression returns XExpression:
 	{XSwitchExpression}
-	'switch' (=>(localVarName=myID ':')? switch=featureCall
-		| =>('(' localVarName=myID ':') switch=featureCall ')') '{'
+	'switch' (=>(localVarName=typeID ':')? switch=featureCall
+		| =>('(' localVarName=typeID ':') switch=featureCall ')') '{'
 	(cases+=XCasePart)+
-	('default' ':' default=binaryOperation )?
+	('default' ':' default=operandAssignment )?
 	'}';
 
 XCasePart:
@@ -179,19 +182,21 @@ XForLoopExpression returns XExpression:
 
 classicForLoop:
 	
-	'for' '(' declaredParam=operandWithDeclaration ';' 
+	'for' '(' declaredParam=(operandWithDeclaration | simpleOperand) ';' 
 				forExpression=conditionalExpression ';'
-				forOperation=unaryOperation ')'
+				forOperation=abstractOperation ')'
 		body=myBlockExpression
 ;
 
 forLoopWithIterator:
 	'for''('
-		jType=JvmTypeReference iteratorName=myID ':'
+		(abstractTypeName | jType = JvmTypeReference) iteratorName=declarativeID ':'
 		iteratableObject=featureCall
+		
 	')'
 	body=myBlockExpression
 ;
+
 
 
 XWhileExpression returns XExpression:
@@ -206,28 +211,52 @@ XDoWhileExpression returns XExpression:
    'while' '(' predicate=conditionalExpression ')';
 
 
+
 enum Visibility :
 	 protected | public | private
 ;
 
- myID:
- 	'${' ValidID (':freeName('ValidID')')? '}'
+ typeID:
+ 	'${' ( 
+ 		ValidID |
+ 		'elemType(' ValidID ')'
+ 		)
+ 	 '}' 
  ;
 
-literal:
-	value= (STRING | Number)
+declarativeID:
+	jFaceVarID | ValidID
 ;
-enum booleanLiteral:
-	true | false | null
-;
-QualifiedName :
 
-  ValidID ('.' ValidID)* |
-  myID ('.' myID)*
-  
-  ;
-QualifiedMethodName:
-	QualifiedName '(' 
-	(QualifiedMethodName | QualifiedName)*
-	')'
+jFaceVarID:
+	'${' 
+	(
+		ValidID |
+		'freeName('ValidID')' |
+		ValidID ':' ('freeName('ValidID')' | 'iter')
+	) 
+	'}'
 ;
+
+
+
+literal:
+	value= (STRING | Number | booleanLiteral)
+;
+booleanLiteral:
+	'true' | 'false' | 'null'
+;
+
+abstractTypeName:
+	(typeID|ValidID)
+;
+
+
+annotation:
+	
+	'${helper}' | '${endHelper}' |
+	'${cursor}' | '${dollar}'
+		
+;
+ 
+ 
