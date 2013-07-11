@@ -1,0 +1,15 @@
+//import javax.swing.JFrame
+//import java.awt.FlowLayout
+
+JFrame ${frame:freeName(frame) } = new JFrame();
+void setFrame(String ${frame})
+{
+${frame}.setTitle("${cursor}"); 
+${frame}.setSize(400 , 400);  
+${frame}.setLayout(new FlowLayout());
+${frame}.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+// TODO: Create window content here.
+
+${frame}.setVisible(true);
+}
