@@ -1,0 +1,57 @@
+
+//${import( javax.swing.${JFrame})}
+
+package p1{
+	
+}
+class myclass 
+{
+
+	String ${a} = new String("String");
+	 public static ${someType} ${l}; 
+ 	int [] ${b}=new int[55];   
+	
+	Integer ${something}=1+2+3+3+4;   
+	MyClass e=new MyClass(); 
+	void meth1()  
+	{
+		${a}++; 
+		double newavg = avg + ( notData - avg ) / ( i + 1 );
+		sum += ( data - avg ) * ( data  -newavg ) ;
+		avg = newavg;
+		return Math.sqrt( sum / ( n - 1 ) );
+	 
+		for(int i=0; i<10; i++)
+		{
+			i--;
+			int a=som;
+			
+		}
+		for(${elemType(someIntSet)} ${freeName(i)} : ${someIntSet})
+		{
+			double newavg = avg + ( data - avg ) / ( i + 1 );
+		sum += ( data - avg ) * ( data  -newavg ) ;
+		avg = newavg;
+		return Math.sqrt( sum / ( n - 1 ) );
+		}
+		
+		
+		
+		
+		
+		${p} = ${s}.someMethod() ;
+		//${p} +=1 ;
+		int ${s} = 0;
+		 ${p}=${p}.${s}(${a})+1; 
+		if(${a}==3 && ${val2}==1 && b) 
+		{  
+			return new SomeClass();
+		}
+		
+		//Get name of current Java method
+		String ${freeName(methodName)} = Thread.currentThread().getStackTrace()[1].getMethodName();
+	}	
+		
+	
+	
+} 

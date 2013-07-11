@@ -1,0 +1,23 @@
+static double standardDeviation()
+{
+		
+		final int n = data.length;
+		
+		if ( n < 2 )
+		{
+			return Double.NaN;
+		}
+		//double avg = data[0];
+		double sum = 0;
+		for (int i=0; i<10; i++) 
+		{ 
+				double newavg = avg + ( data - avg ) / ( i + 1 );
+		sum += ( data - avg ) * ( data  -newavg ) ;
+		avg = newavg;
+		return Math.sqrt( sum / ( n - 1 ) );
+		}
+	
+		for (${ elemType(loopable) } ${freeName(elem) } : ${loopable}) {
+				${cursor}
+			}
+	}   

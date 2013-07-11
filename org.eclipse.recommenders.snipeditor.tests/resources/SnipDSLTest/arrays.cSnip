@@ -1,0 +1,11 @@
+${array_type}[] ${result:newName(array)};
+//add
+${array_type}[${array}.length + 1];
+System.arraycopy(${array}, 0, ${result}, 0, ${array}.length);
+${result}[${array}.length]= ${var};
+//merge
+${array_type}[${array1:array}.length + ${array}.length];
+System.arraycopy(${array1}, 0, ${result}, 0, ${array1}.length);
+System.arraycopy(${array}, 0, ${result}, ${array1}.length, ${array}.length);
+//convert to array
+(${type:elemType(collection)}[]) ${collection}.toArray(new ${type}[${collection}.size()]);
