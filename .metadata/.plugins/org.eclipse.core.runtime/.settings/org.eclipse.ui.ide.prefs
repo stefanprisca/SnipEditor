@@ -1,5 +1,6 @@
 PROBLEMS_FILTERS_MIGRATE=true
+REFRESH_WORKSPACE_ON_STARTUP=true
 eclipse.preferences.version=1
-platformState=1369124274866
+platformState=1373461617510
 quickStart=false
 tipsAndTricks=true
