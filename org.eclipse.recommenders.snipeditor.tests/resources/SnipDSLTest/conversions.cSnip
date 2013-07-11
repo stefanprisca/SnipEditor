@@ -1,8 +1,0 @@
-//convert $int to String
-String ${freeName(str)} = Integer.toString(${int});
-
-//Convert $ArrayList to array
-${elemType(ArrayList)}[] ${freeName(a)} = ${ArrayList}.toArray(new ${elemType(ArrayList)}[${ArrayList}.size()]);
-
-//Convert $double to String
-String ${freeName(str)} = Double.toString(${double});

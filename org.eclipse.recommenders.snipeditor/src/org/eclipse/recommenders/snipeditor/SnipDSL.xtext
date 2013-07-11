@@ -1,20 +1,20 @@
 grammar org.eclipse.recommenders.snipeditor.SnipDSL with org.eclipse.xtext.xbase.Xbase
 import 'http://www.eclipse.org/xtext/xbase/Xbase' as xbase
 import "http://www.eclipse.org/xtext/common/JavaVMTypes" as types
-
 generate snipDSL "http://www.eclipse.org/recommenders/snipeditor/SnipDSL"
 
 domainmodel:
-	(importSection+=importDeclare?)*
-	(elements += abstractElement )*
+	importSection += (importDeclare)?
+	elements += abstractElement*
+	(annotations+=annotation*)?
 ;
 importDeclare:
-	'${import('name = (QualifiedNameWithWildcard | QualifiedName) ')}'
+	'${import' '('name = (QualifiedNameWithWildcard | QualifiedName) ')}'
 ;
 
 
 abstractElement returns xbase::XExpression:
-	packageDeclare | entity | feature | blockFeature | helpperClassAnnotation
+	packageDeclare | entity | feature | blockFeature
 ;
 
 packageDeclare:
@@ -26,10 +26,10 @@ packageDeclare:
 
 entity:
 	(visibility=Visibility)? 'class' name = ValidID 
-		('extends' jType=abstractTypeName  )?
+		('extends' ( superType=JvmTypeReference | abstractTypeName  ) )?
 	'{'
 		features += feature*
-	
+		(annotations+=annotation*)?
 	'}'
 ;
 
@@ -40,11 +40,11 @@ feature returns xbase::XExpression:
 
 
 parameter :
-	(jType=abstractTypeName)  name = declarativeID;
+	(parameterType=JvmTypeReference | abstractTypeName)  name = declarativeID;
 
 
 method:
-	(visibility=Visibility)? 'static'?  (jType=abstractTypeName | "void")
+	(visibility=Visibility)? 'static'?  (abstractTypeName | "void")
 	name=ValidID'('(params+=parameter
 		(','params+=parameter)*)?')'
 	body=myBlockExpression
@@ -61,19 +61,19 @@ blockAssignment:
 
 arrayAssignment:
 	{arrayAssignment}
-	"new" (jType=abstractTypeName)"[" (value=simpleOperand | Number) "]"
+	"new" (abstractTypeName | jType=JvmTypeReference)"[" (value=simpleOperand | Number) "]"
 ;
 
 
 binaryOperation:
 	'('?
 	operands+= ( featureCall | literal) ')'?
-		((binaryOperator operations+=binaryOperation)*) ?
+		((binaryOperator operands+=binaryOperation)*) ?
 	
 ;
 
 attributeDeclaration :
-	(visible=Visibility)? 'static'? jType=abstractTypeName
+	(visible=Visibility)? 'static'?   abstractTypeName '[]'?
 	name = declarativeID ('=' value=attributeAssignment)? ";"
 ;
 
@@ -81,8 +81,8 @@ attributeDeclaration :
 myBlockExpression returns xbase::XExpression:
 	{myBlockExpression}
 	'{'
-		((expressions+=blockFeature))* 
-		
+		(expressions+=blockFeature)* 
+		(annotations+=annotation*)?
 	'}'
 ;
 
@@ -108,7 +108,7 @@ unaryOperation:
 	;
 
 conditionalExpression:
-	operands+=(simpleOperand | literal ) (conditionOperator operands+=( featureCall | literal ))?
+	operands+=simpleOperand (conditionOperator operands+=( featureCall | literal ))?
 	((('&&' | '||')expressions+=conditionalExpression)*) ?
 ;
 
@@ -116,19 +116,19 @@ conditionalExpression:
 
 
 operandWithDeclaration returns operand:
-	(jType=abstractTypeName)
+	(abstractTypeName | jType = JvmTypeReference)
 	name=declarativeID ('=' value = attributeAssignment)?
 ;
 
 
 calledParameter returns xbase::XExpression:
 	
-	(localMethodCall | simpleOperand | XConstructorCall) ('['Number']')?
+	localMethodCall | simpleOperand | XConstructorCall
 ;
 
 featureCall returns operand:
-	caller=calledParameter
-	(('.' featureCalls+=featureCall)*)
+	featureCalls+=calledParameter
+	(('.' featureCalls+=calledParameter)*)?
 ;
 
 localMethodCall:
@@ -190,7 +190,7 @@ classicForLoop:
 
 forLoopWithIterator:
 	'for''('
-		jType=(abstractTypeName) iteratorName=declarativeID ':'
+		(abstractTypeName | jType = JvmTypeReference) iteratorName=declarativeID ':'
 		iteratableObject=featureCall
 		
 	')'
@@ -217,21 +217,25 @@ enum Visibility :
 ;
 
  typeID:
- 		'${'ValidID '}'|
- 		'${elemType(' ValidID ')}'
- 	
+ 	'${' ( 
+ 		ValidID |
+ 		'elemType(' ValidID ')'
+ 		)
+ 	 '}' 
  ;
 
 declarativeID:
-	 ValidID | jFaceVarID 
+	jFaceVarID | ValidID
 ;
 
 jFaceVarID:
-	 
-	 
-		'${'ValidID (':' ('freeName('ValidID')' | 'iter'))? '}'
-		|'${freeName('ValidID')}'
-	
+	'${' 
+	(
+		ValidID |
+		'freeName('ValidID')' |
+		ValidID ':' ('freeName('ValidID')' | 'iter')
+	) 
+	'}'
 ;
 
 
@@ -243,19 +247,16 @@ booleanLiteral:
 	'true' | 'false' | 'null'
 ;
 
-abstractTypeName :
-	(typeID|ValidID) '[]'?
+abstractTypeName:
+	(typeID|ValidID)
 ;
 
-/* 
-annotation :
+
+annotation:
 	
+	'${helper}' | '${endHelper}' |
 	'${cursor}' | '${dollar}'
 		
-;*/
-helpperClassAnnotation:
-	'${helper}' class= entity '${endHelper}'
 ;
-
  
  

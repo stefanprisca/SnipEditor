@@ -2,9 +2,4 @@
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="org.eclipse.xtext.junit4.util.ParseHelper"/>
 <fullyQualifiedTypeName name="com.google.inject.Inject"/>
-<fullyQualifiedTypeName name="org.eclipselabs.xtext.utils.unittesting.XtextTest"/>
-<fullyQualifiedTypeName name="org.junit.runner.RunWith"/>
-<fullyQualifiedTypeName name="org.eclipselabs.xtext.utils.unittesting.XtextRunner2"/>
-<fullyQualifiedTypeName name="org.eclipse.xtext.junit4.InjectWith"/>
-<fullyQualifiedTypeName name="org.eclipse.recommenders.snipeditor.SnipDSLInjectorProvider"/>
 </qualifiedTypeNameHistroy>

@@ -1,3 +1,0 @@
-synchronized (${mutex:var}) {
-        ${line_selection}
-}
