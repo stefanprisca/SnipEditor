@@ -4,19 +4,10 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+public class SnipDSLTest {
 
-
-
-public class SnipDSLTest{ //extends XtextTest {
-
-//	 public SnipDSLTest() {
- //        super("SnipDSLTest");
-	// }
- 
-	 @Test
-	 public void randomTests(){
-		 assertTrue(true);
-		// suppressSerialization();
-        // testFile("Tests.cSnip");
-	 }
+	@Test
+	public void test() {
+		assertTrue(true);
+	}
 }
