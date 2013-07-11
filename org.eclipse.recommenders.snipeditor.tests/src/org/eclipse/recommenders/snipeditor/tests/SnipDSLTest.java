@@ -7,14 +7,16 @@ import org.junit.Test;
 
 
 
-public class SnipDSLTest {
+public class SnipDSLTest{ //extends XtextTest {
 
-
-	@Test
-	public void randomFunctionality(){
-		assertTrue(true);
-       
-        }
-	
-	
+//	 public SnipDSLTest() {
+ //        super("SnipDSLTest");
+	// }
+ 
+	 @Test
+	 public void randomTests(){
+		 assertTrue(true);
+		// suppressSerialization();
+        // testFile("Tests.cSnip");
+	 }
 }
