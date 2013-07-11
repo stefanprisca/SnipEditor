@@ -13,6 +13,7 @@
   <packaging>eclipse-test-plugin</packaging>
 
   <name>MyDSL Example tests</name>
+	
 
   <build>
     <plugins>
