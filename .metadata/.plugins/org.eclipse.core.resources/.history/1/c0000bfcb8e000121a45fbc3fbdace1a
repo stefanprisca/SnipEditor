@@ -1,0 +1,75 @@
+grammar org.eclipse.recommenders.snipeditor.SnipDSL with org.eclipse.xtext.xbase.Xbase
+
+generate snipDSL "http://www.eclipse.org/recommenders/snipeditor/SnipDSL"
+
+domainmodel:
+	importSection += (importDeclare)?
+	elements += abstractElement*;
+
+importDeclare:
+	'${import}' name = (QualifiedNameWithWildcard | QualifiedName)
+;
+
+
+abstractElement:
+	packageDeclare | entity | attribute | method
+;
+
+packageDeclare:
+	'package' name = QualifiedName '{'
+	(elements += abstractElement)*
+	'}'
+;
+
+
+entity:
+	(visibility=Visibility)? 'class' name = ValidID 
+		('extends' superType=JvmTypeReference )?
+	'{'
+		features += feature*
+	'}'
+;
+
+feature:
+	attribute | method
+;
+
+
+parameter :
+	parameterType=JvmTypeReference  name = myID;
+
+
+method:
+	(visibility=Visibility)? 'static'? jType = JvmTypeReference
+	name=ValidID'('(params+=parameter
+		(','params+=parameter)*)?')'
+	body=BlockExpression
+;
+
+
+
+attribute:
+	(visible=Visibility)? 'static'? jType = JvmTypeReference
+	 name = myID
+;
+ myID:
+ 	'${' ValidID '}'
+ ;
+
+XExpressionInsideBlock returns xbase::XExpression:
+	XVariableDeclaration | XExpression | Message;
+
+myBlockExpression:
+	{myBlockExpression}
+	'{'
+		(expressions+=XExpressionInsideBlock ';'?)*
+	'}'
+;
+
+
+enum Visibility:
+	 protected | public | private
+;
+
+
+
