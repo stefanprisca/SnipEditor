@@ -28,7 +28,10 @@
 			<id>fornax</id>
 			<url>http://fornax-platform.org/nexus/content/groups/public/</url>
 		</pluginRepository>
-		
+		 <pluginRepository>
+      		<id>org.eclipselabs.xtext.utils.unittesting</id>
+     		 <url>http://xtext-utils.eclipselabs.org.codespot.com/git.distribution/snapshots/unittesting-0.9.x/</url>
+   		 </pluginRepository>
 	</pluginRepositories>
 	<dependencies>
 		<dependency>
