@@ -5,8 +5,8 @@ import "http://www.eclipse.org/xtext/common/JavaVMTypes" as types
 generate snipDSL "http://www.eclipse.org/recommenders/snipeditor/SnipDSL"
 
 domainmodel:
-	(importSection+=importDeclare?)*
-	(elements += abstractElement )*
+	(importSection+=importDeclare)*
+	=> (elements += abstractElement )+
 ;
 importDeclare:
 	'${import('name = (QualifiedNameWithWildcard | QualifiedName) ')}'
@@ -61,14 +61,14 @@ blockAssignment:
 
 arrayAssignment:
 	{arrayAssignment}
-	"new" (jType=abstractTypeName)"[" (value=simpleOperand | Number) "]"
+	"new" (jType=abstractTypeName) arguments=squareClosure
 ;
 
 
 binaryOperation:
 	'('?
-	operands+= ( featureCall | literal) ')'?
-		((binaryOperator operations+=binaryOperation)*) ?
+	operands+= (featureCall | literal) ')'?
+		(binaryOperator opertions+=binaryOperation)*
 	
 ;
 
@@ -109,7 +109,7 @@ unaryOperation:
 
 conditionalExpression:
 	operands+=(simpleOperand | literal ) (conditionOperator operands+=( featureCall | literal ))?
-	((('&&' | '||')expressions+=conditionalExpression)*) ?
+	(('&&' | '||')expressions+=conditionalExpression)*
 ;
 
 
@@ -123,7 +123,7 @@ operandWithDeclaration returns operand:
 
 calledParameter returns xbase::XExpression:
 	
-	(localMethodCall | simpleOperand | XConstructorCall) ('['Number']')?
+	(localMethodCall | simpleOperand | XConstructorCall) (arguments+=squareClosure)?
 ;
 
 featureCall returns operand:
@@ -132,12 +132,12 @@ featureCall returns operand:
 ;
 
 localMethodCall:
-	name = declarativeID '('
+	name = operandID '('
 	(parameters+=(featureCall | literal) (',' parameters+=(featureCall | literal))*)?
 	')' 
 ;
 simpleOperand returns operand:
-	name = declarativeID
+	name = operandID
 ;
 
 unaryOperator:
@@ -167,7 +167,7 @@ XSwitchExpression returns XExpression:
 	'switch' (=>(localVarName=typeID ':')? switch=featureCall
 		| =>('(' localVarName=typeID ':') switch=featureCall ')') '{'
 	(cases+=XCasePart)+
-	('default' ':' default=operandAssignment )?
+	('default' ':' default=myBlockExpression )?
 	'}';
 
 XCasePart:
@@ -210,7 +210,17 @@ XDoWhileExpression returns XExpression:
        body=myBlockExpression
    'while' '(' predicate=conditionalExpression ')';
 
-
+XConstructorCall returns XExpression:
+	{XConstructorCall}
+	'new' constructor=[types::JvmConstructor|abstractTypeName] 
+	(=>'<' typeArguments+=abstractTypeName (',' typeArguments+=abstractTypeName)* '>')?
+	(=>'(' 
+		(
+		    arguments+=(featureCall | literal)
+		    (',' arguments+=(featureCall | literal))*
+		)? 
+	')')?
+	arguments+=squareClosure?;
 
 enum Visibility :
 	 protected | public | private
@@ -227,13 +237,12 @@ declarativeID:
 ;
 
 jFaceVarID:
-	 
-	 
 		'${'ValidID (':' ('freeName('ValidID')' | 'iter'))? '}'
 		|'${freeName('ValidID')}'
-	
 ;
-
+operandID:
+	'${'ValidID'}' | ValidID
+;
 
 
 literal:
@@ -255,6 +264,10 @@ annotation :
 ;*/
 helpperClassAnnotation:
 	'${helper}' class= entity '${endHelper}'
+;
+
+squareClosure:
+	'[' (featureCall | literal) ']'
 ;
 
  
