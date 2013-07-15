@@ -6,10 +6,10 @@ generate snipDSL "http://www.eclipse.org/recommenders/snipeditor/SnipDSL"
 
 domainmodel:
 	(importSection+=importDeclare)*
-	=> (elements += abstractElement )+
+    (elements += abstractElement )*
 ;
-importDeclare:
-	'${import('name = (QualifiedNameWithWildcard | QualifiedName) ')}'
+importDeclare hidden (WS):
+	'${''import''('name = (QualifiedNameWithWildcard | QualifiedName) ')}'
 ;
 
 
@@ -44,40 +44,35 @@ parameter :
 
 
 method:
-	(visibility=Visibility)? 'static'?  (jType=abstractTypeName | "void")
+	(visibility=Visibility)? 'static'?  (jType=abstractTypeName| "void")
 	name=ValidID'('(params+=parameter
 		(','params+=parameter)*)?')'
 	body=myBlockExpression
 ;
-
+//attribute assignments
 attributeAssignment returns xbase::XExpression:
-	 arrayAssignment | blockAssignment | XConstructorCall | binaryOperation
+	 arrayAssignment | blockAssignment | XConstructorCall | multyAssignOperation
 ;
-
+//assignment with {...}
 blockAssignment:
 	{blockAssignment}
 	"{" (values+=literal (',' values+=literal)*)? "}"
 ;
-
+//square bracket assignment
 arrayAssignment:
 	{arrayAssignment}
 	"new" (jType=abstractTypeName) arguments=squareClosure
 ;
 
 
-binaryOperation:
-	'('?
-	operands+= (featureCall | literal) ')'?
-		(binaryOperator opertions+=binaryOperation)*
-	
-;
 
+//attribute declaration
 attributeDeclaration :
 	(visible=Visibility)? 'static'? jType=abstractTypeName
 	name = declarativeID ('=' value=attributeAssignment)? ";"
 ;
 
-
+//expression of the block
 myBlockExpression returns xbase::XExpression:
 	{myBlockExpression}
 	'{'
@@ -85,37 +80,47 @@ myBlockExpression returns xbase::XExpression:
 		
 	'}'
 ;
-
+//features that are present in the block
 blockFeature returns xbase::XExpression:
- 			(operandWithDeclaration ';' |  abstractOperation ';' | XPrimaryExpression ';'?
- 				|  featureCall ';'
+ 			(operandWithDeclaration ';' |  abstractAssignmentOperation ';' | XPrimaryExpression ';'?
  			)
 ;
 
-abstractOperation:
+abstractAssignmentOperation:
 	operandAssignment | unaryOperation
 ;
 
 operandAssignment:
 	result=simpleOperand valueAssignmentOperator
-		value=binaryOperation
+		value=multyAssignOperation
 ;
+//does not support ()
+multyAssignOperation:
 
-
+	operands+= (XFeatureCall | literal) 
+		(binaryOperator operands+=multyAssignOperation)*
+	
+;
 unaryOperation:
-	result=simpleOperand
+	result=XFeatureCall
 		operator=unaryOperator
 	;
 
+//removed =>, see what happens
 conditionalExpression:
-	operands+=(simpleOperand | literal ) (conditionOperator operands+=( featureCall | literal ))?
+	
+	('('operands+=operandAssignment')' 
+		conditionOperator operands+=multyAssignOperation
+	| operands+=multyAssignOperation
+	 	(conditionOperator operands+=multyAssignOperation)?)
+	
 	(('&&' | '||')expressions+=conditionalExpression)*
 ;
 
 
 
 
-operandWithDeclaration returns operand:
+operandWithDeclaration :
 	(jType=abstractTypeName)
 	name=declarativeID ('=' value = attributeAssignment)?
 ;
@@ -123,20 +128,22 @@ operandWithDeclaration returns operand:
 
 calledParameter returns xbase::XExpression:
 	
-	(localMethodCall | simpleOperand | XConstructorCall) (arguments+=squareClosure)?
+	(localMethodCall | simpleOperand | XConstructorCall ) (arguments+=squareClosure)?
 ;
 
-featureCall returns operand:
-	caller=calledParameter
-	(('.' featureCalls+=featureCall)*)
+XFeatureCall returns XExpression:
+	featureCalls+=calledParameter
+	(('.' featureCalls+=calledParameter)*)
 ;
 
+
+//this is the call for a method; has multyAssignOp as parameter as it includes all.
 localMethodCall:
 	name = operandID '('
-	(parameters+=(featureCall | literal) (',' parameters+=(featureCall | literal))*)?
+	(parameters+=multyAssignOperation (',' parameters+=multyAssignOperation)*)?
 	')' 
 ;
-simpleOperand returns operand:
+simpleOperand:
 	name = operandID
 ;
 
@@ -164,15 +171,16 @@ XIfExpression returns XExpression:
 
 XSwitchExpression returns XExpression:
 	{XSwitchExpression}
-	'switch' (=>(localVarName=typeID ':')? switch=featureCall
-		| =>('(' localVarName=typeID ':') switch=featureCall ')') '{'
-	(cases+=XCasePart)+
-	('default' ':' default=myBlockExpression )?
+	'switch' (=>(localVarName=typeID ':')? switch=XFeatureCall
+		| =>('(' localVarName=typeID ':') switch=XFeatureCall ')') '{'
+	(cases+=XCasePart 'break;')+
+	('default' ':' defaultExp+=blockFeature* 'break;')?
 	'}';
 
 XCasePart:
 	typeGuard=JvmTypeReference? ('case' case=XExpression)? 
-		':' then=myBlockExpression 
+		':' thenExp+=blockFeature
+		 
 		;
  
 XForLoopExpression returns XExpression:
@@ -184,14 +192,14 @@ classicForLoop:
 	
 	'for' '(' declaredParam=(operandWithDeclaration | simpleOperand) ';' 
 				forExpression=conditionalExpression ';'
-				forOperation=abstractOperation ')'
+				forOperation=abstractAssignmentOperation ')'
 		body=myBlockExpression
 ;
 
 forLoopWithIterator:
 	'for''('
 		jType=(abstractTypeName) iteratorName=declarativeID ':'
-		iteratableObject=featureCall
+		iteratableObject=XFeatureCall
 		
 	')'
 	body=myBlockExpression
@@ -216,8 +224,8 @@ XConstructorCall returns XExpression:
 	(=>'<' typeArguments+=abstractTypeName (',' typeArguments+=abstractTypeName)* '>')?
 	(=>'(' 
 		(
-		    arguments+=(featureCall | literal)
-		    (',' arguments+=(featureCall | literal))*
+		    arguments+=(multyAssignOperation)
+		    (',' arguments+=(multyAssignOperation))*
 		)? 
 	')')?
 	arguments+=squareClosure?;
@@ -226,22 +234,24 @@ enum Visibility :
 	 protected | public | private
 ;
 
- typeID:
- 		'${'ValidID '}'|
- 		'${elemType(' ValidID ')}'
- 	
+ typeID hidden(WS):
+ 		'${'(
+ 			ValidID |
+ 		'elemType(' ValidID ')'
+ 		)'}'
  ;
 
 declarativeID:
 	 ValidID | jFaceVarID 
 ;
 
-jFaceVarID:
-		'${'ValidID (':' ('freeName('ValidID')' | 'iter'))? '}'
-		|'${freeName('ValidID')}'
+jFaceVarID hidden (WS):
+		'${'(
+			ValidID (':' ('freeName' '('ValidID')' | 'iter'))? |'freeName' '('ValidID')'
+		) '}'
 ;
-operandID:
-	'${'ValidID'}' | ValidID
+operandID :
+	 ValidID | '${'ValidID'}'
 ;
 
 
@@ -262,13 +272,11 @@ annotation :
 	'${cursor}' | '${dollar}'
 		
 ;*/
-helpperClassAnnotation:
-	'${helper}' class= entity '${endHelper}'
+helpperClassAnnotation hidden (WS):
+	'${''helper''}' class= entity '${''endHelper''}'
 ;
 
 squareClosure:
-	'[' (featureCall | literal) ']'
+	'[' multyAssignOperation ']'
 ;
-
- 
  

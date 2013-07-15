@@ -24,8 +24,10 @@
         <configuration>
           <useUIHarness>false</useUIHarness>
           <useUIThread>false</useUIThread>
+           
+          
         </configuration>
       </plugin>
         </plugins>
-  </build>
+        </build>
 </project>

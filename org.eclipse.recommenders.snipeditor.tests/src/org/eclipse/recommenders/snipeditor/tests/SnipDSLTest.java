@@ -26,7 +26,7 @@ public class SnipDSLTest extends XtextTest {
 	 @Test
 	 public void conversionTests(){
 	
-		 suppressSerialization();
+		 suppressSerialization(); 
         // testFile("conversions.cSnip");
 	 }
 	 @Test
