@@ -43,12 +43,67 @@ public class SnipDSLTest extends XtextTest {
 	 public void conversionTests(){
 	
 		 suppressSerialization(); 
-        // testFile("conversions.cSnip");
+         testFile("conversions.cSnip");
 	 }
 	 @Test
 	 public void arraysTests(){
 	
 		 suppressSerialization();
-         //testFile("arrays.cSnip");
+         testFile("arrays.cSnip");
+	 }
+	 @Test
+	 public void captureScreenShoot(){
+	
+		 suppressSerialization();
+         testFile("capture_screenshoot.cSnip");
+	 } 
+	 @Test
+	 public void createSwingWindow(){
+	
+		 suppressSerialization();
+         testFile("createSwingWindow.cSnip");
+	 }
+	 @Test
+	 public void file_manip(){
+	
+		 suppressSerialization();
+         testFile("file_manipulation.cSnip");
+	 }
+	 @Test
+	 public void if_else(){
+	
+		 suppressSerialization();
+         testFile("if_else.cSnip");
+	 }
+	 @Test
+	 public void instance_of(){
+	
+		 suppressSerialization();
+         testFile("instanceof.cSnip");
+	 }
+
+	 @Test
+	 public void print_error(){
+	
+		 suppressSerialization();
+         testFile("print_error.cSnip");
+	 }
+	 @Test
+	 public void stdDerivMethod(){
+	
+		 suppressSerialization();
+         testFile("stdDerivMethod.cSnip");
+	 }
+	 @Test
+	 public void sync(){
+	
+		 suppressSerialization();
+         testFile("sync.cSnip");
+	 }
+	 @Test
+	 public void try_catch(){
+	
+		 suppressSerialization();
+         testFile("try_catch.cSnip");
 	 }
 }
