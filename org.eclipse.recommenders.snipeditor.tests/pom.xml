@@ -24,26 +24,10 @@
         <configuration>
           <useUIHarness>false</useUIHarness>
           <useUIThread>false</useUIThread>
+           
+          
         </configuration>
       </plugin>
         </plugins>
-  </build>
-  <repositories>
-  <repository>
-      		<id>eclipselabs</id>
-     		 <url>https://code.google.com/a/eclipselabs.org/p/xtext-utils/source/checkout?repo=unittesting</url>
-   		 
-   		 </repository>
-   </repositories>
-  <dependencies>
-  	<dependency>
-  		<groupId>org.eclipselabs.xtext.utils</groupId>
-  		<artifactId>
-  			org.eclipselabs.xtext.utils.unittesting
-  		</artifactId>
-  		<version>0.9.3.201204261440</version>
-  		<scope>test</scope>
-  		<optional>true</optional>
-  	</dependency>
-  </dependencies>
+        </build>
 </project>
