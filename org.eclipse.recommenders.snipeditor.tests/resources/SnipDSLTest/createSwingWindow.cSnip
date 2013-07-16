@@ -1,7 +1,7 @@
 //import javax.swing.JFrame
 //import java.awt.FlowLayout
 
-JFrame ${frame:freeName(frame) } = new JFrame();
+JFrame ${frame:freeName(frame)} = new JFrame();
 void setFrame(String ${frame})
 {
 ${frame}.setTitle("${cursor}"); 
