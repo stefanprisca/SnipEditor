@@ -1,4 +1,4 @@
-if (${name:var} instanceof ${type}) {
+if (${name} instanceof ${type}) {
         ${type} ${new_name} = (${type})${name};
         ${cursor}
 }
