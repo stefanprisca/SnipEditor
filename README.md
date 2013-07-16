@@ -1,7 +1,6 @@
 SnipEditor_MavenBuild
 =====================
-Working maven build and most of the JFace grammar. The grammar has some issues regarding the usage of Jvm Types and <br>
-the editor has problems telling the difference between a method and an entity.<br>
+Working maven build and most of the JFace grammar. <br>
 The update site can be found here[1]. In order to use, please follow the instructions provided<br>
 in the update site readme file. It does not work directly from eclipse IDE(yet).<br>  
 This build supports syntax for class declarations, method declarations, attribute declarations and assignments and <br>
