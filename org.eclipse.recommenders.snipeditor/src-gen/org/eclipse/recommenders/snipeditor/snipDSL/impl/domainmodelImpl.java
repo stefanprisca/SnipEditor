@@ -4,6 +4,7 @@ package org.eclipse.recommenders.snipeditor.snipDSL.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
@@ -11,6 +12,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
@@ -18,9 +20,10 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.recommenders.snipeditor.snipDSL.SnipDSLPackage;
 import org.eclipse.recommenders.snipeditor.snipDSL.domainmodel;
-import org.eclipse.recommenders.snipeditor.snipDSL.importDeclare;
 
 import org.eclipse.xtext.xbase.XExpression;
+
+import org.eclipse.xtext.xtype.XImportSection;
 
 /**
  * <!-- begin-user-doc -->
@@ -39,14 +42,14 @@ import org.eclipse.xtext.xbase.XExpression;
 public class domainmodelImpl extends MinimalEObjectImpl.Container implements domainmodel
 {
   /**
-   * The cached value of the '{@link #getImportSection() <em>Import Section</em>}' containment reference list.
+   * The cached value of the '{@link #getImportSection() <em>Import Section</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getImportSection()
    * @generated
    * @ordered
    */
-  protected EList<importDeclare> importSection;
+  protected XImportSection importSection;
 
   /**
    * The cached value of the '{@link #getElements() <em>Elements</em>}' containment reference list.
@@ -84,13 +87,47 @@ public class domainmodelImpl extends MinimalEObjectImpl.Container implements dom
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<importDeclare> getImportSection()
+  public XImportSection getImportSection()
   {
-    if (importSection == null)
-    {
-      importSection = new EObjectContainmentEList<importDeclare>(importDeclare.class, this, SnipDSLPackage.DOMAINMODEL__IMPORT_SECTION);
-    }
     return importSection;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetImportSection(XImportSection newImportSection, NotificationChain msgs)
+  {
+    XImportSection oldImportSection = importSection;
+    importSection = newImportSection;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SnipDSLPackage.DOMAINMODEL__IMPORT_SECTION, oldImportSection, newImportSection);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setImportSection(XImportSection newImportSection)
+  {
+    if (newImportSection != importSection)
+    {
+      NotificationChain msgs = null;
+      if (importSection != null)
+        msgs = ((InternalEObject)importSection).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SnipDSLPackage.DOMAINMODEL__IMPORT_SECTION, null, msgs);
+      if (newImportSection != null)
+        msgs = ((InternalEObject)newImportSection).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SnipDSLPackage.DOMAINMODEL__IMPORT_SECTION, null, msgs);
+      msgs = basicSetImportSection(newImportSection, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, SnipDSLPackage.DOMAINMODEL__IMPORT_SECTION, newImportSection, newImportSection));
   }
 
   /**
@@ -118,7 +155,7 @@ public class domainmodelImpl extends MinimalEObjectImpl.Container implements dom
     switch (featureID)
     {
       case SnipDSLPackage.DOMAINMODEL__IMPORT_SECTION:
-        return ((InternalEList<?>)getImportSection()).basicRemove(otherEnd, msgs);
+        return basicSetImportSection(null, msgs);
       case SnipDSLPackage.DOMAINMODEL__ELEMENTS:
         return ((InternalEList<?>)getElements()).basicRemove(otherEnd, msgs);
     }
@@ -155,8 +192,7 @@ public class domainmodelImpl extends MinimalEObjectImpl.Container implements dom
     switch (featureID)
     {
       case SnipDSLPackage.DOMAINMODEL__IMPORT_SECTION:
-        getImportSection().clear();
-        getImportSection().addAll((Collection<? extends importDeclare>)newValue);
+        setImportSection((XImportSection)newValue);
         return;
       case SnipDSLPackage.DOMAINMODEL__ELEMENTS:
         getElements().clear();
@@ -177,7 +213,7 @@ public class domainmodelImpl extends MinimalEObjectImpl.Container implements dom
     switch (featureID)
     {
       case SnipDSLPackage.DOMAINMODEL__IMPORT_SECTION:
-        getImportSection().clear();
+        setImportSection((XImportSection)null);
         return;
       case SnipDSLPackage.DOMAINMODEL__ELEMENTS:
         getElements().clear();
@@ -197,7 +233,7 @@ public class domainmodelImpl extends MinimalEObjectImpl.Container implements dom
     switch (featureID)
     {
       case SnipDSLPackage.DOMAINMODEL__IMPORT_SECTION:
-        return importSection != null && !importSection.isEmpty();
+        return importSection != null;
       case SnipDSLPackage.DOMAINMODEL__ELEMENTS:
         return elements != null && !elements.isEmpty();
     }

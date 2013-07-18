@@ -4,8 +4,6 @@ package org.eclipse.recommenders.snipeditor.snipDSL;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.xtext.common.types.JvmTypeReference;
-
 import org.eclipse.xtext.xbase.XExpression;
 
 /**
@@ -20,6 +18,7 @@ import org.eclipse.xtext.xbase.XExpression;
  *   <li>{@link org.eclipse.recommenders.snipeditor.snipDSL.method#getJType <em>JType</em>}</li>
  *   <li>{@link org.eclipse.recommenders.snipeditor.snipDSL.method#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.recommenders.snipeditor.snipDSL.method#getParams <em>Params</em>}</li>
+ *   <li>{@link org.eclipse.recommenders.snipeditor.snipDSL.method#getThrowExceptions <em>Throw Exceptions</em>}</li>
  *   <li>{@link org.eclipse.recommenders.snipeditor.snipDSL.method#getBody <em>Body</em>}</li>
  * </ul>
  * </p>
@@ -68,12 +67,12 @@ public interface method extends XExpression
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>JType</em>' containment reference.
-   * @see #setJType(JvmTypeReference)
+   * @see #setJType(abstractTypeName)
    * @see org.eclipse.recommenders.snipeditor.snipDSL.SnipDSLPackage#getmethod_JType()
    * @model containment="true"
    * @generated
    */
-  JvmTypeReference getJType();
+  abstractTypeName getJType();
 
   /**
    * Sets the value of the '{@link org.eclipse.recommenders.snipeditor.snipDSL.method#getJType <em>JType</em>}' containment reference.
@@ -83,7 +82,7 @@ public interface method extends XExpression
    * @see #getJType()
    * @generated
    */
-  void setJType(JvmTypeReference value);
+  void setJType(abstractTypeName value);
 
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
@@ -126,6 +125,22 @@ public interface method extends XExpression
    * @generated
    */
   EList<parameter> getParams();
+
+  /**
+   * Returns the value of the '<em><b>Throw Exceptions</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.recommenders.snipeditor.snipDSL.simpleOperand}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Throw Exceptions</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Throw Exceptions</em>' containment reference list.
+   * @see org.eclipse.recommenders.snipeditor.snipDSL.SnipDSLPackage#getmethod_ThrowExceptions()
+   * @model containment="true"
+   * @generated
+   */
+  EList<simpleOperand> getThrowExceptions();
 
   /**
    * Returns the value of the '<em><b>Body</b></em>' containment reference.

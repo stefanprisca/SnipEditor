@@ -8,6 +8,8 @@ import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.xtext.xbase.XExpression;
 
+import org.eclipse.xtext.xtype.XImportSection;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>domainmodel</b></em>'.
@@ -28,20 +30,30 @@ import org.eclipse.xtext.xbase.XExpression;
 public interface domainmodel extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Import Section</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipse.recommenders.snipeditor.snipDSL.importDeclare}.
+   * Returns the value of the '<em><b>Import Section</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Import Section</em>' containment reference list isn't clear,
+   * If the meaning of the '<em>Import Section</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Import Section</em>' containment reference list.
+   * @return the value of the '<em>Import Section</em>' containment reference.
+   * @see #setImportSection(XImportSection)
    * @see org.eclipse.recommenders.snipeditor.snipDSL.SnipDSLPackage#getdomainmodel_ImportSection()
    * @model containment="true"
    * @generated
    */
-  EList<importDeclare> getImportSection();
+  XImportSection getImportSection();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.recommenders.snipeditor.snipDSL.domainmodel#getImportSection <em>Import Section</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Import Section</em>' containment reference.
+   * @see #getImportSection()
+   * @generated
+   */
+  void setImportSection(XImportSection value);
 
   /**
    * Returns the value of the '<em><b>Elements</b></em>' containment reference list.
