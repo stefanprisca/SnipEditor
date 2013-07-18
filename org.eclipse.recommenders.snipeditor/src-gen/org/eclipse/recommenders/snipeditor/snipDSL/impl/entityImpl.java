@@ -19,9 +19,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.recommenders.snipeditor.snipDSL.SnipDSLPackage;
 import org.eclipse.recommenders.snipeditor.snipDSL.Visibility;
+import org.eclipse.recommenders.snipeditor.snipDSL.abstractTypeName;
 import org.eclipse.recommenders.snipeditor.snipDSL.entity;
-
-import org.eclipse.xtext.common.types.JvmTypeReference;
 
 import org.eclipse.xtext.xbase.XExpression;
 
@@ -36,7 +35,7 @@ import org.eclipse.xtext.xbase.impl.XExpressionImpl;
  * <ul>
  *   <li>{@link org.eclipse.recommenders.snipeditor.snipDSL.impl.entityImpl#getVisibility <em>Visibility</em>}</li>
  *   <li>{@link org.eclipse.recommenders.snipeditor.snipDSL.impl.entityImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.recommenders.snipeditor.snipDSL.impl.entityImpl#getSuperType <em>Super Type</em>}</li>
+ *   <li>{@link org.eclipse.recommenders.snipeditor.snipDSL.impl.entityImpl#getJType <em>JType</em>}</li>
  *   <li>{@link org.eclipse.recommenders.snipeditor.snipDSL.impl.entityImpl#getFeatures <em>Features</em>}</li>
  * </ul>
  * </p>
@@ -86,14 +85,14 @@ public class entityImpl extends XExpressionImpl implements entity
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getSuperType() <em>Super Type</em>}' containment reference.
+   * The cached value of the '{@link #getJType() <em>JType</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getSuperType()
+   * @see #getJType()
    * @generated
    * @ordered
    */
-  protected JvmTypeReference superType;
+  protected abstractTypeName jType;
 
   /**
    * The cached value of the '{@link #getFeatures() <em>Features</em>}' containment reference list.
@@ -177,9 +176,9 @@ public class entityImpl extends XExpressionImpl implements entity
    * <!-- end-user-doc -->
    * @generated
    */
-  public JvmTypeReference getSuperType()
+  public abstractTypeName getJType()
   {
-    return superType;
+    return jType;
   }
 
   /**
@@ -187,13 +186,13 @@ public class entityImpl extends XExpressionImpl implements entity
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetSuperType(JvmTypeReference newSuperType, NotificationChain msgs)
+  public NotificationChain basicSetJType(abstractTypeName newJType, NotificationChain msgs)
   {
-    JvmTypeReference oldSuperType = superType;
-    superType = newSuperType;
+    abstractTypeName oldJType = jType;
+    jType = newJType;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SnipDSLPackage.ENTITY__SUPER_TYPE, oldSuperType, newSuperType);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SnipDSLPackage.ENTITY__JTYPE, oldJType, newJType);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -204,20 +203,20 @@ public class entityImpl extends XExpressionImpl implements entity
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setSuperType(JvmTypeReference newSuperType)
+  public void setJType(abstractTypeName newJType)
   {
-    if (newSuperType != superType)
+    if (newJType != jType)
     {
       NotificationChain msgs = null;
-      if (superType != null)
-        msgs = ((InternalEObject)superType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SnipDSLPackage.ENTITY__SUPER_TYPE, null, msgs);
-      if (newSuperType != null)
-        msgs = ((InternalEObject)newSuperType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SnipDSLPackage.ENTITY__SUPER_TYPE, null, msgs);
-      msgs = basicSetSuperType(newSuperType, msgs);
+      if (jType != null)
+        msgs = ((InternalEObject)jType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SnipDSLPackage.ENTITY__JTYPE, null, msgs);
+      if (newJType != null)
+        msgs = ((InternalEObject)newJType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SnipDSLPackage.ENTITY__JTYPE, null, msgs);
+      msgs = basicSetJType(newJType, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, SnipDSLPackage.ENTITY__SUPER_TYPE, newSuperType, newSuperType));
+      eNotify(new ENotificationImpl(this, Notification.SET, SnipDSLPackage.ENTITY__JTYPE, newJType, newJType));
   }
 
   /**
@@ -244,8 +243,8 @@ public class entityImpl extends XExpressionImpl implements entity
   {
     switch (featureID)
     {
-      case SnipDSLPackage.ENTITY__SUPER_TYPE:
-        return basicSetSuperType(null, msgs);
+      case SnipDSLPackage.ENTITY__JTYPE:
+        return basicSetJType(null, msgs);
       case SnipDSLPackage.ENTITY__FEATURES:
         return ((InternalEList<?>)getFeatures()).basicRemove(otherEnd, msgs);
     }
@@ -266,8 +265,8 @@ public class entityImpl extends XExpressionImpl implements entity
         return getVisibility();
       case SnipDSLPackage.ENTITY__NAME:
         return getName();
-      case SnipDSLPackage.ENTITY__SUPER_TYPE:
-        return getSuperType();
+      case SnipDSLPackage.ENTITY__JTYPE:
+        return getJType();
       case SnipDSLPackage.ENTITY__FEATURES:
         return getFeatures();
     }
@@ -291,8 +290,8 @@ public class entityImpl extends XExpressionImpl implements entity
       case SnipDSLPackage.ENTITY__NAME:
         setName((String)newValue);
         return;
-      case SnipDSLPackage.ENTITY__SUPER_TYPE:
-        setSuperType((JvmTypeReference)newValue);
+      case SnipDSLPackage.ENTITY__JTYPE:
+        setJType((abstractTypeName)newValue);
         return;
       case SnipDSLPackage.ENTITY__FEATURES:
         getFeatures().clear();
@@ -318,8 +317,8 @@ public class entityImpl extends XExpressionImpl implements entity
       case SnipDSLPackage.ENTITY__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case SnipDSLPackage.ENTITY__SUPER_TYPE:
-        setSuperType((JvmTypeReference)null);
+      case SnipDSLPackage.ENTITY__JTYPE:
+        setJType((abstractTypeName)null);
         return;
       case SnipDSLPackage.ENTITY__FEATURES:
         getFeatures().clear();
@@ -342,8 +341,8 @@ public class entityImpl extends XExpressionImpl implements entity
         return visibility != VISIBILITY_EDEFAULT;
       case SnipDSLPackage.ENTITY__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case SnipDSLPackage.ENTITY__SUPER_TYPE:
-        return superType != null;
+      case SnipDSLPackage.ENTITY__JTYPE:
+        return jType != null;
       case SnipDSLPackage.ENTITY__FEATURES:
         return features != null && !features.isEmpty();
     }

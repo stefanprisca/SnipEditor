@@ -1,8 +1,11 @@
 //convert $int to String
+${import(java.util.ArrayList)}
+
+
 String ${freeName(str)} = Integer.toString(${nt});
 
 //Convert $ArrayList to array
-${elemType(ArrayList)}[] ${freeName(a)} = ${ArrayList}.toArray(new ${elemType(ArrayList)}[${ArrayList}.size()]);
+${elemType(ArrayList)}[] ${freeName(a)} = ${ArrayList}.toArray(new ArrayList()[${ArrayList}.size()]);
 
 //Convert $double to String
 String ${freeName(str)} = Double.toString(${double});

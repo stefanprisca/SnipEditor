@@ -1,15 +1,21 @@
 grammar org.eclipse.recommenders.snipeditor.SnipDSL with org.eclipse.xtext.xbase.Xbase
+import "http://www.eclipse.org/xtext/xbase/Xtype"
 import 'http://www.eclipse.org/xtext/xbase/Xbase' as xbase
 import "http://www.eclipse.org/xtext/common/JavaVMTypes" as types
 
 generate snipDSL "http://www.eclipse.org/recommenders/snipeditor/SnipDSL"
 
 domainmodel:
-	(importSection+=importDeclare)*
+	importSection=XImportSection?
     (elements += abstractElement )*
 ;
-importDeclare :
-	'${''import''('name = (QualifiedNameWithWildcard | QualifiedName) ')}'
+XImportDeclaration :
+	'${''import''('
+	(
+	importedType=[types::JvmDeclaredType|QualifiedName] 
+		| importedNamespace=QualifiedNameWithWildcard
+	)
+	')}'
 ;
 
 
@@ -50,7 +56,7 @@ parameter :
 
 
 method:
-	(visibility=Visibility)? 'static'?  (jType=abstractTypeName| "void")
+	(visibility=Visibility)? 'static'?  (jType=abstractTypeName | "void")
 	name=ValidID'('(params+=parameter
 		(','params+=parameter)*)?')' 
 		('throws' throwExceptions+=simpleOperand(',' throwExceptions+=simpleOperand)*)?
@@ -75,7 +81,7 @@ arrayAssignment:
 
 //attribute declaration
 attributeDeclaration :
-	(visible=Visibility)? 'static'? jType=abstractTypeName
+	(visible=Visibility)? 'static'? (jType=abstractTypeName)
 	name = declarativeID ('=' value=attributeAssignment)? 
 ;
 
@@ -130,7 +136,7 @@ conditionalExpression:
 
 
 
-XVariableDeclaration returns XExpression:
+XVariableDeclaration:
 	jType=abstractTypeName
 	name=declarativeID ('=' value = attributeAssignment)?
 ;
@@ -146,7 +152,8 @@ calledParameter returns xbase::XExpression:
 
 XFeatureCall returns XExpression:
 	featureCalls+=calledParameter
-	(('.' featureCalls+=calledParameter)*)
+	(('.' featureCalls+=calledParameter)*) 
+	
 ;
 
 
@@ -157,7 +164,8 @@ localMethodCall:
 	')' (arguments+=squareClosure)?
 ;
 simpleOperand:
-	name = operandID (arguments+=squareClosure)?
+	name = (operandID) 	
+	(arguments+=squareClosure)?
 ;
 
 unaryOperator:
@@ -231,9 +239,11 @@ XDoWhileExpression returns XExpression:
        body=myBlockExpression
    'while' '(' predicate=conditionalExpression ')';
 
+
+//TODO: replace ValidID to support abstract type creation
 XConstructorCall returns XExpression:
 	{XConstructorCall}
-	'new' constructor=[types::JvmConstructor|abstractTypeName] 
+	'new' constructor=abstractTypeName 
 	(=>'<' typeArguments+=abstractTypeName (',' typeArguments+=abstractTypeName)* '>')?
 	(=>'(' 
 		(
@@ -272,10 +282,12 @@ enum Visibility :
 	 protected | public | private
 ;
 
+//TODO: put abstract type in elemType!
  typeID:
+ 	{typeID}
  		('${'ValidID 
-			(=>':''elemType' '('ValidID')}' | '}'))
- 		|(=>'${''elemType' '('ValidID')}')
+			(=>':''elemType' '('type=JvmTypeReference')}' | '}'))
+ 		|(=>'${''elemType' '('type=JvmTypeReference')}')
  ;
 
 declarativeID:
@@ -289,7 +301,9 @@ jFaceVarID :
 	|=> '${'ValidID'}'
 ;
 operandID :
-	 ValidID | ('${'ValidID ':''var''}') 
+	 
+	ValidID | 
+	 ('${' ValidID ':''var''}') 
 	 |=>'${'ValidID'}'
 ;
 
@@ -306,8 +320,11 @@ jFaceSpecificLiteral:
 ;
 
 abstractTypeName :
-	(typeID|ValidID) '[]'?
+	(typeID) '[]'? 
+	|=>	type=JvmTypeReference '[]'?
 ;
+
+
 
 /* 
 annotation :

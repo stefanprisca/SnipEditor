@@ -4,8 +4,6 @@ package org.eclipse.recommenders.snipeditor.snipDSL;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.xtext.common.types.JvmTypeReference;
-
 import org.eclipse.xtext.xbase.XExpression;
 
 /**
@@ -18,7 +16,7 @@ import org.eclipse.xtext.xbase.XExpression;
  * <ul>
  *   <li>{@link org.eclipse.recommenders.snipeditor.snipDSL.entity#getVisibility <em>Visibility</em>}</li>
  *   <li>{@link org.eclipse.recommenders.snipeditor.snipDSL.entity#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.recommenders.snipeditor.snipDSL.entity#getSuperType <em>Super Type</em>}</li>
+ *   <li>{@link org.eclipse.recommenders.snipeditor.snipDSL.entity#getJType <em>JType</em>}</li>
  *   <li>{@link org.eclipse.recommenders.snipeditor.snipDSL.entity#getFeatures <em>Features</em>}</li>
  * </ul>
  * </p>
@@ -85,30 +83,30 @@ public interface entity extends XExpression
   void setName(String value);
 
   /**
-   * Returns the value of the '<em><b>Super Type</b></em>' containment reference.
+   * Returns the value of the '<em><b>JType</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Super Type</em>' containment reference isn't clear,
+   * If the meaning of the '<em>JType</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Super Type</em>' containment reference.
-   * @see #setSuperType(JvmTypeReference)
-   * @see org.eclipse.recommenders.snipeditor.snipDSL.SnipDSLPackage#getentity_SuperType()
+   * @return the value of the '<em>JType</em>' containment reference.
+   * @see #setJType(abstractTypeName)
+   * @see org.eclipse.recommenders.snipeditor.snipDSL.SnipDSLPackage#getentity_JType()
    * @model containment="true"
    * @generated
    */
-  JvmTypeReference getSuperType();
+  abstractTypeName getJType();
 
   /**
-   * Sets the value of the '{@link org.eclipse.recommenders.snipeditor.snipDSL.entity#getSuperType <em>Super Type</em>}' containment reference.
+   * Sets the value of the '{@link org.eclipse.recommenders.snipeditor.snipDSL.entity#getJType <em>JType</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Super Type</em>' containment reference.
-   * @see #getSuperType()
+   * @param value the new value of the '<em>JType</em>' containment reference.
+   * @see #getJType()
    * @generated
    */
-  void setSuperType(JvmTypeReference value);
+  void setJType(abstractTypeName value);
 
   /**
    * Returns the value of the '<em><b>Features</b></em>' containment reference list.

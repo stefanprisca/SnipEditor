@@ -19,10 +19,10 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.recommenders.snipeditor.snipDSL.SnipDSLPackage;
 import org.eclipse.recommenders.snipeditor.snipDSL.Visibility;
+import org.eclipse.recommenders.snipeditor.snipDSL.abstractTypeName;
 import org.eclipse.recommenders.snipeditor.snipDSL.method;
 import org.eclipse.recommenders.snipeditor.snipDSL.parameter;
-
-import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.recommenders.snipeditor.snipDSL.simpleOperand;
 
 import org.eclipse.xtext.xbase.XExpression;
 
@@ -39,6 +39,7 @@ import org.eclipse.xtext.xbase.impl.XExpressionImpl;
  *   <li>{@link org.eclipse.recommenders.snipeditor.snipDSL.impl.methodImpl#getJType <em>JType</em>}</li>
  *   <li>{@link org.eclipse.recommenders.snipeditor.snipDSL.impl.methodImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.recommenders.snipeditor.snipDSL.impl.methodImpl#getParams <em>Params</em>}</li>
+ *   <li>{@link org.eclipse.recommenders.snipeditor.snipDSL.impl.methodImpl#getThrowExceptions <em>Throw Exceptions</em>}</li>
  *   <li>{@link org.eclipse.recommenders.snipeditor.snipDSL.impl.methodImpl#getBody <em>Body</em>}</li>
  * </ul>
  * </p>
@@ -75,7 +76,7 @@ public class methodImpl extends XExpressionImpl implements method
    * @generated
    * @ordered
    */
-  protected JvmTypeReference jType;
+  protected abstractTypeName jType;
 
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -106,6 +107,16 @@ public class methodImpl extends XExpressionImpl implements method
    * @ordered
    */
   protected EList<parameter> params;
+
+  /**
+   * The cached value of the '{@link #getThrowExceptions() <em>Throw Exceptions</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getThrowExceptions()
+   * @generated
+   * @ordered
+   */
+  protected EList<simpleOperand> throwExceptions;
 
   /**
    * The cached value of the '{@link #getBody() <em>Body</em>}' containment reference.
@@ -166,7 +177,7 @@ public class methodImpl extends XExpressionImpl implements method
    * <!-- end-user-doc -->
    * @generated
    */
-  public JvmTypeReference getJType()
+  public abstractTypeName getJType()
   {
     return jType;
   }
@@ -176,9 +187,9 @@ public class methodImpl extends XExpressionImpl implements method
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetJType(JvmTypeReference newJType, NotificationChain msgs)
+  public NotificationChain basicSetJType(abstractTypeName newJType, NotificationChain msgs)
   {
-    JvmTypeReference oldJType = jType;
+    abstractTypeName oldJType = jType;
     jType = newJType;
     if (eNotificationRequired())
     {
@@ -193,7 +204,7 @@ public class methodImpl extends XExpressionImpl implements method
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setJType(JvmTypeReference newJType)
+  public void setJType(abstractTypeName newJType)
   {
     if (newJType != jType)
     {
@@ -244,6 +255,20 @@ public class methodImpl extends XExpressionImpl implements method
       params = new EObjectContainmentEList<parameter>(parameter.class, this, SnipDSLPackage.METHOD__PARAMS);
     }
     return params;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<simpleOperand> getThrowExceptions()
+  {
+    if (throwExceptions == null)
+    {
+      throwExceptions = new EObjectContainmentEList<simpleOperand>(simpleOperand.class, this, SnipDSLPackage.METHOD__THROW_EXCEPTIONS);
+    }
+    return throwExceptions;
   }
 
   /**
@@ -308,6 +333,8 @@ public class methodImpl extends XExpressionImpl implements method
         return basicSetJType(null, msgs);
       case SnipDSLPackage.METHOD__PARAMS:
         return ((InternalEList<?>)getParams()).basicRemove(otherEnd, msgs);
+      case SnipDSLPackage.METHOD__THROW_EXCEPTIONS:
+        return ((InternalEList<?>)getThrowExceptions()).basicRemove(otherEnd, msgs);
       case SnipDSLPackage.METHOD__BODY:
         return basicSetBody(null, msgs);
     }
@@ -332,6 +359,8 @@ public class methodImpl extends XExpressionImpl implements method
         return getName();
       case SnipDSLPackage.METHOD__PARAMS:
         return getParams();
+      case SnipDSLPackage.METHOD__THROW_EXCEPTIONS:
+        return getThrowExceptions();
       case SnipDSLPackage.METHOD__BODY:
         return getBody();
     }
@@ -353,7 +382,7 @@ public class methodImpl extends XExpressionImpl implements method
         setVisibility((Visibility)newValue);
         return;
       case SnipDSLPackage.METHOD__JTYPE:
-        setJType((JvmTypeReference)newValue);
+        setJType((abstractTypeName)newValue);
         return;
       case SnipDSLPackage.METHOD__NAME:
         setName((String)newValue);
@@ -361,6 +390,10 @@ public class methodImpl extends XExpressionImpl implements method
       case SnipDSLPackage.METHOD__PARAMS:
         getParams().clear();
         getParams().addAll((Collection<? extends parameter>)newValue);
+        return;
+      case SnipDSLPackage.METHOD__THROW_EXCEPTIONS:
+        getThrowExceptions().clear();
+        getThrowExceptions().addAll((Collection<? extends simpleOperand>)newValue);
         return;
       case SnipDSLPackage.METHOD__BODY:
         setBody((XExpression)newValue);
@@ -383,13 +416,16 @@ public class methodImpl extends XExpressionImpl implements method
         setVisibility(VISIBILITY_EDEFAULT);
         return;
       case SnipDSLPackage.METHOD__JTYPE:
-        setJType((JvmTypeReference)null);
+        setJType((abstractTypeName)null);
         return;
       case SnipDSLPackage.METHOD__NAME:
         setName(NAME_EDEFAULT);
         return;
       case SnipDSLPackage.METHOD__PARAMS:
         getParams().clear();
+        return;
+      case SnipDSLPackage.METHOD__THROW_EXCEPTIONS:
+        getThrowExceptions().clear();
         return;
       case SnipDSLPackage.METHOD__BODY:
         setBody((XExpression)null);
@@ -416,6 +452,8 @@ public class methodImpl extends XExpressionImpl implements method
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case SnipDSLPackage.METHOD__PARAMS:
         return params != null && !params.isEmpty();
+      case SnipDSLPackage.METHOD__THROW_EXCEPTIONS:
+        return throwExceptions != null && !throwExceptions.isEmpty();
       case SnipDSLPackage.METHOD__BODY:
         return body != null;
     }

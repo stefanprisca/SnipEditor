@@ -4,8 +4,6 @@ package org.eclipse.recommenders.snipeditor.snipDSL;
 
 import org.eclipse.emf.ecore.EObject;
 
-import org.eclipse.xtext.common.types.JvmTypeReference;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>parameter</b></em>'.
@@ -14,7 +12,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.recommenders.snipeditor.snipDSL.parameter#getParameterType <em>Parameter Type</em>}</li>
+ *   <li>{@link org.eclipse.recommenders.snipeditor.snipDSL.parameter#getJType <em>JType</em>}</li>
  *   <li>{@link org.eclipse.recommenders.snipeditor.snipDSL.parameter#getName <em>Name</em>}</li>
  * </ul>
  * </p>
@@ -26,30 +24,30 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 public interface parameter extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Parameter Type</b></em>' containment reference.
+   * Returns the value of the '<em><b>JType</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Parameter Type</em>' containment reference isn't clear,
+   * If the meaning of the '<em>JType</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Parameter Type</em>' containment reference.
-   * @see #setParameterType(JvmTypeReference)
-   * @see org.eclipse.recommenders.snipeditor.snipDSL.SnipDSLPackage#getparameter_ParameterType()
+   * @return the value of the '<em>JType</em>' containment reference.
+   * @see #setJType(abstractTypeName)
+   * @see org.eclipse.recommenders.snipeditor.snipDSL.SnipDSLPackage#getparameter_JType()
    * @model containment="true"
    * @generated
    */
-  JvmTypeReference getParameterType();
+  abstractTypeName getJType();
 
   /**
-   * Sets the value of the '{@link org.eclipse.recommenders.snipeditor.snipDSL.parameter#getParameterType <em>Parameter Type</em>}' containment reference.
+   * Sets the value of the '{@link org.eclipse.recommenders.snipeditor.snipDSL.parameter#getJType <em>JType</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Parameter Type</em>' containment reference.
-   * @see #getParameterType()
+   * @param value the new value of the '<em>JType</em>' containment reference.
+   * @see #getJType()
    * @generated
    */
-  void setParameterType(JvmTypeReference value);
+  void setJType(abstractTypeName value);
 
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.

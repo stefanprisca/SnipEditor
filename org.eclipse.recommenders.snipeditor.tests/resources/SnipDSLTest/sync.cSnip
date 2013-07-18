@@ -1,4 +1,4 @@
-void synchronized (SomeType ${mutex}) 
+void synchronized (${SomeType} ${mutex}) 
 {
         ${line_selection}
         
