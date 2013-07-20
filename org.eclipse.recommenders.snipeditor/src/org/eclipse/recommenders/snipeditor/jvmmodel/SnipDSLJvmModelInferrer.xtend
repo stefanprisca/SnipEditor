@@ -10,6 +10,13 @@ import org.eclipse.recommenders.snipeditor.snipDSL.attributeDeclaration
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.eclipse.recommenders.snipeditor.snipDSL.method
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer
+import org.eclipse.recommenders.snipeditor.compiler.SnipDSLSpecificCompiler
+import org.eclipse.recommenders.snipeditor.snipDSL.impl.XVariableDeclarationImpl
+import org.eclipse.xtext.common.types.util.TypeReferences
+import org.eclipse.xtext.xbase.XExpression
+import org.eclipse.recommenders.snipeditor.snipDSL.impl.XAssignmentImpl
+
+//import org.eclipse.recommenders.snipeditor.snipDSL.XAssignment
 
 /**
  * <p>Infers a JVM model from the source model.</p> 
@@ -23,8 +30,10 @@ class SnipDSLJvmModelInferrer extends AbstractModelInferrer {
      * convenience API to build and initialize JVM types and their members.
      */
 	@Inject extension JvmTypesBuilder
+	@Inject	extension TypeReferences
 	@Inject extension IQualifiedNameProvider
 	@Inject extension TypeReferenceSerializer
+	@Inject SnipDSLSpecificCompiler snipCompiler
 	
    	def dispatch void infer(entity element, IJvmDeclaredTypeAcceptor acceptor, boolean isPreIndexingPhase) {
    		// Here you explain how your model is mapped to Java elements, by writing the actual translation code.
@@ -42,22 +51,33 @@ class SnipDSLJvmModelInferrer extends AbstractModelInferrer {
    								}
    						method 
    								:{
-   								if(feature.JType!=null){
-          						  	members += feature.toMethod(feature.name, feature.JType.type) [
+   								//if(feature.JType!=null){
+          						  	members += feature.toMethod(feature.name, 
+          						  		 if (feature.JType != null) feature.JType.type
+          						  	) [
               						documentation = feature.documentation
               						for (p : feature.params) {
                 					parameters += p.toParameter(p.name, p.JType.type)
               						}
-             	 					body = feature.body;
-             	 					
-   								]}else{
+             	 					body = [
+             	 						for(blkFeature : feature.body.eContents)
+             	 						{
+             	 							switch(blkFeature){
+             	 								XVariableDeclarationImpl:
+             	 									snipCompiler._toJavaStatement(blkFeature, it, true)
+             	 								//XAssignmentImpl:
+             	 								//	it.append('''''')
+             	 							}
+             	 						}
+             	 					]
+             	 				]//else{
    									//TODO: members += feature.toMethod(feature.name, null ) [
               						//documentation = feature.documentation
               						/*for (p : feature.params) {
                 					parameters += p.toParameter(p.name, p.JType.type)
               						}*/
              	 				//body = feature.body ]
-             	 				}
+             	 				//}
    								}
    						
    						}
