@@ -4,8 +4,6 @@ package org.eclipse.recommenders.snipeditor.snipDSL;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.xtext.common.types.JvmFormalParameter;
-
 import org.eclipse.xtext.xbase.XExpression;
 
 /**
@@ -17,6 +15,8 @@ import org.eclipse.xtext.xbase.XExpression;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.recommenders.snipeditor.snipDSL.method#getVisibility <em>Visibility</em>}</li>
+ *   <li>{@link org.eclipse.recommenders.snipeditor.snipDSL.method#getJType <em>JType</em>}</li>
+ *   <li>{@link org.eclipse.recommenders.snipeditor.snipDSL.method#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.recommenders.snipeditor.snipDSL.method#getParams <em>Params</em>}</li>
  *   <li>{@link org.eclipse.recommenders.snipeditor.snipDSL.method#getThrowExceptions <em>Throw Exceptions</em>}</li>
  *   <li>{@link org.eclipse.recommenders.snipeditor.snipDSL.method#getBody <em>Body</em>}</li>
@@ -27,7 +27,7 @@ import org.eclipse.xtext.xbase.XExpression;
  * @model
  * @generated
  */
-public interface method extends feature
+public interface method extends XExpression
 {
   /**
    * Returns the value of the '<em><b>Visibility</b></em>' attribute.
@@ -59,8 +59,60 @@ public interface method extends feature
   void setVisibility(Visibility value);
 
   /**
+   * Returns the value of the '<em><b>JType</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>JType</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>JType</em>' containment reference.
+   * @see #setJType(abstractTypeName)
+   * @see org.eclipse.recommenders.snipeditor.snipDSL.SnipDSLPackage#getmethod_JType()
+   * @model containment="true"
+   * @generated
+   */
+  abstractTypeName getJType();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.recommenders.snipeditor.snipDSL.method#getJType <em>JType</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>JType</em>' containment reference.
+   * @see #getJType()
+   * @generated
+   */
+  void setJType(abstractTypeName value);
+
+  /**
+   * Returns the value of the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Name</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Name</em>' attribute.
+   * @see #setName(String)
+   * @see org.eclipse.recommenders.snipeditor.snipDSL.SnipDSLPackage#getmethod_Name()
+   * @model
+   * @generated
+   */
+  String getName();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.recommenders.snipeditor.snipDSL.method#getName <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Name</em>' attribute.
+   * @see #getName()
+   * @generated
+   */
+  void setName(String value);
+
+  /**
    * Returns the value of the '<em><b>Params</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipse.xtext.common.types.JvmFormalParameter}.
+   * The list contents are of type {@link org.eclipse.recommenders.snipeditor.snipDSL.parameter}.
    * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Params</em>' containment reference list isn't clear,
@@ -72,7 +124,7 @@ public interface method extends feature
    * @model containment="true"
    * @generated
    */
-  EList<JvmFormalParameter> getParams();
+  EList<parameter> getParams();
 
   /**
    * Returns the value of the '<em><b>Throw Exceptions</b></em>' containment reference list.

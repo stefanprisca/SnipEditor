@@ -6,8 +6,6 @@ package org.eclipse.recommenders.snipeditor.generator
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.IGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess
-import org.eclipse.recommenders.snipeditor.snipDSL.entity
-import org.eclipse.recommenders.snipeditor.snipDSL.impl.XVariableDeclarationImpl
 
 /**
  * Generates code from your model files on save.
@@ -15,29 +13,12 @@ import org.eclipse.recommenders.snipeditor.snipDSL.impl.XVariableDeclarationImpl
  * see http://www.eclipse.org/Xtext/documentation.html#TutorialCodeGeneration
  */
 class SnipDSLGenerator implements IGenerator {
-
-override void doGenerate(Resource resource, IFileSystemAccess fsa) {
-  for(e: resource.allContents.toIterable.filter(entity)) {
-    fsa.generateFile(
-      e.name.toString() + ".java",
-      e.compile)
-  }
-}
-
-def dispatch CharSequence compile(entity entity){
-	 ''' package «entity.eContainer.toString»;
-  
-  public class «entity.name» {
-  }
-'''
-
-}
-def dispatch CharSequence compile(XVariableDeclarationImpl xVar)
-{
-	'''
-	«xVar.type.type.simpleName» «xVar.name»
-	'''
-}
 	
-	
+	override void doGenerate(Resource resource, IFileSystemAccess fsa) {
+//		fsa.generateFile('greetings.txt', 'People to greet: ' + 
+//			resource.allContents
+//				.filter(typeof(Greeting))
+//				.map[name]
+//				.join(', '))
+	}
 }

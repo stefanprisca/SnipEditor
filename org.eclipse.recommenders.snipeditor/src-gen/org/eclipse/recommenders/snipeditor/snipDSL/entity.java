@@ -110,7 +110,7 @@ public interface entity extends XExpression
 
   /**
    * Returns the value of the '<em><b>Features</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipse.recommenders.snipeditor.snipDSL.feature}.
+   * The list contents are of type {@link org.eclipse.xtext.xbase.XExpression}.
    * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Features</em>' containment reference list isn't clear,
@@ -122,6 +122,6 @@ public interface entity extends XExpression
    * @model containment="true"
    * @generated
    */
-  EList<feature> getFeatures();
+  EList<XExpression> getFeatures();
 
 } // entity
