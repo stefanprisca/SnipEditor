@@ -19,12 +19,14 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.recommenders.snipeditor.snipDSL.SnipDSLPackage;
 import org.eclipse.recommenders.snipeditor.snipDSL.Visibility;
+import org.eclipse.recommenders.snipeditor.snipDSL.abstractTypeName;
 import org.eclipse.recommenders.snipeditor.snipDSL.method;
+import org.eclipse.recommenders.snipeditor.snipDSL.parameter;
 import org.eclipse.recommenders.snipeditor.snipDSL.simpleOperand;
 
-import org.eclipse.xtext.common.types.JvmFormalParameter;
-
 import org.eclipse.xtext.xbase.XExpression;
+
+import org.eclipse.xtext.xbase.impl.XExpressionImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -34,6 +36,8 @@ import org.eclipse.xtext.xbase.XExpression;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.recommenders.snipeditor.snipDSL.impl.methodImpl#getVisibility <em>Visibility</em>}</li>
+ *   <li>{@link org.eclipse.recommenders.snipeditor.snipDSL.impl.methodImpl#getJType <em>JType</em>}</li>
+ *   <li>{@link org.eclipse.recommenders.snipeditor.snipDSL.impl.methodImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.recommenders.snipeditor.snipDSL.impl.methodImpl#getParams <em>Params</em>}</li>
  *   <li>{@link org.eclipse.recommenders.snipeditor.snipDSL.impl.methodImpl#getThrowExceptions <em>Throw Exceptions</em>}</li>
  *   <li>{@link org.eclipse.recommenders.snipeditor.snipDSL.impl.methodImpl#getBody <em>Body</em>}</li>
@@ -42,7 +46,7 @@ import org.eclipse.xtext.xbase.XExpression;
  *
  * @generated
  */
-public class methodImpl extends featureImpl implements method
+public class methodImpl extends XExpressionImpl implements method
 {
   /**
    * The default value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
@@ -65,6 +69,36 @@ public class methodImpl extends featureImpl implements method
   protected Visibility visibility = VISIBILITY_EDEFAULT;
 
   /**
+   * The cached value of the '{@link #getJType() <em>JType</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getJType()
+   * @generated
+   * @ordered
+   */
+  protected abstractTypeName jType;
+
+  /**
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected static final String NAME_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected String name = NAME_EDEFAULT;
+
+  /**
    * The cached value of the '{@link #getParams() <em>Params</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -72,7 +106,7 @@ public class methodImpl extends featureImpl implements method
    * @generated
    * @ordered
    */
-  protected EList<JvmFormalParameter> params;
+  protected EList<parameter> params;
 
   /**
    * The cached value of the '{@link #getThrowExceptions() <em>Throw Exceptions</em>}' containment reference list.
@@ -143,11 +177,82 @@ public class methodImpl extends featureImpl implements method
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<JvmFormalParameter> getParams()
+  public abstractTypeName getJType()
+  {
+    return jType;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetJType(abstractTypeName newJType, NotificationChain msgs)
+  {
+    abstractTypeName oldJType = jType;
+    jType = newJType;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SnipDSLPackage.METHOD__JTYPE, oldJType, newJType);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setJType(abstractTypeName newJType)
+  {
+    if (newJType != jType)
+    {
+      NotificationChain msgs = null;
+      if (jType != null)
+        msgs = ((InternalEObject)jType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SnipDSLPackage.METHOD__JTYPE, null, msgs);
+      if (newJType != null)
+        msgs = ((InternalEObject)newJType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SnipDSLPackage.METHOD__JTYPE, null, msgs);
+      msgs = basicSetJType(newJType, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, SnipDSLPackage.METHOD__JTYPE, newJType, newJType));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String getName()
+  {
+    return name;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setName(String newName)
+  {
+    String oldName = name;
+    name = newName;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, SnipDSLPackage.METHOD__NAME, oldName, name));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<parameter> getParams()
   {
     if (params == null)
     {
-      params = new EObjectContainmentEList<JvmFormalParameter>(JvmFormalParameter.class, this, SnipDSLPackage.METHOD__PARAMS);
+      params = new EObjectContainmentEList<parameter>(parameter.class, this, SnipDSLPackage.METHOD__PARAMS);
     }
     return params;
   }
@@ -224,6 +329,8 @@ public class methodImpl extends featureImpl implements method
   {
     switch (featureID)
     {
+      case SnipDSLPackage.METHOD__JTYPE:
+        return basicSetJType(null, msgs);
       case SnipDSLPackage.METHOD__PARAMS:
         return ((InternalEList<?>)getParams()).basicRemove(otherEnd, msgs);
       case SnipDSLPackage.METHOD__THROW_EXCEPTIONS:
@@ -246,6 +353,10 @@ public class methodImpl extends featureImpl implements method
     {
       case SnipDSLPackage.METHOD__VISIBILITY:
         return getVisibility();
+      case SnipDSLPackage.METHOD__JTYPE:
+        return getJType();
+      case SnipDSLPackage.METHOD__NAME:
+        return getName();
       case SnipDSLPackage.METHOD__PARAMS:
         return getParams();
       case SnipDSLPackage.METHOD__THROW_EXCEPTIONS:
@@ -270,9 +381,15 @@ public class methodImpl extends featureImpl implements method
       case SnipDSLPackage.METHOD__VISIBILITY:
         setVisibility((Visibility)newValue);
         return;
+      case SnipDSLPackage.METHOD__JTYPE:
+        setJType((abstractTypeName)newValue);
+        return;
+      case SnipDSLPackage.METHOD__NAME:
+        setName((String)newValue);
+        return;
       case SnipDSLPackage.METHOD__PARAMS:
         getParams().clear();
-        getParams().addAll((Collection<? extends JvmFormalParameter>)newValue);
+        getParams().addAll((Collection<? extends parameter>)newValue);
         return;
       case SnipDSLPackage.METHOD__THROW_EXCEPTIONS:
         getThrowExceptions().clear();
@@ -297,6 +414,12 @@ public class methodImpl extends featureImpl implements method
     {
       case SnipDSLPackage.METHOD__VISIBILITY:
         setVisibility(VISIBILITY_EDEFAULT);
+        return;
+      case SnipDSLPackage.METHOD__JTYPE:
+        setJType((abstractTypeName)null);
+        return;
+      case SnipDSLPackage.METHOD__NAME:
+        setName(NAME_EDEFAULT);
         return;
       case SnipDSLPackage.METHOD__PARAMS:
         getParams().clear();
@@ -323,6 +446,10 @@ public class methodImpl extends featureImpl implements method
     {
       case SnipDSLPackage.METHOD__VISIBILITY:
         return visibility != VISIBILITY_EDEFAULT;
+      case SnipDSLPackage.METHOD__JTYPE:
+        return jType != null;
+      case SnipDSLPackage.METHOD__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case SnipDSLPackage.METHOD__PARAMS:
         return params != null && !params.isEmpty();
       case SnipDSLPackage.METHOD__THROW_EXCEPTIONS:
@@ -346,6 +473,8 @@ public class methodImpl extends featureImpl implements method
     StringBuffer result = new StringBuffer(super.toString());
     result.append(" (visibility: ");
     result.append(visibility);
+    result.append(", name: ");
+    result.append(name);
     result.append(')');
     return result.toString();
   }

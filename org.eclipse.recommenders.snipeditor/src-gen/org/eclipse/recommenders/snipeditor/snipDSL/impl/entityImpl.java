@@ -21,7 +21,8 @@ import org.eclipse.recommenders.snipeditor.snipDSL.SnipDSLPackage;
 import org.eclipse.recommenders.snipeditor.snipDSL.Visibility;
 import org.eclipse.recommenders.snipeditor.snipDSL.abstractTypeName;
 import org.eclipse.recommenders.snipeditor.snipDSL.entity;
-import org.eclipse.recommenders.snipeditor.snipDSL.feature;
+
+import org.eclipse.xtext.xbase.XExpression;
 
 import org.eclipse.xtext.xbase.impl.XExpressionImpl;
 
@@ -101,7 +102,7 @@ public class entityImpl extends XExpressionImpl implements entity
    * @generated
    * @ordered
    */
-  protected EList<feature> features;
+  protected EList<XExpression> features;
 
   /**
    * <!-- begin-user-doc -->
@@ -223,11 +224,11 @@ public class entityImpl extends XExpressionImpl implements entity
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<feature> getFeatures()
+  public EList<XExpression> getFeatures()
   {
     if (features == null)
     {
-      features = new EObjectContainmentEList<feature>(feature.class, this, SnipDSLPackage.ENTITY__FEATURES);
+      features = new EObjectContainmentEList<XExpression>(XExpression.class, this, SnipDSLPackage.ENTITY__FEATURES);
     }
     return features;
   }
@@ -294,7 +295,7 @@ public class entityImpl extends XExpressionImpl implements entity
         return;
       case SnipDSLPackage.ENTITY__FEATURES:
         getFeatures().clear();
-        getFeatures().addAll((Collection<? extends feature>)newValue);
+        getFeatures().addAll((Collection<? extends XExpression>)newValue);
         return;
     }
     super.eSet(featureID, newValue);

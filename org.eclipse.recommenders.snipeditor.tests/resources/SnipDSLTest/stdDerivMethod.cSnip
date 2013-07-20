@@ -17,11 +17,7 @@ static double standardDeviation()
 		return Math.sqrt( sum / ( n - 1 ) );
 		}
 	
-<<<<<<< Updated upstream
-		for (${elemType(loopable)} ${freeName(elem)} : ${loopable}) {
-=======
-		for (${elemType(String [])} ${freeName(elem)} : ${loopable}) {
->>>>>>> Stashed changes
+		for (${elemType(String [ ])} ${freeName(elem)} : ${loopable}) {
 				${cursor}
 			}
 	}   
