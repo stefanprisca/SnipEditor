@@ -3,9 +3,17 @@
  */
 package org.eclipse.recommenders.snipeditor;
 
+import org.eclipse.recommenders.snipeditor.scoping.SnipDSLScopeProvider;
+import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.xbase.scoping.batch.XbaseBatchScopeProvider;
+
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
 public class SnipDSLRuntimeModule extends org.eclipse.recommenders.snipeditor.AbstractSnipDSLRuntimeModule {
 
+	 @Override
+	    public Class<? extends XbaseBatchScopeProvider> bindXbaseBatchScopeProvider() {
+	        return SnipDSLScopeProvider.class;
+	    }
 }

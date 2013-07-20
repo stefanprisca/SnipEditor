@@ -1,4 +1,10 @@
+<<<<<<< Updated upstream
 ${array_type}[] ${result:newName(array)};
+=======
+${import(java.util.Collection)}
+
+${array_type[]} ${result:newName(array)};
+>>>>>>> Stashed changes
 //add
 ${array_type}[${array}.length + 1];
 System.arraycopy(${array}, 0, ${result}, 0, ${array}.length);
@@ -8,4 +14,8 @@ ${array_type}[${array1}.length + ${array}.length];
 System.arraycopy(${array1}, 0, ${result}, 0, ${array1}.length);
 System.arraycopy(${array}, 0, ${result}, ${array1}.length, ${array}.length);
 //convert to array
+<<<<<<< Updated upstream
 (${type:elemType(collection)}[]) ${collection}.toArray(new ${type}[${collection}.size()]);
+=======
+(${type:elemType(Collection [])}) ${collection}.toArray(new ${Type}()[${collection}.size()]);
+>>>>>>> Stashed changes
