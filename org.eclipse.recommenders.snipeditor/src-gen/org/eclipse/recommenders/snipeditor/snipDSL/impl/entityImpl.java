@@ -19,8 +19,9 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.recommenders.snipeditor.snipDSL.SnipDSLPackage;
 import org.eclipse.recommenders.snipeditor.snipDSL.Visibility;
-import org.eclipse.recommenders.snipeditor.snipDSL.abstractTypeName;
 import org.eclipse.recommenders.snipeditor.snipDSL.entity;
+
+import org.eclipse.xtext.common.types.JvmTypeReference;
 
 import org.eclipse.xtext.xbase.XExpression;
 
@@ -92,7 +93,7 @@ public class entityImpl extends XExpressionImpl implements entity
    * @generated
    * @ordered
    */
-  protected abstractTypeName jType;
+  protected JvmTypeReference jType;
 
   /**
    * The cached value of the '{@link #getFeatures() <em>Features</em>}' containment reference list.
@@ -176,7 +177,7 @@ public class entityImpl extends XExpressionImpl implements entity
    * <!-- end-user-doc -->
    * @generated
    */
-  public abstractTypeName getJType()
+  public JvmTypeReference getJType()
   {
     return jType;
   }
@@ -186,9 +187,9 @@ public class entityImpl extends XExpressionImpl implements entity
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetJType(abstractTypeName newJType, NotificationChain msgs)
+  public NotificationChain basicSetJType(JvmTypeReference newJType, NotificationChain msgs)
   {
-    abstractTypeName oldJType = jType;
+    JvmTypeReference oldJType = jType;
     jType = newJType;
     if (eNotificationRequired())
     {
@@ -203,7 +204,7 @@ public class entityImpl extends XExpressionImpl implements entity
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setJType(abstractTypeName newJType)
+  public void setJType(JvmTypeReference newJType)
   {
     if (newJType != jType)
     {
@@ -291,7 +292,7 @@ public class entityImpl extends XExpressionImpl implements entity
         setName((String)newValue);
         return;
       case SnipDSLPackage.ENTITY__JTYPE:
-        setJType((abstractTypeName)newValue);
+        setJType((JvmTypeReference)newValue);
         return;
       case SnipDSLPackage.ENTITY__FEATURES:
         getFeatures().clear();
@@ -318,7 +319,7 @@ public class entityImpl extends XExpressionImpl implements entity
         setName(NAME_EDEFAULT);
         return;
       case SnipDSLPackage.ENTITY__JTYPE:
-        setJType((abstractTypeName)null);
+        setJType((JvmTypeReference)null);
         return;
       case SnipDSLPackage.ENTITY__FEATURES:
         getFeatures().clear();

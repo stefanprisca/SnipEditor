@@ -4,6 +4,8 @@ package org.eclipse.recommenders.snipeditor.snipDSL;
 
 import org.eclipse.emf.common.util.EList;
 
+import org.eclipse.xtext.common.types.JvmTypeReference;
+
 import org.eclipse.xtext.xbase.XExpression;
 
 /**
@@ -91,12 +93,12 @@ public interface entity extends XExpression
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>JType</em>' containment reference.
-   * @see #setJType(abstractTypeName)
+   * @see #setJType(JvmTypeReference)
    * @see org.eclipse.recommenders.snipeditor.snipDSL.SnipDSLPackage#getentity_JType()
    * @model containment="true"
    * @generated
    */
-  abstractTypeName getJType();
+  JvmTypeReference getJType();
 
   /**
    * Sets the value of the '{@link org.eclipse.recommenders.snipeditor.snipDSL.entity#getJType <em>JType</em>}' containment reference.
@@ -106,7 +108,7 @@ public interface entity extends XExpression
    * @see #getJType()
    * @generated
    */
-  void setJType(abstractTypeName value);
+  void setJType(JvmTypeReference value);
 
   /**
    * Returns the value of the '<em><b>Features</b></em>' containment reference list.

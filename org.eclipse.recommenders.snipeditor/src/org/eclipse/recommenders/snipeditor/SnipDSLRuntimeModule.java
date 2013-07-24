@@ -3,9 +3,36 @@
  */
 package org.eclipse.recommenders.snipeditor;
 
+import org.eclipse.recommenders.snipeditor.compiler.SnipDSLSpecificCompiler;
+import org.eclipse.recommenders.snipeditor.typing.SnipDSLTypeComputer;
+import org.eclipse.recommenders.snipeditor.scoping.SnipDSLLocalScope;
+import org.eclipse.recommenders.snipeditor.scoping.SnipDSLScopeProvider;
+import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
+import org.eclipse.xtext.xbase.scoping.batch.XbaseBatchScopeProvider;
+import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;
+
+import com.google.inject.name.Names;
+
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
 public class SnipDSLRuntimeModule extends org.eclipse.recommenders.snipeditor.AbstractSnipDSLRuntimeModule {
 
+	@SuppressWarnings("restriction")
+	public Class<? extends XbaseCompiler> bindXbaseCompiler() {
+		return SnipDSLSpecificCompiler.class;
+
+	}
+	/*public Class<? extends XbaseBatchScopeProvider> bindXbaseBatchScopeProvider() {
+		System.out.println("Scope has changed");
+		return SnipDSLLocalScope.class;
+
+	}
+	public Class<? extends org.eclipse.xtext.scoping.IScopeProvider> bindIScopeProvider() {
+		return SnipDSLScopeProvider.class;
+	}*/
+	public Class<? extends org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer> bindITypeComputer() {
+			return SnipDSLTypeComputer.class;
+		}
 }
