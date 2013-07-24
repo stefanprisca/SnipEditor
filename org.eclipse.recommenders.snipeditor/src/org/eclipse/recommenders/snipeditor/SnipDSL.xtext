@@ -1,7 +1,8 @@
-grammar org.eclipse.recommenders.snipeditor.SnipDSL with org.eclipse.xtext.xbase.Xbase
-import "http://www.eclipse.org/xtext/xbase/Xtype"
+grammar org.eclipse.recommenders.snipeditor.SnipDSL with org.eclipse.xtext.xbase.Xbase 
 import 'http://www.eclipse.org/xtext/xbase/Xbase' as xbase
 import "http://www.eclipse.org/xtext/common/JavaVMTypes" as types
+import "http://www.eclipse.org/xtext/xbase/Xtype" as xtypes
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 generate snipDSL "http://www.eclipse.org/recommenders/snipeditor/SnipDSL"
 
@@ -9,7 +10,7 @@ domainmodel:
 	importSection=XImportSection?
     (elements += abstractElement )*
 ;
-XImportDeclaration :
+XImportDeclaration returns xtypes::XImportDeclaration:
 	'${''import''('
 	(
 	importedType=[types::JvmDeclaredType|QualifiedName] 
@@ -24,8 +25,7 @@ abstractElement returns xbase::XExpression:
 	entity | 
 	feature | 
 	helpperClassAnnotation | 
-	abstractAssignmentOperation ";" | 
-	XPrimaryExpression ";"?|
+	abstractAssignmentOperation ";"? |
 	jFaceSpecificLiteral
 ;
 
@@ -59,20 +59,20 @@ method:
 	(visibility=Visibility)? 'static'?  (jType=abstractTypeName | "void")
 	name=ValidID'('(params+=parameter
 		(','params+=parameter)*)?')' 
-		('throws' throwExceptions+=simpleOperand(',' throwExceptions+=simpleOperand)*)?
-	body=myBlockExpression
+		('throws' throwExceptions+=operandID(',' throwExceptions+=operandID)*)?
+	body=XBlockExpression
 ;
 //attribute assignments
 attributeAssignment returns xbase::XExpression:
-	 arrayAssignment | blockAssignment | XConstructorCall | multyAssignOperation
+	 arrayAssignment | blockAssignment | XLiteral |=>XExpression
 ;
 //assignment with {...}
-blockAssignment:
+blockAssignment returns xbase::XExpression:
 	{blockAssignment}
-	"{" (values+=literal (',' values+=literal)*)? "}"
+	"{" (values+=XLiteral (',' values+=XLiteral)*)? "}"
 ;
 //square bracket assignment
-arrayAssignment:
+arrayAssignment returns xbase::XExpression:
 	{arrayAssignment}
 	"new" (jType=abstractTypeName) arguments=squareClosure
 ;
@@ -82,64 +82,82 @@ arrayAssignment:
 //attribute declaration
 attributeDeclaration :
 	(visible=Visibility)? 'static'? (jType=abstractTypeName)
-	name = declarativeID ('=' value=attributeAssignment)? 
+	name = declarativeID ('=' value=XExpression)? 
 ;
 
 //expression of the block
-myBlockExpression returns xbase::XExpression:
-	{myBlockExpression}
-	'{'
-		((expressions+=blockFeature))* 
-		
-	'}'
-;
+
 //features that are present in the block
-blockFeature  returns xbase::XExpression :
+XExpressionInsideBlock  returns xbase::XExpression :
  			(XVariableDeclaration ';' | 
- 			 abstractAssignmentOperation ';' | 
- 			 XPrimaryExpression ';'?|
+ 			 abstractAssignmentOperation ';'? | 
 			 jFaceSpecificLiteral
  			)
 ;
 
-abstractAssignmentOperation:
-	operandAssignment | unaryOperation
+abstractAssignmentOperation returns xbase::XExpression:
+	XExpression | unaryOperation
 ;
 
-operandAssignment:
-	result=simpleOperand valueAssignmentOperator
-		value=multyAssignOperation
-;
-//does not support ()
-multyAssignOperation :
+/*multyAssignOperation :
 
-	operands+= (XFeatureCall | literal | XParenthesizedExpression) 
+	operands+= (XMemberFeatureCall | literal)
 		(binaryOperator operands+=multyAssignOperation)*
 	
-;
+;*/
 unaryOperation:
-	result=XFeatureCall
+	result=operandID
 		operator=unaryOperator
 	;
 
-//removed =>, see what happens
-conditionalExpression:
+/*conditionalExpression:
 	
-	('('operands+=operandAssignment')' 
+	('('operands+=XAssignment')' 
 		conditionOperator operands+=multyAssignOperation
 	| operands+=multyAssignOperation
 	 	(conditionOperator operands+=multyAssignOperation)?)
 	
 	(('&&' | '||')expressions+=conditionalExpression)*
-;
+;*/
 
 
 
 
-XVariableDeclaration:
-	jType=abstractTypeName
-	name=declarativeID ('=' value = attributeAssignment)?
-;
+XVariableDeclaration returns xbase::XExpression:
+	{xbase::XVariableDeclaration}
+	(writeable?='final')? type=abstractTypeName name=declarativeID ('=' right=attributeAssignment)?;
+
+
+/*XMemberFeatureCall returns xbase::XExpression:
+	XPrimaryExpression
+	(=>({XAssignment.assignable=current} ('.'|explicitStatic?="::") feature=simpleOperand OpSingleAssign) value=XAssignment
+	|=>({XMemberFeatureCall.memberCallTarget=current} ("."|nullSafe?="?."|explicitStatic?="::")) 
+		('<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?  
+		feature=simpleOperand (
+			=>explicitOperationCall?='(' 
+				(
+				    memberCallArguments+=XShortClosure
+				  |	memberCallArguments+=XExpression (',' memberCallArguments+=XExpression)*
+				)? 
+			')')?
+			memberCallArguments+=XClosure?
+		)*;
+XFeatureCall returns XExpression:
+	{XFeatureCall}
+	('<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')? 
+	feature=simpleOperand 
+	(=>explicitOperationCall?='(' 
+		(
+		    featureCallArguments+=XShortClosure
+		  |	featureCallArguments+=XExpression (',' featureCallArguments+=XExpression)*
+		)? 
+	')')?
+	featureCallArguments+=XClosure?;
+
+*/
+
+
+/*
 converssionCall:
 	'('newJType=abstractTypeName')'name=XFeatureCall
 	(arguments+=squareClosure)?
@@ -149,133 +167,83 @@ calledParameter returns xbase::XExpression:
 	
 	(localMethodCall | simpleOperand | XConstructorCall | converssionCall) 
 ;
-
-XFeatureCall returns XExpression:
-	featureCalls+=calledParameter
-	(('.' featureCalls+=calledParameter)*) 
-	
-;
-
+*/
 
 //this is the call for a method; has multyAssignOp as parameter as it includes all.
-localMethodCall:
+/*localMethodCall:
 	name = operandID '('
 	(parameters+=multyAssignOperation (',' parameters+=multyAssignOperation)*)?
 	')' (arguments+=squareClosure)?
-;
-simpleOperand:
-	name = (operandID) 	
+;*/
+/*simpleOperand:
+	(operandID) 	
 	(arguments+=squareClosure)?
-;
+;*/
 
 unaryOperator:
 	"++" | "--"
 ;
-
+/*
 binaryOperator:
 	"+" | "-" | "*" | "/" 
 ;
 
 conditionOperator:
 	'==' | '!=' | '>=' | '<=' | '>' | '<' | 'instanceof'
-	;
+	;*/
 valueAssignmentOperator:
 	"="|"+="|"-="
 ;
-
-
-XIfExpression returns XExpression:
-	{XIfExpression}
-	'if' '(' if=conditionalExpression ')'
-	then=myBlockExpression
-	(=>'else' else=myBlockExpression)?;
-
-XSwitchExpression returns XExpression:
-	{XSwitchExpression}
-	'switch' (=>(localVarName=typeID ':')? switch=XFeatureCall
-		| =>('(' localVarName=typeID ':') switch=XFeatureCall ')') '{'
-	(cases+=XCasePart 'break;')+
-	('default' ':' defaultExp+=blockFeature* 'break;')?
-	'}';
-
-XCasePart:
-	typeGuard=JvmTypeReference? ('case' case=XExpression)? 
-		':' thenExp+=blockFeature
-		 
-		;
  
-XForLoopExpression returns XExpression:
+/*XForLoopExpression returns xbase::XExpression:
 	
 	classicForLoop | forLoopWithIterator
-	;
+;
 
 classicForLoop:
 	
-	'for' '(' declaredParam=(XVariableDeclaration | simpleOperand) ';' 
-				forExpression=conditionalExpression ';'
+	'for' '(' declaredParam=operandID ';' 
+				forExpression=XExpression ';'
 				forOperation=abstractAssignmentOperation ')'
-		body=myBlockExpression
+		body=XBlockExpression
 ;
 
 forLoopWithIterator:
 	'for''('
 		jType=(abstractTypeName) iteratorName=declarativeID ':'
-		iteratableObject=XFeatureCall
+		iteratableObject=XExpression
 		
 	')'
-	body=myBlockExpression
+	body=XBlockExpression
 ;
 
-
-
-XWhileExpression returns XExpression:
-	{XWhileExpression}
-	'while' '(' predicate=conditionalExpression ')'
-		body=myBlockExpression;
-	
-XDoWhileExpression returns XExpression:
-	{XDoWhileExpression}
-   'do'
-       body=myBlockExpression
-   'while' '(' predicate=conditionalExpression ')';
-
-
 //TODO: replace ValidID to support abstract type creation
-XConstructorCall returns XExpression:
+/*XConstructorCall returns xbase::XExpression:
 	{XConstructorCall}
 	'new' constructor=abstractTypeName 
 	(=>'<' typeArguments+=abstractTypeName (',' typeArguments+=abstractTypeName)* '>')?
 	(=>'(' 
 		(
-		    arguments+=(multyAssignOperation)
-		    (',' arguments+=(multyAssignOperation))*
+		    arguments+=XExpression
+		    (',' arguments+=XExpression)*
 		)? 
 	')')?
 	arguments+=squareClosure?;
 
-XThrowExpression returns XExpression :
-	{XThrowExpression} 'throw' expression=(simpleOperand|XConstructorCall);
-	
-XReturnExpression returns XExpression :
-	{XReturnExpression} 'return' (=>expression=multyAssignOperation);
-	
 XTryCatchFinallyExpression returns XExpression:
 	{XTryCatchFinallyExpression}
 	'try' 
-		expression=myBlockExpression
+		expression=XBlockExpression
 	(
 		catchClauses+=XCatchClause+
-		(=>'finally' finallyExpression=myBlockExpression)?
-	|	'finally' finallyExpression=myBlockExpression
+		(=>'finally' finallyExpression=XBlockExpression)?
+	|	'finally' finallyExpression=XBlockExpression
 	);
 	
 XCatchClause :
-	=>'catch' '(' param=parameter ')' expression=myBlockExpression;
+	=>'catch' '(' param=parameter ')' expression=XBlockExpression;
 
-XParenthesizedExpression returns XExpression:
-	'(' multyAssignOperation ')';
-
-
+*/
 
 
 enum Visibility :
@@ -283,45 +251,35 @@ enum Visibility :
 ;
 
 //TODO: put abstract type in elemType!
- typeID:
- 	{typeID}
- 		('${'ValidID 
-			(=>':''elemType' '('type=JvmTypeReference')}' | '}'))
- 		|(=>'${''elemType' '('type=JvmTypeReference')}')
+ typeID returns types::JvmTypeReference:
+ 		({typeID}'${'ValidID '}'
+		|(=>'${'ValidID':''elemType' '('=>JvmTypeReference')}'))
+ 		|(=>'${''elemType' '('=>JvmTypeReference')}')
  ;
 
 declarativeID:
-	 ValidID | jFaceVarID 
+	  jFaceVarID |
+	  =>ValidID 
 ;
 
-jFaceVarID :
-	('${'ValidID 
-		(=>':' ('freeName' '('ValidID')}' | 'iter''}' | 'newName' '('ValidID')}')))
-	|(=>'${''freeName' '('ValidID')}') 
-	|=> '${'ValidID'}'
+jFaceVarID:
+	'${'=>ValidID'}' 
+		|('{'=>ValidID':'('freeName'|'newName') '('ValidID')}')
+ 		|(=>'${'('freeName'|'newName') '('=>ValidID')}')
 ;
-operandID :
-	 
-	ValidID | 
-	 ('${' ValidID ':''var''}') 
-	 |=>'${'ValidID'}'
+operandID returns types::JvmIdentifiableElement:
+	{types::JvmIdentifiableElement}ValidID | 
+	{types::JvmIdentifiableElement}('${' (ValidID) (':''var')? '}') 
 ;
 
-
-literal:
-	value= (STRING | Number | booleanLiteral  )
-;
-booleanLiteral:
-	'true' | 'false' | 'null'
-;
 
 jFaceSpecificLiteral:
 	'${'type=('cursor'|'dollar'|'line_selection')'}'
 ;
 
-abstractTypeName :
+abstractTypeName returns types::JvmTypeReference:
 	(typeID) '[]'? 
-	|=>	type=JvmTypeReference '[]'?
+	|=>	JvmTypeReference '[]'?
 ;
 
 
@@ -337,8 +295,13 @@ helpperClassAnnotation :
 	class= entity 
 	'${' 'endHelper' '}'
 ;
-
+XLiteral returns xbase::XExpression:
+	XBooleanLiteral |
+	XNumberLiteral |
+	XNullLiteral |
+	XStringLiteral
+;
 squareClosure:
-	'[' multyAssignOperation ']'
+	'[' expression=XNumberLiteral ']'
 ;
  

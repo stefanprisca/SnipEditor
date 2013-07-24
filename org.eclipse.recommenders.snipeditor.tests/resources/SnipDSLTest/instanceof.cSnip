@@ -1,3 +1,6 @@
+
+//todo : if expression
+
 if (${name} instanceof ${type}) {
         ${type} ${new_name} = (${type})${name};
         ${cursor}

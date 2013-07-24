@@ -5,7 +5,8 @@ import com.google.inject.Inject;
 import java.util.Arrays;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.recommenders.snipeditor.snipDSL.abstractTypeName;
+import org.eclipse.recommenders.snipeditor.compiler.SnipDSLSpecificCompiler;
+import org.eclipse.recommenders.snipeditor.scoping.SnipDSLLocalScope;
 import org.eclipse.recommenders.snipeditor.snipDSL.attributeDeclaration;
 import org.eclipse.recommenders.snipeditor.snipDSL.entity;
 import org.eclipse.recommenders.snipeditor.snipDSL.method;
@@ -44,11 +45,18 @@ public class SnipDSLJvmModelInferrer extends AbstractModelInferrer {
   
   @Inject
   @Extension
+  private SnipDSLLocalScope _snipDSLLocalScope;
+  
+  @Inject
+  @Extension
   private IQualifiedNameProvider _iQualifiedNameProvider;
   
   @Inject
   @Extension
   private TypeReferenceSerializer _typeReferenceSerializer;
+  
+  @Inject
+  private SnipDSLSpecificCompiler snipCompiler;
   
   protected void _infer(final entity element, final IJvmDeclaredTypeAcceptor acceptor, final boolean isPreIndexingPhase) {
     QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(element);
@@ -58,13 +66,12 @@ public class SnipDSLJvmModelInferrer extends AbstractModelInferrer {
         public void apply(final JvmGenericType it) {
           String _documentation = SnipDSLJvmModelInferrer.this._jvmTypesBuilder.getDocumentation(element);
           SnipDSLJvmModelInferrer.this._jvmTypesBuilder.setDocumentation(it, _documentation);
-          abstractTypeName _jType = element.getJType();
+          JvmTypeReference _jType = element.getJType();
           boolean _notEquals = (!Objects.equal(_jType, null));
           if (_notEquals) {
             EList<JvmTypeReference> _superTypes = it.getSuperTypes();
-            abstractTypeName _jType_1 = element.getJType();
-            JvmTypeReference _type = _jType_1.getType();
-            JvmTypeReference _cloneWithProxies = SnipDSLJvmModelInferrer.this._jvmTypesBuilder.cloneWithProxies(_type);
+            JvmTypeReference _jType_1 = element.getJType();
+            JvmTypeReference _cloneWithProxies = SnipDSLJvmModelInferrer.this._jvmTypesBuilder.cloneWithProxies(_jType_1);
             SnipDSLJvmModelInferrer.this._jvmTypesBuilder.<JvmTypeReference>operator_add(_superTypes, _cloneWithProxies);
           }
           EList<XExpression> _features = element.getFeatures();
@@ -73,52 +80,45 @@ public class SnipDSLJvmModelInferrer extends AbstractModelInferrer {
             if (!_matched) {
               if (feature instanceof attributeDeclaration) {
                 final attributeDeclaration _attributeDeclaration = (attributeDeclaration)feature;
-                abstractTypeName _jType_2 = _attributeDeclaration.getJType();
-                JvmTypeReference _type_1 = _jType_2.getType();
-                boolean _notEquals_1 = (!Objects.equal(_type_1, null));
-                if (_notEquals_1) {
-                  _matched=true;
-                  EList<JvmMember> _members = it.getMembers();
-                  String _name = _attributeDeclaration.getName();
-                  abstractTypeName _jType_3 = _attributeDeclaration.getJType();
-                  JvmTypeReference _type_2 = _jType_3.getType();
-                  JvmField _field = SnipDSLJvmModelInferrer.this._jvmTypesBuilder.toField(_attributeDeclaration, _name, _type_2);
-                  SnipDSLJvmModelInferrer.this._jvmTypesBuilder.<JvmField>operator_add(_members, _field);
-                }
+                _matched=true;
+                EList<JvmMember> _members = it.getMembers();
+                String _name = _attributeDeclaration.getName();
+                JvmTypeReference _jType_2 = _attributeDeclaration.getJType();
+                JvmField _field = SnipDSLJvmModelInferrer.this._jvmTypesBuilder.toField(_attributeDeclaration, _name, _jType_2);
+                SnipDSLJvmModelInferrer.this._jvmTypesBuilder.<JvmField>operator_add(_members, _field);
               }
             }
             if (!_matched) {
               if (feature instanceof method) {
                 final method _method = (method)feature;
                 _matched=true;
-                abstractTypeName _jType_2 = _method.getJType();
+                EList<JvmMember> _members = it.getMembers();
+                String _name = _method.getName();
+                JvmTypeReference _xifexpression = null;
+                JvmTypeReference _jType_2 = _method.getJType();
                 boolean _notEquals_1 = (!Objects.equal(_jType_2, null));
                 if (_notEquals_1) {
-                  EList<JvmMember> _members = it.getMembers();
-                  String _name = _method.getName();
-                  abstractTypeName _jType_3 = _method.getJType();
-                  JvmTypeReference _type_1 = _jType_3.getType();
-                  final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
-                      public void apply(final JvmOperation it) {
-                        String _documentation = SnipDSLJvmModelInferrer.this._jvmTypesBuilder.getDocumentation(_method);
-                        SnipDSLJvmModelInferrer.this._jvmTypesBuilder.setDocumentation(it, _documentation);
-                        EList<parameter> _params = _method.getParams();
-                        for (final parameter p : _params) {
-                          EList<JvmFormalParameter> _parameters = it.getParameters();
-                          String _name = p.getName();
-                          abstractTypeName _jType = p.getJType();
-                          JvmTypeReference _type = _jType.getType();
-                          JvmFormalParameter _parameter = SnipDSLJvmModelInferrer.this._jvmTypesBuilder.toParameter(p, _name, _type);
-                          SnipDSLJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters, _parameter);
-                        }
-                        XExpression _body = _method.getBody();
-                        SnipDSLJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _body);
-                      }
-                    };
-                  JvmOperation _method_1 = SnipDSLJvmModelInferrer.this._jvmTypesBuilder.toMethod(_method, _name, _type_1, _function);
-                  SnipDSLJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members, _method_1);
-                } else {
+                  JvmTypeReference _jType_3 = _method.getJType();
+                  _xifexpression = _jType_3;
                 }
+                final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
+                    public void apply(final JvmOperation it) {
+                      String _documentation = SnipDSLJvmModelInferrer.this._jvmTypesBuilder.getDocumentation(_method);
+                      SnipDSLJvmModelInferrer.this._jvmTypesBuilder.setDocumentation(it, _documentation);
+                      EList<parameter> _params = _method.getParams();
+                      for (final parameter p : _params) {
+                        EList<JvmFormalParameter> _parameters = it.getParameters();
+                        String _name = p.getName();
+                        JvmTypeReference _jType = p.getJType();
+                        JvmFormalParameter _parameter = SnipDSLJvmModelInferrer.this._jvmTypesBuilder.toParameter(p, _name, _jType);
+                        SnipDSLJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters, _parameter);
+                      }
+                      XExpression _body = _method.getBody();
+                      SnipDSLJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _body);
+                    }
+                  };
+                JvmOperation _method_1 = SnipDSLJvmModelInferrer.this._jvmTypesBuilder.toMethod(_method, _name, _xifexpression, _function);
+                SnipDSLJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members, _method_1);
               }
             }
           }

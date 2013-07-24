@@ -1,20 +1,16 @@
 package org.eclipse.recommenders.snipeditor.jvmmodel
 
 import com.google.inject.Inject
+import org.eclipse.recommenders.snipeditor.compiler.SnipDSLSpecificCompiler
+import org.eclipse.recommenders.snipeditor.scoping.SnipDSLLocalScope
+import org.eclipse.recommenders.snipeditor.snipDSL.attributeDeclaration
+import org.eclipse.recommenders.snipeditor.snipDSL.entity
+import org.eclipse.recommenders.snipeditor.snipDSL.method
+import org.eclipse.xtext.naming.IQualifiedNameProvider
+import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
-import org.eclipse.recommenders.snipeditor.snipDSL.domainmodel
-import org.eclipse.recommenders.snipeditor.snipDSL.entity
-import org.eclipse.recommenders.snipeditor.snipDSL.attributeDeclaration
-import org.eclipse.xtext.naming.IQualifiedNameProvider
-import org.eclipse.recommenders.snipeditor.snipDSL.method
-import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer
-import org.eclipse.recommenders.snipeditor.compiler.SnipDSLSpecificCompiler
-import org.eclipse.recommenders.snipeditor.snipDSL.impl.XVariableDeclarationImpl
-import org.eclipse.xtext.common.types.util.TypeReferences
-import org.eclipse.xtext.xbase.XExpression
-import org.eclipse.recommenders.snipeditor.snipDSL.impl.XAssignmentImpl
 
 //import org.eclipse.recommenders.snipeditor.snipDSL.XAssignment
 
@@ -30,7 +26,7 @@ class SnipDSLJvmModelInferrer extends AbstractModelInferrer {
      * convenience API to build and initialize JVM types and their members.
      */
 	@Inject extension JvmTypesBuilder
-	@Inject	extension TypeReferences
+	@Inject	extension SnipDSLLocalScope
 	@Inject extension IQualifiedNameProvider
 	@Inject extension TypeReferenceSerializer
 	@Inject SnipDSLSpecificCompiler snipCompiler
@@ -42,34 +38,46 @@ class SnipDSLJvmModelInferrer extends AbstractModelInferrer {
    			 ).initializeLater [
      			 documentation = element.documentation
       				if (element.JType != null)
-        			superTypes += element.JType.type.cloneWithProxies 
+        			superTypes += element.JType.cloneWithProxies 
    				for (feature : element.features) {
    					switch feature{
-   						attributeDeclaration case feature.JType.type!=null
+   						attributeDeclaration //case feature.JType.type!=null
    								:{ 
-   									members+=feature.toField(feature.name, feature.JType.type)
+   									members+=feature.toField(feature.name, feature.JType)
    								}
    						method 
    								:{
    								//if(feature.JType!=null){
           						  	members += feature.toMethod(feature.name, 
-          						  		 if (feature.JType != null) feature.JType.type
+          						  		 if (feature.JType != null) feature.JType
           						  	) [
               						documentation = feature.documentation
               						for (p : feature.params) {
-                					parameters += p.toParameter(p.name, p.JType.type)
+                					parameters += p.toParameter(p.name, p.JType)
               						}
-             	 					body = [
+             	 					body =feature.body  /*[	
              	 						for(blkFeature : feature.body.eContents)
              	 						{
              	 							switch(blkFeature){
+             	 									
+             	 								XExpression:
+             	 									snipCompiler.toJavaStatement(blkFeature, it, false)
+             	 									
              	 								XVariableDeclarationImpl:
-             	 									snipCompiler._toJavaStatement(blkFeature, it, true)
-             	 								//XAssignmentImpl:
-             	 								//	it.append('''''')
+             	 									{
+             	 										snipCompiler.toJavaStatement(blkFeature, it, true)
+             	 										
+             	 									//	JvmTypesBuilder.declaredFields.add(blkFeature.toField(blkFeature.name.name, blkFeature.JType.type));
+             	 									}
+             	 								
              	 							}
+             	 							//feature.body.getScope()
+             	 							
              	 						}
-             	 					]
+             	 						//it.closeScope
+             	 						//if(feature.JType.type!=null)
+             	 						//	snipCompiler.compile(feature.body, it, feature.JType.type)
+             	 					]*/
              	 				]//else{
    									//TODO: members += feature.toMethod(feature.name, null ) [
               						//documentation = feature.documentation
@@ -86,5 +94,6 @@ class SnipDSLJvmModelInferrer extends AbstractModelInferrer {
    		
    			]
    	}
+   
 }
 
