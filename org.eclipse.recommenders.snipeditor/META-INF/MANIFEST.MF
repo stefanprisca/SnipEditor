@@ -1,9 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: org.eclipse.recommenders.snipeditor
-Bundle-Vendor: My Company
-Bundle-Version: 1.0.0.qualifier
 Bundle-SymbolicName: org.eclipse.recommenders.snipeditor; singleton:=true
+Bundle-Version: 1.100.0.qualifier
+Bundle-Vendor: Eclipse Code Recommenders
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.eclipse.xtext.xbase;visibility:=reexport,

@@ -1,2 +1,11 @@
 language: java
-before_install: cd org.eclipse.recommenders.snipeditor.releng
+jdk: oraclejdk7
+before_install:
+  - cd ..
+  - git clone http://git.eclipse.org/gitroot/recommenders/org.eclipse.recommenders.git
+  - cd org.eclipse.recommenders
+  - export MAVEN_OPTS="-Xmx512m -XX:MaxPermSize=128m"
+  - mvn install -P e43 -Dlicense.failIfMissing=false -e -Dtycho.disableP2Mirrors=true -DskipTests=true
+  - cd ../SnipEditor_MavenBuild
+install:
+  - mvn install -DskipTests=true -Dlicense.failIfMissing=false -e -Dtycho.disableP2Mirrors=true

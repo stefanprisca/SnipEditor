@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+//TODO: solve abstract type names!
+>>>>>>> Test
 void synchronized (${SomeType} ${mutex}) 
 {
         ${line_selection}
