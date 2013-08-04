@@ -3,6 +3,7 @@
  */
 package org.eclipse.recommenders.snipeditor.ui;
 
+import org.eclipse.recommenders.snipeditor.ui.contentassist.SnipDSLReferenceProposalCreator;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 /**
@@ -11,5 +12,9 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 public class SnipDSLUiModule extends org.eclipse.recommenders.snipeditor.ui.AbstractSnipDSLUiModule {
 	public SnipDSLUiModule(AbstractUIPlugin plugin) {
 		super(plugin);
+	}
+	@Override
+	public Class<? extends org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider.ReferenceProposalCreator> bindAbstractJavaBasedContentProposalProvider$ReferenceProposalCreator() {
+		return SnipDSLReferenceProposalCreator.class;
 	}
 }

@@ -64,19 +64,13 @@ method:
 ;
 //attribute assignments
 attributeAssignment returns xbase::XExpression:
-	 /*arrayAssignment |*/ blockAssignment | XLiteral |=>XExpression
+	 blockAssignment | XLiteral |=>XExpression
 ;
 //assignment with {...}
 blockAssignment returns xbase::XExpression:
 	{blockAssignment}
 	"{" (values+=XLiteral (',' values+=XLiteral)*)? "}"
 ;
-//square bracket assignment
-/*arrayAssignment returns xbase::XExpression:
-	{arrayAssignment}
-	"new" (jType=abstractTypeName) arguments=squareClosure
-;*/
-
 
 
 //attribute declaration
@@ -84,8 +78,6 @@ attributeDeclaration :
 	(visible=Visibility)? 'static'? (jType=abstractTypeName)
 	name = declarativeID ('=' value=XExpression)? 
 ;
-
-//expression of the block
 
 //features that are present in the block
 XExpressionInsideBlock  returns xbase::XExpression :
@@ -100,6 +92,27 @@ XVariableDeclaration returns xbase::XExpression:
 	{xbase::XVariableDeclaration}
 	//TODO: resolve assignment to final variables!
 	( writeable?='final')? (type=abstractTypeName) name=declarativeID ('=' right=attributeAssignment)?;
+
+
+XConstructorCall returns xbase::XExpression:
+	{xbase::XConstructorCall}
+	'new' constructor=[types::JvmConstructor|QualifiedName] 
+	(=>'<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?
+	((=>'(' 
+		(
+		    arguments+=XShortClosure
+		  |	arguments+=XExpression (',' arguments+=XExpression)*
+		)? 
+	')') |=> arguments+=XClosure);
+
+XClosure returns xbase::XExpression:
+	=>({xbase::XClosure} 
+	'[') 
+		=>((declaredFormalParameters+=JvmFormalParameter (',' declaredFormalParameters+=JvmFormalParameter)*)? explicitSyntax?='|')? 
+		expression=(XExpressionInClosure | XNumberLiteral)
+	']';
+
+
 enum Visibility :
 	 protected | public | private
 ;
@@ -163,7 +176,5 @@ XLiteral returns xbase::XExpression:
 terminal ID:
 	'^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 	
-squareClosure:
-	'[' expression=XNumberLiteral ']'
-;
+
  

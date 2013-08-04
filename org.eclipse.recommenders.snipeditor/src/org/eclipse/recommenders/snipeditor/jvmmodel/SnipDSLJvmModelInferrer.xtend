@@ -26,6 +26,8 @@ class SnipDSLJvmModelInferrer extends AbstractModelInferrer {
      * convenience API to build and initialize JVM types and their members.
      */
 	@Inject extension JvmTypesBuilder
+	@Inject JvmTypesBuilder typeBuilder;
+	
 	@Inject	extension SnipDSLLocalScope
 	@Inject extension IQualifiedNameProvider
 	@Inject extension TypeReferenceSerializer
@@ -55,7 +57,8 @@ class SnipDSLJvmModelInferrer extends AbstractModelInferrer {
    								:{
    								//if(feature.JType!=null){
           						  	members += feature.toMethod(feature.name, 
-          						  		 if (feature.JType != null) feature.JType
+          						  		 if (feature.JType != null) feature.JType 
+          						  		 else newTypeRef(Void::TYPE)
           						  	) [
               						documentation = feature.documentation
               						for (p : feature.params) {
