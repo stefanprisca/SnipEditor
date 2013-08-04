@@ -7,11 +7,11 @@ ${import(java.io.FileInputStream)}
 ${import(java.io.FileOutputStream)}
 
 //Move the file at a string path to a directory string path.
-File ${file:freeName(file)} = new File(${filePathString});
-${file}.renameTo(new File(${dirPathString} + File.separator + ${file}.getName()));
+File ${/*TODO:file:*/freeName(file)} = new File(${filePathString});
+${file}.renameTo(new File(${dirPathString} + File.separator() + ${file}.getName()));
 
 //Move a file object to a directory string path.
-${fileObject}.renameTo(new File(${dirPathString} + File.separator + ${fileObject}.getName()));
+${fileObject}.renameTo(new File(${dirPathString} + File.separator() + ${fileObject}.getName()));
 
 //Copy a file object to a target string path.
 
@@ -22,7 +22,7 @@ class CopyFile {
 		FileInputStream in = new FileInputStream(file);
 		FileOutputStream out = new FileOutputStream(newFile);
 
-		byte[] buffer = new byte[1024];
+		byte[] buffer;//MUST TODO: resolve array assignments! = new byte[1024];
 		int bytesRead;
 
 		while ((bytesRead = in.read(buffer)) > 0) {
@@ -46,35 +46,3 @@ catch (IOException e) {
 }
 
 
-//Copy the file at a string path to a target string path.
-${helper}
-class CopyFile {
-	public static void copyFile(String oldPath, String newPath) throws FileNotFoundException, IOException {
-		
-		File file = new File(oldPath);
-		File newFile = new File(newPath);
-		FileInputStream in = new FileInputStream(file);
-		FileOutputStream out = new FileOutputStream(newFile);
-
-		byte[] buffer = new byte[1024];
-		int bytesRead;
-
-		while ((bytesRead = in.read(buffer)) > 0) {
-			out.write(buffer, 0, bytesRead);
-		}
-
-		in.close();
-		out.close();
-	}
-}
-${endHelper}
-
-try {
-	CopyFile.copyFile(${oldStringPath}, ${newStringPath});
-}
-catch (FileNotFoundException e) {
-	// TODO: Handle file opening errors here.
-}
-catch (IOException e) {
-	// TODO: Handle file reading and writing errors here.
-}

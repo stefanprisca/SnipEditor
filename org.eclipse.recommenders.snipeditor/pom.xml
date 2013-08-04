@@ -1,25 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
 	<parent>
-		<relativePath>../org.eclipse.recommenders.snipeditor.releng/pom.xml</relativePath>
-		<groupId>org.eclipse.recommenders.snipeditor</groupId>
-		<artifactId>parent</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
+		<groupId>org.eclipse.recommenders</groupId>
+		<artifactId>plugins</artifactId>
+		<version>1.100.0-SNAPSHOT</version>
 	</parent>
-
 	<artifactId>org.eclipse.recommenders.snipeditor</artifactId>
 	<packaging>eclipse-plugin</packaging>
-
-	<name>MyDSL core language services</name>
-
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>tycho-source-plugin</artifactId>
-				<version>${tycho-version}</version>
+				<artifactId>target-platform-configuration</artifactId>
+				<configuration>
+					<target>
+						<artifact>
+							<groupId>${project.groupId}</groupId>
+							<artifactId>snipeditor</artifactId>
+							<version>${recommenders-version}</version>
+						</artifact>
+					</target>
+				</configuration>
 			</plugin>
 			<!-- Generate the Xtext language infrastructure -->
 			<plugin>
@@ -39,22 +42,11 @@
 					</execution>
 				</executions>
 			</plugin>
-			<!-- Compile the Xtend source files -->
+			<!-- Execute xtend-maven-plugin after the fornax-oaw-m2-plugin:run-workflow -->
 			<plugin>
 				<groupId>org.eclipse.xtend</groupId>
 				<artifactId>xtend-maven-plugin</artifactId>
 				<version>2.4.2</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>compile</goal>
-							<goal>testCompile</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>${basedir}/xtend-gen</outputDirectory>
-						</configuration>
-					</execution>
-				</executions>
 			</plugin>
 			<!-- Make sure a clean Maven build is actually clean -->
 			<plugin>
@@ -64,12 +56,6 @@
 					<filesets>
 						<fileset>
 							<directory>src-gen</directory>
-							<includes>
-								<include>**</include>
-							</includes>
-						</fileset>
-						<fileset>
-							<directory>xtend-gen</directory>
 							<includes>
 								<include>**</include>
 							</includes>
@@ -85,14 +71,12 @@
 				<executions>
 					<execution>
 						<id>add-source</id>
-						<phase>generate-sources</phase>
 						<goals>
 							<goal>add-source</goal>
 						</goals>
 						<configuration>
 							<sources>
 								<source>src-gen</source>
-								<source>xtend-gen</source>
 							</sources>
 						</configuration>
 					</execution>
@@ -100,6 +84,7 @@
 			</plugin>
 		</plugins>
 		<!-- Allow Maven access to the required Xtext resources -->
+		<!-- TODO This is ugly as sources end up in the JAR -->
 		<resources>
 			<resource>
 				<directory>src</directory>
@@ -108,8 +93,14 @@
 				<directory>src-gen</directory>
 			</resource>
 			<resource>
-				<directory>xtend-gen</directory>
+				<directory>target/generated-sources/xtend</directory>
 			</resource>
 		</resources>
 	</build>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>fornax</id>
+			<url>http://fornax-platform.org/nexus/content/groups/public/</url>
+		</pluginRepository>
+	</pluginRepositories>
 </project>
