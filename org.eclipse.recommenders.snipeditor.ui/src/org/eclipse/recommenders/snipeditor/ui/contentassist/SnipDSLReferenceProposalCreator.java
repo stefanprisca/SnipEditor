@@ -53,9 +53,9 @@ public class SnipDSLReferenceProposalCreator extends
 			
 			//checks and skips Extensions proposals
 			if(candidate.getEObjectOrProxy() instanceof JvmOperation)
-			{
+			{//TODO: change to remove all non-literal proposals!
 				JvmOperation operation=(JvmOperation)candidate.getEObjectOrProxy();
-				if(operation.eResource().getURI().toString().contains("ObjectExtensions")){
+				if(operation.eResource().getURI().toString().contains("Extensions")){
 					//System.out.println("an object extenssion");
 					continue;
 				}
