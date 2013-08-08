@@ -43,13 +43,17 @@ class SnipDSLJvmModelInferrer extends AbstractModelInferrer {
         			superTypes += element.JType.cloneWithProxies 
    				for (feature : element.features) {
    					switch feature{
-   						attributeDeclaration //case feature.JType.type!=null
+   						attributeDeclaration //sets the name of the feature accordingly
    								:{ 
    									if(feature.name.contains("freeName") || feature.name.contains("newName")){
    										feature.setName(
    											'${'+feature.name.substring(feature.name.indexOf('(')+1,
    												feature.name.indexOf(')')) +'}'
    										)
+   									}
+   									if(feature.JType==null)
+   									{
+   										feature.setJType(typeBuilder.newTypeRef(feature, typeof(Object) , null));
    									}
    									members+=feature.toField(feature.name, feature.JType)
    								}
@@ -62,7 +66,7 @@ class SnipDSLJvmModelInferrer extends AbstractModelInferrer {
           						  	) [
               						documentation = feature.documentation
               						for (p : feature.params) {
-                					parameters += p.toParameter(p.name, p.JType)
+                					parameters += p.toParameter(p.name, p.parameterType)
               						}
              	 					body =feature.body  /*[	
              	 						for(blkFeature : feature.body.eContents)

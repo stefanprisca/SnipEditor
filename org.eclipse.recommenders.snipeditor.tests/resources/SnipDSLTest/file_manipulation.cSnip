@@ -7,7 +7,7 @@ ${import(java.io.FileInputStream)}
 ${import(java.io.FileOutputStream)}
 
 //Move the file at a string path to a directory string path.
-File ${/*TODO:file:*/freeName(file)} = new File(${filePathString});
+File ${file:freeName(file)} = new File(${filePathString});
 ${file}.renameTo(new File(${dirPathString} + File.separator() + ${file}.getName()));
 
 //Move a file object to a directory string path.
@@ -22,7 +22,7 @@ class CopyFile {
 		FileInputStream in = new FileInputStream(file);
 		FileOutputStream out = new FileOutputStream(newFile);
 
-		byte[] buffer;//MUST TODO: resolve array assignments! = new byte[1024];
+		byte[] buffer= new byte[1024];
 		int bytesRead;
 
 		while ((bytesRead = in.read(buffer)) > 0) {
