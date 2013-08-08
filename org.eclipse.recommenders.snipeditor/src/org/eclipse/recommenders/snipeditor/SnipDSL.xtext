@@ -69,7 +69,7 @@ blockAssignment returns xbase::XExpression:
 
 //attribute declaration
 attributeDeclaration :
-	(visible=Visibility)? 'static'? (jType=abstractTypeName | "${"ValidID"}" closure?=XClosure)
+	(visible=Visibility)? 'static'? (jType=abstractTypeName | "${"ValidID"}" closure=XClosure?)
 	name = declarativeID ('=' value=XExpression)? 
 ;
 
