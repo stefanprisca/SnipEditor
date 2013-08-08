@@ -34,8 +34,7 @@ abstractElement returns xbase::XExpression:
 	entity | 
 	feature | 
 	helpperClassAnnotation | 
-	XExpression ";"? |
-	jFaceSpecificLiteral
+	XExpressionInsideBlock 
 ;
 
 packageDeclare:
@@ -59,15 +58,10 @@ feature returns xbase::XExpression:
 
 ;
 
-
-parameter :
-	(jType=abstractTypeName)  name = declarativeID;
-
-
 method:
 	(visibility=Visibility)? 'static'?  (jType=abstractTypeName | "void")
-	name=ValidID'('(params+=parameter
-		(','params+=parameter)*)?')' 
+	name=ValidID'('(params+=FullJvmFormalParameter
+		(','params+=FullJvmFormalParameter)*)?')' 
 		('throws' throwExceptions+=operandID(',' throwExceptions+=operandID)*)?
 	body=XBlockExpression
 ;
@@ -84,19 +78,26 @@ blockAssignment returns xbase::XExpression:
 
 //attribute declaration
 attributeDeclaration :
+<<<<<<< HEAD
 	(visible=Visibility)? 'static'? (jType=abstractTypeName)
 <<<<<<< HEAD
 	name = declarativeID ('=' value=attributeAssignment)? 
 =======
+=======
+	(visible=Visibility)? 'static'? (jType=abstractTypeName | "${"ValidID"}" closure?=XClosure)
+>>>>>>> Test
 	name = declarativeID ('=' value=XExpression)? 
 >>>>>>> Test
 ;
 
 //features that are present in the block
 XExpressionInsideBlock  returns xbase::XExpression :
- 			(XVariableDeclaration ';'| 
- 			 XExpression ';'?| 
+ 			(XVariableDeclaration | 
+ 			 XExpression | 
+ 			 UnaryOperation|
+ 			 myCastedExpression |
 			 jFaceSpecificLiteral
+<<<<<<< HEAD
 <<<<<<< HEAD
  			)
 ;
@@ -168,14 +169,70 @@ simpleOperand:
 =======
  			) 
 >>>>>>> Test
+=======
+ 			) ';'?
+>>>>>>> Test
+;
+
+XExpression returns xbase::XExpression :
+	AssignmentWithClosure | XAssignment
+;
+/*
+ *Assignment that changes the XAssignment to support [] closure 
+ * for operands.
+ * Does not offer scoping for local scope variables (variables inside a method body)
+ * TODO: Implement JvmIdentifiableElement as feature!
+ */
+AssignmentWithClosure returns xbase::XExpression:
+	{AssignmentWithClosure}
+	(feature=FeatureCallID 
+	closure=XClosure (OpSingleAssign|OpMultiAssign) value=XAssignment
+	) 
+;
+
+/*
+ * Note: Writable means final!
+ * 
+ */
+XVariableDeclaration returns xbase::XExpression:
+	{xbase::XVariableDeclaration}
+
+	( writeable?='final')? (type=abstractTypeName) name=declarativeID ('=' right=attributeAssignment)?;
+
+UnaryOperation returns xbase::XExpression:
+	{UnaryOperation}
+	operand=operandID feature=OpUnary
 ;
 
 
-XVariableDeclaration returns xbase::XExpression:
-	{xbase::XVariableDeclaration}
-	//TODO: resolve assignment to final variables!
-	( writeable?='final')? (type=abstractTypeName) name=declarativeID ('=' right=attributeAssignment)?;
 
+XPrimaryExpression returns xbase::XExpression:
+	XConstructorCall |
+	XBlockExpression |
+	XSwitchExpression |
+	AbstractFeatureCall |
+	XLiteral |
+	XIfExpression |
+	ForLoopExpression |
+	XWhileExpression |
+	XDoWhileExpression |
+	XThrowExpression |
+	XReturnExpression |
+	XTryCatchFinallyExpression |
+	XParenthesizedExpression;
+
+
+AbstractFeatureCall returns xbase::XExpression:
+	FeatureCallWithClosure |
+	XFeatureCall
+;
+
+/*
+ * Feature call that supports [] closure
+ */
+FeatureCallWithClosure:
+	feature=XFeatureCall closure=XClosure
+;
 
 <<<<<<< HEAD
 XSwitchExpression returns XExpression:
@@ -237,7 +294,7 @@ XConstructorCall returns XExpression:
 =======
 XConstructorCall returns xbase::XExpression:
 	{xbase::XConstructorCall}
-	'new' constructor=[types::JvmConstructor|QualifiedName] 
+	'new' constructor=[types::JvmConstructor|operandID] 
 	(=>'<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?
 	((=>'(' 
 >>>>>>> Test
@@ -247,18 +304,76 @@ XConstructorCall returns xbase::XExpression:
 		)? 
 	')') |=> arguments+=XClosure);
 
-XClosure returns xbase::XExpression:
-	=>({xbase::XClosure} 
-	'[') 
-		=>((declaredFormalParameters+=JvmFormalParameter (',' declaredFormalParameters+=JvmFormalParameter)*)? explicitSyntax?='|')? 
-		expression=(XExpressionInClosure | XNumberLiteral)
-	']';
+/*
+ * Overridden to eliminate lambda expression 
+ * This expressions were conflicting with [] closure, and java has no lambda expressions
+ */
+XFeatureCall returns xbase::XExpression:
+	{xbase::XFeatureCall}
+	('<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')? 
+	feature=[types::JvmIdentifiableElement|IdOrSuper] 
+	(=>explicitOperationCall?='(' 
+		(
+		    featureCallArguments+=XShortClosure
+		  |	featureCallArguments+=XExpression (',' featureCallArguments+=XExpression)*
+		)? 
+	')')?
+	;
 
+
+/*
+XMemberFeatureCall returns xbase::XExpression:
+	XPrimaryExpression
+	(=>({xbase::XAssignment.assignable=current} ('.'|explicitStatic?="::") feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign) value=XAssignment
+	|=>({xbase::XMemberFeatureCall.memberCallTarget=current} ("."|nullSafe?="?."|explicitStatic?="::")) 
+		('<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?  
+		feature=[types::JvmIdentifiableElement|FeatureCallID] (
+			=>explicitOperationCall?='(' 
+				(
+				    memberCallArguments+=XShortClosure
+				  |	memberCallArguments+=XExpression (',' memberCallArguments+=XExpression)*
+				)? 
+			')')?
+		)*;
+*/
+
+myCastedExpression:
+ '(' type=abstractTypeName ')' target=XExpression
+;
+
+
+ForLoopExpression returns xbase::XExpression:
+	ClassicForLoopExpression | XForLoopExpression
+;
+
+
+OpUnary:
+	"!" | "--" | "++";
+
+
+ClassicForLoopExpression:
+	//{ClassicForLoopExpression}
+	'for' '(' 
+	declaredParam=JvmFormalParameter ('=' value=XAssignment)?';' 
+				condition=XExpression ';' 
+				(forExpression=XExpression | forExpression=UnaryOperation)
+		')'
+		eachExpression=XExpression
+;
+
+
+
+XForLoopExpression returns xbase::XExpression:
+	{xbase::XForLoopExpression}
+	'for' '(' declaredParam=(FullJvmFormalParameter|JvmFormalParameter) ':' forExpression=XExpression ')'
+		eachExpression=XExpression
+;
 
 enum Visibility :
 	 protected | public | private
 ;
 
+<<<<<<< HEAD
 //TODO: put abstract type in elemType!
 <<<<<<< HEAD
  typeID:
@@ -267,6 +382,8 @@ enum Visibility :
 			(=>':''elemType' '('type=JvmTypeReference')}' | '}'))
  		|(=>'${''elemType' '('type=JvmTypeReference')}')
 =======
+=======
+>>>>>>> Test
  typeID returns types::JvmTypeReference:
  		('${'ValidID':''elemType' '('=>JvmTypeReference')}')
  		|(=>'${''elemType' '('=>JvmTypeReference')}')
@@ -279,9 +396,9 @@ declarativeID:
 ;
 
 jFaceVarID:
-	'${'=>ValidID'}' 
-		|('{'=>ValidID':'('freeName'|'newName') '('ValidID')}')
- 		|(=>'${'('freeName'|'newName') '('=>ValidID')}')
+	'${'ValidID'}' 
+		|('${'=>ValidID ':' ('freeName'|'newName') '('ValidID')}')
+ 		|('${'=>('freeName'|'newName') '('ValidID')}')
 ;
 operandID :
 <<<<<<< HEAD
@@ -291,7 +408,12 @@ operandID :
 	 |=>'${'ValidID'}'
 =======
 	ValidID | 
+<<<<<<< HEAD
 	('${' (ValidID) (':''var')? '}') 
+>>>>>>> Test
+=======
+	('${' (=>ValidID) (':''var')? '}')
+
 >>>>>>> Test
 ;
 
@@ -314,11 +436,13 @@ FeatureCallID:
 >>>>>>> Test
 ;
 JvmFormalParameter returns types::JvmFormalParameter:
-	(parameterType=JvmTypeReference)? name=operandID;
+	(parameterType=abstractTypeName)? name=operandID;
 	
 FullJvmFormalParameter returns types::JvmFormalParameter:
-	parameterType=JvmTypeReference (name=declarativeID |=>name=operandID) ;
+	(parameterType=abstractTypeName | '${'ValidID'}') name=(declarativeID|operandID) ;
 
+
+<<<<<<< HEAD
 
 
 /* 
@@ -327,6 +451,8 @@ annotation :
 	'${cursor}' | '${dollar}'
 		
 ;*/
+=======
+>>>>>>> Test
 helpperClassAnnotation :
 	'${' 'helper' '}' 
 	class= entity 

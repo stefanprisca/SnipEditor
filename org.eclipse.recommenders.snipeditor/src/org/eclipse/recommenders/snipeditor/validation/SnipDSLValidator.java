@@ -2,13 +2,9 @@ package org.eclipse.recommenders.snipeditor.validation;
 
 import static org.eclipse.xtext.xbase.validation.IssueCodes.ASSIGNMENT_TO_FINAL;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.MISSING_INITIALIZATION;
-import static org.eclipse.xtext.xbase.validation.IssueCodes.MISSING_TYPE;
-import static org.eclipse.xtext.xbase.validation.IssueCodes.NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE;
-import static org.eclipse.xtext.xbase.validation.IssueCodes.NULL_SAFE_FEATURE_CALL_ON_PRIMITIVE;
-import static org.eclipse.xtext.xbase.validation.IssueCodes.TOO_LITTLE_TYPE_INFORMATION;
 
 import org.eclipse.recommenders.snipeditor.snipDSL.attributeDeclaration;
-import org.eclipse.recommenders.snipeditor.snipDSL.method;
+import org.eclipse.recommenders.snipeditor.snipDSL.blockAssignment;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -16,16 +12,14 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
-import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XClosure;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage.Literals;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.validation.XbaseJavaValidator;
 
 import com.google.inject.Inject;
 
@@ -35,7 +29,9 @@ public class SnipDSLValidator extends AbstractSnipDSLValidator {
 	@Inject
 	private ILogicalContainerProvider logicalContainerProvider;
 	
-	
+	/**
+	 * overridden to accommodate the <i>writable</i> field
+	 */
 	@Check
 	@Override
 	public void checkVariableDeclaration(XVariableDeclaration declaration) {
@@ -49,6 +45,17 @@ public class SnipDSLValidator extends AbstractSnipDSLValidator {
 		}
 	}
 	
+	/**
+	 * Check for correct feature calls.
+	 * <p>
+	 * 	<li>if caller is not instantiated and a member feature is called, 
+	 * 	prompt error</li> 
+	 * 
+	 * 	<li>if a call to a method is made without explicit feature call <i>()</i>
+	 * prompt error</li>
+	 * </p>
+	 * @param featureCall
+	 */
 	@Check
 	void checkCorrectFeatureCall(XMemberFeatureCall featureCall) {
 		if(featureCall.getActualReceiver() instanceof XFeatureCall){
@@ -70,21 +77,25 @@ public class SnipDSLValidator extends AbstractSnipDSLValidator {
 					
 				}
 			}
-			System.out.println(caller.getFeature().eClass());
+			//System.out.println(caller.getFeature().eClass());
 		}
 		//System.out.println(featureCall.getActualReceiver().eClass());
-		if (!featureCall.isExplicitOperationCall() && !(featureCall.getFeature() instanceof JvmField)){
+		if (!featureCall.isExplicitOperationCall() && (featureCall.getFeature() instanceof JvmOperation))
+		{
 			error("Please provide full feature call",Literals.XABSTRACT_FEATURE_CALL__FEATURE);
-			//System.out.println(featureCall.getClass());
+			System.out.println(featureCall.getMemberCallTarget());
 		}
 		
 	}
 	
+	/**
+	 * Check if assignment if made to final variable
+	 * Overridden to accommodate <i>writable</i> field
+	 */
 	@Check
 	@Override
 	public void checkAssignment(XAssignment assignment) {
 		JvmIdentifiableElement assignmentFeature = assignment.getFeature();
-		System.out.println("");
 		if (assignmentFeature instanceof XVariableDeclaration
 				&& ((XVariableDeclaration) assignmentFeature).isWriteable()){
 			error("Assignment to final variable", Literals.XASSIGNMENT__ASSIGNABLE,
@@ -108,40 +119,42 @@ public class SnipDSLValidator extends AbstractSnipDSLValidator {
 					ValidationMessageAcceptor.INSIGNIFICANT_INDEX, ASSIGNMENT_TO_FINAL);
 		}
 	}
-	
+	/**
+	 * Override to eliminate checking for side effects
+	 * Not sure if it is good
+	 * TODO: take a deeper look into the effects
+	 */
+	@Override
+	@Check
+	public void checkInnerExpressions(XExpression expr) {
+		
+	}
+	/**
+	 * Override to check for <b>DeclaredFormalParameters</b>
+	 * The super checks for other parameter type and promts error
+	 * TODO: get a better understanding of the mechanics
+	 */
+	@Override
 	@Check
 	public void checkClosureParameterTypes(XClosure closure) {
 		if (closure.getDeclaredFormalParameters().isEmpty())
 			return;
-		LightweightTypeReference closureType = getActualType(closure);
-		if (closureType != null && closureType.isUnknown())
-			return;
-		boolean checkedClosure = false;
-		for (JvmFormalParameter p : closure.getFormalParameters()) {
-			if (p.getParameterType() == null) {
-				if (!checkedClosure) {
-					LightweightTypeReference type = getExpectedType(closure);
-					if (type == null) {
-						error("There is no context to infer the closure's argument types from. Consider typing the arguments or put the closures into a typed context.",
-								closure, null, INSIGNIFICANT_INDEX, TOO_LITTLE_TYPE_INFORMATION);
-						return;
-					} else {
-						JvmOperation operation = getServices().getFunctionTypes().findImplementingOperation(type);
-						if (operation == null) {
-							error("There is no context to infer the closure's argument types from. Consider typing the arguments or use the closures in a more specific context.",
-									closure, null, INSIGNIFICANT_INDEX, TOO_LITTLE_TYPE_INFORMATION);
-							return;
-						}
-					}
-					checkedClosure = true;
-				}
-				LightweightTypeReference parameterType = getActualType(closure, p);
-				if (parameterType == null) {
-					error("There is no context to infer the closure's argument types from. Consider typing the arguments or use the closures in a more specific context.",
-							closure, null, INSIGNIFICANT_INDEX, TOO_LITTLE_TYPE_INFORMATION);
-					return;
-				}
+		super.checkClosureParameterTypes(closure);
+	}
+	
+	/**
+	 * check if there are different types in a block assignment
+	 * @param blkAssign
+	 */
+	@Check
+	public void checkValidBlockAssignment(blockAssignment blkAssign){
+		for(int i=1; i<blkAssign.getValues().size(); i++){
+			if(!blkAssign.getValues().get(i).getClass().equals(blkAssign.getValues().get(i-1).getClass())){
+				error("Different types in block!", blkAssign.getValues().get(i).eContainingFeature());
 			}
 		}
 	}
+	
+	
+	
 }
