@@ -8,10 +8,18 @@
         <editor
             class="org.eclipse.recommenders.snipeditor.ui.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
             contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
-            default="true"
+            default="false"
             extensions="cSnip"
             id="org.eclipse.recommenders.snipeditor.SnipDSL"
             name="SnipDSL Editor">
+        </editor>
+        <editor
+              class="org.eclipse.recommenders.snipeditor.ui.editors.MultiPageSnipEditor"
+              contributorClass="org.eclipse.recommenders.snipeditor.ui.editors.MultiPageSnipEditorContributor"
+              default="true"
+              extensions="cSnip"
+              id="org.eclipse.recommenders.snipeditor.ui.editors.MultiPageSnipEditor"
+              name="Multi-page Snip Editor">
         </editor>
     </extension>
     <extension
