@@ -50,15 +50,7 @@ public class SnipDSLTest extends XtextTest {
 		 suppressSerialization();
 		 testFile("arrays.cSnip");
          ignoreUnassertedWarnings();
-<<<<<<< HEAD
-<<<<<<< HEAD
 	 }
-=======
-	 }*/
->>>>>>> Test
-=======
-	 }
->>>>>>> Test
 	 @Test
 	 public void captureScreenShoot(){
 		 suppressSerialization();
@@ -89,62 +81,26 @@ public class SnipDSLTest extends XtextTest {
 		 suppressSerialization();
          testFile("instanceof.cSnip");
          ignoreUnassertedWarnings();
-<<<<<<< HEAD
-<<<<<<< HEAD
 	 }
-=======
-	 }*/
->>>>>>> Test
-=======
-	 }
->>>>>>> Test
 
 	 @Test
 	 public void print_error(){
 		 suppressSerialization();
          testFile("print_error.cSnip");
          ignoreUnassertedWarnings();
-<<<<<<< HEAD
-<<<<<<< HEAD
-	 }
-	 @Test
-=======
-	 }*/
-	 /*@Test
->>>>>>> Test
-=======
 	 }
 	@Test
->>>>>>> Test
 	 public void stdDerivMethod(){
 		 suppressSerialization();
          testFile("stdDerivMethod.cSnip");
          ignoreUnassertedWarnings();
-<<<<<<< HEAD
-<<<<<<< HEAD
 	 }
 	 @Test
-=======
-	 }*/
-	 /*@Test
->>>>>>> Test
-=======
-	 }
-	 @Test
->>>>>>> Test
 	 public void sync(){
 		 suppressSerialization();
          testFile("sync.cSnip");
          ignoreUnassertedWarnings();
-<<<<<<< HEAD
-<<<<<<< HEAD
 	 }
-=======
-	 }*/
->>>>>>> Test
-=======
-	 }
->>>>>>> Test
 	 @Test
 	 public void try_catch(){
 		 suppressSerialization();
