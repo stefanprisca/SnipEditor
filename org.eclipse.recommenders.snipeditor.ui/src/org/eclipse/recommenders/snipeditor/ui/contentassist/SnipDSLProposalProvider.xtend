@@ -28,13 +28,13 @@ class SnipDSLProposalProvider extends AbstractSnipDSLProposalProvider {
 		super.completeXFeatureCall_Feature(model,assignment,context,acceptor)
 		//System.out.println("it reaches here");
 		
-		acceptor.accept(createCompletionProposal("Thisismyproposal", context))
+		//acceptor.accept(createCompletionProposal("Thisismyproposal", context))
 	}	
 	
 	override completeXMemberFeatureCall_Feature(EObject model, Assignment assignment,
 		ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		val jvmTypeProvider = jvmTypeProviderFactory.createTypeProvider(model.eResource().getResourceSet());
-        acceptor.accept(createCompletionProposal("Thisismyproposal", context))    
+        //acceptor.accept(createCompletionProposal("Thisismyproposal", context))    
 		lookupCrossReference(assignment.getTerminal() as CrossReference, context, acceptor)
 		var surogate = assignment.getTerminal() as CrossReference
 		

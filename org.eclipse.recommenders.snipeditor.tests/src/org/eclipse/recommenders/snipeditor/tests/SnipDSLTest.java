@@ -45,15 +45,19 @@ public class SnipDSLTest extends XtextTest {
          testFile("conversions.cSnip");
          ignoreUnassertedWarnings();
 	 }
-	 /*@Test
+	 @Test
 	 public void arraysTests(){
 		 suppressSerialization();
 		 testFile("arrays.cSnip");
          ignoreUnassertedWarnings();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 }
 =======
 	 }*/
+>>>>>>> Test
+=======
+	 }
 >>>>>>> Test
 	 @Test
 	 public void captureScreenShoot(){
@@ -80,48 +84,66 @@ public class SnipDSLTest extends XtextTest {
          testFile("if_else.cSnip");
          ignoreUnassertedWarnings();
 	 }
-	 /*@Test
+	 @Test
 	 public void instance_of(){
 		 suppressSerialization();
          testFile("instanceof.cSnip");
          ignoreUnassertedWarnings();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 }
 =======
 	 }*/
 >>>>>>> Test
+=======
+	 }
+>>>>>>> Test
 
-	 /*@Test
+	 @Test
 	 public void print_error(){
 		 suppressSerialization();
          testFile("print_error.cSnip");
          ignoreUnassertedWarnings();
+<<<<<<< HEAD
 <<<<<<< HEAD
 	 }
 	 @Test
 =======
 	 }*/
 	 /*@Test
+>>>>>>> Test
+=======
+	 }
+	@Test
 >>>>>>> Test
 	 public void stdDerivMethod(){
 		 suppressSerialization();
          testFile("stdDerivMethod.cSnip");
          ignoreUnassertedWarnings();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 }
 	 @Test
 =======
 	 }*/
 	 /*@Test
 >>>>>>> Test
+=======
+	 }
+	 @Test
+>>>>>>> Test
 	 public void sync(){
 		 suppressSerialization();
          testFile("sync.cSnip");
          ignoreUnassertedWarnings();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 }
 =======
 	 }*/
+>>>>>>> Test
+=======
+	 }
 >>>>>>> Test
 	 @Test
 	 public void try_catch(){

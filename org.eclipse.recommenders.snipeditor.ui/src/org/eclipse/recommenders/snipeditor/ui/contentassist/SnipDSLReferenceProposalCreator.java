@@ -2,6 +2,7 @@ package org.eclipse.recommenders.snipeditor.ui.contentassist;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -25,8 +26,6 @@ public class SnipDSLReferenceProposalCreator extends
 		XbaseReferenceProposalCreator {
 
 	public Iterable<IEObjectDescription> queryScope(IScope scope, EObject model, EReference reference, Predicate<IEObjectDescription> filter) {
-		System.out.println(model+"\n"+reference+"\n"+scope);
-		
 		return scope.getAllElements();
 	}
 	
@@ -52,13 +51,13 @@ public class SnipDSLReferenceProposalCreator extends
 				return;
 			
 			//checks and skips Extensions proposals
-			if(candidate.getEObjectOrProxy() instanceof JvmOperation)
+			//System.out.println(candidate.getName());
+			if (Pattern.matches("[a-zA-Z]+", candidate.getName().toString()) == false)
 			{
-				JvmOperation operation=(JvmOperation)candidate.getEObjectOrProxy();
-				if(operation.eResource().getURI().toString().contains("ObjectExtensions")){
-					//System.out.println("an object extenssion");
-					continue;
-				}
+			//TODO: change to remove all non-literal proposals!
+				System.out.println(candidate.getName());
+				
+				continue;
 				//System.out.println(operation.eResource().getURI().toString());
 			}
 			//System.out.println(candidate);
