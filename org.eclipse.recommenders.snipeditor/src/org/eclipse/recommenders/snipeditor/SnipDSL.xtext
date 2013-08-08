@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-grammar org.eclipse.recommenders.snipeditor.SnipDSL with org.eclipse.xtext.xbase.Xbase
-import "http://www.eclipse.org/xtext/xbase/Xtype"
-=======
 grammar org.eclipse.recommenders.snipeditor.SnipDSL with org.eclipse.xtext.xbase.Xbase 
->>>>>>> Test
 import 'http://www.eclipse.org/xtext/xbase/Xbase' as xbase
 import "http://www.eclipse.org/xtext/common/JavaVMTypes" as types
 import "http://www.eclipse.org/xtext/xbase/Xtype" as xtypes
@@ -15,11 +10,7 @@ domainmodel:
 	importSection=XImportSection?
     (elements += abstractElement )*
 ;
-<<<<<<< HEAD
-XImportDeclaration :
-=======
 XImportDeclaration returns xtypes::XImportDeclaration:
->>>>>>> Test
 	'${''import''('
 	(
 	importedType=[types::JvmDeclaredType|QualifiedName] 
@@ -78,16 +69,8 @@ blockAssignment returns xbase::XExpression:
 
 //attribute declaration
 attributeDeclaration :
-<<<<<<< HEAD
-	(visible=Visibility)? 'static'? (jType=abstractTypeName)
-<<<<<<< HEAD
-	name = declarativeID ('=' value=attributeAssignment)? 
-=======
-=======
 	(visible=Visibility)? 'static'? (jType=abstractTypeName | "${"ValidID"}" closure?=XClosure)
->>>>>>> Test
 	name = declarativeID ('=' value=XExpression)? 
->>>>>>> Test
 ;
 
 //features that are present in the block
@@ -97,81 +80,7 @@ XExpressionInsideBlock  returns xbase::XExpression :
  			 UnaryOperation|
  			 myCastedExpression |
 			 jFaceSpecificLiteral
-<<<<<<< HEAD
-<<<<<<< HEAD
- 			)
-;
-
-abstractAssignmentOperation:
-	operandAssignment | unaryOperation
-;
-
-operandAssignment:
-	result=simpleOperand valueAssignmentOperator
-		value=multyAssignOperation
-;
-//does not support ()
-multyAssignOperation :
-
-	operands+= (XFeatureCall | literal | XParenthesizedExpression) 
-		(binaryOperator operands+=multyAssignOperation)*
-	
-;
-unaryOperation:
-	result=XFeatureCall
-		operator=unaryOperator
-	;
-
-//removed =>, see what happens
-conditionalExpression:
-	
-	('('operands+=operandAssignment')' 
-		conditionOperator operands+=multyAssignOperation
-	| operands+=multyAssignOperation
-	 	(conditionOperator operands+=multyAssignOperation)?)
-	
-	(('&&' | '||')expressions+=conditionalExpression)*
-;
-
-
-
-
-XVariableDeclaration:
-	jType=abstractTypeName
-	name=declarativeID ('=' value = attributeAssignment)?
-;
-converssionCall:
-	'('newJType=abstractTypeName')'name=XFeatureCall
-	(arguments+=squareClosure)?
-;
-
-calledParameter returns xbase::XExpression:
-	
-	(localMethodCall | simpleOperand | XConstructorCall | converssionCall) 
-;
-
-XFeatureCall returns XExpression:
-	featureCalls+=calledParameter
-	(('.' featureCalls+=calledParameter)*) 
-	
-;
-
-
-//this is the call for a method; has multyAssignOp as parameter as it includes all.
-localMethodCall:
-	name = operandID '('
-	(parameters+=multyAssignOperation (',' parameters+=multyAssignOperation)*)?
-	')' (arguments+=squareClosure)?
-;
-simpleOperand:
-	name = (operandID) 	
-	(arguments+=squareClosure)?
-=======
- 			) 
->>>>>>> Test
-=======
  			) ';'?
->>>>>>> Test
 ;
 
 XExpression returns xbase::XExpression :
@@ -234,70 +143,11 @@ FeatureCallWithClosure:
 	feature=XFeatureCall closure=XClosure
 ;
 
-<<<<<<< HEAD
-XSwitchExpression returns XExpression:
-	{XSwitchExpression}
-	'switch' (=>(localVarName=typeID ':')? switch=XFeatureCall
-		| =>('(' localVarName=typeID ':') switch=XFeatureCall ')') '{'
-	(cases+=XCasePart 'break;')+
-	('default' ':' defaultExp+=blockFeature* 'break;')?
-	'}';
-
-XCasePart:
-	typeGuard=JvmTypeReference? ('case' case=XExpression)? 
-		':' thenExp+=blockFeature
-		 
-		;
- 
-XForLoopExpression returns XExpression:
-	
-	classicForLoop | forLoopWithIterator
-	;
-
-classicForLoop:
-	
-	'for' '(' declaredParam=(XVariableDeclaration | simpleOperand) ';' 
-				forExpression=conditionalExpression ';'
-				forOperation=abstractAssignmentOperation ')'
-		body=myBlockExpression
-;
-
-forLoopWithIterator:
-	'for''('
-		jType=(abstractTypeName) iteratorName=declarativeID ':'
-		iteratableObject=XFeatureCall
-		
-	')'
-	body=myBlockExpression
-;
-
-
-
-XWhileExpression returns XExpression:
-	{XWhileExpression}
-	'while' '(' predicate=conditionalExpression ')'
-		body=myBlockExpression;
-	
-XDoWhileExpression returns XExpression:
-	{XDoWhileExpression}
-   'do'
-       body=myBlockExpression
-   'while' '(' predicate=conditionalExpression ')';
-
-
-//TODO: replace ValidID to support abstract type creation
-XConstructorCall returns XExpression:
-	{XConstructorCall}
-	'new' constructor=abstractTypeName 
-	(=>'<' typeArguments+=abstractTypeName (',' typeArguments+=abstractTypeName)* '>')?
-	(=>'(' 
-=======
 XConstructorCall returns xbase::XExpression:
 	{xbase::XConstructorCall}
 	'new' constructor=[types::JvmConstructor|operandID] 
 	(=>'<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?
 	((=>'(' 
->>>>>>> Test
 		(
 		    arguments+=XShortClosure
 		  |	arguments+=XExpression (',' arguments+=XExpression)*
@@ -373,21 +223,9 @@ enum Visibility :
 	 protected | public | private
 ;
 
-<<<<<<< HEAD
-//TODO: put abstract type in elemType!
-<<<<<<< HEAD
- typeID:
- 	{typeID}
- 		('${'ValidID 
-			(=>':''elemType' '('type=JvmTypeReference')}' | '}'))
- 		|(=>'${''elemType' '('type=JvmTypeReference')}')
-=======
-=======
->>>>>>> Test
  typeID returns types::JvmTypeReference:
  		('${'ValidID':''elemType' '('=>JvmTypeReference')}')
  		|(=>'${''elemType' '('=>JvmTypeReference')}')
->>>>>>> Test
  ;
 
 declarativeID:
@@ -401,20 +239,9 @@ jFaceVarID:
  		|('${'=>('freeName'|'newName') '('ValidID')}')
 ;
 operandID :
-<<<<<<< HEAD
-	 
 	ValidID | 
-	 ('${' ValidID ':''var''}') 
-	 |=>'${'ValidID'}'
-=======
-	ValidID | 
-<<<<<<< HEAD
-	('${' (ValidID) (':''var')? '}') 
->>>>>>> Test
-=======
 	('${' (=>ValidID) (':''var')? '}')
 
->>>>>>> Test
 ;
 
 
@@ -422,18 +249,12 @@ jFaceSpecificLiteral:
 	'${'type=('cursor'|'dollar'|'line_selection')'}'
 ;
 
-<<<<<<< HEAD
-abstractTypeName :
-	(typeID) '[]'? 
-	|=>	type=JvmTypeReference '[]'?
-=======
 abstractTypeName returns types::JvmTypeReference:
 	(typeID)  
 	|=>	JvmTypeReference
 ;
 FeatureCallID:
 	operandID | 'extends' | 'static' | 'import' | 'extension'
->>>>>>> Test
 ;
 JvmFormalParameter returns types::JvmFormalParameter:
 	(parameterType=abstractTypeName)? name=operandID;
@@ -442,17 +263,6 @@ FullJvmFormalParameter returns types::JvmFormalParameter:
 	(parameterType=abstractTypeName | '${'ValidID'}') name=(declarativeID|operandID) ;
 
 
-<<<<<<< HEAD
-
-
-/* 
-annotation :
-	
-	'${cursor}' | '${dollar}'
-		
-;*/
-=======
->>>>>>> Test
 helpperClassAnnotation :
 	'${' 'helper' '}' 
 	class= entity 

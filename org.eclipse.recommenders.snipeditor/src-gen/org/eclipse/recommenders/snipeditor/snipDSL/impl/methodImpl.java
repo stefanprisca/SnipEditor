@@ -14,15 +14,16 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.util.EDataTypeEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.recommenders.snipeditor.snipDSL.SnipDSLPackage;
 import org.eclipse.recommenders.snipeditor.snipDSL.Visibility;
-import org.eclipse.recommenders.snipeditor.snipDSL.abstractTypeName;
 import org.eclipse.recommenders.snipeditor.snipDSL.method;
-import org.eclipse.recommenders.snipeditor.snipDSL.parameter;
-import org.eclipse.recommenders.snipeditor.snipDSL.simpleOperand;
+
+import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 
 import org.eclipse.xtext.xbase.XExpression;
 
@@ -76,7 +77,7 @@ public class methodImpl extends XExpressionImpl implements method
    * @generated
    * @ordered
    */
-  protected abstractTypeName jType;
+  protected JvmTypeReference jType;
 
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -106,17 +107,17 @@ public class methodImpl extends XExpressionImpl implements method
    * @generated
    * @ordered
    */
-  protected EList<parameter> params;
+  protected EList<JvmFormalParameter> params;
 
   /**
-   * The cached value of the '{@link #getThrowExceptions() <em>Throw Exceptions</em>}' containment reference list.
+   * The cached value of the '{@link #getThrowExceptions() <em>Throw Exceptions</em>}' attribute list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getThrowExceptions()
    * @generated
    * @ordered
    */
-  protected EList<simpleOperand> throwExceptions;
+  protected EList<String> throwExceptions;
 
   /**
    * The cached value of the '{@link #getBody() <em>Body</em>}' containment reference.
@@ -177,7 +178,7 @@ public class methodImpl extends XExpressionImpl implements method
    * <!-- end-user-doc -->
    * @generated
    */
-  public abstractTypeName getJType()
+  public JvmTypeReference getJType()
   {
     return jType;
   }
@@ -187,9 +188,9 @@ public class methodImpl extends XExpressionImpl implements method
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetJType(abstractTypeName newJType, NotificationChain msgs)
+  public NotificationChain basicSetJType(JvmTypeReference newJType, NotificationChain msgs)
   {
-    abstractTypeName oldJType = jType;
+    JvmTypeReference oldJType = jType;
     jType = newJType;
     if (eNotificationRequired())
     {
@@ -204,7 +205,7 @@ public class methodImpl extends XExpressionImpl implements method
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setJType(abstractTypeName newJType)
+  public void setJType(JvmTypeReference newJType)
   {
     if (newJType != jType)
     {
@@ -248,11 +249,11 @@ public class methodImpl extends XExpressionImpl implements method
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<parameter> getParams()
+  public EList<JvmFormalParameter> getParams()
   {
     if (params == null)
     {
-      params = new EObjectContainmentEList<parameter>(parameter.class, this, SnipDSLPackage.METHOD__PARAMS);
+      params = new EObjectContainmentEList<JvmFormalParameter>(JvmFormalParameter.class, this, SnipDSLPackage.METHOD__PARAMS);
     }
     return params;
   }
@@ -262,11 +263,11 @@ public class methodImpl extends XExpressionImpl implements method
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<simpleOperand> getThrowExceptions()
+  public EList<String> getThrowExceptions()
   {
     if (throwExceptions == null)
     {
-      throwExceptions = new EObjectContainmentEList<simpleOperand>(simpleOperand.class, this, SnipDSLPackage.METHOD__THROW_EXCEPTIONS);
+      throwExceptions = new EDataTypeEList<String>(String.class, this, SnipDSLPackage.METHOD__THROW_EXCEPTIONS);
     }
     return throwExceptions;
   }
@@ -333,8 +334,6 @@ public class methodImpl extends XExpressionImpl implements method
         return basicSetJType(null, msgs);
       case SnipDSLPackage.METHOD__PARAMS:
         return ((InternalEList<?>)getParams()).basicRemove(otherEnd, msgs);
-      case SnipDSLPackage.METHOD__THROW_EXCEPTIONS:
-        return ((InternalEList<?>)getThrowExceptions()).basicRemove(otherEnd, msgs);
       case SnipDSLPackage.METHOD__BODY:
         return basicSetBody(null, msgs);
     }
@@ -382,18 +381,18 @@ public class methodImpl extends XExpressionImpl implements method
         setVisibility((Visibility)newValue);
         return;
       case SnipDSLPackage.METHOD__JTYPE:
-        setJType((abstractTypeName)newValue);
+        setJType((JvmTypeReference)newValue);
         return;
       case SnipDSLPackage.METHOD__NAME:
         setName((String)newValue);
         return;
       case SnipDSLPackage.METHOD__PARAMS:
         getParams().clear();
-        getParams().addAll((Collection<? extends parameter>)newValue);
+        getParams().addAll((Collection<? extends JvmFormalParameter>)newValue);
         return;
       case SnipDSLPackage.METHOD__THROW_EXCEPTIONS:
         getThrowExceptions().clear();
-        getThrowExceptions().addAll((Collection<? extends simpleOperand>)newValue);
+        getThrowExceptions().addAll((Collection<? extends String>)newValue);
         return;
       case SnipDSLPackage.METHOD__BODY:
         setBody((XExpression)newValue);
@@ -416,7 +415,7 @@ public class methodImpl extends XExpressionImpl implements method
         setVisibility(VISIBILITY_EDEFAULT);
         return;
       case SnipDSLPackage.METHOD__JTYPE:
-        setJType((abstractTypeName)null);
+        setJType((JvmTypeReference)null);
         return;
       case SnipDSLPackage.METHOD__NAME:
         setName(NAME_EDEFAULT);
@@ -475,6 +474,8 @@ public class methodImpl extends XExpressionImpl implements method
     result.append(visibility);
     result.append(", name: ");
     result.append(name);
+    result.append(", throwExceptions: ");
+    result.append(throwExceptions);
     result.append(')');
     return result.toString();
   }

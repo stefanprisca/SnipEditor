@@ -2,17 +2,10 @@
 ${import(java.util.ArrayList)}
 
 
-<<<<<<< HEAD
-String ${freeName(str)} = Integer.toString(${nt});
-
-//Convert $ArrayList to array
-${elemType(ArrayList)}[] ${freeName(a)} = ${ArrayList}.toArray(new ArrayList()[${ArrayList}.size()]);
-=======
 String ${freeName(str)} = Integer.toString(${int});
 
 //Convert $ArrayList to array
 ${elemType(ArrayList[])} ${freeName(a)} = ${ArrayList}.toArray(new ArrayList());//[${ArrayList}.size]->not working!
->>>>>>> Test
 
 //Convert $double to String
 String ${freeName(str)} = Double.toString(${double});
