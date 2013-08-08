@@ -38,8 +38,8 @@ Some using instructions:<br>
      <br>
       ~ varName <br>
       ~ ${varName} <br>
-      ~ ${freeName(varName)} <br>
-      ~ ${newName(varName)} <br>
+      ~ ${freeName(varName)} / ${varName:freeName(varName)} <br>
+      ~ ${newName(varName)} / ${varName:newName(varName)} <br>
     <br>
     Each of the last three will be translated to ${varName}, so the variable / attribute will be accessed<br> 
     through this id (new ids can be introduced at any time if needed) <br>
@@ -50,7 +50,7 @@ Some using instructions:<br>
   Types can be accessed in the following manner:<br>
       <br>
       ~ type_name <br>
-      ~ ${elemType(type_name)} <br>
+      ~ ${elemType(type_name)} / ${typeName:elemType(type_name)} <br>
     <br>
   Both access the same type ( type_name ). Maybe somewhere in the future, abstract types that will<br> 
     be deduced from context will be availabe.(e.g.: ${some_Array_type})<br>
