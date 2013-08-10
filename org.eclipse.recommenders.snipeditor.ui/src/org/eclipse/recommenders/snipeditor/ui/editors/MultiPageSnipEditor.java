@@ -47,6 +47,7 @@ import com.google.inject.Injector;
  */
 public class MultiPageSnipEditor extends MultiPageEditorPart implements IResourceChangeListener{
 
+	@Inject XtextEditor snipEditor;
 	/** The text editor used in page 0. */
 	private TextEditor editor;
 
@@ -68,10 +69,8 @@ public class MultiPageSnipEditor extends MultiPageEditorPart implements IResourc
 	 */
 	void createPage0() {
 		try {
-			Injector myInjector = SnipDSLActivator.getInstance().getInjector(
-					 "org.eclipse.recommenders.snipeditor.SnipDSL");
-		
-			editor =  myInjector.getInstance(XtextEditor.class);
+			
+			editor =  snipEditor;
 			int index = addPage(editor, getEditorInput());
 			setPageText(index, editor.getTitle());
 		} catch (PartInitException e) {
