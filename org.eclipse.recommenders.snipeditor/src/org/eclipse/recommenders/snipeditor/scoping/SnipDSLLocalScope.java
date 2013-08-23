@@ -18,30 +18,30 @@ import org.eclipse.xtext.xbase.scoping.batch.XbaseBatchScopeProvider;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
-public class SnipDSLLocalScope extends XbaseBatchScopeProvider{
-	@Inject ImportedNamespaceAwareLocalScopeProvider inalsp;
-	@Inject
-	@Named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE)
-	private IScopeProvider delegate;
-	@Inject
-	private SnipDSLFeatureCallScope featureScopes;
-	
-	@Override
-	public IScope getScope(EObject context, EReference reference) {
-	
-		if (context == null)
-			throw new NullPointerException("context");
-		if(reference instanceof XExpression){
-			//return Scopes.scopeFor(context.eContents());
-			System.out.println("An Expression!");
-		}
-		System.out.println("#1  "+context.eClass().getName()  + "     "+ reference.getEReferenceType().getName());
-		if(super.getScope(context, reference)!=null)
-		{
-			return super.getScope(context, reference);
-		}
-		return delegate.getScope(context, reference);
-	}
-	
-	 
+public class SnipDSLLocalScope extends XbaseBatchScopeProvider {
+    @Inject
+    ImportedNamespaceAwareLocalScopeProvider inalsp;
+    @Inject
+    @Named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE)
+    private IScopeProvider delegate;
+    @Inject
+    private SnipDSLFeatureCallScope featureScopes;
+
+    @Override
+    public IScope getScope(EObject context, EReference reference) {
+
+        if (context == null)
+            throw new NullPointerException("context");
+        if (reference instanceof XExpression) {
+            // return Scopes.scopeFor(context.eContents());
+            System.out.println("An Expression!");
+        }
+        System.out.println("#1  " + context.eClass().getName() + "     "
+                + reference.getEReferenceType().getName());
+        if (super.getScope(context, reference) != null) {
+            return super.getScope(context, reference);
+        }
+        return delegate.getScope(context, reference);
+    }
+
 }
