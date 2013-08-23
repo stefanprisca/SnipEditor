@@ -15,6 +15,7 @@
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>target-platform-configuration</artifactId>
 				<configuration>
+					<pomDependencies>consider</pomDependencies>
 					<target>
 						<artifact>
 							<groupId>${project.groupId}</groupId>
@@ -22,8 +23,12 @@
 							<version>${recommenders-version}</version>
 						</artifact>
 					</target>
+
+
 				</configuration>
 			</plugin>
+
 		</plugins>
+
 	</build>
 </project>

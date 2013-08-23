@@ -11,19 +11,20 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 /**
  * Use this class to register components to be used within the IDE.
  */
-public class SnipDSLUiModule extends org.eclipse.recommenders.snipeditor.ui.AbstractSnipDSLUiModule {
-	public SnipDSLUiModule(AbstractUIPlugin plugin) {
-		super(plugin);
-	}
-	@Override
-	public Class<? extends org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider.ReferenceProposalCreator> bindAbstractJavaBasedContentProposalProvider$ReferenceProposalCreator() {
-		return SnipDSLReferenceProposalCreator.class;
-	}
-	
+public class SnipDSLUiModule extends
+        org.eclipse.recommenders.snipeditor.ui.AbstractSnipDSLUiModule {
+    public SnipDSLUiModule(AbstractUIPlugin plugin) {
+        super(plugin);
+    }
 
-	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
-	public Class<MultiPageSnipEditor> bindMultiPageEditor() {
-		System.out.print("my editor is binded");
-		return MultiPageSnipEditor.class;
-	}
+    @Override
+    public Class<? extends org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider.ReferenceProposalCreator> bindAbstractJavaBasedContentProposalProvider$ReferenceProposalCreator() {
+        return SnipDSLReferenceProposalCreator.class;
+    }
+
+    // contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
+    public Class<MultiPageSnipEditor> bindMultiPageEditor() {
+        System.out.print("my editor is binded");
+        return MultiPageSnipEditor.class;
+    }
 }
