@@ -6,8 +6,8 @@ import org.eclipse.xtext.xbase.scoping.batch.FeatureScopes;
 
 public class SnipDSLFeatureCallScope extends FeatureScopes {
 
-	@Override
-	public boolean isFeatureCallScope(EReference reference) {
-		return reference == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE;
-	}
+    @Override
+    public boolean isFeatureCallScope(EReference reference) {
+        return reference == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE;
+    }
 }
