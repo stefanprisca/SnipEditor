@@ -4,12 +4,13 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.eclipse.recommenders</groupId>
-		<artifactId>features</artifactId>
+		<artifactId>repositories</artifactId>
 		<version>1.100.0-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>org.eclipse.recommenders.feature.snipeditor</artifactId>
-	<packaging>eclipse-feature</packaging>
+	<artifactId>org.eclipse.recommenders.repository.rcp.snipeditor</artifactId>
+	<packaging>eclipse-repository</packaging>
+	<name>Code Recommenders: SnipEditor Update Site</name>
 	<build>
 		<plugins>
 			<plugin>
