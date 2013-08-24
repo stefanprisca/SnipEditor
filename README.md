@@ -5,12 +5,7 @@ The update site can be found here[1]. In order to use, please follow the instruc
 in the update site readme file. It does not work directly from eclipse IDE(yet).<br>  
 This build supports syntax for class declarations, method declarations, attribute declarations and assignments and <br>
 basic operations. Examples can be found in the update site repository.<br>
-The meaning of the projects is the following:<br>
-  -> org.eclipse.recommenders.snipeditor.releng: the release project. It contains the project pom file, describing <br>
-  all the other projects.<br>
-  -> org.eclipse.recommenders.snipeditor.updatesite: the update site for this project.<br>
-  -> the rest of the projects are the XText projects. Note that this have not been modified, they are fresh projects.<br>
-<br>
+\<br>
 In order to open the projects in eclipse, simply clone the repo on the local computer and import the projects<br>
 in eclipse. You will also need to generate the language artifacts.
 <br>
@@ -24,8 +19,35 @@ In order to build this, follow the steps:<br>
 <br>
 
 
-Some using instructions:<br>
+<h1>The preference page and the view</h1>
 <p>
+	The prefetence page can be used to set the locations of the snippets. This can be accessed from<br>
+Window -> Preferences -> SnipMatch Preferences.<br>
+	
+	In order to set it up:<br>
+	<br>
+	(1) Set the location of the local snippets in the <i>Local Snippets Directory</i> path location <br>
+	(2) Click the <i>Generate Index File</i> button.<br>
+	(3) Chose the index file in its alocated path.<br>
+	<br>
+	After the preference page is set up, you can access the local snippets through the snippets view:<br>
+	<br>
+	(1) Go to <i>Window -> Show View -> Other -> Other -> Snippets View </i> and open it.<br>
+	(2) If the snippets do not appear in the list, press the refresh button.<br>
+	(3) The snippets ahould be visible now, so in order to edit them, just press double click on the one <br>
+	to be edited :) <br>
+	<br>
+</p>
+
+<h2>The Editor</h2>
+<p>
+	In order to allow all functionalities of the editor, the files are copied in the local workspace.<br>
+	Therefor, a new project will be created in the workpsace with the snippets. Here, .cSnip files <br>
+	will be created from the code in the .json files.<br>
+</p>
+<p>
+Some instructions on how to use the editor:<br>
+<br>
   (1) imports have the following format:<br>
     <br>
     ~ ${import(library.you.want.to.import.*)}<br>
