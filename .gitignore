@@ -1,0 +1,22 @@
+<<<<<<< HEAD
+#################
+## Eclipse
+#################
+
+*.pydevproject
+
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+
+target/
+*-gen/
+.settings/
+.loadpath
+
+
