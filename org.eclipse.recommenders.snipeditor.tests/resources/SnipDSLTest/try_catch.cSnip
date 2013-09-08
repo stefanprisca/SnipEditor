@@ -1,5 +1,0 @@
-try {
-        ${line_selection}${cursor}
-} catch (Exception ${exception_variable_name}) {
-        // ${todo}: handle exception
-}

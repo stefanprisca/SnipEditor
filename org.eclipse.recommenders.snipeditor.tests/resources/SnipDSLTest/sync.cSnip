@@ -1,6 +1,0 @@
-//TODO: solve abstract type names!
-void synchronized (${SomeType} ${mutex}) 
-{
-        ${line_selection}
-        
-}  
