@@ -28,16 +28,15 @@ Workflow {
     	directory = "${runtimeProject}.ui/src-gen"
     }
     
-    component = DirectoryCleaner {
-    	directory = "org.eclipse.recommenders.snipmatch.rcp/src-gen"
-    }
-    
     component = Generator {
     	pathRtProject = runtimeProject
     	pathUiProject = "${runtimeProject}.ui"
     	pathTestProject = "${runtimeProject}.tests"
     	projectNameRt = projectName
     	projectNameUi = "${projectName}.ui"
+    	
+    	
+    	
     	language = auto-inject {
     		uri = grammarURI
     

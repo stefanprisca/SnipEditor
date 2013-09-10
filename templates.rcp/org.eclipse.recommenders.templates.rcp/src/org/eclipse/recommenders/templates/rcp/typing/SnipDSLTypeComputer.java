@@ -1,9 +1,10 @@
 package org.eclipse.recommenders.templates.rcp.typing;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
-import org.eclipse.internal.xpand2.model.Procedure;
+import org.eclipse.recommenders.templates.rcp.services.SnipDSLGrammarAccess.JFACEEXPRASTYPEElements;
 import org.eclipse.recommenders.templates.rcp.snipDSL.AssignmentWithClosure;
 import org.eclipse.recommenders.templates.rcp.snipDSL.ClassicForLoopExpression;
 import org.eclipse.recommenders.templates.rcp.snipDSL.FeatureCallWithClosure;
@@ -18,12 +19,7 @@ import org.eclipse.recommenders.templates.rcp.snipDSL.jFaceVariableDeclaration;
 import org.eclipse.recommenders.templates.rcp.snipDSL.method;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.impl.JvmTypeImpl;
-import org.eclipse.xtext.naming.IQualifiedNameProvider;
-import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
@@ -31,7 +27,6 @@ import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.annotations.typesystem.XbaseWithAnnotationsTypeComputer;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
@@ -82,18 +77,53 @@ public class SnipDSLTypeComputer extends XbaseWithAnnotationsTypeComputer {
             this._computeTypes((jFaceSpecificLiteral) expression, state);
         } else if (expression instanceof jFaceDeclarationType) {
             this._computeTypes((jFaceDeclarationType) expression, state);
-        } else {
+        } else /*
+                * if (expression instanceof jFaceFullDeclarationType) {
+                * this._computeTypes((jFaceFullDeclarationType) expression,
+                * state); } else
+                */{
             super.computeTypes(expression, state);
         }
     }
 
+    /*
+     * private void _computeTypes(jFaceFullDeclarationType expression,
+     * ITypeComputationState state) { // TODO Auto-generated method stub
+     * System.out.println("got a type expression!");
+     * if(expression.getType().getSimpleName().contains("array")){
+     * System.out.println("got an array type expression!"); }
+     * expression.setType(typeBuilder.newTypeRef(expression, Iterable.class,
+     * null).getType()); }
+     */
     private void _computeTypes(final method expression,
             ITypeComputationState state) {
         // TODO Auto-generated method stub
         // simple type computation, the true work is done via the model
         // inferrer.
-        state.acceptActualType(state.getConverter().toLightweightReference(
-                expression.getJType()));
+        JvmTypeReference type = null;
+        if (expression.getJType().getType() != null) {
+            type = expression.getJType().getType();
+
+        } else if (expression.getJType().getJFaceType() != null) {
+            jFaceDeclarationType jfaceType = expression.getJType()
+                    .getJFaceType();
+            if (jfaceType.getType().contains("array")) {
+                type = typeBuilder.newTypeRef(expression, Object.class, null);
+
+            } else if (jfaceType.getType().contains("interable")) {
+                type = typeBuilder.newTypeRef(expression, Iterable.class, null);
+            } else if (jfaceType.getType().contains("collection")) {
+                type = typeBuilder.newTypeRef(expression, Collection.class,
+                        null);
+
+            }
+
+        }
+        if (type != null) {
+            state.acceptActualType(state.getConverter().toLightweightReference(
+                    type));
+        }
+
     }
 
     private void _computeTypes(UnaryOperation expression,
@@ -123,9 +153,7 @@ public class SnipDSLTypeComputer extends XbaseWithAnnotationsTypeComputer {
                     .toLightweightReference(expression.getTypes().get(0)));
             state.acceptActualType(state.getConverter().toLightweightReference(
                     expression.getTypes().get(0)));
-        } else {
-
-            // System.out.println("An jface Expressioin:"+expression.getValue());
+        } else if (expression.getValue().contains("array")) {
             JvmTypeReference type = typeBuilder
                     .addArrayTypeDimension(typeBuilder.newTypeRef(expression,
                             Object.class, null));
@@ -133,12 +161,35 @@ public class SnipDSLTypeComputer extends XbaseWithAnnotationsTypeComputer {
                     + expression.getValue() + "}", type);
             state.assignType(toField, state.getConverter()
                     .toLightweightReference(type));
-            state.addLocalToCurrentScope(toField);
-
             state.acceptActualType(state.getConverter().toLightweightReference(
-                    typeBuilder.addArrayTypeDimension(typeBuilder.newTypeRef(
-                            expression, Object.class, null))));
-
+                    type));
+        } else if (expression.getValue().contains("iterable")) {
+            JvmTypeReference type = typeBuilder.newTypeRef(expression,
+                    Iterable.class, null);
+            JvmField toField = typeBuilder.toField(expression, "${"
+                    + expression.getValue() + "}", type);
+            state.assignType(toField, state.getConverter()
+                    .toLightweightReference(type));
+            state.acceptActualType(state.getConverter().toLightweightReference(
+                    type));
+        } else if (expression.getValue().contains("collection")) {
+            JvmTypeReference type = typeBuilder.newTypeRef(expression,
+                    Collection.class, null);
+            JvmField toField = typeBuilder.toField(expression, "${"
+                    + expression.getValue() + "}", type);
+            state.assignType(toField, state.getConverter()
+                    .toLightweightReference(type));
+            state.acceptActualType(state.getConverter().toLightweightReference(
+                    type));
+        } else if (expression.getValue().contains("index")) {
+            JvmTypeReference type = typeBuilder.newTypeRef(expression,
+                    int.class, null);
+            JvmField toField = typeBuilder.toField(expression, "${"
+                    + expression.getValue() + "}", type);
+            state.assignType(toField, state.getConverter()
+                    .toLightweightReference(type));
+            state.acceptActualType(state.getConverter().toLightweightReference(
+                    type));
         }
     }
 
@@ -146,13 +197,28 @@ public class SnipDSLTypeComputer extends XbaseWithAnnotationsTypeComputer {
             ITypeComputationState state) {
         // TODO Auto-generated method stub
         // System.out.println(expression.getConstructor().getType());
-        if (expression.getConstructor().getType() == "array_type") {
+        if (expression.getConstructor() instanceof jFaceDeclarationType) {
+            jFaceDeclarationType constructor = (jFaceDeclarationType) expression
+                    .getConstructor();
+            if (constructor.getType() == "array_type") {
+                state.acceptActualType(state.getConverter()
+                        .toLightweightReference(
+                                typeBuilder.addArrayTypeDimension(typeBuilder
+                                        .newTypeRef(expression, Object.class,
+                                                (JvmTypeReference[]) null))));
+            } else if (constructor.getType().contains("iterable")) {
+                state.acceptActualType(state.getConverter()
+                        .toLightweightReference(
+                                typeBuilder.newTypeRef(expression,
+                                        Iterable.class,
+                                        (JvmTypeReference[]) null)));
+            }
+        } else if (expression.getConstructor() instanceof JvmTypeReference) {
+            JvmTypeReference reference = (JvmTypeReference) expression
+                    .getConstructor();
             state.acceptActualType(state.getConverter().toLightweightReference(
-                    typeBuilder.addArrayTypeDimension(typeBuilder
-                            .newTypeRef(expression, Object.class,
-                                    (JvmTypeReference[]) null))));
+                    reference));
         }
-
     }
 
     private void _computeTypes(jFaceDeclarationType expression,
@@ -186,7 +252,7 @@ public class SnipDSLTypeComputer extends XbaseWithAnnotationsTypeComputer {
     protected void _computeTypes(AssignmentWithClosure expression,
             ITypeComputationState state) {
         // TODO Set the correct type!
-        // System.out.println("Got an assignment call with closure ");
+        System.out.println("Got an assignment call with closure ");
 
         // super._computeTypes((XAssignment)expression.getValue(), state);
 
@@ -258,21 +324,28 @@ public class SnipDSLTypeComputer extends XbaseWithAnnotationsTypeComputer {
 
         // System.out.println(var.getJType().getSimpleName());
 
-        if (var.getJType() != null) {
+        if (var.getJType().getType() != null) {
             if (var.getArrayType() != null) {
-                var.setJType(typeBuilder.addArrayTypeDimension(var.getJType()));
+                var.getJType().setType(
+                        typeBuilder.addArrayTypeDimension(var.getJType()
+                                .getType()));
             }
             varType = state.getConverter().toLightweightReference(
-                    var.getJType());
-        } else if (var.getJFaceType() != null) {
-            if (var.getJFaceType().getType().contains("array_type")) {
+                    var.getJType().getType());
+        } else if (var.getJType().getJFaceType() != null) {
+            jFaceDeclarationType jfaceType = var.getJType().getJFaceType();
+            if (jfaceType.getType().contains("array")) {
                 // System.out.println(expression.getType());
                 varType = state.getConverter().toLightweightReference(
                         typeBuilder.addArrayTypeDimension(typeBuilder
                                 .newTypeRef(var, Object.class, null)));
-            } else if (var.getJFaceType().getType().contains("interable_type")) {
+            } else if (jfaceType.getType().contains("interable")) {
                 varType = state.getConverter().toLightweightReference(
                         typeBuilder.newTypeRef(var, Iterable.class, null));
+            } else if (jfaceType.getType().contains("collection")) {
+                varType = state.getConverter().toLightweightReference(
+                        typeBuilder.newTypeRef(var, Collection.class, null));
+
             }
         }
         // System.out.println("The jFaceVarType is: "+varType.getSimpleName());
@@ -362,14 +435,16 @@ public class SnipDSLTypeComputer extends XbaseWithAnnotationsTypeComputer {
         if (expression.getType().contains("date")) {
             LightweightTypeReference type = getTypeForName(Date.class, state);
             state.acceptActualType(type);
-        }
-        if (expression.getType().contains("time")) {
+        } else if (expression.getType().contains("time")) {
             LightweightTypeReference type = getTypeForName(Long.class, state);
             state.acceptActualType(type);
+        } else {// TODO: make the type computer accept any type
+            LightweightTypeReference type = getTypeForName(boolean.class, state);
+            ConformanceHint hints;
+            hints = ConformanceHint.SUCCESS;
+            state.acceptActualType(type, hints);
         }
-        if (expression.getType().contains("cursor")) {
-            state.acceptActualType(getTypeForName(Object.class, state));
-        }
+        // state.acceptActualType(JvmAnyTypeReference);
     }
 
     public ITypeReferenceOwner getReferenceOwner() {
