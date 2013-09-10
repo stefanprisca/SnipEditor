@@ -182,7 +182,7 @@ public class SnippetsView extends ViewPart {
                         IFileEditorInput input = new FileEditorInput(
                                 new SnipEditorFileInput(jsonFile).getFile());
                         page.openEditor(new SnipEditorFileInput(jsonFile),
-                                "org.eclipse.recommenders.snipeditor.SnipDSL");
+                                "org.eclipse.recommenders.snipmatch.MultiPage");
 
                     } catch (PartInitException pie) {
                         throw new RuntimeException(pie);
@@ -249,7 +249,7 @@ public class SnippetsView extends ViewPart {
                 IPath elemPath = new Path(element.filePath);
                 element.filePath = snippetsPath + '/' + elemPath.lastSegment();
                 snippetsMap.put(summary, element);
-                System.out.println(summary + " : " + element.filePath);
+
             }
         }
     }

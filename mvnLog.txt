@@ -1,0 +1,572 @@
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for org.eclipse.recommenders:snipeditor-targets:pom:1.100.0-SNAPSHOT
+[WARNING] 'parent.relativePath' points at org.eclipse.recommenders:snipeditor-aggregator instead of org.eclipse.recommenders:targets, please verify your project structure @ line 5, column 10
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for org.eclipse.recommenders:org.eclipse.recommenders.templates.rcp:eclipse-plugin:1.100.0-SNAPSHOT
+[WARNING] 'parent.relativePath' points at org.eclipse.recommenders:templates.rcp instead of org.eclipse.recommenders:plugins, please verify your project structure @ line 5, column 10
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for org.eclipse.recommenders:org.eclipse.recommenders.templates.rcp.tests:eclipse-test-plugin:1.100.0-SNAPSHOT
+[WARNING] 'parent.relativePath' points at org.eclipse.recommenders:templates.rcp instead of org.eclipse.recommenders:tests, please verify your project structure @ line 5, column 10
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for org.eclipse.recommenders:org.eclipse.recommenders.feature.snipmatch:eclipse-feature:1.100.0-SNAPSHOT
+[WARNING] 'parent.relativePath' points at org.eclipse.recommenders:snipeditor-aggregator instead of org.eclipse.recommenders:features, please verify your project structure @ line 5, column 10
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for org.eclipse.recommenders:org.eclipse.recommenders.repository.rcp.snipmatch:eclipse-repository:1.100.0-SNAPSHOT
+[WARNING] 'parent.relativePath' points at org.eclipse.recommenders:snipeditor-aggregator instead of org.eclipse.recommenders:repositories, please verify your project structure @ line 5, column 10
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[WARNING] No explicit target runtime environment configuration. Build is platform dependent.
+[WARNING] No explicit target runtime environment configuration. Build is platform dependent.
+[WARNING] No explicit target runtime environment configuration. Build is platform dependent.
+[WARNING] No explicit target runtime environment configuration. Build is platform dependent.
+[WARNING] No explicit target runtime environment configuration. Build is platform dependent.
+[WARNING] No explicit target runtime environment configuration. Build is platform dependent.
+[INFO] Computing target platform for MavenProject: org.eclipse.recommenders:org.eclipse.recommenders.templates.rcp:1.100.0-SNAPSHOT @ W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp\pom.xml
+[INFO] Resolving dependencies of MavenProject: org.eclipse.recommenders:org.eclipse.recommenders.templates.rcp:1.100.0-SNAPSHOT @ W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp\pom.xml
+[INFO] Resolving class path of MavenProject: org.eclipse.recommenders:org.eclipse.recommenders.templates.rcp:1.100.0-SNAPSHOT @ W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp\pom.xml
+[INFO] Computing target platform for MavenProject: org.eclipse.recommenders:org.eclipse.recommenders.templates.rcp.ui:1.100.0-SNAPSHOT @ W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp.ui\pom.xml
+[INFO] Resolving dependencies of MavenProject: org.eclipse.recommenders:org.eclipse.recommenders.templates.rcp.ui:1.100.0-SNAPSHOT @ W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp.ui\pom.xml
+[INFO] Resolving class path of MavenProject: org.eclipse.recommenders:org.eclipse.recommenders.templates.rcp.ui:1.100.0-SNAPSHOT @ W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp.ui\pom.xml
+[INFO] Computing target platform for MavenProject: org.eclipse.recommenders:org.eclipse.recommenders.templates.rcp.tests:1.100.0-SNAPSHOT @ W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp.tests\pom.xml
+[INFO] Resolving dependencies of MavenProject: org.eclipse.recommenders:org.eclipse.recommenders.templates.rcp.tests:1.100.0-SNAPSHOT @ W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp.tests\pom.xml
+[INFO] Resolving class path of MavenProject: org.eclipse.recommenders:org.eclipse.recommenders.templates.rcp.tests:1.100.0-SNAPSHOT @ W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp.tests\pom.xml
+[INFO] Computing target platform for MavenProject: org.eclipse.recommenders:org.eclipse.recommenders.snipmatch.rcp:1.100.0-SNAPSHOT @ W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.snipmatch.rcp\pom.xml
+[INFO] Resolving dependencies of MavenProject: org.eclipse.recommenders:org.eclipse.recommenders.snipmatch.rcp:1.100.0-SNAPSHOT @ W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.snipmatch.rcp\pom.xml
+[INFO] Resolving class path of MavenProject: org.eclipse.recommenders:org.eclipse.recommenders.snipmatch.rcp:1.100.0-SNAPSHOT @ W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.snipmatch.rcp\pom.xml
+[INFO] Computing target platform for MavenProject: org.eclipse.recommenders:org.eclipse.recommenders.feature.snipmatch:1.100.0-SNAPSHOT @ W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.feature.snipmatch\pom.xml
+[INFO] Resolving dependencies of MavenProject: org.eclipse.recommenders:org.eclipse.recommenders.feature.snipmatch:1.100.0-SNAPSHOT @ W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.feature.snipmatch\pom.xml
+[INFO] Resolving class path of MavenProject: org.eclipse.recommenders:org.eclipse.recommenders.feature.snipmatch:1.100.0-SNAPSHOT @ W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.feature.snipmatch\pom.xml
+[INFO] Computing target platform for MavenProject: org.eclipse.recommenders:org.eclipse.recommenders.repository.rcp.snipmatch:1.100.0-SNAPSHOT @ W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.repository.rcp.snipmatch\pom.xml
+[INFO] Resolving dependencies of MavenProject: org.eclipse.recommenders:org.eclipse.recommenders.repository.rcp.snipmatch:1.100.0-SNAPSHOT @ W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.repository.rcp.snipmatch\pom.xml
+[INFO] Resolving class path of MavenProject: org.eclipse.recommenders:org.eclipse.recommenders.repository.rcp.snipmatch:1.100.0-SNAPSHOT @ W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.repository.rcp.snipmatch\pom.xml
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] snipeditor-targets
+[INFO] snipeditor-kepler
+[INFO] snipeditor-luna
+[INFO] org.eclipse.recommenders.templates.rcp
+[INFO] org.eclipse.recommenders.templates.rcp.ui
+[INFO] org.eclipse.recommenders.snipmatch.rcp
+[INFO] org.eclipse.recommenders.templates.rcp.tests
+[INFO] templates.rcp
+[INFO] org.eclipse.recommenders.feature.snipmatch
+[INFO] Code Recommenders: SnipEditor Update Site
+[INFO] snipeditor-aggregator
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building snipeditor-targets 1.100.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.4.1:clean (default-clean) @ snipeditor-targets ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.2:enforce (require-plugin-versions) @ snipeditor-targets ---
+[INFO] 
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ snipeditor-targets ---
+[INFO] Installing W:\Workspace\o.e.r.templates.rcp\snipeditor-targets\pom.xml to C:\Users\Stefan\.m2\repository\org\eclipse\recommenders\snipeditor-targets\1.100.0-SNAPSHOT\snipeditor-targets-1.100.0-SNAPSHOT.pom
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building snipeditor-kepler 1.100.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.4.1:clean (default-clean) @ snipeditor-kepler ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.2:enforce (require-plugin-versions) @ snipeditor-kepler ---
+[INFO] 
+[INFO] --- tycho-packaging-plugin:0.18.1:package-target-definition (default-package-target-definition) @ snipeditor-kepler ---
+[INFO] 
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ snipeditor-kepler ---
+[INFO] Installing W:\Workspace\o.e.r.templates.rcp\snipeditor-targets\snipeditor-kepler\snipeditor-kepler.target to C:\Users\Stefan\.m2\repository\org\eclipse\recommenders\snipeditor-kepler\1.100.0-SNAPSHOT\snipeditor-kepler-1.100.0-SNAPSHOT.target
+[INFO] Installing W:\Workspace\o.e.r.templates.rcp\snipeditor-targets\snipeditor-kepler\pom.xml to C:\Users\Stefan\.m2\repository\org\eclipse\recommenders\snipeditor-kepler\1.100.0-SNAPSHOT\snipeditor-kepler-1.100.0-SNAPSHOT.pom
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building snipeditor-luna 1.100.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.4.1:clean (default-clean) @ snipeditor-luna ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.2:enforce (require-plugin-versions) @ snipeditor-luna ---
+[INFO] 
+[INFO] --- tycho-packaging-plugin:0.18.1:package-target-definition (default-package-target-definition) @ snipeditor-luna ---
+[INFO] 
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ snipeditor-luna ---
+[INFO] Installing W:\Workspace\o.e.r.templates.rcp\snipeditor-targets\snipeditor-luna\snipeditor-luna.target to C:\Users\Stefan\.m2\repository\org\eclipse\recommenders\snipeditor-luna\1.100.0-SNAPSHOT\snipeditor-luna-1.100.0-SNAPSHOT.target
+[INFO] Installing W:\Workspace\o.e.r.templates.rcp\snipeditor-targets\snipeditor-luna\pom.xml to C:\Users\Stefan\.m2\repository\org\eclipse\recommenders\snipeditor-luna\1.100.0-SNAPSHOT\snipeditor-luna-1.100.0-SNAPSHOT.pom
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building org.eclipse.recommenders.templates.rcp 1.100.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.4.1:clean (default-clean) @ org.eclipse.recommenders.templates.rcp ---
+[INFO] Deleting W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp\target
+[INFO] Deleting W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp\src-gen (includes = [**], excludes = [])
+[INFO] 
+[INFO] --- tycho-packaging-plugin:0.18.1:build-qualifier (default-build-qualifier) @ org.eclipse.recommenders.templates.rcp ---
+[INFO] 
+[INFO] --- tycho-packaging-plugin:0.18.1:validate-id (default-validate-id) @ org.eclipse.recommenders.templates.rcp ---
+[INFO] 
+[INFO] --- tycho-packaging-plugin:0.18.1:validate-version (default-validate-version) @ org.eclipse.recommenders.templates.rcp ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.2:enforce (require-about-html) @ org.eclipse.recommenders.templates.rcp ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.2:enforce (enforce-bytecode-version) @ org.eclipse.recommenders.templates.rcp ---
+[INFO] 
+[INFO] --- fornax-oaw-m2-plugin:3.3.1:run-workflow (default) @ org.eclipse.recommenders.templates.rcp ---
+[INFO] Fornax Model Workflow Maven2 Plugin V3.3.1
+[INFO] 0    INFO  StandaloneSetup    - Registering platform uri 'W:\Workspace\o.e.r.templates.rcp'
+[INFO] 205  INFO  StandaloneSetup    - Adding generated EPackage 'org.eclipse.xtext.xbase.XbasePackage'
+[INFO] 356  INFO  GenModelHelper     - Registered GenModel 'http://www.eclipse.org/Xtext/Xbase/XAnnotations' from 'platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel'
+[INFO] 359  INFO  GenModelHelper     - Registered GenModel 'http://www.eclipse.org/xtext/xbase/Xtype' from 'platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel'
+[INFO] 371  INFO  GenModelHelper     - Registered GenModel 'http://www.eclipse.org/xtext/xbase/Xbase' from 'platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel'
+[INFO] 371  INFO  GenModelHelper     - Registered GenModel 'http://www.eclipse.org/xtext/common/JavaVMTypes' from 'platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel'
+[INFO] 1043 INFO  DirectoryCleaner   - Cleaning W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp\..\..\org.eclipse.recommenders.snipmatch.rcp\src-gen
+[INFO] 1155 INFO  LanguageConfig     - generating infrastructure for org.eclipse.recommenders.templates.rcp.SnipDSL with fragments : ImplicitRuntimeFragment, ImplicitUiFragment, GrammarAccessFragment, EcoreGeneratorFragment, SerializerFragment, ResourceFactoryFragment, XtextAntlrGeneratorFragment, ValidatorFragment, ImportNamespacesScopingFragment, QualifiedNamesFragment, BuilderIntegrationFragment, GeneratorFragment, FormatterFragment, LabelProviderFragment, OutlineTreeProviderFragment, QuickOutlineFragment, QuickfixProviderFragment, ContentAssistFragment, XtextAntlrUiGeneratorFragment, Junit4Fragment, RefactorElementNameFragment, TypesGeneratorFragment, XbaseGeneratorFragment, CodetemplatesGeneratorFragment, CompareFragment
+[INFO] 4464 INFO  GenModelHelper     - Registered GenModel 'http://www.eclipse.org/recommenders/templates/rcp/SnipDSL' from 'platform:/resource/org.eclipse.recommenders.templates.rcp/src-gen/org/eclipse/recommenders/templates/rcp/SnipDSL.genmodel'
+[WARNING] 12913 WARN  AbstractScopingFragment - Skipping stub generation as Xbase is used
+[INFO] 19123 INFO  Junit4Fragment     - generating Junit4 Test support classes
+[INFO] 19177 INFO  CompareFragment    - generating Compare Framework infrastructure
+[INFO] 19279 INFO  Workflow           - Done.
+[INFO] Workflow 'src/org/eclipse/recommenders/templates/rcp/SnipMatch.mwe2' finished.
+[INFO] 
+[INFO] --- xtend-maven-plugin:2.4.2:compile (compile) @ org.eclipse.recommenders.templates.rcp ---
+[INFO] Compiling 2 source files to W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp\target/generated-sources/xtend
+[INFO] 
+[INFO] --- build-helper-maven-plugin:1.7:add-source (add-source) @ org.eclipse.recommenders.templates.rcp ---
+[INFO] Source directory: W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp\src-gen added.
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ org.eclipse.recommenders.templates.rcp ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 10 resources
+[INFO] Copying 58 resources
+[INFO] Copying 4 resources
+[INFO] 
+[INFO] --- tycho-compiler-plugin:0.18.1:compile (default-compile) @ org.eclipse.recommenders.templates.rcp ---
+[WARNING] Effective compiler target 1.6 is incompatible with OSGi profile 'J2SE-1.5' { source level: 1.5, target level: 1.5} @ MavenProject: org.eclipse.recommenders:org.eclipse.recommenders.templates.rcp:1.100.0-SNAPSHOT @ W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp\pom.xml
+[INFO] Compiling 60 source files to W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp\target\classes
+[INFO] 
+[INFO] --- animal-sniffer-maven-plugin:1.9:check (check-signature) @ org.eclipse.recommenders.templates.rcp ---
+[INFO] Checking unresolved references to org.codehaus.mojo.signature:java16:1.0
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ org.eclipse.recommenders.templates.rcp ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp\src\test\resources
+[INFO] 
+[INFO] --- tycho-source-plugin:0.18.1:plugin-source (attach-source) @ org.eclipse.recommenders.templates.rcp ---
+[WARNING] bundle localization file W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp\plugin.properties not found
+[INFO] Building jar: W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp\target\org.eclipse.recommenders.templates.rcp-1.100.0-SNAPSHOT-sources.jar
+[INFO] 
+[INFO] --- tycho-packaging-plugin:0.18.1:package-plugin (default-package-plugin) @ org.eclipse.recommenders.templates.rcp ---
+[INFO] Building jar: W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp\target\org.eclipse.recommenders.templates.rcp-1.100.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- tycho-p2-plugin:0.18.1:p2-metadata-default (default-p2-metadata-default) @ org.eclipse.recommenders.templates.rcp ---
+[INFO] 
+[INFO] --- maven-checkstyle-plugin:2.10:check (check-coding-conventions) @ org.eclipse.recommenders.templates.rcp ---
+[INFO] 
+[INFO] 
+[INFO] --- maven-license-plugin:1.9.0:check (check-license-headers) @ org.eclipse.recommenders.templates.rcp ---
+Downloading: http://fornax-platform.org/nexus/content/groups/public/org/eclipse/recommenders/licenses/1.100.0-SNAPSHOT/maven-metadata.xml
+[INFO] Checking licenses...
+[WARNING] Property 'strictCheck' is not enabled. Please consider adding <strictCheck>true</strictCheck> in your pom.xml file.
+[WARNING] See http://code.google.com/p/maven-license-plugin/wiki/Configuration for more information.
+[INFO] Missing header in: W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp\src\org\eclipse\recommenders\templates\rcp\SnipDSLStandaloneSetup.java
+[INFO] Missing header in: W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp\src\org\eclipse\recommenders\templates\rcp\SnipDSLRuntimeModule.java
+[INFO] Missing header in: W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp\src\org\eclipse\recommenders\templates\rcp\typing\SnipDSLTypeComputer.java
+[INFO] Missing header in: W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp\src\org\eclipse\recommenders\templates\rcp\jvmmodel\SnipDSLJvmModelInferrer.xtend
+[INFO] Missing header in: W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp\src\org\eclipse\recommenders\templates\rcp\formatting\SnipDSLFormatter.xtend
+[INFO] Missing header in: W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp\src\org\eclipse\recommenders\templates\rcp\compiler\SnipDSLSpecificCompiler.java
+[INFO] Missing header in: W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp\src\org\eclipse\recommenders\templates\rcp\validation\SnipDSLValidator.java
+[WARNING] Some files do not have the expected license header
+[INFO] 
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ org.eclipse.recommenders.templates.rcp ---
+[INFO] Installing W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp\target\org.eclipse.recommenders.templates.rcp-1.100.0-SNAPSHOT.jar to C:\Users\Stefan\.m2\repository\org\eclipse\recommenders\org.eclipse.recommenders.templates.rcp\1.100.0-SNAPSHOT\org.eclipse.recommenders.templates.rcp-1.100.0-SNAPSHOT.jar
+[INFO] Installing W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp\pom.xml to C:\Users\Stefan\.m2\repository\org\eclipse\recommenders\org.eclipse.recommenders.templates.rcp\1.100.0-SNAPSHOT\org.eclipse.recommenders.templates.rcp-1.100.0-SNAPSHOT.pom
+[INFO] Installing W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp\target\org.eclipse.recommenders.templates.rcp-1.100.0-SNAPSHOT-sources.jar to C:\Users\Stefan\.m2\repository\org\eclipse\recommenders\org.eclipse.recommenders.templates.rcp\1.100.0-SNAPSHOT\org.eclipse.recommenders.templates.rcp-1.100.0-SNAPSHOT-sources.jar
+[INFO] Installing W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp\target\p2content.xml to C:\Users\Stefan\.m2\repository\org\eclipse\recommenders\org.eclipse.recommenders.templates.rcp\1.100.0-SNAPSHOT\org.eclipse.recommenders.templates.rcp-1.100.0-SNAPSHOT-p2metadata.xml
+[INFO] Installing W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp\target\p2artifacts.xml to C:\Users\Stefan\.m2\repository\org\eclipse\recommenders\org.eclipse.recommenders.templates.rcp\1.100.0-SNAPSHOT\org.eclipse.recommenders.templates.rcp-1.100.0-SNAPSHOT-p2artifacts.xml
+[INFO] 
+[INFO] --- tycho-p2-plugin:0.18.1:update-local-index (default-update-local-index) @ org.eclipse.recommenders.templates.rcp ---
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building org.eclipse.recommenders.templates.rcp.ui 1.100.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.4.1:clean (default-clean) @ org.eclipse.recommenders.templates.rcp.ui ---
+[INFO] Deleting W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp.ui\target
+[INFO] 
+[INFO] --- tycho-packaging-plugin:0.18.1:build-qualifier (default-build-qualifier) @ org.eclipse.recommenders.templates.rcp.ui ---
+[INFO] 
+[INFO] --- tycho-packaging-plugin:0.18.1:validate-id (default-validate-id) @ org.eclipse.recommenders.templates.rcp.ui ---
+[INFO] 
+[INFO] --- tycho-packaging-plugin:0.18.1:validate-version (default-validate-version) @ org.eclipse.recommenders.templates.rcp.ui ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.2:enforce (require-about-html) @ org.eclipse.recommenders.templates.rcp.ui ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.2:enforce (enforce-bytecode-version) @ org.eclipse.recommenders.templates.rcp.ui ---
+[INFO] 
+[INFO] --- xtend-maven-plugin:2.4.2:compile (compile) @ org.eclipse.recommenders.templates.rcp.ui ---
+[INFO] Compiling 5 source files to W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp.ui\target/generated-sources/xtend
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ org.eclipse.recommenders.templates.rcp.ui ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp.ui\resources
+[INFO] 
+[INFO] --- tycho-compiler-plugin:0.18.1:compile (default-compile) @ org.eclipse.recommenders.templates.rcp.ui ---
+[WARNING] Effective compiler target 1.6 is incompatible with OSGi profile 'J2SE-1.5' { source level: 1.5, target level: 1.5} @ MavenProject: org.eclipse.recommenders:org.eclipse.recommenders.templates.rcp.ui:1.100.0-SNAPSHOT @ W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp.ui\pom.xml
+[INFO] Compiling 14 source files to W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp.ui\target\classes
+[INFO] 
+[INFO] --- animal-sniffer-maven-plugin:1.9:check (check-signature) @ org.eclipse.recommenders.templates.rcp.ui ---
+[INFO] Checking unresolved references to org.codehaus.mojo.signature:java16:1.0
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ org.eclipse.recommenders.templates.rcp.ui ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp.ui\src\test\resources
+[INFO] 
+[INFO] --- tycho-source-plugin:0.18.1:plugin-source (attach-source) @ org.eclipse.recommenders.templates.rcp.ui ---
+[WARNING] bundle localization file W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp.ui\plugin.properties not found
+[INFO] Building jar: W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp.ui\target\org.eclipse.recommenders.templates.rcp.ui-1.100.0-SNAPSHOT-sources.jar
+[INFO] 
+[INFO] --- tycho-packaging-plugin:0.18.1:package-plugin (default-package-plugin) @ org.eclipse.recommenders.templates.rcp.ui ---
+[INFO] Building jar: W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp.ui\target\org.eclipse.recommenders.templates.rcp.ui-1.100.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- tycho-p2-plugin:0.18.1:p2-metadata-default (default-p2-metadata-default) @ org.eclipse.recommenders.templates.rcp.ui ---
+[INFO] 
+[INFO] --- maven-checkstyle-plugin:2.10:check (check-coding-conventions) @ org.eclipse.recommenders.templates.rcp.ui ---
+[INFO] 
+[INFO] 
+[INFO] --- maven-license-plugin:1.9.0:check (check-license-headers) @ org.eclipse.recommenders.templates.rcp.ui ---
+[INFO] Checking licenses...
+[WARNING] Property 'strictCheck' is not enabled. Please consider adding <strictCheck>true</strictCheck> in your pom.xml file.
+[WARNING] See http://code.google.com/p/maven-license-plugin/wiki/Configuration for more information.
+[INFO] Missing header in: W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp.ui\src\org\eclipse\recommenders\templates\rcp\ui\outline\SnipDSLOutlineTreeProvider.xtend
+[INFO] Missing header in: W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp.ui\src\org\eclipse\recommenders\templates\rcp\ui\labeling\SnipDSLLabelProvider.xtend
+[INFO] Missing header in: W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp.ui\src\org\eclipse\recommenders\templates\rcp\ui\contentassist\SnipDSLProposalProvider.xtend
+[INFO] Missing header in: W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp.ui\src\org\eclipse\recommenders\templates\rcp\ui\SnipDSLUiModule.java
+[INFO] Missing header in: W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp.ui\src\org\eclipse\recommenders\templates\rcp\ui\quickfix\SnipDSLQuickfixProvider.xtend
+[INFO] Missing header in: W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp.ui\src\org\eclipse\recommenders\templates\rcp\ui\labeling\SnipDSLDescriptionLabelProvider.xtend
+[WARNING] Some files do not have the expected license header
+[INFO] 
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ org.eclipse.recommenders.templates.rcp.ui ---
+[INFO] Installing W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp.ui\target\org.eclipse.recommenders.templates.rcp.ui-1.100.0-SNAPSHOT.jar to C:\Users\Stefan\.m2\repository\org\eclipse\recommenders\org.eclipse.recommenders.templates.rcp.ui\1.100.0-SNAPSHOT\org.eclipse.recommenders.templates.rcp.ui-1.100.0-SNAPSHOT.jar
+[INFO] Installing W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp.ui\pom.xml to C:\Users\Stefan\.m2\repository\org\eclipse\recommenders\org.eclipse.recommenders.templates.rcp.ui\1.100.0-SNAPSHOT\org.eclipse.recommenders.templates.rcp.ui-1.100.0-SNAPSHOT.pom
+[INFO] Installing W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp.ui\target\org.eclipse.recommenders.templates.rcp.ui-1.100.0-SNAPSHOT-sources.jar to C:\Users\Stefan\.m2\repository\org\eclipse\recommenders\org.eclipse.recommenders.templates.rcp.ui\1.100.0-SNAPSHOT\org.eclipse.recommenders.templates.rcp.ui-1.100.0-SNAPSHOT-sources.jar
+[INFO] Installing W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp.ui\target\p2content.xml to C:\Users\Stefan\.m2\repository\org\eclipse\recommenders\org.eclipse.recommenders.templates.rcp.ui\1.100.0-SNAPSHOT\org.eclipse.recommenders.templates.rcp.ui-1.100.0-SNAPSHOT-p2metadata.xml
+[INFO] Installing W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp.ui\target\p2artifacts.xml to C:\Users\Stefan\.m2\repository\org\eclipse\recommenders\org.eclipse.recommenders.templates.rcp.ui\1.100.0-SNAPSHOT\org.eclipse.recommenders.templates.rcp.ui-1.100.0-SNAPSHOT-p2artifacts.xml
+[INFO] 
+[INFO] --- tycho-p2-plugin:0.18.1:update-local-index (default-update-local-index) @ org.eclipse.recommenders.templates.rcp.ui ---
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building org.eclipse.recommenders.snipmatch.rcp 1.100.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.4.1:clean (default-clean) @ org.eclipse.recommenders.snipmatch.rcp ---
+[INFO] Deleting W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.snipmatch.rcp\target
+[INFO] 
+[INFO] --- tycho-packaging-plugin:0.18.1:build-qualifier (default-build-qualifier) @ org.eclipse.recommenders.snipmatch.rcp ---
+[INFO] 
+[INFO] --- tycho-packaging-plugin:0.18.1:validate-id (default-validate-id) @ org.eclipse.recommenders.snipmatch.rcp ---
+[INFO] 
+[INFO] --- tycho-packaging-plugin:0.18.1:validate-version (default-validate-version) @ org.eclipse.recommenders.snipmatch.rcp ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.2:enforce (require-about-html) @ org.eclipse.recommenders.snipmatch.rcp ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.2:enforce (enforce-bytecode-version) @ org.eclipse.recommenders.snipmatch.rcp ---
+[INFO] 
+[INFO] --- xtend-maven-plugin:2.4.2:compile (compile) @ org.eclipse.recommenders.snipmatch.rcp ---
+[WARNING] 
+WARNING: 	SnipDSLProposalProvider.xtend - W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.snipmatch.rcp\src\org\eclipse\recommenders\snipmatch\rcp\contentassist\SnipDSLProposalProvider.xtend
+11: The import 'org.eclipse.xtext.CrossReference' is never used.
+[WARNING] 
+WARNING: 	SnipDSLProposalProvider.xtend - W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.snipmatch.rcp\src\org\eclipse\recommenders\snipmatch\rcp\contentassist\SnipDSLProposalProvider.xtend
+8: The import 'org.eclipse.xtext.Assignment' is never used.
+[WARNING] 
+WARNING: 	SnipDSLProposalProvider.xtend - W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.snipmatch.rcp\src\org\eclipse\recommenders\snipmatch\rcp\contentassist\SnipDSLProposalProvider.xtend
+14: The import 'org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider' is never used.
+[WARNING] 
+WARNING: 	SnipDSLProposalProvider.xtend - W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.snipmatch.rcp\src\org\eclipse\recommenders\snipmatch\rcp\contentassist\SnipDSLProposalProvider.xtend
+7: The import 'org.eclipse.emf.ecore.EObject' is never used.
+[WARNING] 
+WARNING: 	SnipDSLProposalProvider.xtend - W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.snipmatch.rcp\src\org\eclipse\recommenders\snipmatch\rcp\contentassist\SnipDSLProposalProvider.xtend
+10: The import 'org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor' is never used.
+[WARNING] 
+WARNING: 	SnipDSLProposalProvider.xtend - W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.snipmatch.rcp\src\org\eclipse\recommenders\snipmatch\rcp\contentassist\SnipDSLProposalProvider.xtend
+13: The import 'com.google.inject.Inject' is never used.
+[WARNING] 
+WARNING: 	SnipDSLProposalProvider.xtend - W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.snipmatch.rcp\src\org\eclipse\recommenders\snipmatch\rcp\contentassist\SnipDSLProposalProvider.xtend
+12: The import 'org.eclipse.xtext.RuleCall' is never used.
+[WARNING] 
+WARNING: 	SnipDSLProposalProvider.xtend - W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.snipmatch.rcp\src\org\eclipse\recommenders\snipmatch\rcp\contentassist\SnipDSLProposalProvider.xtend
+9: The import 'org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext' is never used.
+[WARNING] 
+WARNING: 	SnipDSLProposalProvider.xtend - W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.snipmatch.rcp\src\org\eclipse\recommenders\snipmatch\rcp\contentassist\SnipDSLProposalProvider.xtend
+15: The import 'org.eclipse.xtext.common.types.access.IJvmTypeProvider$Factory' is never used.
+[INFO] Compiling 5 source files to W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.snipmatch.rcp\target/generated-sources/xtend
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ org.eclipse.recommenders.snipmatch.rcp ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.snipmatch.rcp\resources
+[INFO] 
+[INFO] --- tycho-compiler-plugin:0.18.1:compile (default-compile) @ org.eclipse.recommenders.snipmatch.rcp ---
+[WARNING] Effective compiler target 1.6 is incompatible with OSGi profile 'J2SE-1.5' { source level: 1.5, target level: 1.5} @ MavenProject: org.eclipse.recommenders:org.eclipse.recommenders.snipmatch.rcp:1.100.0-SNAPSHOT @ W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.snipmatch.rcp\pom.xml
+[INFO] Compiling 28 source files to W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.snipmatch.rcp\target\classes
+[INFO] 
+[INFO] --- animal-sniffer-maven-plugin:1.9:check (check-signature) @ org.eclipse.recommenders.snipmatch.rcp ---
+[INFO] Checking unresolved references to org.codehaus.mojo.signature:java16:1.0
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ org.eclipse.recommenders.snipmatch.rcp ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.snipmatch.rcp\src\test\resources
+[INFO] 
+[INFO] --- tycho-source-plugin:0.18.1:plugin-source (attach-source) @ org.eclipse.recommenders.snipmatch.rcp ---
+[WARNING] bundle localization file W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.snipmatch.rcp\plugin.properties not found
+[WARNING] Bundle-Name header not found in W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.snipmatch.rcp\META-INF\MANIFEST.MF, fallback to Bundle-SymbolicName for source bundle
+[INFO] Building jar: W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.snipmatch.rcp\target\org.eclipse.recommenders.snipmatch.rcp-1.100.0-SNAPSHOT-sources.jar
+[INFO] 
+[INFO] --- tycho-packaging-plugin:0.18.1:package-plugin (default-package-plugin) @ org.eclipse.recommenders.snipmatch.rcp ---
+[INFO] Building jar: W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.snipmatch.rcp\target\org.eclipse.recommenders.snipmatch.rcp-1.100.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- tycho-p2-plugin:0.18.1:p2-metadata-default (default-p2-metadata-default) @ org.eclipse.recommenders.snipmatch.rcp ---
+[INFO] 
+[INFO] --- maven-checkstyle-plugin:2.10:check (check-coding-conventions) @ org.eclipse.recommenders.snipmatch.rcp ---
+[INFO] 
+[INFO] 
+[INFO] --- maven-license-plugin:1.9.0:check (check-license-headers) @ org.eclipse.recommenders.snipmatch.rcp ---
+[INFO] Checking licenses...
+[WARNING] Property 'strictCheck' is not enabled. Please consider adding <strictCheck>true</strictCheck> in your pom.xml file.
+[WARNING] See http://code.google.com/p/maven-license-plugin/wiki/Configuration for more information.
+[INFO] Missing header in: W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.snipmatch.rcp\src\org\eclipse\recommenders\snipmatch\rcp\core\LightweightSnippet.java
+[INFO] Missing header in: W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.snipmatch.rcp\src\org\eclipse\recommenders\snipmatch\rcp\contentassist\SnipDSLProposalProvider.xtend
+[INFO] Missing header in: W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.snipmatch.rcp\src\org\eclipse\recommenders\snipmatch\rcp\editors\MultiPageSnipEditorContributor.java
+[INFO] Missing header in: W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.snipmatch.rcp\src\org\eclipse\recommenders\snipmatch\rcp\editors\MetaFieldEditor.java
+[INFO] Missing header in: W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.snipmatch.rcp\src\org\eclipse\recommenders\snipmatch\rcp\editors\SnipEditorStorageInput.java
+[INFO] Missing header in: W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.snipmatch.rcp\src\org\eclipse\recommenders\snipmatch\rcp\editors\SnipStorage.java
+[INFO] Missing header in: W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.snipmatch.rcp\src\org\eclipse\recommenders\snipmatch\rcp\labeling\SnipDSLDescriptionLabelProvider.xtend
+[INFO] Missing header in: W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.snipmatch.rcp\src\org\eclipse\recommenders\snipmatch\rcp\labeling\SnipDSLLabelProvider.xtend
+[INFO] Missing header in: W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.snipmatch.rcp\src\org\eclipse\recommenders\snipmatch\rcp\outline\SnipDSLOutlineTreeProvider.xtend
+[INFO] Missing header in: W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.snipmatch.rcp\src\org\eclipse\recommenders\snipmatch\rcp\preferences\PreferenceConstants.java
+[INFO] Missing header in: W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.snipmatch.rcp\src\org\eclipse\recommenders\snipmatch\rcp\preferences\PreferenceInitializer.java
+[INFO] Missing header in: W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.snipmatch.rcp\src\org\eclipse\recommenders\snipmatch\rcp\preferences\SnipPreferencePage.java
+[INFO] Missing header in: W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.snipmatch.rcp\src\org\eclipse\recommenders\snipmatch\rcp\quickfix\SnipDSLQuickfixProvider.xtend
+[INFO] Missing header in: W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.snipmatch.rcp\src\org\eclipse\recommenders\snipmatch\rcp\SnipDSLUiModule.java
+[INFO] Missing header in: W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.snipmatch.rcp\src\org\eclipse\recommenders\snipmatch\rcp\editors\SnipEditorFileInput.java
+[INFO] Missing header in: W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.snipmatch.rcp\src\org\eclipse\recommenders\snipmatch\rcp\core\Snippet.java
+[INFO] Missing header in: W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.snipmatch.rcp\src\org\eclipse\recommenders\snipmatch\rcp\contentassist\SnipDSLReferenceProposalCreator.java
+[INFO] Missing header in: W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.snipmatch.rcp\src\org\eclipse\recommenders\snipmatch\rcp\editors\MultiPageSnipEditor.java
+[WARNING] Some files do not have the expected license header
+[INFO] 
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ org.eclipse.recommenders.snipmatch.rcp ---
+[INFO] Installing W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.snipmatch.rcp\target\org.eclipse.recommenders.snipmatch.rcp-1.100.0-SNAPSHOT.jar to C:\Users\Stefan\.m2\repository\org\eclipse\recommenders\org.eclipse.recommenders.snipmatch.rcp\1.100.0-SNAPSHOT\org.eclipse.recommenders.snipmatch.rcp-1.100.0-SNAPSHOT.jar
+[INFO] Installing W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.snipmatch.rcp\pom.xml to C:\Users\Stefan\.m2\repository\org\eclipse\recommenders\org.eclipse.recommenders.snipmatch.rcp\1.100.0-SNAPSHOT\org.eclipse.recommenders.snipmatch.rcp-1.100.0-SNAPSHOT.pom
+[INFO] Installing W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.snipmatch.rcp\target\org.eclipse.recommenders.snipmatch.rcp-1.100.0-SNAPSHOT-sources.jar to C:\Users\Stefan\.m2\repository\org\eclipse\recommenders\org.eclipse.recommenders.snipmatch.rcp\1.100.0-SNAPSHOT\org.eclipse.recommenders.snipmatch.rcp-1.100.0-SNAPSHOT-sources.jar
+[INFO] Installing W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.snipmatch.rcp\target\p2content.xml to C:\Users\Stefan\.m2\repository\org\eclipse\recommenders\org.eclipse.recommenders.snipmatch.rcp\1.100.0-SNAPSHOT\org.eclipse.recommenders.snipmatch.rcp-1.100.0-SNAPSHOT-p2metadata.xml
+[INFO] Installing W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.snipmatch.rcp\target\p2artifacts.xml to C:\Users\Stefan\.m2\repository\org\eclipse\recommenders\org.eclipse.recommenders.snipmatch.rcp\1.100.0-SNAPSHOT\org.eclipse.recommenders.snipmatch.rcp-1.100.0-SNAPSHOT-p2artifacts.xml
+[INFO] 
+[INFO] --- tycho-p2-plugin:0.18.1:update-local-index (default-update-local-index) @ org.eclipse.recommenders.snipmatch.rcp ---
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building org.eclipse.recommenders.templates.rcp.tests 1.100.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.4.1:clean (default-clean) @ org.eclipse.recommenders.templates.rcp.tests ---
+[INFO] Deleting W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp.tests\target
+[INFO] 
+[INFO] --- tycho-packaging-plugin:0.18.1:build-qualifier (default-build-qualifier) @ org.eclipse.recommenders.templates.rcp.tests ---
+[INFO] 
+[INFO] --- tycho-packaging-plugin:0.18.1:validate-id (default-validate-id) @ org.eclipse.recommenders.templates.rcp.tests ---
+[INFO] 
+[INFO] --- tycho-packaging-plugin:0.18.1:validate-version (default-validate-version) @ org.eclipse.recommenders.templates.rcp.tests ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.2:enforce (require-plugin-versions) @ org.eclipse.recommenders.templates.rcp.tests ---
+[INFO] 
+[INFO] --- jacoco-maven-plugin:0.6.2.201302030002:prepare-agent (prepare-agent) @ org.eclipse.recommenders.templates.rcp.tests ---
+[INFO] tycho.testArgLine set to -javaagent:C:\Users\Stefan\.m2\repository\org\jacoco\org.jacoco.agent\0.6.2.201302030002\org.jacoco.agent-0.6.2.201302030002-runtime.jar=destfile=W:\Workspace\o.e.r.templates.rcp\templates.rcp\target\jacoco.exec,append=true,includes=org.eclipse.recommenders.*
+[INFO] 
+[INFO] --- xtend-maven-plugin:2.4.2:compile (compile) @ org.eclipse.recommenders.templates.rcp.tests ---
+[INFO] No sources to compile in 'W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp.tests\src;W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp.tests\src-gen;W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp.tests\xtend-gen'
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ org.eclipse.recommenders.templates.rcp.tests ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp.tests\resources
+[INFO] 
+[INFO] --- tycho-compiler-plugin:0.18.1:compile (default-compile) @ org.eclipse.recommenders.templates.rcp.tests ---
+[WARNING] Effective compiler target 1.6 is incompatible with OSGi profile 'J2SE-1.5' { source level: 1.5, target level: 1.5} @ MavenProject: org.eclipse.recommenders:org.eclipse.recommenders.templates.rcp.tests:1.100.0-SNAPSHOT @ W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp.tests\pom.xml
+[INFO] Compiling 3 source files to W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp.tests\target\classes
+[INFO] 
+[INFO] --- animal-sniffer-maven-plugin:1.9:check (check-signature) @ org.eclipse.recommenders.templates.rcp.tests ---
+[INFO] Checking unresolved references to org.codehaus.mojo.signature:java16:1.0
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ org.eclipse.recommenders.templates.rcp.tests ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp.tests\src\test\resources
+[INFO] 
+[INFO] --- tycho-source-plugin:0.18.1:plugin-source (attach-source) @ org.eclipse.recommenders.templates.rcp.tests ---
+[WARNING] bundle localization file W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp.tests\plugin.properties not found
+[INFO] Building jar: W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp.tests\target\org.eclipse.recommenders.templates.rcp.tests-1.100.0-SNAPSHOT-sources.jar
+[INFO] 
+[INFO] --- tycho-packaging-plugin:0.18.1:package-plugin (default-package-plugin) @ org.eclipse.recommenders.templates.rcp.tests ---
+[INFO] Building jar: W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp.tests\target\org.eclipse.recommenders.templates.rcp.tests-1.100.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- tycho-p2-plugin:0.18.1:p2-metadata-default (default-p2-metadata-default) @ org.eclipse.recommenders.templates.rcp.tests ---
+[INFO] 
+[INFO] --- tycho-surefire-plugin:0.18.1:test (default-test) @ org.eclipse.recommenders.templates.rcp.tests ---
+[WARNING] The following locally built units have been used to resolve project dependencies:
+[WARNING]   org.eclipse.recommenders.templates.rcp/1.100.0.v20130908-1455
+[WARNING]   org.eclipse.recommenders.templates.rcp.ui/1.100.0.v20130908-1455
+[WARNING]   org.eclipse.recommenders.snipmatch.rcp/1.100.0.v20130908-1455
+[INFO] Expected eclipse log file: W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp.tests\target\work\data\.metadata\.log
+[INFO] Command line:
+	cmd.exe /X /C ""C:\Program Files\Java\jdk1.7.0_25\jre\bin\java.exe" -Dosgi.noShutdown=false -Dosgi.os=win32 -Dosgi.ws=win32 -Dosgi.arch=x86_64 -javaagent:C:\Users\Stefan\.m2\repository\org\jacoco\org.jacoco.agent\0.6.2.201302030002\org.jacoco.agent-0.6.2.201302030002-runtime.jar=destfile=W:\Workspace\o.e.r.templates.rcp\templates.rcp\target\jacoco.exec,append=true,includes=org.eclipse.recommenders.* -jar C:\Users\Stefan\.m2\repository\p2\osgi\bundle\org.eclipse.equinox.launcher\1.3.0.v20130327-1440\org.eclipse.equinox.launcher-1.3.0.v20130327-1440.jar -data W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp.tests\target\work\data -install W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp.tests\target\work -configuration W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp.tests\target\work\configuration -application org.eclipse.tycho.surefire.osgibooter.headlesstest -testproperties W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp.tests\target\surefire.properties"
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running org.eclipse.recommenders.templates.rcp.tests.SnipDSLTest
+log4j:WARN No appenders could be found for logger (org.eclipse.xtext.internal.ExtensionResourceServiceProviderRegistryReader).
+log4j:WARN Please initialize the log4j system properly.
+Sep 10, 2013 8:50:46 PM org.eclipse.emf.mwe.utils.StandaloneSetup setPlatformUri
+INFO: Registering platform uri 'W:\Workspace\o.e.r.templates.rcp\templates.rcp'
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.682 sec
+
+Results :
+
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+
+[INFO] All tests passed!
+[INFO] 
+[INFO] --- maven-checkstyle-plugin:2.10:check (check-coding-conventions) @ org.eclipse.recommenders.templates.rcp.tests ---
+[INFO] 
+[INFO] 
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ org.eclipse.recommenders.templates.rcp.tests ---
+[INFO] Installing W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp.tests\target\org.eclipse.recommenders.templates.rcp.tests-1.100.0-SNAPSHOT.jar to C:\Users\Stefan\.m2\repository\org\eclipse\recommenders\org.eclipse.recommenders.templates.rcp.tests\1.100.0-SNAPSHOT\org.eclipse.recommenders.templates.rcp.tests-1.100.0-SNAPSHOT.jar
+[INFO] Installing W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp.tests\pom.xml to C:\Users\Stefan\.m2\repository\org\eclipse\recommenders\org.eclipse.recommenders.templates.rcp.tests\1.100.0-SNAPSHOT\org.eclipse.recommenders.templates.rcp.tests-1.100.0-SNAPSHOT.pom
+[INFO] Installing W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp.tests\target\org.eclipse.recommenders.templates.rcp.tests-1.100.0-SNAPSHOT-sources.jar to C:\Users\Stefan\.m2\repository\org\eclipse\recommenders\org.eclipse.recommenders.templates.rcp.tests\1.100.0-SNAPSHOT\org.eclipse.recommenders.templates.rcp.tests-1.100.0-SNAPSHOT-sources.jar
+[INFO] Installing W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp.tests\target\p2content.xml to C:\Users\Stefan\.m2\repository\org\eclipse\recommenders\org.eclipse.recommenders.templates.rcp.tests\1.100.0-SNAPSHOT\org.eclipse.recommenders.templates.rcp.tests-1.100.0-SNAPSHOT-p2metadata.xml
+[INFO] Installing W:\Workspace\o.e.r.templates.rcp\templates.rcp\org.eclipse.recommenders.templates.rcp.tests\target\p2artifacts.xml to C:\Users\Stefan\.m2\repository\org\eclipse\recommenders\org.eclipse.recommenders.templates.rcp.tests\1.100.0-SNAPSHOT\org.eclipse.recommenders.templates.rcp.tests-1.100.0-SNAPSHOT-p2artifacts.xml
+[INFO] 
+[INFO] --- tycho-p2-plugin:0.18.1:update-local-index (default-update-local-index) @ org.eclipse.recommenders.templates.rcp.tests ---
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building templates.rcp 1.100.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.4.1:clean (default-clean) @ templates.rcp ---
+[INFO] Deleting W:\Workspace\o.e.r.templates.rcp\templates.rcp\target
+[INFO] 
+[INFO] --- maven-install-plugin:2.3.1:install (default-install) @ templates.rcp ---
+[INFO] Installing W:\Workspace\o.e.r.templates.rcp\templates.rcp\pom.xml to C:\Users\Stefan\.m2\repository\org\eclipse\recommenders\templates.rcp\1.100.0-SNAPSHOT\templates.rcp-1.100.0-SNAPSHOT.pom
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building org.eclipse.recommenders.feature.snipmatch 1.100.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.4.1:clean (default-clean) @ org.eclipse.recommenders.feature.snipmatch ---
+[INFO] Deleting W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.feature.snipmatch\target
+[INFO] 
+[INFO] --- tycho-packaging-plugin:0.18.1:build-qualifier-aggregator (default-build-qualifier-aggregator) @ org.eclipse.recommenders.feature.snipmatch ---
+[INFO] 
+[INFO] --- tycho-packaging-plugin:0.18.1:validate-id (default-validate-id) @ org.eclipse.recommenders.feature.snipmatch ---
+[INFO] 
+[INFO] --- tycho-packaging-plugin:0.18.1:validate-version (default-validate-version) @ org.eclipse.recommenders.feature.snipmatch ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.2:enforce (require-feature-properties) @ org.eclipse.recommenders.feature.snipmatch ---
+[INFO] 
+[INFO] --- tycho-packaging-plugin:0.18.1:package-feature (default-package-feature) @ org.eclipse.recommenders.feature.snipmatch ---
+[INFO] Building jar: W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.feature.snipmatch\target\org.eclipse.recommenders.feature.snipmatch-1.100.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- tycho-p2-plugin:0.18.1:p2-metadata-default (default-p2-metadata-default) @ org.eclipse.recommenders.feature.snipmatch ---
+[INFO] 
+[INFO] --- tycho-p2-plugin:0.18.1:feature-p2-metadata (default-feature-p2-metadata) @ org.eclipse.recommenders.feature.snipmatch ---
+[INFO] 
+[INFO] --- tycho-source-feature-plugin:0.18.1:source-feature (generate-source-feature) @ org.eclipse.recommenders.feature.snipmatch ---
+[INFO] Building jar: W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.feature.snipmatch\target\org.eclipse.recommenders.feature.snipmatch-sources-feature.jar
+[INFO] 
+[INFO] --- tycho-p2-plugin:0.18.1:p2-metadata (attach-p2-metadata) @ org.eclipse.recommenders.feature.snipmatch ---
+[INFO] 
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ org.eclipse.recommenders.feature.snipmatch ---
+[INFO] Installing W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.feature.snipmatch\target\org.eclipse.recommenders.feature.snipmatch-1.100.0-SNAPSHOT.jar to C:\Users\Stefan\.m2\repository\org\eclipse\recommenders\org.eclipse.recommenders.feature.snipmatch\1.100.0-SNAPSHOT\org.eclipse.recommenders.feature.snipmatch-1.100.0-SNAPSHOT.jar
+[INFO] Installing W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.feature.snipmatch\pom.xml to C:\Users\Stefan\.m2\repository\org\eclipse\recommenders\org.eclipse.recommenders.feature.snipmatch\1.100.0-SNAPSHOT\org.eclipse.recommenders.feature.snipmatch-1.100.0-SNAPSHOT.pom
+[INFO] Installing W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.feature.snipmatch\target\org.eclipse.recommenders.feature.snipmatch-sources-feature.jar to C:\Users\Stefan\.m2\repository\org\eclipse\recommenders\org.eclipse.recommenders.feature.snipmatch\1.100.0-SNAPSHOT\org.eclipse.recommenders.feature.snipmatch-1.100.0-SNAPSHOT-sources-feature.jar
+[INFO] Installing W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.feature.snipmatch\target\p2content.xml to C:\Users\Stefan\.m2\repository\org\eclipse\recommenders\org.eclipse.recommenders.feature.snipmatch\1.100.0-SNAPSHOT\org.eclipse.recommenders.feature.snipmatch-1.100.0-SNAPSHOT-p2metadata.xml
+[INFO] Installing W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.feature.snipmatch\target\p2artifacts.xml to C:\Users\Stefan\.m2\repository\org\eclipse\recommenders\org.eclipse.recommenders.feature.snipmatch\1.100.0-SNAPSHOT\org.eclipse.recommenders.feature.snipmatch-1.100.0-SNAPSHOT-p2artifacts.xml
+[INFO] 
+[INFO] --- tycho-p2-plugin:0.18.1:update-local-index (default-update-local-index) @ org.eclipse.recommenders.feature.snipmatch ---
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Code Recommenders: SnipEditor Update Site 1.100.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.4.1:clean (default-clean) @ org.eclipse.recommenders.repository.rcp.snipmatch ---
+[INFO] Deleting W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.repository.rcp.snipmatch\target
+[INFO] 
+[INFO] --- tycho-packaging-plugin:0.18.1:build-qualifier-aggregator (default-build-qualifier-aggregator) @ org.eclipse.recommenders.repository.rcp.snipmatch ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.2:enforce (require-plugin-versions) @ org.eclipse.recommenders.repository.rcp.snipmatch ---
+[INFO] 
+[INFO] --- maven-clean-plugin:2.4.1:clean (default-clean-1) @ org.eclipse.recommenders.repository.rcp.snipmatch ---
+[INFO] 
+[INFO] --- tycho-p2-publisher-plugin:0.18.1:publish-products (default-publish-products) @ org.eclipse.recommenders.repository.rcp.snipmatch ---
+[WARNING] The following locally built units have been used to resolve project dependencies:
+[WARNING]   org.eclipse.recommenders.feature.snipmatch.feature.group/1.100.0.v20130908-1455
+[WARNING]   org.eclipse.recommenders.templates.rcp/1.100.0.v20130908-1455
+[WARNING]   org.eclipse.recommenders.snipmatch.rcp/1.100.0.v20130908-1455
+[WARNING]   org.eclipse.recommenders.feature.snipmatch.feature.jar/1.100.0.v20130908-1455
+[INFO] 
+[INFO] --- tycho-p2-publisher-plugin:0.18.1:publish-categories (default-publish-categories) @ org.eclipse.recommenders.repository.rcp.snipmatch ---
+[WARNING] The following locally built units have been used to resolve project dependencies:
+[WARNING]   org.eclipse.recommenders.feature.snipmatch.feature.group/1.100.0.v20130908-1455
+[WARNING]   org.eclipse.recommenders.templates.rcp/1.100.0.v20130908-1455
+[WARNING]   org.eclipse.recommenders.snipmatch.rcp/1.100.0.v20130908-1455
+[WARNING]   org.eclipse.recommenders.feature.snipmatch.feature.jar/1.100.0.v20130908-1455
+[INFO] 
+[INFO] --- tycho-p2-publisher-plugin:0.18.1:attach-artifacts (default-attach-artifacts) @ org.eclipse.recommenders.repository.rcp.snipmatch ---
+[INFO] 
+[INFO] --- tycho-p2-repository-plugin:0.18.1:assemble-repository (default-assemble-repository) @ org.eclipse.recommenders.repository.rcp.snipmatch ---
+[WARNING] The following locally built units have been used to resolve project dependencies:
+[WARNING]   org.eclipse.recommenders.feature.snipmatch.feature.group/1.100.0.v20130908-1455
+[WARNING]   org.eclipse.recommenders.templates.rcp/1.100.0.v20130908-1455
+[WARNING]   org.eclipse.recommenders.snipmatch.rcp/1.100.0.v20130908-1455
+[WARNING]   org.eclipse.recommenders.feature.snipmatch.feature.jar/1.100.0.v20130908-1455
+[INFO] 
+[INFO] --- tycho-p2-repository-plugin:0.18.1:archive-repository (default-archive-repository) @ org.eclipse.recommenders.repository.rcp.snipmatch ---
+[INFO] Building zip: W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.repository.rcp.snipmatch\target\org.eclipse.recommenders.repository.rcp.snipmatch-1.100.0-SNAPSHOT.zip
+[INFO] 
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ org.eclipse.recommenders.repository.rcp.snipmatch ---
+[INFO] Installing W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.repository.rcp.snipmatch\target\org.eclipse.recommenders.repository.rcp.snipmatch-1.100.0-SNAPSHOT.zip to C:\Users\Stefan\.m2\repository\org\eclipse\recommenders\org.eclipse.recommenders.repository.rcp.snipmatch\1.100.0-SNAPSHOT\org.eclipse.recommenders.repository.rcp.snipmatch-1.100.0-SNAPSHOT.zip
+[INFO] Installing W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.repository.rcp.snipmatch\pom.xml to C:\Users\Stefan\.m2\repository\org\eclipse\recommenders\org.eclipse.recommenders.repository.rcp.snipmatch\1.100.0-SNAPSHOT\org.eclipse.recommenders.repository.rcp.snipmatch-1.100.0-SNAPSHOT.pom
+[INFO] Installing W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.repository.rcp.snipmatch\target\p2content.xml to C:\Users\Stefan\.m2\repository\org\eclipse\recommenders\org.eclipse.recommenders.repository.rcp.snipmatch\1.100.0-SNAPSHOT\org.eclipse.recommenders.repository.rcp.snipmatch-1.100.0-SNAPSHOT-p2metadata.xml
+[INFO] Installing W:\Workspace\o.e.r.templates.rcp\org.eclipse.recommenders.repository.rcp.snipmatch\target\p2artifacts.xml to C:\Users\Stefan\.m2\repository\org\eclipse\recommenders\org.eclipse.recommenders.repository.rcp.snipmatch\1.100.0-SNAPSHOT\org.eclipse.recommenders.repository.rcp.snipmatch-1.100.0-SNAPSHOT-p2artifacts.xml
+[INFO] 
+[INFO] --- tycho-p2-plugin:0.18.1:update-local-index (default-update-local-index) @ org.eclipse.recommenders.repository.rcp.snipmatch ---
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building snipeditor-aggregator 1.100.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.4.1:clean (default-clean) @ snipeditor-aggregator ---
+[INFO] 
+[INFO] --- maven-install-plugin:2.3.1:install (default-install) @ snipeditor-aggregator ---
+[INFO] Installing W:\Workspace\o.e.r.templates.rcp\pom.xml to C:\Users\Stefan\.m2\repository\org\eclipse\recommenders\snipeditor-aggregator\1.100.0-SNAPSHOT\snipeditor-aggregator-1.100.0-SNAPSHOT.pom
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary:
+[INFO] 
+[INFO] snipeditor-targets ................................ SUCCESS [0.316s]
+[INFO] snipeditor-kepler ................................. SUCCESS [0.097s]
+[INFO] snipeditor-luna ................................... SUCCESS [0.083s]
+[INFO] org.eclipse.recommenders.templates.rcp ............ SUCCESS [50.269s]
+[INFO] org.eclipse.recommenders.templates.rcp.ui ......... SUCCESS [25.356s]
+[INFO] org.eclipse.recommenders.snipmatch.rcp ............ SUCCESS [12.850s]
+[INFO] org.eclipse.recommenders.templates.rcp.tests ...... SUCCESS [12.438s]
+[INFO] templates.rcp ..................................... SUCCESS [0.166s]
+[INFO] org.eclipse.recommenders.feature.snipmatch ........ SUCCESS [0.399s]
+[INFO] Code Recommenders: SnipEditor Update Site ......... SUCCESS [2.848s]
+[INFO] snipeditor-aggregator ............................. SUCCESS [0.155s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 2:18.547s
+[INFO] Finished at: Tue Sep 10 20:50:53 EEST 2013
+[INFO] Final Memory: 109M/417M
+[INFO] ------------------------------------------------------------------------
