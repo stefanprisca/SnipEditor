@@ -61,7 +61,7 @@ class SnipDSLJvmModelInferrer extends AbstractModelInferrer {
 				method :{
    								//if(feature.JType!=null){
           						  	members+=feature.toMethod(feature.name, 
-          						  		 if (feature.JType != null) feature.JType 
+          						  		 if (feature.JType.type != null) feature.JType.type 
           						  		 else newTypeRef(Void.TYPE)
           						  	) [
               						documentation = feature.documentation
@@ -94,7 +94,7 @@ class SnipDSLJvmModelInferrer extends AbstractModelInferrer {
    			 ).initializeLater [
      			 documentation = element.documentation
       				if (element.JType != null)
-        			superTypes += element.JType.cloneWithProxies 
+        			superTypes += element.JType.type.cloneWithProxies 
    				for (feature : element.features) {
    					switch feature{
    						jFaceVariableDeclaration //sets the name of the feature accordingly
@@ -105,17 +105,17 @@ class SnipDSLJvmModelInferrer extends AbstractModelInferrer {
    												feature.simpleName.indexOf(':')) +'}'
    										)
    									}
-   									if(feature.JType==null)
+   									if(feature.JType.type==null)
    									{
-   										feature.setJType(newTypeRef(feature, typeof(Object) , null));
+   										feature.JType.setType(newTypeRef(feature, typeof(Object) , null));
    									}
-   									members+=feature.toField(feature.simpleName, feature.JType)
+   									members+=feature.toField(feature.simpleName, feature.JType.type)
    								}
    						method 
    								:{
    								//if(feature.JType!=null){
           						  	members += feature.toMethod(feature.name, 
-          						  		 if (feature.JType != null) feature.JType 
+          						  		 if (feature.JType != null) feature.JType.type 
           						  		 else newTypeRef(Void::TYPE)
           						  	) [
               						documentation = feature.documentation
