@@ -1,6 +1,9 @@
 package org.eclipse.recommenders.snipmatch.rcp.editors;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -14,11 +17,14 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.internal.adaptor.EclipseEnvironmentInfo;
+import org.eclipse.emf.common.EMFPlugin.EclipsePlugin;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.launching.JavaRuntime;
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.recommenders.snipmatch.rcp.core.LightweightSnippet;
 import org.eclipse.recommenders.snipmatch.rcp.core.Snippet;
 import org.eclipse.recommenders.utils.gson.GsonUtil;
 import org.eclipse.ui.IFileEditorInput;
@@ -205,13 +211,11 @@ public class SnipEditorFileInput implements IFileEditorInput {
             project.setDescription(description, null);
             javaProject = JavaCore.create(project);
 
+            // System.out.println(path);
             // set the build path
-            IClasspathEntry[] buildPath = {
-                    JavaCore.newSourceEntry(project.getFullPath().append("src")),
-                    JavaRuntime.getDefaultJREContainerEntry() };
 
-            javaProject.setRawClasspath(buildPath, project.getFullPath()
-                    .append("bin"), null);
+            javaProject.setRawClasspath(createClassPath(project), project
+                    .getFullPath().append("bin"), null);
 
             // create folder by using resources package
             folder = project.getFolder("src");
@@ -223,6 +227,37 @@ public class SnipEditorFileInput implements IFileEditorInput {
         }
 
         return folder;
+    }
+
+    private IClasspathEntry[] createClassPath(IProject project) {
+        ArrayList<IClasspathEntry> classPath = new ArrayList<IClasspathEntry>();
+        // Add default buildpath
+        classPath.add(JavaCore.newSourceEntry(project.getFullPath().append(
+                "src")));
+        classPath.add(JavaRuntime.getDefaultJREContainerEntry());
+
+        // add libraries that are in the eclipse plugin folder
+        IPath path = new Path(JavaCore.getClasspathVariable("ECLIPSE_HOME")
+                .toString() + "/plugins/");
+        LinkedList<File> list = new LinkedList<File>();
+        File dir = new File(path.toOSString());
+        // list.addAll(dir.listFiles());
+
+        for (File f : dir.listFiles()) {
+
+            // tmp = list.removeFirst();
+            if (f.isDirectory()) {
+                continue;
+            } else if (f.getAbsolutePath().endsWith(".jar")
+                    && f.getAbsolutePath().contains("swt")) {
+
+                classPath.add(JavaCore.newLibraryEntry(
+                        new Path(f.getAbsolutePath()), null, path));
+            }
+        }
+        IClasspathEntry[] a = {};
+        return classPath.toArray(a);
+
     }
 
 }

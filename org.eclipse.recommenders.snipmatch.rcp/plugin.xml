@@ -83,25 +83,25 @@
             class="org.eclipse.recommenders.snipmatch.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
             id="org.eclipse.recommenders.snipeditor.SnipDSL"
             name="SnipDSL">
-            <keywordReference id="org.eclipse.recommenders.templates.rcp.ui.keyword_SnipDSL"/>
+            <keywordReference id="org.eclipse.recommenders.templates.ui.keyword_SnipDSL"/>
         </page>
         <page
             category="org.eclipse.recommenders.snipeditor.SnipDSL"
             class="org.eclipse.recommenders.snipmatch.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
             id="org.eclipse.recommenders.snipeditor.SnipDSL.coloring"
             name="Syntax Coloring">
-            <keywordReference id="org.eclipse.recommenders.templates.rcp.ui.keyword_SnipDSL"/>
+            <keywordReference id="org.eclipse.recommenders.templates.ui.keyword_SnipDSL"/>
         </page>
         <page
             category="org.eclipse.recommenders.snipeditor.SnipDSL"
             class="org.eclipse.recommenders.snipmatch.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
             id="org.eclipse.recommenders.snipeditor.SnipDSL.templates"
             name="Templates">
-            <keywordReference id="org.eclipse.recommenders.templates.rcp.ui.keyword_SnipDSL"/>
+            <keywordReference id="org.eclipse.recommenders.templates.ui.keyword_SnipDSL"/>
         </page>
         <page
               class="org.eclipse.recommenders.snipmatch.rcp.preferences.SnipPreferencePage"
-              id="org.eclipse.recommenders.templates.rcp.ui.preferences.SnipPreferencePage"
+              id="org.eclipse.recommenders.templates.ui.preferences.SnipPreferencePage"
               name="SnipMatch Preferences">
         </page>
     </extension>
@@ -111,7 +111,7 @@
             class="org.eclipse.recommenders.snipmatch.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
             id="org.eclipse.recommenders.snipeditor.SnipDSL"
             name="SnipDSL">
-            <keywordReference id="org.eclipse.recommenders.templates.rcp.ui.keyword_SnipDSL"/>
+            <keywordReference id="org.eclipse.recommenders.templates.ui.keyword_SnipDSL"/>
             <enabledWhen>
 	            <adapt type="org.eclipse.core.resources.IProject"/>
 			</enabledWhen>
@@ -121,7 +121,7 @@
     <extension
         point="org.eclipse.ui.keywords">
         <keyword
-            id="org.eclipse.recommenders.templates.rcp.ui.keyword_SnipDSL"
+            id="org.eclipse.recommenders.templates.ui.keyword_SnipDSL"
             label="SnipDSL"/>
     </extension>
     <extension
@@ -265,7 +265,7 @@
             class="org.eclipse.recommenders.snipmatch.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
             id="org.eclipse.recommenders.snipeditor.SnipDSL.compiler.preferencePage"
             name="Compiler">
-            <keywordReference id="org.eclipse.recommenders.templates.rcp.ui.keyword_SnipDSL"/>
+            <keywordReference id="org.eclipse.recommenders.templates.ui.keyword_SnipDSL"/>
         </page>
     </extension>
     <extension
@@ -275,7 +275,7 @@
             class="org.eclipse.recommenders.snipmatch.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
             id="org.eclipse.recommenders.snipeditor.SnipDSL.compiler.propertyPage"
             name="Compiler">
-            <keywordReference id="org.eclipse.recommenders.templates.rcp.ui.keyword_SnipDSL"/>
+            <keywordReference id="org.eclipse.recommenders.templates.ui.keyword_SnipDSL"/>
             <enabledWhen>
 	            <adapt type="org.eclipse.core.resources.IProject"/>
 			</enabledWhen>
@@ -321,7 +321,7 @@
             point="org.eclipse.ui.ide.markerResolution">
         <markerResolutionGenerator
             class="org.eclipse.recommenders.snipmatch.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-            markerType="org.eclipse.recommenders.templates.rcp.ui.snipdsl.check.fast">
+            markerType="org.eclipse.recommenders.templates.ui.snipdsl.check.fast">
             <attribute
                 name="FIXABLE_KEY"
                 value="true">
@@ -329,7 +329,7 @@
         </markerResolutionGenerator>
         <markerResolutionGenerator
             class="org.eclipse.recommenders.snipmatch.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-            markerType="org.eclipse.recommenders.templates.rcp.ui.snipdsl.check.normal">
+            markerType="org.eclipse.recommenders.templates.ui.snipdsl.check.normal">
             <attribute
                 name="FIXABLE_KEY"
                 value="true">
@@ -337,7 +337,7 @@
         </markerResolutionGenerator>
         <markerResolutionGenerator
             class="org.eclipse.recommenders.snipmatch.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-            markerType="org.eclipse.recommenders.templates.rcp.ui.snipdsl.check.expensive">
+            markerType="org.eclipse.recommenders.templates.ui.snipdsl.check.expensive">
             <attribute
                 name="FIXABLE_KEY"
                 value="true">
@@ -375,7 +375,7 @@
 	        class="org.eclipse.recommenders.snipmatch.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferencePage"
 	        id="org.eclipse.recommenders.snipeditor.SnipDSL.refactoring"
 	        name="Refactoring">
-	        <keywordReference id="org.eclipse.recommenders.templates.rcp.ui.keyword_SnipDSL"/>
+	        <keywordReference id="org.eclipse.recommenders.templates.ui.keyword_SnipDSL"/>
 	    </page>
 	</extension>
 
@@ -416,7 +416,7 @@
            category="org.eclipse.recommenders.rcp.category.views"
            class="org.eclipse.recommenders.snipmatch.rcp.views.SnippetsView"
            icon="icons/sample.gif"
-           id="org.eclipse.recommenders.templates.rcp.ui.views.SnipView"
+           id="org.eclipse.recommenders.templates.ui.views.SnipView"
            name="Snippets View">
      </view>
   </extension>
