@@ -17,10 +17,13 @@ public class SnipDSLUiModule extends
         super(plugin);
     }
 
-    @Override
-    public Class<? extends org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider.ReferenceProposalCreator> bindAbstractJavaBasedContentProposalProvider$ReferenceProposalCreator() {
-        return SnipDSLReferenceProposalCreator.class;
-    }
+    /*
+     * @Override public Class<? extends
+     * org.eclipse.xtext.ui.editor.contentassist
+     * .AbstractJavaBasedContentProposalProvider.ReferenceProposalCreator>
+     * bindAbstractJavaBasedContentProposalProvider$ReferenceProposalCreator() {
+     * return SnipDSLReferenceProposalCreator.class; }
+     */
 
     // contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
     public Class<MultiPageSnipEditor> bindMultiPageEditor() {

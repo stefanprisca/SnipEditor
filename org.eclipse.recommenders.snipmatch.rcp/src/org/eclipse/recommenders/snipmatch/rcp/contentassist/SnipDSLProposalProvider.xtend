@@ -18,38 +18,5 @@ import org.eclipse.xtext.common.types.access.IJvmTypeProvider.Factory
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#contentAssist on how to customize content assistant
  */
 class SnipDSLProposalProvider extends AbstractSnipDSLProposalProvider {
-	 @Inject
-    private Factory jvmTypeProviderFactory;
-    @Inject
-    private ITypesProposalProvider        typeProposalProvider;
-   
-	override completeXFeatureCall_Feature(EObject model, Assignment assignment, ContentAssistContext context,
-			ICompletionProposalAcceptor acceptor) {
-		super.completeXFeatureCall_Feature(model,assignment,context,acceptor)
-		//System.out.println("it reaches here");
-		
-		//acceptor.accept(createCompletionProposal("Thisismyproposal", context))
-	}	
 	
-	override completeXMemberFeatureCall_Feature(EObject model, Assignment assignment,
-		ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		//println(context.currentModel+"\n"+model+"\n"+assignment);
-		
-		//if(model)
-		
-		val jvmTypeProvider = jvmTypeProviderFactory.createTypeProvider(model.eResource().getResourceSet());
-        //acceptor.accept(createCompletionProposal("Thisismyproposal", context))    
-		lookupCrossReference(assignment.getTerminal() as CrossReference, context, acceptor)
-		var surogate = assignment.getTerminal() as CrossReference
-		
-	}	
-	override complete_XMemberFeatureCall(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		// subclasses may override
-		//System.out.println("it reaches here #3");
-		
-	}
-	override complete_jFaceExpression(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		// subclasses may override
-		acceptor.accept(createCompletionProposal("This should be a proposal", context));
-	}
 }
