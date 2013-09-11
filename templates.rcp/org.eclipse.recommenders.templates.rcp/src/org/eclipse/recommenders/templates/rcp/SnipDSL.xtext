@@ -106,7 +106,7 @@ XExpressionInsideBlock  returns xbase::XExpression :
  */
 jFaceVariableDeclaration returns xbase::XVariableDeclaration:
 	{jFaceVariableDeclaration}
-	(visible=Visibility)? static='static'? ( writeable?='final')? (jType=abstractTypeName|jFaceType=jFaceDeclarationType) arrayType='[]'?
+	(visible=Visibility)? static='static'? ( writeable?='final')? (jType=abstractTypeName) arrayType='[]'?
 	simpleName=declarativeID ('=' right=attributeAssignment)?
 	
 ;
@@ -116,11 +116,10 @@ jFaceVariableDeclaration returns xbase::XVariableDeclaration:
 XExpression returns xbase::XExpression :
 	UnaryOperation
 ;
- 
  UnaryOperation returns xbase::XExpression:
 	{UnaryOperation}
 	operand=jFaceExpression feature=UnaryOperand
-	|=>jFaceExpression
+	|=>jFaceSpecificLiteral
 ;
 
 /*Append special jFace expression to the grammar
@@ -136,15 +135,15 @@ jFaceExpression returns xbase::XExpression:
 		'(' types+=JvmTypeReference (',' types+=JvmTypeReference)*')}' 
 		|ValidID ':' value='link' '('links+=QualifiedName(','links+=QualifiedName)*')}'
 		|ValidID ':' value='argType' '('arg=IdOrSuper   /*[types::JvmIdentifiableElement|IdOrSuper]*/ ',' typeArg=INT')}'
-		)) =>('.' feature=XExpression)?
-	|=>jFaceSpecificLiteral
+		)) //=>('.' feature=XExpression)?
+	//|=>jFaceSpecificLiteral
 	;
 /*JFace cast expression : supports casts to jface types
  * e.g: ${array}
  */
 jFaceCastExpression returns xbase::XExpression:
 	{jFaceCastExpression}
- '('type=jFaceDeclarationType')' target=XExpression
+ '('(type=jFaceDeclarationType | javaType=abstractTypeName)')' target=XExpression
  |=> AssignmentWithClosure
 ;
 /**
@@ -204,6 +203,7 @@ ConstructorCall returns xbase::XExpression:
 
 AbstractFeatureCall returns xbase::XExpression:
 	FeatureCallWithClosure |
+	jFaceExpression|
 	XFeatureCall
 ;
 
@@ -216,7 +216,7 @@ FeatureCallWithClosure:
 /*Constructor call for jface types */
 jFaceConstructorCall:
 	{jFaceConstructorCall}
-	'new' (constructor=jFaceDeclarationType)
+	'new' (constructor=(jFaceDeclarationType|abstractTypeName))
 	(=>'<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?
 	((=>'(' 
 		(
@@ -293,9 +293,9 @@ UnaryOperand:
 ClassicForLoopExpression:
 	//{ClassicForLoopExpression}
 	'for' '(' 
-	declaredParam=JvmFormalParameter ('=' value=XAssignment)?';' 
-				condition=XExpression ';' 
-				(forExpression=XExpression)
+	(declaredParam=JvmFormalParameter ('=' value=XAssignment)?)?';' 
+				(condition=XExpression)? ';' 
+				(forExpression=XExpression)?
 		')'
 		eachExpression=XExpression
 ;
@@ -307,6 +307,32 @@ XForLoopExpression returns xbase::XExpression:
 	'for' '(' declaredParam=(FullJvmFormalParameter|JvmFormalParameter) ':' forExpression=XExpression ')'
 		eachExpression=XExpression
 ;
+
+XIfExpression returns xbase::XExpression:
+	{xbase::XIfExpression}
+	'if' '(' if=XExpression ')'
+	then=XExpression
+	(=>'else' else=XExpression)?
+	|{xbase::XIfExpression}
+	=>'else' else=XExpression;
+
+XTryCatchFinallyExpression returns xbase::XExpression:
+	{xbase::XTryCatchFinallyExpression}
+	'try' 
+		expression=XExpression
+	(
+		catchClauses+=XCatchClause+
+		(=>'finally' finallyExpression=XExpression)?
+	|	'finally' finallyExpression=XExpression
+	)
+	|{xbase::XTryCatchFinallyExpression}
+	(
+		catchClauses+=XCatchClause+
+		(=>'finally' finallyExpression=XExpression)?
+	|	'finally' finallyExpression=XExpression
+	)
+	;
+
 
 enum Visibility :
 	 protected | public | private
@@ -324,13 +350,13 @@ declarativeID:
 ;
 
 jFaceVarID:
-	'${'ValidID'}' 
+	'${'(ValidID|JFACEEXPRID)'}' 
 		|('${'=>ValidID ':' ('newName') '('(QualifiedName|JFACEEXPRID)')}')
  		//|('${'=>('freeName'|'newName') '('ValidID')}')
 ;
 operandID :
 	ValidID | 
-	('${' =>(ValidID | JFACEEXPRID)'}')
+	('${' =>(ValidID)'}')
 
 ;
 
@@ -349,11 +375,19 @@ jFaceSpecificLiteral returns xbase::XExpression:
 	|=>jFaceCastExpression
 ;
 
-jFaceDeclarationType:
-	'${'type=('array_type'|'iterable_type'|ValidID)'}'
-;
 
-abstractTypeName returns types::JvmTypeReference:
+ abstractTypeName:
+ 	type=referencedType | jFaceType=jFaceDeclarationType
+ ;
+ 
+ jFaceDeclarationType:
+	'${'type=('array_type'|'iterable_type'|ValidID )'}'
+	|('${'ValidID':'('elemType' | 'newType')'('type=( JFACEEXPRASTYPE | 'array_type'|'iterable_type' )')}')
+;
+ 
+
+
+referencedType returns types::JvmTypeReference:
 	(typeID)
 	|=>	JvmTypeReference
 ;
@@ -364,11 +398,12 @@ FeatureCallID:
 
 JvmFormalParameter returns types::JvmFormalParameter:
 {JvmFormalParameter}	
-(parameterType=abstractTypeName | jFaceType=jFaceDeclarationType)? simpleName=operandID;
+(parameterType=referencedType | jFaceType=jFaceDeclarationType)? 
+(simpleName=operandID | jFaceExpr=jFaceExpression);
 	
 FullJvmFormalParameter returns types::JvmFormalParameter:
 {JvmFormalParameter}	
-	(parameterType=abstractTypeName | jFaceType=jFaceDeclarationType) simpleName=(declarativeID|operandID) ;
+	(parameterType=referencedType | jFaceType=jFaceDeclarationType) simpleName=(declarativeID|operandID) ;
 
 
 helpperClassAnnotation :
@@ -384,7 +419,12 @@ XLiteral returns xbase::XExpression:
 ;
 
 JFACEEXPRID:
-	'array' | 'collection' | 'iterator' | 'iterable' | 'iterable_element' | 'array_element' | 'index' | 'exception_variable_name'
+	JFACEEXPRASTYPE | 'iterable_element' | 'array_element' | 'index' | 'exception_variable_name'
+;
+
+JFACEEXPRASTYPE:
+	
+	'array' | 'collection' | /*'iterator' |*/ 'iterable' 
 ;
 
 terminal ID:

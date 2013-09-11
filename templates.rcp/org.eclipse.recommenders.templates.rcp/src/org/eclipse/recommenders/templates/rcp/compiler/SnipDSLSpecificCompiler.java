@@ -6,6 +6,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.recommenders.templates.rcp.snipDSL.AssignmentWithClosure;
 import org.eclipse.recommenders.templates.rcp.snipDSL.ClassicForLoopExpression;
 import org.eclipse.recommenders.templates.rcp.snipDSL.FeatureCallWithClosure;
+import org.eclipse.recommenders.templates.rcp.snipDSL.JvmFormalParameter;
 import org.eclipse.recommenders.templates.rcp.snipDSL.UnaryOperation;
 import org.eclipse.recommenders.templates.rcp.snipDSL.blockAssignment;
 import org.eclipse.recommenders.templates.rcp.snipDSL.jFaceCastExpression;
@@ -15,7 +16,6 @@ import org.eclipse.recommenders.templates.rcp.snipDSL.jFaceVariableDeclaration;
 import org.eclipse.recommenders.templates.rcp.snipDSL.method;
 import org.eclipse.recommenders.templates.rcp.snipDSL.impl.jFaceSpecificLiteralImpl;
 import org.eclipse.xtext.common.types.JvmArrayType;
-import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -26,8 +26,10 @@ import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XForLoopExpression;
+import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XNumberLiteral;
 import org.eclipse.xtext.xbase.XStringLiteral;
+import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.compiler.Later;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
@@ -91,6 +93,8 @@ public class SnipDSLSpecificCompiler extends XbaseCompiler {
         } else if (obj instanceof FeatureCallWithClosure) {
             this._toJavaStatement((FeatureCallWithClosure) obj, appendable,
                     isReferenced);
+        } else if (obj instanceof XIfExpression) {
+            this._toJavaStatement((XIfExpression) obj, appendable, isReferenced);
         } else if (obj instanceof AssignmentWithClosure) {
             this._toJavaStatement((AssignmentWithClosure) obj, appendable);
         } else if (obj instanceof XVariableDeclaration) {
@@ -159,8 +163,8 @@ public class SnipDSLSpecificCompiler extends XbaseCompiler {
 
     protected void _toJavaStatement(jFaceSpecificLiteralImpl obj,
             ITreeAppendable appendable, boolean isReferenced) {
-        appendable.append(obj.getType().equalsIgnoreCase("dolar") ? "dollar"
-                : "");
+        // appendable.append(obj.getType().equalsIgnoreCase("dolar") ? "dollar"
+        // : "");
     }
 
     protected void _toJavaStatement(jFaceExpression obj,
@@ -199,6 +203,28 @@ public class SnipDSLSpecificCompiler extends XbaseCompiler {
         String featureName = ((XAbstractFeatureCall) obj.getFeature())
                 .getConcreteSyntaxFeatureName();
         appendable.append(featureName + "[]");
+    }
+
+    protected void _toJavaStatement(XIfExpression obj,
+            ITreeAppendable appendable, boolean isReferenced) {
+        // appendable.append();
+        if (obj.getIf() != null) {
+            super._toJavaStatement(obj, appendable, isReferenced);
+
+        } else {// TODO: complete the statement
+            appendable.newLine().append("else {}");
+        }
+    }
+
+    protected void _toJavaStatement(XTryCatchFinallyExpression obj,
+            ITreeAppendable appendable, boolean isReferenced) {
+        // appendable.append();
+        if (obj.getExpression() != null) {
+            super._toJavaStatement(obj, appendable, isReferenced);
+
+        } else {// TODO: complete the statement
+            appendable.newLine().append("catch {}");
+        }
     }
 
     protected void _toJavaStatement(XConstructorCall obj,
@@ -272,8 +298,8 @@ public class SnipDSLSpecificCompiler extends XbaseCompiler {
 
     protected void _toJavaExpression(jFaceSpecificLiteralImpl obj,
             ITreeAppendable appendable) {
-        appendable.append(obj.getType().equalsIgnoreCase("dolar") ? "dollar"
-                : "");
+        // appendable.append(obj.getType().equalsIgnoreCase("dolar") ? "dollar"
+        // : "");
     }
 
     protected void _toJavaExpression(jFaceExpression obj,
@@ -338,7 +364,7 @@ public class SnipDSLSpecificCompiler extends XbaseCompiler {
             ITreeAppendable appendable) {
 
         // TODO: create java code for constructor
-        appendable.append("new " + obj.getConstructor().getType() + "()");
+        appendable.append("new " + obj.getConstructor() + "()");
 
     }
 
@@ -348,12 +374,11 @@ public class SnipDSLSpecificCompiler extends XbaseCompiler {
      */
     protected void _toJavaExpression(XClosure obj, ITreeAppendable appendable) {
         appendable.append("[");
-        if (!obj.getDeclaredFormalParameters().isEmpty()) {
-            for (JvmFormalParameter parameter : obj
-                    .getDeclaredFormalParameters()) {
-                appendable.append(parameter.getSimpleName() + ", ");
-            }
-        }
+        /*
+         * if (!obj.getDeclaredFormalParameters().isEmpty()) { for
+         * (JvmFormalParameter parameter : obj .getDeclaredFormalParameters()) {
+         * appendable.append(parameter.getSimpleName() + ", "); } }
+         */
         if (obj.getExpression() != null) {
             internalToConvertedExpression(obj.getExpression(), appendable);
         }
@@ -374,17 +399,29 @@ public class SnipDSLSpecificCompiler extends XbaseCompiler {
      */
     protected void appendForLoopParameter(XForLoopExpression expr,
             ITreeAppendable appendable) {
-        appendable.append("final ");
         JvmTypeReference paramType = getForLoopParameterType(expr);
         serialize(paramType, expr, appendable);
         appendable.append(" ");
-        final String name = makeJavaIdentifier(expr.getDeclaredParam()
-                .getSimpleName());
-        String varName = appendable.declareVariable(expr.getDeclaredParam(),
-                name);
-        appendable.trace(expr.getDeclaredParam(),
-                TypesPackage.Literals.JVM_FORMAL_PARAMETER__NAME, 0).append(
-                varName);
+        if (expr.getDeclaredParam().getSimpleName() != null) {
+            final String name = makeJavaIdentifier(expr.getDeclaredParam()
+                    .getSimpleName());
+            String varName = appendable.declareVariable(
+                    expr.getDeclaredParam(), name);
+            appendable.trace(expr.getDeclaredParam(),
+                    TypesPackage.Literals.JVM_FORMAL_PARAMETER__NAME, 0)
+                    .append(varName);
+        } else if (((JvmFormalParameter) expr.getDeclaredParam())
+                .getJFaceExpr() != null) {
+            final String name = makeJavaIdentifier("${"
+                    + ((jFaceExpression) ((JvmFormalParameter) expr
+                            .getDeclaredParam()).getJFaceExpr()).getValue()
+                    + "}");
+            String varName = appendable.declareVariable(
+                    expr.getDeclaredParam(), name);
+            appendable.trace(expr.getDeclaredParam(),
+                    TypesPackage.Literals.JVM_FORMAL_PARAMETER__NAME, 0)
+                    .append(varName);
+        }
     }
 
 }
