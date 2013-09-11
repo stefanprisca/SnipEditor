@@ -8,9 +8,11 @@
 	<packaging>pom</packaging>
 	<modules>
 		<module>snipeditor-targets</module>
-		<module>templates.rcp</module>
+		<module>org.eclipse.recommenders.templates</module>
+		<module>org.eclipse.recommenders.templates.rcp</module>
+		<module>org.eclipse.recommenders.templates.tests</module>
 		<module>org.eclipse.recommenders.snipmatch.rcp</module>
-		<module>org.eclipse.recommenders.feature.snipmatch</module>
-		<module>org.eclipse.recommenders.repository.rcp.snipmatch</module>
+		<module>org.eclipse.recommenders.snipmatch.feature</module>
+		<module>org.eclipse.recommenders.snipmatch.rcp.repository</module>
 	</modules>
 </project>

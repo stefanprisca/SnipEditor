@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.jface.viewers.ListViewer;
-import org.eclipse.recommenders.templates.rcp.typing.SnipDSLTypeComputer;
+import org.eclipse.recommenders.templates.typing.SnipDSLTypeComputer;
 import org.eclipse.recommenders.snipmatch.rcp.internal.SnipDSLActivator;
 import org.eclipse.recommenders.snipmatch.rcp.core.Snippet;
 import org.eclipse.recommenders.snipmatch.rcp.preferences.PreferenceConstants;
@@ -40,6 +40,7 @@ import org.eclipse.ui.part.MultiPageEditorPart;
 import org.eclipse.ui.ide.IDE;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.ui.editor.XtextEditor;
+
 import com.google.inject.Inject;
 
 /**
