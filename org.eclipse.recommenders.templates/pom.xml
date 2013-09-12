@@ -11,7 +11,7 @@
 	<packaging>eclipse-plugin</packaging>
 	<build>
 		<plugins>
-			<!-- Generate the Xtext language infrastructure -->
+			<!-- Generate the Xtext language infrastructure for the o.e.r.snipmatch.rcp-->
 			<plugin>
 				<groupId>org.fornax.toolsupport</groupId>
 				<artifactId>fornax-oaw-m2-plugin</artifactId>
@@ -29,6 +29,25 @@
 					</execution>
 				</executions>
 			</plugin>
+			<!-- Generate language artefacts for the o.e.r.templates.rcp project -->
+			<plugin>
+				<groupId>org.fornax.toolsupport</groupId>
+				<artifactId>fornax-oaw-m2-plugin</artifactId>
+				<version>3.3.1</version>
+				<configuration>
+					<workflowEngine>mwe2</workflowEngine>
+					<workflowDescriptor>src/org/eclipse/recommenders/templates/GenerateSnipDSL.mwe2</workflowDescriptor>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>run-workflow</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			
 			<!-- Execute xtend-maven-plugin after the fornax-oaw-m2-plugin:run-workflow -->
 			<plugin>
 				<groupId>org.eclipse.xtend</groupId>
