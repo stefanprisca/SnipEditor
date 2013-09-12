@@ -29,7 +29,7 @@
 					</execution>
 				</executions>
 			</plugin>
-			<!-- Generate language artefacts for the o.e.r.templates.rcp project -->
+			<!-- Generate language artefacts for the o.e.r.templates.rcp project 
 			<plugin>
 				<groupId>org.fornax.toolsupport</groupId>
 				<artifactId>fornax-oaw-m2-plugin</artifactId>
@@ -46,7 +46,7 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin>-->
 			
 			<!-- Execute xtend-maven-plugin after the fornax-oaw-m2-plugin:run-workflow -->
 			<plugin>
