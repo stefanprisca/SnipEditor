@@ -3,6 +3,7 @@
  */
 package org.eclipse.recommenders.snipmatch.rcp;
 
+import org.eclipse.recommenders.snipmatch.rcp.contentassist.SnipDSLProposalProvider;
 import org.eclipse.recommenders.snipmatch.rcp.contentassist.SnipDSLReferenceProposalCreator;
 import org.eclipse.recommenders.snipmatch.rcp.editors.MultiPageSnipEditor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
@@ -17,13 +18,7 @@ public class SnipDSLUiModule extends
         super(plugin);
     }
 
-    /*
-     * @Override public Class<? extends
-     * org.eclipse.xtext.ui.editor.contentassist
-     * .AbstractJavaBasedContentProposalProvider.ReferenceProposalCreator>
-     * bindAbstractJavaBasedContentProposalProvider$ReferenceProposalCreator() {
-     * return SnipDSLReferenceProposalCreator.class; }
-     */
+   
 
     // contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
     public Class<MultiPageSnipEditor> bindMultiPageEditor() {

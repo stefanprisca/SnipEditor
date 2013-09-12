@@ -3,10 +3,14 @@
  */
 package org.eclipse.recommenders.templates.rcp.contentassist
 
-import org.eclipse.recommenders.templates.rcp.contentassist.AbstractSnipDSLProposalProvider
+import org.eclipse.recommenders.templates.rcp.contentassist.AbstractSnipDSLProposalProviderimport org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.RuleCall
+import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext
+import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor
 
 /**
  * see http://www.eclipse.org/Xtext/documentation.html#contentAssist on how to customize content assistant
  */
 class SnipDSLProposalProvider extends AbstractSnipDSLProposalProvider {
+	
 }

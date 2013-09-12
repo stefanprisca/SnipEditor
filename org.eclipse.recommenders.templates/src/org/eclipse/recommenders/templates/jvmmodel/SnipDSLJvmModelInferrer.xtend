@@ -23,7 +23,12 @@ class SnipDSLJvmModelInferrer extends AbstractModelInferrer {
      */
 	@Inject extension JvmTypesBuilder
 	@Inject extension IQualifiedNameProvider
-		
+		/**
+		 * The whole domain model is treated as a class in order to allow any elements inside it's body
+		 * to be treated as members.
+		 * This might not be the best approach, but it does the job.
+		 * Maybe change it in the future.
+		 */
 	def dispatch void infer(domainmodel element, IJvmDeclaredTypeAcceptor acceptor, boolean isPreIndexingPhase){
 	//	scopeProvider.getScope(element, null);
 		//println(this)
@@ -39,25 +44,6 @@ class SnipDSLJvmModelInferrer extends AbstractModelInferrer {
 				for(feature : dbody.expressions){
 			switch feature
 			{
-				/*attributeDeclaration: {
-					if(feature.name.contains("newName")){
-   										feature.setName(
-   											'${'+feature.name.substring(feature.name.indexOf('{')+1,
-   												feature.name.indexOf(':')) +'}'
-   										)
-   									}
-   									println("Attribute type: "+feature.jfaceType)
-   									if(feature.JType==null)
-   									{
-   										if(feature.jfaceType.type.contains("_type"))
-   										{
-   											feature.setJType(newTypeRef(feature, typeof(Object) , null).addArrayTypeDimension);
-   											
-   										}
-   									}
-   								members+=feature.toField(feature.name, feature.JType)
-   							//	scope.getScope(element, feature.eContainmentFeature );
-				}*/
 				method :{
    								//if(feature.JType!=null){
           						  	members+=feature.toMethod(feature.name, 
@@ -86,7 +72,9 @@ class SnipDSLJvmModelInferrer extends AbstractModelInferrer {
 		
 	}
 	
-	
+	/**
+	 * same as the domainmodel method, but for a class
+	 */
    	def dispatch void infer(entity element, IJvmDeclaredTypeAcceptor acceptor, boolean isPreIndexingPhase) {
    		// Here you explain how your model is mapped to Java elements, by writing the actual translation code.
    		

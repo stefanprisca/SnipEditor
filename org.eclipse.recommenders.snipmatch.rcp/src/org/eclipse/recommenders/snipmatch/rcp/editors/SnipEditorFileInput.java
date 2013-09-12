@@ -39,8 +39,7 @@ public class SnipEditorFileInput implements IFileEditorInput {
     public static final int VAR_CODE = 0;
     public static final int VAR_NAME = 1;
     public static final int VAR_PATTERNS = 2;
-    public static final int VAR_MAJOR_TYPE = 3;
-    public static final int VAR_MINORTYPE = 4;
+    public static final int VAR_AUTHOR=3;
     public static final int VAR_DESCRIPTION = 5;
     // public static final int FULL_SNIPPET = 2;
 
@@ -135,7 +134,7 @@ public class SnipEditorFileInput implements IFileEditorInput {
             return snippet.getAliases();
         case VAR_DESCRIPTION:
             return snippet.getDescription();
-
+        
             // case FULL_SNIPPET:
             // return snippet;
         }
