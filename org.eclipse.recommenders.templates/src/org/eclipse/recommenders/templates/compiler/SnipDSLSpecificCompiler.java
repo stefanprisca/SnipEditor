@@ -39,6 +39,14 @@ import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 
 import com.google.inject.Inject;
 
+
+/**
+ * Class used to compile the template syntax into java code.
+ * Does not work properly yet. -> This is a big TODO
+ * @author Stefan
+ *
+ */
+
 @SuppressWarnings("restriction")
 public class SnipDSLSpecificCompiler extends XbaseCompiler {
     @Inject
@@ -102,6 +110,9 @@ public class SnipDSLSpecificCompiler extends XbaseCompiler {
                     isReferenced);
         } else if (obj instanceof XConstructorCall) {
             this._toJavaStatement((XConstructorCall) obj, appendable,
+                    isReferenced);
+        } else if (obj instanceof jFaceConstructorCall) {
+            this._toJavaStatement((jFaceConstructorCall) obj, appendable,
                     isReferenced);
         } else if (obj instanceof method) {
             this._toJavaStatement((method) obj, appendable, isReferenced);
@@ -231,6 +242,18 @@ public class SnipDSLSpecificCompiler extends XbaseCompiler {
             ITreeAppendable appendable, boolean isReferenced) {
         // appendable.append();
         appendable.append("new " + obj.getConstructor().getIdentifier());
+        for (XExpression x : obj.getArguments()) {
+            // System.out.println(x);
+            if (!(x instanceof method || x instanceof jFaceVariableDeclaration))
+                internalToConvertedExpression(x, appendable);
+        }
+        // super._toJavaStatement(obj, appendable, isReferenced);
+
+    }
+    protected void _toJavaStatement(jFaceConstructorCall obj,
+            ITreeAppendable appendable, boolean isReferenced) {
+        // appendable.append();
+        appendable.append("new " + obj.getConstructor());
         for (XExpression x : obj.getArguments()) {
             // System.out.println(x);
             if (!(x instanceof method || x instanceof jFaceVariableDeclaration))

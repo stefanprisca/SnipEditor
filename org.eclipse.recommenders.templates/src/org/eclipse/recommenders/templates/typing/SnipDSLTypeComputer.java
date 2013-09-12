@@ -36,6 +36,12 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 import com.google.inject.Inject;
 
+
+/**
+ * Class used to compute the types for each of the expressions inside the domainmodel
+ * @author Stefan
+ *
+ */
 @SuppressWarnings("restriction")
 public class SnipDSLTypeComputer extends XbaseWithAnnotationsTypeComputer {
     @Inject
@@ -86,15 +92,6 @@ public class SnipDSLTypeComputer extends XbaseWithAnnotationsTypeComputer {
         }
     }
 
-    /*
-     * private void _computeTypes(jFaceFullDeclarationType expression,
-     * ITypeComputationState state) { // TODO Auto-generated method stub
-     * System.out.println("got a type expression!");
-     * if(expression.getType().getSimpleName().contains("array")){
-     * System.out.println("got an array type expression!"); }
-     * expression.setType(typeBuilder.newTypeRef(expression, Iterable.class,
-     * null).getType()); }
-     */
     private void _computeTypes(final method expression,
             ITypeComputationState state) {
         // TODO Auto-generated method stub
@@ -108,7 +105,7 @@ public class SnipDSLTypeComputer extends XbaseWithAnnotationsTypeComputer {
             jFaceDeclarationType jfaceType = expression.getJType()
                     .getJFaceType();
             if (jfaceType.getType().contains("array")) {
-                type = typeBuilder.newTypeRef(expression, Object.class, null);
+                type = typeBuilder.addArrayTypeDimension(typeBuilder.newTypeRef(expression, Object.class, null));
 
             } else if (jfaceType.getType().contains("interable")) {
                 type = typeBuilder.newTypeRef(expression, Iterable.class, null);
@@ -140,6 +137,14 @@ public class SnipDSLTypeComputer extends XbaseWithAnnotationsTypeComputer {
 
     }
 
+    /**
+     * Computes the type for a template variable
+     * The type is computed based on the variable "name".
+     * The method checks what kind of variable it is, and creates a JvmField with the corresponding 
+     * type and name that will be registered in the type computation state.
+     * @param expression The template variable
+     * @param state The type computation state
+     */
     private void _computeTypes(jFaceExpression expression,
             ITypeComputationState state) {
         // TODO Auto-generated method stub
@@ -193,6 +198,12 @@ public class SnipDSLTypeComputer extends XbaseWithAnnotationsTypeComputer {
         }
     }
 
+    /**
+     * Type computation for jFaceConstructorCall.
+     * Computes types based on the type of the template specific type variable
+     * @param expression
+     * @param state
+     */
     private void _computeTypes(jFaceConstructorCall expression,
             ITypeComputationState state) {
         // TODO Auto-generated method stub
@@ -221,6 +232,12 @@ public class SnipDSLTypeComputer extends XbaseWithAnnotationsTypeComputer {
         }
     }
 
+    /**
+     * Type computation for template specific type variables
+     * Registers the type based on the type of the template type variables
+     * @param expression
+     * @param state
+     */
     private void _computeTypes(jFaceDeclarationType expression,
             ITypeComputationState state) {
         // TODO Auto-generated method stub
@@ -230,10 +247,13 @@ public class SnipDSLTypeComputer extends XbaseWithAnnotationsTypeComputer {
             LightweightTypeReference type = getTypeForName(Object[].class,
                     state);
             state.acceptActualType(type);
-        }
-        if (expression.getType() == "interable_type") {
+        }else if (expression.getType() == "interable_type") {
             // System.out.println(expression.getType());
             LightweightTypeReference type = getTypeForName(Iterable.class,
+                    state);
+            state.acceptActualType(type);
+        }else{
+            LightweightTypeReference type = getTypeForName(Object.class,
                     state);
             state.acceptActualType(type);
         }
@@ -303,6 +323,7 @@ public class SnipDSLTypeComputer extends XbaseWithAnnotationsTypeComputer {
     /**
      * Compute type for var declaration Sets the name accordingly if it has
      * jface specific structure e.g.: ${freeName(SomeName)} => ${SomeName}
+     * Also registers the variable in the current scope with the specific type
      */
     protected void _computeTypes(jFaceVariableDeclaration var,
             ITypeComputationState state) {
@@ -426,7 +447,13 @@ public class SnipDSLTypeComputer extends XbaseWithAnnotationsTypeComputer {
     protected void _computeTypes(XClosure object, ITypeComputationState state) {
         // do nothing
     }
-
+/**
+ * Type computation for template literals
+ * Most of them should not be cast to any type, but I did not find a way to do that
+ * TODO: find a way to simply ignore some variables
+ * @param expression
+ * @param state
+ */
     protected void _computeTypes(jFaceSpecificLiteral expression,
             ITypeComputationState state) {
         // TODO Auto-generated method stub
@@ -447,6 +474,12 @@ public class SnipDSLTypeComputer extends XbaseWithAnnotationsTypeComputer {
         // state.acceptActualType(JvmAnyTypeReference);
     }
 
+    /**
+     * Returns the computation state reference owner.
+     * This is used in the snipmatch multi page editor metadata page for 
+     * obtaining the types used in the code snippet.
+     * @return The reference owner of the type computation state.
+     */
     public ITypeReferenceOwner getReferenceOwner() {
         if (compState != null)
             return compState.getReferenceOwner();

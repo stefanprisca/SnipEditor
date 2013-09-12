@@ -6,6 +6,8 @@ import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 generate snipDSL "http://www.eclipse.org/recommenders/templates/SnipDSL"
 
+//the top-most element of the grammar. It does not have the best name
+//TODO:rename it.
 domainmodel:
 	importSection=jFaceImportSection?
 	entity=entity? 
@@ -23,7 +25,7 @@ jFaceImportSection returns xtypes::XImportSection:
 	'import'
 	'(' XImportSection')}'
 ;
-
+//overridden to support the required syntax
 XImportDeclaration returns xtypes::XImportDeclaration:
 	','?
 	(importedType=[types::JvmDeclaredType|QualifiedName] 
@@ -40,7 +42,8 @@ dModelBody returns xbase::XBlockExpression:
 	(expressions += abstractElement) *
 ;
 
-
+//Any element that can be found in the body of the snippet
+//Question: Should the helpperClassAnnotation still exist?
 abstractElement returns xbase::XExpression:
 	packageDeclare | 
 	entity|
@@ -48,14 +51,14 @@ abstractElement returns xbase::XExpression:
 	method |
 	XExpressionInsideBlock 
 ;
-
+//simple package declaration. does not support much template syntax
 packageDeclare:
 	'package' name = QualifiedName '{'
 	(elements += abstractElement)*
 	'}'
 ;
 
-
+//a class representation. snippets might contain classes as well
 entity:
 	(visibility=Visibility)? 'class' name = ValidID 
 		('extends' jType=abstractTypeName  )?
@@ -65,12 +68,14 @@ entity:
 	'}'
 ;
 
-
+//features available in an entity
 EntityFeature returns xbase::XExpression:
 	jFaceVariableDeclaration ";" | method 
 
 ;
 
+//the declaration for a method
+//TODO: set the visibility to allow template expression like link
 method:
 	(visibility=Visibility)? 'static'?  (jType=abstractTypeName | "void")
 	name=ValidID'('(params+=FullJvmFormalParameter
@@ -78,7 +83,7 @@ method:
 		('throws' throwExceptions+=operandID(',' throwExceptions+=operandID)*)?
 	body=XBlockExpression
 ;
-//attribute assignments
+//attribute assignments-> ways in which a variable can be declared
 attributeAssignment returns xbase::XExpression:
 	 blockAssignment | XLiteral |=>XExpression
 ;
@@ -101,7 +106,8 @@ XExpressionInsideBlock  returns xbase::XExpression :
  			 XExpression
  			) ';'?
 ;
-/*Changed the name to simpleName as the type computation asked for a simple name
+/* A specific variable declaration
+ * Changed the name to simpleName as the type computation asked for a simple name
  * Check XVariableDeclaration.getSimpleName();
  */
 jFaceVariableDeclaration returns xbase::XVariableDeclaration:
@@ -112,7 +118,7 @@ jFaceVariableDeclaration returns xbase::XVariableDeclaration:
 ;
 
 
-
+//overridden to add template specific extensions to the xbase chain of expressions
 XExpression returns xbase::XExpression :
 	UnaryOperation
 ;
@@ -124,7 +130,6 @@ XExpression returns xbase::XExpression :
 
 /*Append special jFace expression to the grammar
  * this expression will be resolved in the typecomputer to their specific type
- * TODO: eval the rest of expressions to their proper type
  */
   
 jFaceExpression returns xbase::XExpression:
@@ -139,25 +144,24 @@ jFaceExpression returns xbase::XExpression:
 		)) //=>('.' feature=XExpression)?
 	//|=>jFaceSpecificLiteral
 	;
-/*JFace cast expression : supports casts to jface types
- * e.g: ${array}
+/*JFace cast expression : supports casts to jface types + normal java casting
+ * (xbase offers only Xtend cast structure : elem as type
+ * e.g: (${array_type})elem
  */
 jFaceCastExpression returns xbase::XExpression:
 	{jFaceCastExpression}
  '('(type=jFaceDeclarationType | javaType=abstractTypeName)')' target=XExpression
  |=> AssignmentWithClosure
 ;
-/**
- * unary operation
- */
 
 
 
 /*
  *Assignment that changes the XAssignment to support [] closure 
- * for operands.
+ * for operands. -> Xbase offers lambda expressions instead of closure, so there are some problems regarding this
  * Does not offer scoping for local scope variables (variables inside a method body)
  * TODO: Implement JvmIdentifiableElement as feature!
+ * TODO: find a better way to deal with the [] closure
  */
 AssignmentWithClosure returns xbase::XExpression:
 	{AssignmentWithClosure}
@@ -180,7 +184,7 @@ XVariableDeclaration returns xbase::XExpression:
 
 */
 
-
+//overridden to include and modify expression as necessary
 
 XPrimaryExpression returns xbase::XExpression:
 	ConstructorCall |
@@ -197,11 +201,13 @@ XPrimaryExpression returns xbase::XExpression:
 	XTryCatchFinallyExpression |
 	XParenthesizedExpression;
 
+
+//Constructor calls for jface types and normal constructor call
 ConstructorCall returns xbase::XExpression:
 	jFaceConstructorCall | XConstructorCall
 ;
 
-
+//possible feature calls
 AbstractFeatureCall returns xbase::XExpression:
 	FeatureCallWithClosure |
 	jFaceExpression|
@@ -210,6 +216,7 @@ AbstractFeatureCall returns xbase::XExpression:
 
 /*
  * Feature call that supports [] closure
+ * same problem as the assignment
  */
 FeatureCallWithClosure:
 	feature=XFeatureCall closure=XClosure
@@ -230,7 +237,9 @@ jFaceConstructorCall:
 	)?
 	;
 
-
+/*
+ * overridden to support [] closure. this is required for the same reason as the assignments
+ */
 
 XConstructorCall returns xbase::XExpression:
 	
@@ -264,7 +273,9 @@ XFeatureCall returns xbase::XExpression:
 	;
 
 
-
+/**
+ * same reason to override as above
+ */
 XMemberFeatureCall returns xbase::XExpression:
 	XPrimaryExpression
 	(=>({xbase::XAssignment.assignable=current} ('.'|explicitStatic?="::") (feature=[types::JvmIdentifiableElement|FeatureCallID] )OpSingleAssign) value=XAssignment
@@ -280,17 +291,20 @@ XMemberFeatureCall returns xbase::XExpression:
 
 
 
-
+//include the classic for loop expression
 
 ForLoopExpression returns xbase::XExpression:
 	ClassicForLoopExpression | XForLoopExpression
 ;
 
+//used for unary operations
 
 UnaryOperand:
 	"!" | "--" | "++";
 
-
+/*
+ * The classic for loop expression
+ */
 ClassicForLoopExpression:
 	//{ClassicForLoopExpression}
 	'for' '(' 
@@ -308,7 +322,8 @@ XForLoopExpression returns xbase::XExpression:
 	'for' '(' declaredParam=(FullJvmFormalParameter|JvmFormalParameter) ':' forExpression=XExpression ')'
 		eachExpression=XExpression
 ;
-
+//overridden to support separation of expressions; 
+//e.g: the else expression can appear without the if expression
 XIfExpression returns xbase::XExpression:
 	{xbase::XIfExpression}
 	'if' '(' if=XExpression ')'
@@ -317,6 +332,9 @@ XIfExpression returns xbase::XExpression:
 	|{xbase::XIfExpression}
 	=>'else' else=XExpression;
 
+/*
+ * same as for the if expression
+ */
 XTryCatchFinallyExpression returns xbase::XExpression:
 	{xbase::XTryCatchFinallyExpression}
 	'try' 
@@ -334,27 +352,30 @@ XTryCatchFinallyExpression returns xbase::XExpression:
 	)
 	;
 
-
+//visibility for methods, attributes, classes
 enum Visibility :
 	 protected | public | private
 ;
 
+//template type syntax
  typeID returns types::JvmTypeReference:
  		
  		('${'ValidID':'('elemType' | 'newType')'('=>(JvmTypeReference)')}')
  		//|(=>'${''elemType' '('=>JvmTypeReference')}')
  ;
 
+//id used to declare variables
 declarativeID:
 	  jFaceVarID |
 	  =>ValidID 
 ;
-
+//template variable declaration syntax 
 jFaceVarID:
 	'${'(ValidID|JFACEEXPRID)'}' 
 		|('${'=>ValidID ':' ('newName') '('(QualifiedName|JFACEEXPRID)')}')
  		//|('${'=>('freeName'|'newName') '('ValidID')}')
 ;
+//ID's that can be used in operations (e.g. for feature calls through identifiable elements)
 operandID :
 	ValidID | 
 	('${' =>(ValidID)'}')
@@ -365,29 +386,37 @@ operandID :
 
 
 
-
+//jFace specific elements -> this are reserved words!
 jFaceSpecificLiteral returns xbase::XExpression:
 	{jFaceSpecificLiteral}
 	'${'type=('cursor'|'dollar'|'line_selection'|'date'
 		|'time'|'enclosing_method'|'enclosing_method_arguments'|
-		'enclosing_package'|'enclosing_project'|'enclosing_type'|
-		'file'|'primary_type_name'|'return_type'|'user'|'word_selection${}' |'year'
-	)'}'
+		'enclosing_package'|'enclosing_project'|
+		'file'|'user' |'year'|'primary_type_name'|'return_type'|'enclosing_type'
+	)'}' |{jFaceSpecificLiteral} '${' type='word_selection' '}${}'
 	|=>jFaceCastExpression
 ;
 
-
+//abstract type syntaxes. used to include the ${array_type} syntax as a possible declaration type
+//without using a JvmTypeReference
  abstractTypeName:
  	type=referencedType | jFaceType=jFaceDeclarationType
  ;
  
+ /*
+  * JFace specific type declarations
+  * This types are hard to be referenced by a JvmTypeReference, so their types are computed
+  * separately in the type computer.
+  */
  jFaceDeclarationType:
 	'${'type=('array_type'|'iterable_type'|ValidID )'}'
 	|('${'ValidID':'('elemType' | 'newType')'('type=( JFACEEXPRASTYPE | 'array_type'|'iterable_type' )')}')
 ;
  
 
-
+/* 
+ *Type declarations that support a JvmTypeReference 
+ */
 referencedType returns types::JvmTypeReference:
 	(typeID)
 	|=>	JvmTypeReference
@@ -419,10 +448,12 @@ XLiteral returns xbase::XExpression:
 	XStringLiteral
 ;
 
+//template expressions
 JFACEEXPRID:
 	JFACEEXPRASTYPE | 'iterable_element' | 'array_element' | 'index' | 'exception_variable_name'
 ;
 
+//template expressions that can be used to refer a type
 JFACEEXPRASTYPE:
 	
 	'array' | 'collection' | /*'iterator' |*/ 'iterable' 

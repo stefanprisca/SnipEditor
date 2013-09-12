@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.IPartListener;
 import org.eclipse.ui.IWorkbenchPart;
@@ -183,6 +184,7 @@ public class SnippetsView extends ViewPart {
                                 new SnipEditorFileInput(jsonFile).getFile());
                         page.openEditor(new SnipEditorFileInput(jsonFile),
                                 "org.eclipse.recommenders.snipmatch.MultiPage");
+                       
 
                     } catch (PartInitException pie) {
                         throw new RuntimeException(pie);
