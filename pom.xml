@@ -9,8 +9,8 @@
 	<modules>
 		<module>snipeditor-targets</module>
 		<module>org.eclipse.recommenders.templates</module>
-		<!--<module>org.eclipse.recommenders.templates.rcp</module>
-		<module>org.eclipse.recommenders.templates.tests</module>-->
+		<module>org.eclipse.recommenders.templates.rcp</module>
+		<module>org.eclipse.recommenders.templates.tests</module>
 		<module>org.eclipse.recommenders.snipmatch.rcp</module>
 		<module>org.eclipse.recommenders.snipmatch.feature</module>
 		<module>org.eclipse.recommenders.snipmatch.rcp.repository</module>

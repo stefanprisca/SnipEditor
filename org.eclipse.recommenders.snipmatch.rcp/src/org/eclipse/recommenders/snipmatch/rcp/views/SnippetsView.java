@@ -29,7 +29,7 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ListViewer;
-import org.eclipse.recommenders.snipmatch.rcp.internal.SnipDSLActivator;
+import org.eclipse.recommenders.templates.rcp.internal.SnipDSLActivator;
 import org.eclipse.recommenders.snipmatch.rcp.core.LightweightSnippet;
 import org.eclipse.recommenders.snipmatch.rcp.editors.SnipEditorFileInput;
 import org.eclipse.recommenders.snipmatch.rcp.preferences.PreferenceConstants;

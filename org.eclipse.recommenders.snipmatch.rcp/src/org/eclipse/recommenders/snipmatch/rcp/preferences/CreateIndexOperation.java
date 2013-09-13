@@ -19,7 +19,7 @@ import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.operation.IRunnableWithProgress;
-import org.eclipse.recommenders.snipmatch.rcp.internal.SnipDSLActivator;
+import org.eclipse.recommenders.templates.rcp.internal.SnipDSLActivator;
 import org.eclipse.recommenders.snipmatch.rcp.core.LightweightSnippet;
 import org.eclipse.recommenders.snipmatch.rcp.core.Snippet;
 import org.eclipse.recommenders.snipmatch.rcp.preferences.PreferenceConstants;

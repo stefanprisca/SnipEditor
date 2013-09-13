@@ -7,7 +7,7 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.jface.preference.IPreferenceStore;
-import org.eclipse.recommenders.snipmatch.rcp.internal.SnipDSLActivator;
+import org.eclipse.recommenders.templates.rcp.internal.SnipDSLActivator;
 
 /**
  * Class used to initialize default preference values.

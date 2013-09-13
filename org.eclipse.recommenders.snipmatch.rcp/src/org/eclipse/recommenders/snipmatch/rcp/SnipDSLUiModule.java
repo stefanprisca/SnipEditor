@@ -3,9 +3,8 @@
  */
 package org.eclipse.recommenders.snipmatch.rcp;
 
-import org.eclipse.recommenders.snipmatch.rcp.contentassist.SnipDSLProposalProvider;
-import org.eclipse.recommenders.snipmatch.rcp.contentassist.SnipDSLReferenceProposalCreator;
 import org.eclipse.recommenders.snipmatch.rcp.editors.MultiPageSnipEditor;
+import org.eclipse.recommenders.templates.rcp.contentassist.SnipDSLProposalProvider;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 
@@ -13,7 +12,7 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
  * Use this class to register components to be used within the IDE.
  */
 public class SnipDSLUiModule extends
-        org.eclipse.recommenders.snipmatch.rcp.AbstractSnipDSLUiModule {
+        org.eclipse.recommenders.templates.rcp.AbstractSnipDSLUiModule {
     public SnipDSLUiModule(AbstractUIPlugin plugin) {
         super(plugin);
     }
