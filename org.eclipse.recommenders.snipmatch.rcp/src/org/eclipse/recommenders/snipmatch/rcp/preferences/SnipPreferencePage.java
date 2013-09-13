@@ -8,7 +8,7 @@ import org.eclipse.jface.preference.*;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.recommenders.snipmatch.rcp.internal.SnipDSLActivator;
+import org.eclipse.recommenders.templates.rcp.internal.SnipDSLActivator;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
