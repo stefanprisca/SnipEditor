@@ -6,7 +6,7 @@
     <extension
             point="org.eclipse.ui.editors">
         <editor
-              class="org.eclipse.recommenders.snipmatch.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.recommenders.snipmatch.rcp.editors.MultiPageSnipEditor"
+              class="org.eclipse.recommenders.templates.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.recommenders.snipmatch.rcp.editors.MultiPageSnipEditor"
               contributorClass="org.eclipse.recommenders.snipmatch.rcp.editors.MultiPageSnipEditorContributor"
               default="true"
               extensions="cSnip"
@@ -17,7 +17,7 @@
     <extension
         point="org.eclipse.ui.handlers">
         <handler
-            class="org.eclipse.recommenders.snipmatch.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
+            class="org.eclipse.recommenders.templates.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
             commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
             <activeWhen>
                 <reference
@@ -26,7 +26,7 @@
             </activeWhen>
         </handler>
         <handler
-            class="org.eclipse.recommenders.snipmatch.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
+            class="org.eclipse.recommenders.templates.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
             commandId="org.eclipse.recommenders.snipeditor.SnipDSL.validate">
          <activeWhen>
             <reference
@@ -36,14 +36,14 @@
       	</handler>
       	<!-- copy qualified name -->
         <handler
-            class="org.eclipse.recommenders.snipmatch.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedNameHandler"
+            class="org.eclipse.recommenders.templates.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedNameHandler"
             commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName">
             <activeWhen>
 				<reference definitionId="org.eclipse.recommenders.snipeditor.SnipDSL.Editor.opened" />
             </activeWhen>
         </handler>
         <handler
-            class="org.eclipse.recommenders.snipmatch.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedNameHandler"
+            class="org.eclipse.recommenders.templates.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedNameHandler"
             commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName">
             <activeWhen>
             	<and>
@@ -80,21 +80,21 @@
     <extension
             point="org.eclipse.ui.preferencePages">
         <page
-            class="org.eclipse.recommenders.snipmatch.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            class="org.eclipse.recommenders.templates.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
             id="org.eclipse.recommenders.snipeditor.SnipDSL"
             name="SnipDSL">
             <keywordReference id="org.eclipse.recommenders.templates.ui.keyword_SnipDSL"/>
         </page>
         <page
             category="org.eclipse.recommenders.snipeditor.SnipDSL"
-            class="org.eclipse.recommenders.snipmatch.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+            class="org.eclipse.recommenders.templates.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
             id="org.eclipse.recommenders.snipeditor.SnipDSL.coloring"
             name="Syntax Coloring">
             <keywordReference id="org.eclipse.recommenders.templates.ui.keyword_SnipDSL"/>
         </page>
         <page
             category="org.eclipse.recommenders.snipeditor.SnipDSL"
-            class="org.eclipse.recommenders.snipmatch.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
+            class="org.eclipse.recommenders.templates.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
             id="org.eclipse.recommenders.snipeditor.SnipDSL.templates"
             name="Templates">
             <keywordReference id="org.eclipse.recommenders.templates.ui.keyword_SnipDSL"/>
@@ -108,7 +108,7 @@
     <extension
             point="org.eclipse.ui.propertyPages">
         <page
-            class="org.eclipse.recommenders.snipmatch.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            class="org.eclipse.recommenders.templates.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
             id="org.eclipse.recommenders.snipeditor.SnipDSL"
             name="SnipDSL">
             <keywordReference id="org.eclipse.recommenders.templates.ui.keyword_SnipDSL"/>
@@ -202,7 +202,7 @@
 	</extension>
 	<extension point="org.eclipse.ui.handlers">
 	    <handler
-            class="org.eclipse.recommenders.snipmatch.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
+            class="org.eclipse.recommenders.templates.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
             commandId="org.eclipse.xtext.ui.editor.FindReferences">
             <activeWhen>
                 <reference
@@ -217,13 +217,13 @@
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
-			class="org.eclipse.recommenders.snipmatch.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			class="org.eclipse.recommenders.templates.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
 			type="cSnip">
 		</parser>
 	</extension>
 	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
         <resourceServiceProvider
-            class="org.eclipse.recommenders.snipmatch.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+            class="org.eclipse.recommenders.templates.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
             uriExtension="cSnip">
         </resourceServiceProvider>
     </extension>
@@ -255,14 +255,14 @@
    <extension
          point="org.eclipse.xtext.builder.participant">
       <participant
-            class="org.eclipse.recommenders.snipmatch.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant">
+            class="org.eclipse.recommenders.templates.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant">
       </participant>
    </extension>
    <extension
             point="org.eclipse.ui.preferencePages">
         <page
             category="org.eclipse.recommenders.snipeditor.SnipDSL"
-            class="org.eclipse.recommenders.snipmatch.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
+            class="org.eclipse.recommenders.templates.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
             id="org.eclipse.recommenders.snipeditor.SnipDSL.compiler.preferencePage"
             name="Compiler">
             <keywordReference id="org.eclipse.recommenders.templates.ui.keyword_SnipDSL"/>
@@ -272,7 +272,7 @@
             point="org.eclipse.ui.propertyPages">
         <page
             category="org.eclipse.recommenders.snipeditor.SnipDSL"
-            class="org.eclipse.recommenders.snipmatch.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
+            class="org.eclipse.recommenders.templates.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
             id="org.eclipse.recommenders.snipeditor.SnipDSL.compiler.propertyPage"
             name="Compiler">
             <keywordReference id="org.eclipse.recommenders.templates.ui.keyword_SnipDSL"/>
@@ -287,7 +287,7 @@
 	<extension
 		point="org.eclipse.ui.handlers">
 		<handler 
-			class="org.eclipse.recommenders.snipmatch.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.outline.quickoutline.ShowQuickOutlineActionHandler"
+			class="org.eclipse.recommenders.templates.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.outline.quickoutline.ShowQuickOutlineActionHandler"
 			commandId="org.eclipse.xtext.ui.editor.outline.QuickOutline">
 			<activeWhen>
 				<reference
@@ -320,24 +320,24 @@
     <extension
             point="org.eclipse.ui.ide.markerResolution">
         <markerResolutionGenerator
-            class="org.eclipse.recommenders.snipmatch.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-            markerType="org.eclipse.recommenders.templates.ui.snipdsl.check.fast">
+            class="org.eclipse.recommenders.templates.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="org.eclipse.recommenders.templates.rcp.snipdsl.check.fast">
             <attribute
                 name="FIXABLE_KEY"
                 value="true">
             </attribute>
         </markerResolutionGenerator>
         <markerResolutionGenerator
-            class="org.eclipse.recommenders.snipmatch.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-            markerType="org.eclipse.recommenders.templates.ui.snipdsl.check.normal">
+            class="org.eclipse.recommenders.templates.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="org.eclipse.recommenders.templates.rcp.snipdsl.check.normal">
             <attribute
                 name="FIXABLE_KEY"
                 value="true">
             </attribute>
         </markerResolutionGenerator>
         <markerResolutionGenerator
-            class="org.eclipse.recommenders.snipmatch.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-            markerType="org.eclipse.recommenders.templates.ui.snipdsl.check.expensive">
+            class="org.eclipse.recommenders.templates.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="org.eclipse.recommenders.templates.rcp.snipdsl.check.expensive">
             <attribute
                 name="FIXABLE_KEY"
                 value="true">
@@ -347,7 +347,7 @@
    	<!-- Rename Refactoring -->
 	<extension point="org.eclipse.ui.handlers">
 		<handler 
-			class="org.eclipse.recommenders.snipmatch.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.DefaultRenameElementHandler"
+			class="org.eclipse.recommenders.templates.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.DefaultRenameElementHandler"
 			commandId="org.eclipse.xtext.ui.refactoring.RenameElement">
 			<activeWhen>
 				<reference
@@ -372,7 +372,7 @@
    <extension point="org.eclipse.ui.preferencePages">
 	    <page
 	        category="org.eclipse.recommenders.snipeditor.SnipDSL"
-	        class="org.eclipse.recommenders.snipmatch.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferencePage"
+	        class="org.eclipse.recommenders.templates.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferencePage"
 	        id="org.eclipse.recommenders.snipeditor.SnipDSL.refactoring"
 	        name="Refactoring">
 	        <keywordReference id="org.eclipse.recommenders.templates.ui.keyword_SnipDSL"/>
@@ -381,19 +381,19 @@
 
   <extension point="org.eclipse.compare.contentViewers">
     <viewer id="org.eclipse.recommenders.snipeditor.SnipDSL.compare.contentViewers"
-            class="org.eclipse.recommenders.snipmatch.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+            class="org.eclipse.recommenders.templates.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
             extensions="cSnip">
     </viewer>
   </extension>
   <extension point="org.eclipse.compare.contentMergeViewers">
     <viewer id="org.eclipse.recommenders.snipeditor.SnipDSL.compare.contentMergeViewers"
-            class="org.eclipse.recommenders.snipmatch.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+            class="org.eclipse.recommenders.templates.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
             extensions="cSnip" label="SnipDSL Compare">
      </viewer>
   </extension>
   <extension point="org.eclipse.ui.editors.documentProviders">
     <provider id="org.eclipse.recommenders.snipeditor.SnipDSL.editors.documentProviders"
-            class="org.eclipse.recommenders.snipmatch.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"
+            class="org.eclipse.recommenders.templates.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"
             extensions="cSnip">
     </provider>
   </extension>
