@@ -15,16 +15,15 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.jface.viewers.ListViewer;
-import org.eclipse.recommenders.templates.rcp.typing.SnipDSLTypeComputer;
-import org.eclipse.recommenders.snipmatch.rcp.internal.SnipDSLActivator;
+import org.eclipse.recommenders.templates.typing.SnipDSLTypeComputer;
+import org.eclipse.recommenders.templates.rcp.internal.SnipDSLActivator;
 import org.eclipse.recommenders.snipmatch.rcp.core.Snippet;
 import org.eclipse.recommenders.snipmatch.rcp.preferences.PreferenceConstants;
 import org.eclipse.recommenders.utils.gson.GsonUtil;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.KeyEvent;
-import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -40,6 +39,8 @@ import org.eclipse.ui.part.MultiPageEditorPart;
 import org.eclipse.ui.ide.IDE;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
+
 import com.google.inject.Inject;
 
 /**
@@ -59,16 +60,35 @@ public class MultiPageSnipEditor extends MultiPageEditorPart implements
 
     @Inject
     SnipDSLTypeComputer computer;
-
+   
+    
+    
     /** The text editor used in page 0. */
     private TextEditor editor;
-
+    private ITypeReferenceOwner typeReferences;
+    
+    private IPropertyListener propertyChangeListener=new IPropertyListener() {
+        
+        @Override
+        public void propertyChanged(Object source, int propId) {
+            // TODO Auto-generated method stub
+            if(propId==PROP_DIRTY){
+               
+                System.out.println("Got a property change");
+               
+            }
+        }
+    };
+    
+    
     /**
      * Creates a multi-page editor example.
      */
     public MultiPageSnipEditor() {
+        
         super();
         ResourcesPlugin.getWorkspace().addResourceChangeListener(this);
+        //this.addPropertyListener(propertyChangeListener);
     }
 
     /**
@@ -77,6 +97,7 @@ public class MultiPageSnipEditor extends MultiPageEditorPart implements
     void createPage0() {
         try {
 
+            
             editor = snipEditor;
             // editor.setPartProperty("Name", "Snipeditor");
             // System.out.println(editor.getPartName() +"   "+
@@ -117,22 +138,7 @@ public class MultiPageSnipEditor extends MultiPageEditorPart implements
 
             addTypes.setLayoutData(data);
 
-            snipName.addKeyListener(new KeyListener() {
-
-                @Override
-                public void keyReleased(KeyEvent e) {
-                    // TODO Auto-generated method stub
-                    firePropertyChange(PROP_DIRTY);
-                }
-
-                @Override
-                public void keyPressed(KeyEvent e) {
-                    // TODO Auto-generated method stub
-                    firePropertyChange(PROP_DIRTY);
-
-                }
-            });
-
+             
             Label summary = new Label(pageContents, SWT.None);
             summary.setText("Description: ");
             data = new GridData(GridData.BEGINNING);
@@ -149,7 +155,8 @@ public class MultiPageSnipEditor extends MultiPageEditorPart implements
                     | SWT.SHADOW_IN | SWT.V_SCROLL | SWT.H_SCROLL | SWT.MULTI);
 
             final List typesList = typesListView.getList();
-
+            
+            
             data = new GridData(GridData.FILL_BOTH);
             data.heightHint = 100;
             data.widthHint = 300;
@@ -165,12 +172,12 @@ public class MultiPageSnipEditor extends MultiPageEditorPart implements
             data.widthHint = 300;
             data.verticalSpan = 4;
 
-            ListViewer patternsListView = new ListViewer(pageContents,
+            final ListViewer patternsListView = new ListViewer(pageContents,
                     SWT.BORDER | SWT.SHADOW_IN | SWT.V_SCROLL | SWT.H_SCROLL
                             | SWT.MULTI);
 
             final List patternsList = patternsListView.getList();
-
+           
             patternsList.setLayoutData(data);
 
             java.util.List<String> patternsVal = (java.util.List<String>) editorInp
@@ -183,9 +190,9 @@ public class MultiPageSnipEditor extends MultiPageEditorPart implements
 
             data = new GridData(GridData.CENTER);
             data.widthHint = 100;
-            final Button addNewPattern = new Button(pageContents, SWT.PUSH);
-            addNewPattern.setText("Add New");
-            addNewPattern.setLayoutData(data);
+            final Button addNewPatern = new Button(pageContents, SWT.PUSH);
+            addNewPatern.setText("Add New");
+            addNewPatern.setLayoutData(data);
             final Button editPatern = new Button(pageContents, SWT.PUSH);
             editPatern.setText("Edit");
             editPatern.setLayoutData(data);
@@ -194,37 +201,40 @@ public class MultiPageSnipEditor extends MultiPageEditorPart implements
             removePattern.setText("Remove");
             removePattern.setLayoutData(data);
             removePattern.setEnabled(false);
-
+            
             patternsList.addSelectionListener(new SelectionAdapter() {
                 public void widgetSelected(SelectionEvent e) {
                     removePattern.setEnabled(true);
-                    editPatern.setEnabled(true);
-
+                    editPatern.setEnabled(true);               
                 }
             });
 
-            addNewPattern.addSelectionListener(new SelectionAdapter() {
+            addNewPatern.addSelectionListener(new SelectionAdapter() {
                 public void widgetSelected(SelectionEvent e) {
-                    firePropertyChange(PROP_DIRTY);
+                  //  firePropertyChange(PROP_DIRTY);
+                    Point position = new Point(addNewPatern.getLocation().x+addNewPatern.getBounds().width,
+                            addNewPatern.getLocation().y );
                     new MetaFieldEditor(pageContents, SWT.None, patternsList,
-                            addNewPattern.getBounds());
-
+                            pageContents.toDisplay(position));
+                    firePropertyChange(PROP_DIRTY);
                 }
             });
-
             editPatern.addSelectionListener(new SelectionAdapter() {
                 public void widgetSelected(SelectionEvent e) {
-                    firePropertyChange(PROP_DIRTY);
-                    new MetaFieldEditor(pageContents, SWT.None, patternsList,
-                            addNewPattern.getBounds(), patternsList
-                                    .getSelectionIndex());
-
+                   // firePropertyChange(PROP_DIRTY);
+                    Point position = new Point(editPatern.getLocation().x+editPatern.getBounds().width,
+                            editPatern.getLocation().y );
+                   new MetaFieldEditor(pageContents, SWT.None, patternsList,
+                            pageContents.toDisplay(position), patternsList
+                                  .getSelectionIndex());
+                   
+                   
                 }
             });
             removePattern.addSelectionListener(new SelectionAdapter() {
                 public void widgetSelected(SelectionEvent e) {
                     patternsList.remove(patternsList.getSelectionIndex());
-                    firePropertyChange(PROP_DIRTY);
+                   // firePropertyChange(PROP_DIRTY);
 
                 }
             });
@@ -233,10 +243,13 @@ public class MultiPageSnipEditor extends MultiPageEditorPart implements
                 @SuppressWarnings("restriction")
                 public void widgetSelected(SelectionEvent e) {
                     typesList.removeAll();
-                    for (Resource r : computer.getReferenceOwner()
-                            .getContextResourceSet().getResources()) {
+                    if(typeReferences==null){
+                        typeReferences = computer.getReferenceOwner();
+                    }
+                    for (Resource r : typeReferences.getContextResourceSet().getResources()) {
                         for (EObject content : r.getContents()) {
-                            if (content instanceof JvmType) {
+                            if (content instanceof JvmType
+                                    &&! ((JvmType) content).getQualifiedName().contains("CodeSnippet_")) {
                                 // System.out.println(content);
                                 typesList.add(((JvmType) content)
                                         .getQualifiedName());
@@ -252,6 +265,7 @@ public class MultiPageSnipEditor extends MultiPageEditorPart implements
         pageContents.pack();
         int index = addPage(pageContents);
         setPageText(index, "Metadata");
+        
     }
 
     /**
@@ -276,6 +290,7 @@ public class MultiPageSnipEditor extends MultiPageEditorPart implements
      */
     public void dispose() {
         ResourcesPlugin.getWorkspace().removeResourceChangeListener(this);
+      //  this.removePropertyListener(propertyChangeListener);
         super.dispose();
     }
 
@@ -306,6 +321,7 @@ public class MultiPageSnipEditor extends MultiPageEditorPart implements
                 System.out.println(json.getAbsolutePath());
                 Snippet snippet = GsonUtil.deserialize(json, Snippet.class);
                 snippet.setCode(new String(contents));
+                
                 GsonUtil.serialize(snippet, json);
 
             } catch (IOException e) { // TODO Auto-generated catch block
@@ -314,6 +330,7 @@ public class MultiPageSnipEditor extends MultiPageEditorPart implements
 
             }
         }
+        typeReferences = computer.getReferenceOwner();
 
     }
 
@@ -349,16 +366,20 @@ public class MultiPageSnipEditor extends MultiPageEditorPart implements
             throw new PartInitException(
                     "Invalid Input: Must be IFileEditorInput/IStorageEditorInput");
 
-        // System.out.println(modelInferrer);
         // snipEditor.init(site, editorInput);
         if (editorInput instanceof FileEditorInput) {
             editorInput = new SnipEditorFileInput(
                     ((FileEditorInput) editorInput).getFile());
         }
+        
         // System.out.println(site);
         super.init(site, editorInput);
+        
+        
     }
 
+    
+    
     /*
      * (non-Javadoc) Method declared on IEditorPart.
      */

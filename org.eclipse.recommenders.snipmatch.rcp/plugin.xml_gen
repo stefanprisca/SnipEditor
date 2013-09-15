@@ -10,7 +10,7 @@
             contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
             default="true"
             extensions="cSnip"
-            id="org.eclipse.recommenders.templates.rcp.SnipDSL"
+            id="org.eclipse.recommenders.templates.SnipDSL"
             matchingStrategy="org.eclipse.recommenders.snipmatch.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.editor.JavaEditorInputMatcher"
             name="SnipDSL Editor">
         </editor>
@@ -22,16 +22,16 @@
             commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
             <activeWhen>
                 <reference
-                    definitionId="org.eclipse.recommenders.templates.rcp.SnipDSL.Editor.opened">
+                    definitionId="org.eclipse.recommenders.templates.SnipDSL.Editor.opened">
                 </reference>
             </activeWhen>
         </handler>
         <handler
             class="org.eclipse.recommenders.snipmatch.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
-            commandId="org.eclipse.recommenders.templates.rcp.SnipDSL.validate">
+            commandId="org.eclipse.recommenders.templates.SnipDSL.validate">
          <activeWhen>
             <reference
-                    definitionId="org.eclipse.recommenders.templates.rcp.SnipDSL.Editor.opened">
+                    definitionId="org.eclipse.recommenders.templates.SnipDSL.Editor.opened">
             </reference>
          </activeWhen>
       	</handler>
@@ -40,7 +40,7 @@
             class="org.eclipse.recommenders.snipmatch.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedNameHandler"
             commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName">
             <activeWhen>
-				<reference definitionId="org.eclipse.recommenders.templates.rcp.SnipDSL.Editor.opened" />
+				<reference definitionId="org.eclipse.recommenders.templates.SnipDSL.Editor.opened" />
             </activeWhen>
         </handler>
         <handler
@@ -48,7 +48,7 @@
             commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName">
             <activeWhen>
             	<and>
-            		<reference definitionId="org.eclipse.recommenders.templates.rcp.SnipDSL.XtextEditor.opened" />
+            		<reference definitionId="org.eclipse.recommenders.templates.SnipDSL.XtextEditor.opened" />
 	                <iterate>
 						<adapt type="org.eclipse.xtext.ui.editor.outline.IOutlineNode" />
 					</iterate>
@@ -57,22 +57,22 @@
         </handler>
     </extension>
     <extension point="org.eclipse.core.expressions.definitions">
-        <definition id="org.eclipse.recommenders.templates.rcp.SnipDSL.Editor.opened">
+        <definition id="org.eclipse.recommenders.templates.SnipDSL.Editor.opened">
             <and>
                 <reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
                 <with variable="activeEditor">
                     <test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
-                        value="org.eclipse.recommenders.templates.rcp.SnipDSL" 
+                        value="org.eclipse.recommenders.templates.SnipDSL" 
                         forcePluginActivation="true"/>
                 </with>        
             </and>
         </definition>
-        <definition id="org.eclipse.recommenders.templates.rcp.SnipDSL.XtextEditor.opened">
+        <definition id="org.eclipse.recommenders.templates.SnipDSL.XtextEditor.opened">
             <and>
                 <reference definitionId="isXtextEditorActive"/>
                 <with variable="activeEditor">
                     <test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
-                        value="org.eclipse.recommenders.templates.rcp.SnipDSL" 
+                        value="org.eclipse.recommenders.templates.SnipDSL" 
                         forcePluginActivation="true"/>
                 </with>        
             </and>
@@ -82,32 +82,32 @@
             point="org.eclipse.ui.preferencePages">
         <page
             class="org.eclipse.recommenders.snipmatch.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
-            id="org.eclipse.recommenders.templates.rcp.SnipDSL"
+            id="org.eclipse.recommenders.templates.SnipDSL"
             name="SnipDSL">
-            <keywordReference id="org.eclipse.recommenders.templates.rcp.ui.keyword_SnipDSL"/>
+            <keywordReference id="org.eclipse.recommenders.templates.ui.keyword_SnipDSL"/>
         </page>
         <page
-            category="org.eclipse.recommenders.templates.rcp.SnipDSL"
+            category="org.eclipse.recommenders.templates.SnipDSL"
             class="org.eclipse.recommenders.snipmatch.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
-            id="org.eclipse.recommenders.templates.rcp.SnipDSL.coloring"
+            id="org.eclipse.recommenders.templates.SnipDSL.coloring"
             name="Syntax Coloring">
-            <keywordReference id="org.eclipse.recommenders.templates.rcp.ui.keyword_SnipDSL"/>
+            <keywordReference id="org.eclipse.recommenders.templates.ui.keyword_SnipDSL"/>
         </page>
         <page
-            category="org.eclipse.recommenders.templates.rcp.SnipDSL"
+            category="org.eclipse.recommenders.templates.SnipDSL"
             class="org.eclipse.recommenders.snipmatch.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
-            id="org.eclipse.recommenders.templates.rcp.SnipDSL.templates"
+            id="org.eclipse.recommenders.templates.SnipDSL.templates"
             name="Templates">
-            <keywordReference id="org.eclipse.recommenders.templates.rcp.ui.keyword_SnipDSL"/>
+            <keywordReference id="org.eclipse.recommenders.templates.ui.keyword_SnipDSL"/>
         </page>
     </extension>
     <extension
             point="org.eclipse.ui.propertyPages">
         <page
             class="org.eclipse.recommenders.snipmatch.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
-            id="org.eclipse.recommenders.templates.rcp.SnipDSL"
+            id="org.eclipse.recommenders.templates.SnipDSL"
             name="SnipDSL">
-            <keywordReference id="org.eclipse.recommenders.templates.rcp.ui.keyword_SnipDSL"/>
+            <keywordReference id="org.eclipse.recommenders.templates.ui.keyword_SnipDSL"/>
             <enabledWhen>
 	            <adapt type="org.eclipse.core.resources.IProject"/>
 			</enabledWhen>
@@ -117,14 +117,14 @@
     <extension
         point="org.eclipse.ui.keywords">
         <keyword
-            id="org.eclipse.recommenders.templates.rcp.ui.keyword_SnipDSL"
+            id="org.eclipse.recommenders.templates.ui.keyword_SnipDSL"
             label="SnipDSL"/>
     </extension>
     <extension
          point="org.eclipse.ui.commands">
       <command
             description="Trigger expensive validation"
-            id="org.eclipse.recommenders.templates.rcp.SnipDSL.validate"
+            id="org.eclipse.recommenders.templates.SnipDSL.validate"
             name="Validate">
       </command>
       <!-- copy qualified name -->
@@ -145,12 +145,12 @@
         <menuContribution
             locationURI="popup:#TextEditorContext?after=group.edit">
              <command
-                 commandId="org.eclipse.recommenders.templates.rcp.SnipDSL.validate"
+                 commandId="org.eclipse.recommenders.templates.SnipDSL.validate"
                  style="push"
                  tooltip="Trigger expensive validation">
             <visibleWhen checkEnabled="false">
                 <reference
-                    definitionId="org.eclipse.recommenders.templates.rcp.SnipDSL.Editor.opened">
+                    definitionId="org.eclipse.recommenders.templates.SnipDSL.Editor.opened">
                 </reference>
             </visibleWhen>
          </command>  
@@ -160,7 +160,7 @@
          	<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName" 
          		style="push" tooltip="Copy Qualified Name">
             	<visibleWhen checkEnabled="false">
-                	<reference definitionId="org.eclipse.recommenders.templates.rcp.SnipDSL.Editor.opened" />
+                	<reference definitionId="org.eclipse.recommenders.templates.SnipDSL.Editor.opened" />
             	</visibleWhen>
          	</command>  
          </menuContribution>
@@ -168,7 +168,7 @@
          	<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
             	style="push" tooltip="Copy Qualified Name">
             	<visibleWhen checkEnabled="false">
-                	<reference definitionId="org.eclipse.recommenders.templates.rcp.SnipDSL.Editor.opened" />
+                	<reference definitionId="org.eclipse.recommenders.templates.SnipDSL.Editor.opened" />
             	</visibleWhen>
          	</command>  
          </menuContribution>
@@ -177,7 +177,7 @@
 				style="push" tooltip="Copy Qualified Name">
          		<visibleWhen checkEnabled="false">
 	            	<and>
-	            		<reference definitionId="org.eclipse.recommenders.templates.rcp.SnipDSL.XtextEditor.opened" />
+	            		<reference definitionId="org.eclipse.recommenders.templates.SnipDSL.XtextEditor.opened" />
 						<iterate>
 							<adapt type="org.eclipse.xtext.ui.editor.outline.IOutlineNode" />
 						</iterate>
@@ -190,7 +190,7 @@
 		<menuContribution locationURI="popup:#TextEditorContext?endof=group.find">
 			<command commandId="org.eclipse.xtext.ui.editor.FindReferences">
 				<visibleWhen checkEnabled="false">
-                	<reference definitionId="org.eclipse.recommenders.templates.rcp.SnipDSL.Editor.opened">
+                	<reference definitionId="org.eclipse.recommenders.templates.SnipDSL.Editor.opened">
                 	</reference>
             	</visibleWhen>
 			</command>
@@ -202,7 +202,7 @@
             commandId="org.eclipse.xtext.ui.editor.FindReferences">
             <activeWhen>
                 <reference
-                    definitionId="org.eclipse.recommenders.templates.rcp.SnipDSL.Editor.opened">
+                    definitionId="org.eclipse.recommenders.templates.SnipDSL.Editor.opened">
                 </reference>
             </activeWhen>
         </handler>
@@ -225,7 +225,7 @@
     </extension>
 
 
-	<!-- marker definitions for org.eclipse.recommenders.templates.rcp.SnipDSL -->
+	<!-- marker definitions for org.eclipse.recommenders.templates.SnipDSL -->
 	<extension
 	        id="snipdsl.check.fast"
 	        name="SnipDSL Problem"
@@ -257,21 +257,21 @@
    <extension
             point="org.eclipse.ui.preferencePages">
         <page
-            category="org.eclipse.recommenders.templates.rcp.SnipDSL"
+            category="org.eclipse.recommenders.templates.SnipDSL"
             class="org.eclipse.recommenders.snipmatch.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
-            id="org.eclipse.recommenders.templates.rcp.SnipDSL.compiler.preferencePage"
+            id="org.eclipse.recommenders.templates.SnipDSL.compiler.preferencePage"
             name="Compiler">
-            <keywordReference id="org.eclipse.recommenders.templates.rcp.ui.keyword_SnipDSL"/>
+            <keywordReference id="org.eclipse.recommenders.templates.ui.keyword_SnipDSL"/>
         </page>
     </extension>
     <extension
             point="org.eclipse.ui.propertyPages">
         <page
-            category="org.eclipse.recommenders.templates.rcp.SnipDSL"
+            category="org.eclipse.recommenders.templates.SnipDSL"
             class="org.eclipse.recommenders.snipmatch.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
-            id="org.eclipse.recommenders.templates.rcp.SnipDSL.compiler.propertyPage"
+            id="org.eclipse.recommenders.templates.SnipDSL.compiler.propertyPage"
             name="Compiler">
-            <keywordReference id="org.eclipse.recommenders.templates.rcp.ui.keyword_SnipDSL"/>
+            <keywordReference id="org.eclipse.recommenders.templates.ui.keyword_SnipDSL"/>
             <enabledWhen>
 	            <adapt type="org.eclipse.core.resources.IProject"/>
 			</enabledWhen>
@@ -287,7 +287,7 @@
 			commandId="org.eclipse.xtext.ui.editor.outline.QuickOutline">
 			<activeWhen>
 				<reference
-					definitionId="org.eclipse.recommenders.templates.rcp.SnipDSL.Editor.opened">
+					definitionId="org.eclipse.recommenders.templates.SnipDSL.Editor.opened">
 				</reference>
 			</activeWhen>
 		</handler>
@@ -307,12 +307,12 @@
 				style="push"
 				tooltip="Open Quick Outline">
 				<visibleWhen checkEnabled="false">
-					<reference definitionId="org.eclipse.recommenders.templates.rcp.SnipDSL.Editor.opened"/>
+					<reference definitionId="org.eclipse.recommenders.templates.SnipDSL.Editor.opened"/>
 				</visibleWhen>
 			</command>
 		</menuContribution>
 	</extension>
-    <!-- quickfix marker resolution generator for org.eclipse.recommenders.templates.rcp.SnipDSL -->
+    <!-- quickfix marker resolution generator for org.eclipse.recommenders.templates.SnipDSL -->
     <extension
             point="org.eclipse.ui.ide.markerResolution">
         <markerResolutionGenerator
@@ -347,7 +347,7 @@
 			commandId="org.eclipse.xtext.ui.refactoring.RenameElement">
 			<activeWhen>
 				<reference
-					definitionId="org.eclipse.recommenders.templates.rcp.SnipDSL.Editor.opened">
+					definitionId="org.eclipse.recommenders.templates.SnipDSL.Editor.opened">
 				</reference>
 			</activeWhen>
 		</handler>
@@ -359,7 +359,7 @@
                style="push">
             <visibleWhen checkEnabled="false">
                <reference
-                     definitionId="org.eclipse.recommenders.templates.rcp.SnipDSL.Editor.opened">
+                     definitionId="org.eclipse.recommenders.templates.SnipDSL.Editor.opened">
                </reference>
             </visibleWhen>
          </command>
@@ -367,11 +367,11 @@
    </extension>
    <extension point="org.eclipse.ui.preferencePages">
 	    <page
-	        category="org.eclipse.recommenders.templates.rcp.SnipDSL"
+	        category="org.eclipse.recommenders.templates.SnipDSL"
 	        class="org.eclipse.recommenders.snipmatch.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferencePage"
-	        id="org.eclipse.recommenders.templates.rcp.SnipDSL.refactoring"
+	        id="org.eclipse.recommenders.templates.SnipDSL.refactoring"
 	        name="Refactoring">
-	        <keywordReference id="org.eclipse.recommenders.templates.rcp.ui.keyword_SnipDSL"/>
+	        <keywordReference id="org.eclipse.recommenders.templates.ui.keyword_SnipDSL"/>
 	    </page>
 	</extension>
 
@@ -383,7 +383,7 @@
 			commandId="org.eclipse.xtext.xbase.ui.hierarchy.OpenTypeHierarchy">
 			<activeWhen>
 				<reference
-					definitionId="org.eclipse.recommenders.templates.rcp.SnipDSL.Editor.opened">
+					definitionId="org.eclipse.recommenders.templates.SnipDSL.Editor.opened">
 				</reference>
 			</activeWhen>
 		</handler>
@@ -392,7 +392,7 @@
 			commandId="org.eclipse.jdt.ui.edit.text.java.open.hierarchy">
 			<activeWhen>
 				<reference
-					definitionId="org.eclipse.recommenders.templates.rcp.SnipDSL.Editor.opened">
+					definitionId="org.eclipse.recommenders.templates.SnipDSL.Editor.opened">
 				</reference>
 			</activeWhen>
 		</handler>
@@ -401,7 +401,7 @@
             commandId="org.eclipse.xtext.xbase.ui.organizeImports">
            	<activeWhen>
 				<reference
-					definitionId="org.eclipse.recommenders.templates.rcp.SnipDSL.Editor.opened">
+					definitionId="org.eclipse.recommenders.templates.SnipDSL.Editor.opened">
 				</reference>
 			</activeWhen>
         </handler>
@@ -415,7 +415,7 @@
                  tooltip="Organize Imports">
                 <visibleWhen checkEnabled="false">
                     <reference
-                        definitionId="org.eclipse.recommenders.templates.rcp.SnipDSL.Editor.opened">
+                        definitionId="org.eclipse.recommenders.templates.SnipDSL.Editor.opened">
                     </reference>
                 </visibleWhen>
             </command>  
@@ -426,7 +426,7 @@
 				style="push"
 				tooltip="Open Type Hierarchy">
 				<visibleWhen checkEnabled="false">
-					<reference definitionId="org.eclipse.recommenders.templates.rcp.SnipDSL.Editor.opened"/>
+					<reference definitionId="org.eclipse.recommenders.templates.SnipDSL.Editor.opened"/>
 				</visibleWhen>
 			</command>
 		</menuContribution>
@@ -436,7 +436,7 @@
 				style="push"
 				tooltip="Quick Type Hierarchy">
 				<visibleWhen checkEnabled="false">
-					<reference definitionId="org.eclipse.recommenders.templates.rcp.SnipDSL.Editor.opened"/>
+					<reference definitionId="org.eclipse.recommenders.templates.SnipDSL.Editor.opened"/>
 				</visibleWhen>
 			</command>
 		</menuContribution>
@@ -449,7 +449,7 @@
 			commandId="org.eclipse.xtext.xbase.ui.hierarchy.OpenCallHierarchy">
 			<activeWhen>
 				<reference
-					definitionId="org.eclipse.recommenders.templates.rcp.SnipDSL.Editor.opened">
+					definitionId="org.eclipse.recommenders.templates.SnipDSL.Editor.opened">
 				</reference>
 			</activeWhen>
 		</handler>
@@ -462,7 +462,7 @@
 				style="push"
 				tooltip="Open Call Hierarchy">
 				<visibleWhen checkEnabled="false">
-					<reference definitionId="org.eclipse.recommenders.templates.rcp.SnipDSL.Editor.opened"/>
+					<reference definitionId="org.eclipse.recommenders.templates.SnipDSL.Editor.opened"/>
 				</visibleWhen>
 			</command>
 		</menuContribution>
@@ -475,25 +475,25 @@
       </factory> 
    </extension>
    <extension point="org.eclipse.ui.editorActions">
-      <editorContribution targetID="org.eclipse.recommenders.templates.rcp.SnipDSL" 
-                          id="org.eclipse.recommenders.templates.rcp.SnipDSL.ide.rulerActions">
+      <editorContribution targetID="org.eclipse.recommenders.templates.SnipDSL" 
+                          id="org.eclipse.recommenders.templates.SnipDSL.ide.rulerActions">
 	     <action
 	             label="Not Used"
 	             class="org.eclipse.recommenders.snipmatch.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
 	             style="push"
 	             actionID="RulerDoubleClick"
-	             id="org.eclipse.recommenders.templates.rcp.SnipDSL.doubleClickBreakpointAction"/>
+	             id="org.eclipse.recommenders.templates.SnipDSL.doubleClickBreakpointAction"/>
 	  </editorContribution>
    </extension>
    <extension point="org.eclipse.ui.popupMenus">
       <viewerContribution
          targetID="example.rulerContextMenuId"
-         id="org.eclipse.recommenders.templates.rcp.SnipDSL.ide.RulerPopupActions">
+         id="org.eclipse.recommenders.templates.SnipDSL.ide.RulerPopupActions">
          <action
             label="Toggle Breakpoint"
             class="org.eclipse.recommenders.snipmatch.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
             menubarPath="additions"
-            id="org.eclipse.recommenders.templates.rcp.SnipDSL.ide.rulerContextMenu.toggleBreakpointAction">
+            id="org.eclipse.recommenders.templates.SnipDSL.ide.rulerContextMenu.toggleBreakpointAction">
          </action>
       </viewerContribution>
    </extension>
@@ -505,7 +505,7 @@
 			commandId="org.eclipse.xtext.xbase.ui.refactoring.ExtractLocalVariable">
 			<activeWhen>
 				<reference
-					definitionId="org.eclipse.recommenders.templates.rcp.SnipDSL.Editor.opened">
+					definitionId="org.eclipse.recommenders.templates.SnipDSL.Editor.opened">
 				</reference>
 			</activeWhen>
 		</handler>
@@ -517,7 +517,7 @@
                style="push">
             <visibleWhen checkEnabled="false">
                <reference
-                     definitionId="org.eclipse.recommenders.templates.rcp.SnipDSL.Editor.opened">
+                     definitionId="org.eclipse.recommenders.templates.SnipDSL.Editor.opened">
                </reference>
             </visibleWhen>
          </command>
@@ -525,19 +525,19 @@
    </extension>  
 
   <extension point="org.eclipse.compare.contentViewers">
-    <viewer id="org.eclipse.recommenders.templates.rcp.SnipDSL.compare.contentViewers"
+    <viewer id="org.eclipse.recommenders.templates.SnipDSL.compare.contentViewers"
             class="org.eclipse.recommenders.snipmatch.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
             extensions="cSnip">
     </viewer>
   </extension>
   <extension point="org.eclipse.compare.contentMergeViewers">
-    <viewer id="org.eclipse.recommenders.templates.rcp.SnipDSL.compare.contentMergeViewers"
+    <viewer id="org.eclipse.recommenders.templates.SnipDSL.compare.contentMergeViewers"
             class="org.eclipse.recommenders.snipmatch.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
             extensions="cSnip" label="SnipDSL Compare">
      </viewer>
   </extension>
   <extension point="org.eclipse.ui.editors.documentProviders">
-    <provider id="org.eclipse.recommenders.templates.rcp.SnipDSL.editors.documentProviders"
+    <provider id="org.eclipse.recommenders.templates.SnipDSL.editors.documentProviders"
             class="org.eclipse.recommenders.snipmatch.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"
             extensions="cSnip">
     </provider>

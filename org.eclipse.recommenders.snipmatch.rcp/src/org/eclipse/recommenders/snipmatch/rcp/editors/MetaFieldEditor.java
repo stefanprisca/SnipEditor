@@ -4,6 +4,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -18,20 +19,22 @@ public class MetaFieldEditor extends Composite {
     private Control editableControl;
 
     public MetaFieldEditor(Composite parent, int style, Control editable,
-            Rectangle bounds) {
+           Point position) {
         super(parent, style);
         editableControl = editable;
-        Shell sh = new Shell(parent.getShell());
-        // sh.setFocus();
+        Shell sh = new Shell(parent.getShell(), SWT.ON_TOP);
+        sh.setLocation(position);
+        
         createContents(sh, -1);
         // TODO Auto-generated constructor stub
     }
 
     public MetaFieldEditor(Composite parent, int style, Control editable,
-            Rectangle bounds, int index) {
+            Point position, int index) {
         super(parent, style);
         editableControl = editable;
-        Shell sh = new Shell(parent.getShell());
+        Shell sh = new Shell(parent.getShell(), SWT.ON_TOP);
+        sh.setLocation(position);
         createContents(sh, index);
         // TODO Auto-generated constructor stub
     }
@@ -39,7 +42,6 @@ public class MetaFieldEditor extends Composite {
     private void createContents(final Shell sh, final int index) {
         // TODO Auto-generated method stub
         sh.setVisible(true);
-        sh.setText("Add a new item");
         // Composite contents=new Composite(sh, SWT.None);
         sh.setLayout(new GridLayout());
         final Text newItem = new Text(sh, SWT.BORDER);
@@ -53,7 +55,7 @@ public class MetaFieldEditor extends Composite {
         layoutData.widthHint = 300;
         newItem.setLayoutData(layoutData);
         newItem.setFocus();
-        newItem.setToolTipText("Press Enter in order to confirm");
+        newItem.setToolTipText("Press Enter in order to confirm, Esc to cancel");
         newItem.addKeyListener(new KeyListener() {
 
             @Override
@@ -71,7 +73,10 @@ public class MetaFieldEditor extends Composite {
                             ((List) editableControl).setItem(index,
                                     newItem.getText());
                         } else {
-                            ((List) editableControl).add(newItem.getText());
+                            if(newItem.getText() != ""){
+
+                                ((List) editableControl).add(newItem.getText());   
+                            }
                         }
                     }
 
