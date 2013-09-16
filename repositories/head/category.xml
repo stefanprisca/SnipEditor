@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+ <feature id="org.eclipse.recommenders.snipmatch.rcp.feature" version="0.0.0">
+      <category name="main"/>
+   </feature>
+   <feature id="org.eclipse.recommenders.snipmatch.rcp.feature.source" version="0.0.0">
+      <category name="sources"/>
+   </feature>
+   <feature id="org.eclipse.recommenders.rcp.feature" version="0.0.0">
+      <category name="deps"/>
+   </feature>
+   <category-def name="main" label="Recommenders Incubator"/>
+   <category-def name="sources" label="Recommenders Incubator (Sources)"/>
+   <category-def name="deps" label="Dependencies (do not install)"/>
+</site>
