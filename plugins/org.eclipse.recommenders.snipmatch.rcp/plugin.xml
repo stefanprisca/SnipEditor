@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<plugin>
+
+    <extension
+            point="org.eclipse.ui.editors">
+        <editor
+              class="org.eclipse.recommenders.templates.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.recommenders.internal.snipmatch.rcp.editors.MultiPageSnipEditor"
+              contributorClass="org.eclipse.recommenders.internal.snipmatch.rcp.editors.MultiPageSnipEditorContributor"
+              default="true"
+              extensions="cSnip"
+              id="org.eclipse.recommenders.snipmatch.MultiPage"
+              name="Multi-page Snip Editor">
+        </editor>
+    </extension>
+    <extension
+        point="org.eclipse.ui.handlers">
+        <handler
+            class="org.eclipse.recommenders.templates.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
+            commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
+            <activeWhen>
+                <reference
+                    definitionId="org.eclipse.recommenders.snipeditor.SnipDSL.Editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
+        <handler
+            class="org.eclipse.recommenders.templates.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
+            commandId="org.eclipse.recommenders.snipeditor.SnipDSL.validate">
+         <activeWhen>
+            <reference
+                    definitionId="org.eclipse.recommenders.snipeditor.SnipDSL.Editor.opened">
+            </reference>
+         </activeWhen>
+      	</handler>
+      	<!-- copy qualified name -->
+        <handler
+            class="org.eclipse.recommenders.templates.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedNameHandler"
+            commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName">
+            <activeWhen>
+				<reference definitionId="org.eclipse.recommenders.snipeditor.SnipDSL.Editor.opened" />
+            </activeWhen>
+        </handler>
+        <handler
+            class="org.eclipse.recommenders.templates.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedNameHandler"
+            commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName">
+            <activeWhen>
+            	<and>
+            		<reference definitionId="org.eclipse.recommenders.snipeditor.SnipDSL.XtextEditor.opened" />
+	                <iterate>
+						<adapt type="org.eclipse.xtext.ui.editor.outline.IOutlineNode" />
+					</iterate>
+				</and>
+            </activeWhen>
+        </handler>
+    </extension>
+    <extension point="org.eclipse.core.expressions.definitions">
+        <definition id="org.eclipse.recommenders.snipeditor.SnipDSL.Editor.opened">
+            <and>
+                <reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+                <with variable="activeEditor">
+                    <test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
+                        value="org.eclipse.recommenders.snipeditor.SnipDSL" 
+                        forcePluginActivation="true"/>
+                </with>        
+            </and>
+        </definition>
+        <definition id="org.eclipse.recommenders.snipeditor.SnipDSL.XtextEditor.opened">
+            <and>
+                <reference definitionId="isXtextEditorActive"/>
+                <with variable="activeEditor">
+                    <test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
+                        value="org.eclipse.recommenders.snipeditor.SnipDSL" 
+                        forcePluginActivation="true"/>
+                </with>        
+            </and>
+        </definition>
+    </extension>
+    <extension
+            point="org.eclipse.ui.preferencePages">
+        <page
+            class="org.eclipse.recommenders.templates.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.recommenders.snipeditor.SnipDSL"
+            name="SnipDSL">
+            <keywordReference id="org.eclipse.recommenders.templates.ui.keyword_SnipDSL"/>
+        </page>
+        <page
+            category="org.eclipse.recommenders.snipeditor.SnipDSL"
+            class="org.eclipse.recommenders.templates.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+            id="org.eclipse.recommenders.snipeditor.SnipDSL.coloring"
+            name="Syntax Coloring">
+            <keywordReference id="org.eclipse.recommenders.templates.ui.keyword_SnipDSL"/>
+        </page>
+        <page
+            category="org.eclipse.recommenders.snipeditor.SnipDSL"
+            class="org.eclipse.recommenders.templates.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
+            id="org.eclipse.recommenders.snipeditor.SnipDSL.templates"
+            name="Templates">
+            <keywordReference id="org.eclipse.recommenders.templates.ui.keyword_SnipDSL"/>
+        </page>
+      </extension>
+    <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="org.eclipse.recommenders.templates.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.recommenders.snipeditor.SnipDSL"
+            name="SnipDSL">
+            <keywordReference id="org.eclipse.recommenders.templates.ui.keyword_SnipDSL"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+        </page>
+    </extension>
+    <extension
+        point="org.eclipse.ui.keywords">
+        <keyword
+            id="org.eclipse.recommenders.templates.ui.keyword_SnipDSL"
+            label="SnipDSL"/>
+    </extension>
+    <extension
+         point="org.eclipse.ui.commands">
+      <command
+            description="Trigger expensive validation"
+            id="org.eclipse.recommenders.snipeditor.SnipDSL.validate"
+            name="Validate">
+      </command>
+      <!-- copy qualified name -->
+      <command
+            id="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
+            categoryId="org.eclipse.ui.category.edit"
+            description="Copy the qualified name for the selected element"
+            name="Copy Qualified Name">
+      </command>
+      <command
+            id="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName"
+            categoryId="org.eclipse.ui.category.edit"
+            description="Copy the qualified name for the selected element"
+            name="Copy Qualified Name">
+      </command>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+        <menuContribution
+            locationURI="popup:#TextEditorContext?after=group.edit">
+             <command
+                 commandId="org.eclipse.recommenders.snipeditor.SnipDSL.validate"
+                 style="push"
+                 tooltip="Trigger expensive validation">
+            <visibleWhen checkEnabled="false">
+                <reference
+                    definitionId="org.eclipse.recommenders.snipeditor.SnipDSL.Editor.opened">
+                </reference>
+            </visibleWhen>
+         </command>  
+         </menuContribution>
+         <!-- copy qualified name -->
+         <menuContribution locationURI="popup:#TextEditorContext?after=copy">
+         	<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName" 
+         		style="push" tooltip="Copy Qualified Name">
+            	<visibleWhen checkEnabled="false">
+                	<reference definitionId="org.eclipse.recommenders.snipeditor.SnipDSL.Editor.opened" />
+            	</visibleWhen>
+         	</command>  
+         </menuContribution>
+         <menuContribution locationURI="menu:edit?after=copy">
+         	<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
+            	style="push" tooltip="Copy Qualified Name">
+            	<visibleWhen checkEnabled="false">
+                	<reference definitionId="org.eclipse.recommenders.snipeditor.SnipDSL.Editor.opened" />
+            	</visibleWhen>
+         	</command>  
+         </menuContribution>
+         <menuContribution locationURI="popup:org.eclipse.xtext.ui.outline?after=additions">
+			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName" 
+				style="push" tooltip="Copy Qualified Name">
+         		<visibleWhen checkEnabled="false">
+	            	<and>
+	            		<reference definitionId="org.eclipse.recommenders.snipeditor.SnipDSL.XtextEditor.opened" />
+						<iterate>
+							<adapt type="org.eclipse.xtext.ui.editor.outline.IOutlineNode" />
+						</iterate>
+					</and>
+				</visibleWhen>
+			</command>
+         </menuContribution>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?endof=group.find">
+			<command commandId="org.eclipse.xtext.ui.editor.FindReferences">
+				<visibleWhen checkEnabled="false">
+                	<reference definitionId="org.eclipse.recommenders.snipeditor.SnipDSL.Editor.opened">
+                	</reference>
+            	</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension point="org.eclipse.ui.handlers">
+	    <handler
+            class="org.eclipse.recommenders.templates.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
+            commandId="org.eclipse.xtext.ui.editor.FindReferences">
+            <activeWhen>
+                <reference
+                    definitionId="org.eclipse.recommenders.snipeditor.SnipDSL.Editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
+    </extension>   
+
+<!-- adding resource factories -->
+
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.eclipse.recommenders.templates.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			type="cSnip">
+		</parser>
+	</extension>
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="org.eclipse.recommenders.templates.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+            uriExtension="cSnip">
+        </resourceServiceProvider>
+    </extension>
+
+
+	<!-- marker definitions for org.eclipse.recommenders.snipeditor.SnipDSL -->
+	<extension
+	        id="snipdsl.check.fast"
+	        name="SnipDSL Problem"
+	        point="org.eclipse.core.resources.markers">
+	    <super type="org.eclipse.xtext.ui.check.fast"/>
+	    <persistent value="true"/>
+	</extension>
+	<extension
+	        id="snipdsl.check.normal"
+	        name="SnipDSL Problem"
+	        point="org.eclipse.core.resources.markers">
+	    <super type="org.eclipse.xtext.ui.check.normal"/>
+	    <persistent value="true"/>
+	</extension>
+	<extension
+	        id="snipdsl.check.expensive"
+	        name="SnipDSL Problem"
+	        point="org.eclipse.core.resources.markers">
+	    <super type="org.eclipse.xtext.ui.check.expensive"/>
+	    <persistent value="true"/>
+	</extension>
+
+   <extension
+         point="org.eclipse.xtext.builder.participant">
+      <participant
+            class="org.eclipse.recommenders.templates.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant">
+      </participant>
+   </extension>
+   <extension
+            point="org.eclipse.ui.preferencePages">
+        <page
+            category="org.eclipse.recommenders.snipeditor.SnipDSL"
+            class="org.eclipse.recommenders.templates.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
+            id="org.eclipse.recommenders.snipeditor.SnipDSL.compiler.preferencePage"
+            name="Compiler">
+            <keywordReference id="org.eclipse.recommenders.templates.ui.keyword_SnipDSL"/>
+        </page>
+    </extension>
+    <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            category="org.eclipse.recommenders.snipeditor.SnipDSL"
+            class="org.eclipse.recommenders.templates.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
+            id="org.eclipse.recommenders.snipeditor.SnipDSL.compiler.propertyPage"
+            name="Compiler">
+            <keywordReference id="org.eclipse.recommenders.templates.ui.keyword_SnipDSL"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+        </page>
+    </extension>
+
+	<!-- Quick Outline -->
+	<extension
+		point="org.eclipse.ui.handlers">
+		<handler 
+			class="org.eclipse.recommenders.templates.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.outline.quickoutline.ShowQuickOutlineActionHandler"
+			commandId="org.eclipse.xtext.ui.editor.outline.QuickOutline">
+			<activeWhen>
+				<reference
+					definitionId="org.eclipse.recommenders.snipeditor.SnipDSL.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+	<extension
+		point="org.eclipse.ui.commands">
+		<command
+			description="Open the quick outline."
+			id="org.eclipse.xtext.ui.editor.outline.QuickOutline"
+			name="Quick Outline">
+		</command>
+	</extension>
+	<extension point="org.eclipse.ui.menus">
+		<menuContribution
+			locationURI="popup:#TextEditorContext?after=group.open">
+			<command commandId="org.eclipse.xtext.ui.editor.outline.QuickOutline"
+				style="push"
+				tooltip="Open Quick Outline">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="org.eclipse.recommenders.snipeditor.SnipDSL.Editor.opened"/>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+    <!-- quickfix marker resolution generator for org.eclipse.recommenders.snipeditor.SnipDSL -->
+    <extension
+            point="org.eclipse.ui.ide.markerResolution">
+        <markerResolutionGenerator
+            class="org.eclipse.recommenders.templates.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="org.eclipse.recommenders.templates.rcp.snipdsl.check.fast">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+        <markerResolutionGenerator
+            class="org.eclipse.recommenders.templates.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="org.eclipse.recommenders.templates.rcp.snipdsl.check.normal">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+        <markerResolutionGenerator
+            class="org.eclipse.recommenders.templates.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="org.eclipse.recommenders.templates.rcp.snipdsl.check.expensive">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+    </extension>
+   	<!-- Rename Refactoring -->
+	<extension point="org.eclipse.ui.handlers">
+		<handler 
+			class="org.eclipse.recommenders.templates.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.DefaultRenameElementHandler"
+			commandId="org.eclipse.xtext.ui.refactoring.RenameElement">
+			<activeWhen>
+				<reference
+					definitionId="org.eclipse.recommenders.snipeditor.SnipDSL.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+    <extension point="org.eclipse.ui.menus">
+         <menuContribution
+            locationURI="popup:#TextEditorContext?after=group.edit">
+         <command commandId="org.eclipse.xtext.ui.refactoring.RenameElement"
+               style="push">
+            <visibleWhen checkEnabled="false">
+               <reference
+                     definitionId="org.eclipse.recommenders.snipeditor.SnipDSL.Editor.opened">
+               </reference>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
+   <extension point="org.eclipse.ui.preferencePages">
+	    <page
+	        category="org.eclipse.recommenders.snipeditor.SnipDSL"
+	        class="org.eclipse.recommenders.templates.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferencePage"
+	        id="org.eclipse.recommenders.snipeditor.SnipDSL.refactoring"
+	        name="Refactoring">
+	        <keywordReference id="org.eclipse.recommenders.templates.ui.keyword_SnipDSL"/>
+	    </page>
+	</extension>
+
+  <extension point="org.eclipse.compare.contentViewers">
+    <viewer id="org.eclipse.recommenders.snipeditor.SnipDSL.compare.contentViewers"
+            class="org.eclipse.recommenders.templates.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+            extensions="cSnip">
+    </viewer>
+  </extension>
+  <extension point="org.eclipse.compare.contentMergeViewers">
+    <viewer id="org.eclipse.recommenders.snipeditor.SnipDSL.compare.contentMergeViewers"
+            class="org.eclipse.recommenders.templates.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+            extensions="cSnip" label="SnipDSL Compare">
+     </viewer>
+  </extension>
+  <extension point="org.eclipse.ui.editors.documentProviders">
+    <provider id="org.eclipse.recommenders.snipeditor.SnipDSL.editors.documentProviders"
+            class="org.eclipse.recommenders.templates.rcp.SnipDSLExecutableExtensionFactory:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"
+            extensions="cSnip">
+    </provider>
+  </extension>
+  <extension
+        point="org.eclipse.help.contexts">
+     <contexts
+           file="contexts.xml">
+     </contexts>
+  </extension>
+<extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="org.eclipse.recommenders.injection.ExtensionFactory:org.eclipse.recommenders.internal.snipmatch.rcp.PreferencePage"
+            id="org.eclipse.recommenders.snipmatch.rpc.preferences.SnipMatchPreferencePage"
+            name="Snipmatch"
+            category="org.eclipse.recommenders.rcp.category.preferences">
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="org.eclipse.recommenders.internal.snipmatch.rcp.PreferenceInitializer">
+      </initializer>
+      <initializer
+            class="org.eclipse.recommenders.internal.snipmatch.rcp.PreferenceInitializer">
+      </initializer>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            id="org.eclipse.recommenders.snipmatch.rpc.commands.search"
+            name="Search">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="org.eclipse.recommenders.internal.snipmatch.rcp.SearchHandler"
+            commandId="org.eclipse.recommenders.snipmatch.rpc.commands.search">
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.bindings">
+      <key
+            commandId="org.eclipse.recommenders.snipmatch.rpc.commands.search"
+            contextId="org.eclipse.jdt.ui.javaEditorScope"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+Enter">
+      </key>
+   </extension>
+   <extension
+         point="org.eclipse.ui.themes">
+      <colorDefinition
+            id="org.eclipse.recommenders.snipmatch.rcp.searchboxbackground"
+            label="Search Box Background Color"
+            value="230, 255, 230">
+      </colorDefinition>
+      <fontDefinition
+            defaultsTo="org.eclipse.jface.textfont"
+            id="org.eclipse.recommenders.snipmatch.rcp.searchTextFont"
+            label="Search Text Font">
+      </fontDefinition>
+      <colorDefinition
+            id="org.eclipse.recommenders.snipmatch.rcp.searchResultBackgroundColor"
+            label="Search Result Background Color"
+            value="255, 255, 255">
+      </colorDefinition>
+   </extension>
+   <extension
+         point="org.eclipse.recommenders.injection.modules">
+      <module
+            class="org.eclipse.recommenders.internal.snipmatch.rcp.SnipmatchRcpModule">
+      </module>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            allowMultiple="false"
+            category="org.eclipse.recommenders.rcp.category.views"
+            class="org.eclipse.recommenders.injection.ExtensionFactory:org.eclipse.recommenders.internal.snipmatch.rcp.SnippetsView"
+            icon="icons/sample.gif"
+            id="org.eclipse.recommenders.snipmatch.rcp.views.snippets"
+            name="Snippets 2"
+            restorable="true">
+      </view>
+   </extension>
+
+</plugin>
