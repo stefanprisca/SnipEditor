@@ -1,16 +1,3 @@
-<<<<<<< HEAD
-language: java
-jdk: oraclejdk7
-before_install:
-  - cd ..
-  - git clone http://git.eclipse.org/gitroot/recommenders/org.eclipse.recommenders.git
-  - cd org.eclipse.recommenders
-  - export MAVEN_OPTS="-Xmx512m -XX:MaxPermSize=128m"
-  - mvn install -e -Dtycho.disableP2Mirrors=true -DskipTests=true
-  - cd ../SnipEditor
-install:
-  - mvn install -Dcheckstyle.skip -Dlicense.failIfMissing=false -e -Dtycho.disableP2Mirrors=true
-=======
 language: java
 jdk: oraclejdk7
 before_install:
@@ -22,4 +9,3 @@ before_install:
   - cd ../SnipEditor_MavenBuild
 install:
   - mvn install -Dcheckstyle.skip -Dlicense.failIfMissing=false -e -Dtycho.disableP2Mirrors=true
->>>>>>> master

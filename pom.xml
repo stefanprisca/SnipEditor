@@ -1,34 +1,3 @@
-<<<<<<< HEAD
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.eclipse.recommenders</groupId>
-	<artifactId>snipmatch-aggregator</artifactId>
-	<version>0.2.0-SNAPSHOT</version>
-	<packaging>pom</packaging>
-	<modules>
-		<module>targets/luna</module>
-		<module>releng/licenses</module>
-		<module>plugins/org.eclipse.recommenders.templates</module>
-		<module>plugins/org.eclipse.recommenders.templates.rcp</module>
-		<module>tests/org.eclipse.recommenders.templates.tests</module>
-		<module>plugins/org.eclipse.recommenders.snipmatch.rcp</module>
-		<module>tests/org.eclipse.recommenders.snipmatch.rcp.tests</module>
-		<module>features/org.eclipse.recommenders.snipmatch.rcp.feature</module>
-		<module>repositories/head</module>
-	</modules>
-	<repositories>
-		<repository>
-			<id>repo.eclipse.org</id>
-			<url>https://repo.eclipse.org/content/repositories/recommenders-snapshots/</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
-</project>
-=======
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -46,4 +15,3 @@
 		<module>org.eclipse.recommenders.repository.rcp.snipeditor</module>
 	</modules>
 </project>
->>>>>>> master
