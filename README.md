@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 SnipEditor_MavenBuild
 =====================
 Working maven build and most of the JFace grammar. <br>
@@ -110,3 +111,20 @@ class c1{
 
 [1]https://github.com/stefanprisca/SnipEditor_UpdateSite
 >>>>>>> 4ce47ddfa933575c35a555a9ead1083b71151625
+=======
+SnipMatch
+=========
+
+To build this project, you first need to checkout and build the main Eclipse Code
+Recommenders project once. This installs the necessary parent POMs and related artifacts
+into your local Maven repository (~/.m2/repository).
+
+   git clone http://git.eclipse.org/gitroot/recommenders/org.eclipse.recommenders.git
+   mvn clean install -f org.eclipse.recommenders/pom.xml
+
+Thereafter, you can build this project by simply running
+
+   mvn clean install
+
+in the project's root directory.
+>>>>>>> 0ac2a109039d15c21cabe034c4b249fc5db7cf7a

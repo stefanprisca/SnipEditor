@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
@@ -13,5 +14,19 @@
 		<module>org.eclipse.recommenders.snipeditor.tests</module>
 		<module>org.eclipse.recommenders.feature.snipeditor</module>
 		<module>org.eclipse.recommenders.repository.rcp.snipeditor</module>
+=======
+<project
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.eclipse.recommenders</groupId>
+	<artifactId>snipmatch-aggregator</artifactId>
+	<version>1.100.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<modules>
+		<module>plugins/org.eclipse.recommenders.snipmatch.rcp</module>
+		<module>tests/org.eclipse.recommenders.tests.snipmatch.rcp</module>
+		<module>features/org.eclipse.recommenders.feature.snipmatch.rcp</module>
+>>>>>>> 0ac2a109039d15c21cabe034c4b249fc5db7cf7a
 	</modules>
 </project>
