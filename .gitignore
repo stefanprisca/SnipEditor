@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #################
 ## Eclipse
 #################
@@ -20,3 +21,27 @@ target/
 .loadpath
 
 
+=======
+<<<<<<< HEAD
+#################
+## Eclipse
+#################
+
+*.pydevproject
+
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+
+target/
+*-gen/
+.settings/
+.loadpath
+
+
+>>>>>>> master

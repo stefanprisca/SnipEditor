@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -27,3 +28,22 @@
 		</repository>
 	</repositories>
 </project>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.eclipse.recommenders</groupId>
+	<artifactId>snipeditor-aggregator</artifactId>
+	<version>1.100.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<modules>
+		<module>snipeditor</module>
+		<module>org.eclipse.recommenders.snipeditor</module>
+		<module>org.eclipse.recommenders.snipeditor.ui</module>
+		<module>org.eclipse.recommenders.snipeditor.tests</module>
+		<module>org.eclipse.recommenders.feature.snipeditor</module>
+		<module>org.eclipse.recommenders.repository.rcp.snipeditor</module>
+	</modules>
+</project>
+>>>>>>> master
