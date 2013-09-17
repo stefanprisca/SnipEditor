@@ -6,6 +6,6 @@ before_install:
   - cd org.eclipse.recommenders
   - export MAVEN_OPTS="-Xmx512m -XX:MaxPermSize=128m"
   - mvn install -e -Dtycho.disableP2Mirrors=true -DskipTests=true
-  - cd ../SnipEditor_MavenBuild
+  - cd ../SnipEditor
 install:
   - mvn install -Dcheckstyle.skip -Dlicense.failIfMissing=false -e -Dtycho.disableP2Mirrors=true
