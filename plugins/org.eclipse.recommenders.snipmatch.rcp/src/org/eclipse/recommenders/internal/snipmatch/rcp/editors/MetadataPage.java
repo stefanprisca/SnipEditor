@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2013 Stefan.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *     Stefan - initial API and implementation
+ ******************************************************************************/
 /**
  * 
  */
@@ -39,20 +49,20 @@ import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
  */
 public class MetadataPage extends FormPage {
 
-    private boolean dirty=false;
+    private boolean dirty = false;
     private String snippetName = "";
-    private ArrayList<String> aliases=new ArrayList<String>();
+    private ArrayList<String> aliases = new ArrayList<String>();
     private ArrayList<String> types = new ArrayList<String>();
     private final MetadataPage instance;
     private String summary;
-    
+
     /**
      * @param id
      * @param title
      */
     public MetadataPage(String id, String title) {
         super(id, title);
-        instance=this;
+        instance = this;
         // TODO Auto-generated constructor stub
     }
 
@@ -63,7 +73,7 @@ public class MetadataPage extends FormPage {
      */
     public MetadataPage(FormEditor editor, String id, String title) {
         super(editor, id, title);
-        instance=this;
+        instance = this;
         // TODO Auto-generated constructor stub
     }
 
@@ -76,7 +86,7 @@ public class MetadataPage extends FormPage {
         toolkit.decorateFormHeading(form.getForm());
         toolkit.paintBordersFor(body);
         body.setLayout(new GridLayout(4, false));
-        
+
         SnipEditorFileInput editorInp;
         if (getEditorInput() instanceof SnipEditorFileInput) {
             editorInp = (SnipEditorFileInput) getEditorInput();
@@ -99,8 +109,8 @@ public class MetadataPage extends FormPage {
 
             data.widthHint = 300;
             data.heightHint = 50;
-            final Text summaryTxt = toolkit.createText(body, "summaryTxt", SWT.BORDER
-                    | SWT.V_SCROLL | SWT.H_SCROLL | SWT.MULTI);
+            final Text summaryTxt = toolkit.createText(body, "summaryTxt",
+                    SWT.BORDER | SWT.V_SCROLL | SWT.H_SCROLL | SWT.MULTI);
             summaryTxt.setText(editorInp.getContents(
                     SnipEditorFileInput.VAR_DESCRIPTION).toString());
             summaryTxt.setLayoutData(data);
@@ -164,13 +174,13 @@ public class MetadataPage extends FormPage {
                 }
             });
             summaryTxt.addKeyListener(new KeyListener() {
-                
+
                 @Override
                 public void keyReleased(KeyEvent e) {
                     // TODO Auto-generated method stub
-                    
+
                 }
-                
+
                 @Override
                 public void keyPressed(KeyEvent e) {
                     // TODO Auto-generated method stub
@@ -178,48 +188,46 @@ public class MetadataPage extends FormPage {
                 }
             });
             snippetNameTxt.addKeyListener(new KeyListener() {
-                
+
                 @Override
                 public void keyReleased(KeyEvent e) {
                     // TODO Auto-generated method stub
-                    
+
                 }
-                
+
                 @Override
                 public void keyPressed(KeyEvent e) {
                     // TODO Auto-generated method stub
                     setSnippetName(snippetNameTxt.getText());
                 }
             });
-            
 
             addNewPatern.addSelectionListener(new SelectionAdapter() {
                 public void widgetSelected(SelectionEvent e) {
-                   
+
                     Point position = new Point(addNewPatern.getLocation().x
                             + addNewPatern.getBounds().width, addNewPatern
                             .getLocation().y);
-                    new MetaFieldEditor(instance ,body, SWT.None, aliasesList, body
-                            .toDisplay(position));
-                    
+                    new MetaFieldEditor(instance, body, SWT.None, aliasesList,
+                            body.toDisplay(position));
+
                 }
             });
-           
+
             editPatern.addSelectionListener(new SelectionAdapter() {
                 public void widgetSelected(SelectionEvent e) {
-                   
+
                     Point position = new Point(editPatern.getLocation().x
                             + editPatern.getBounds().width, editPatern
                             .getLocation().y);
-                    new MetaFieldEditor(instance, body, SWT.None, aliasesList, body
-                            .toDisplay(position), aliasesList
-                            .getSelectionIndex());
-                            }
+                    new MetaFieldEditor(instance, body, SWT.None, aliasesList,
+                            body.toDisplay(position), aliasesList
+                                    .getSelectionIndex());
+                }
             });
             removePattern.addSelectionListener(new SelectionAdapter() {
                 public void widgetSelected(SelectionEvent e) {
                     aliasesList.remove(aliasesList.getSelectionIndex());
-                    
 
                 }
             });
@@ -248,76 +256,83 @@ public class MetadataPage extends FormPage {
                             }
 
                         }
-                    }else{
-                       
-                        MessageDialog.openError(body.getShell(), "Wrong Editor", "The on which this page opens must be an"
-                                + " instance of MultiPageSnipEditor.class");
+                    } else {
+
+                        MessageDialog.openError(
+                                body.getShell(),
+                                "Wrong Editor",
+                                "The on which this page opens must be an"
+                                        + " instance of MultiPageSnipEditor.class");
                     }
                 }
             });
         }
     }
-    
-    public void setDirty(boolean arg){
-        dirty=arg;
+
+    public void setDirty(boolean arg) {
+        dirty = arg;
         getEditor().editorDirtyStateChanged();
     }
-    
+
     @Override
-    public boolean isDirty(){
+    public boolean isDirty() {
         return dirty;
     }
 
- 
     /**
-     * @param snippetName the snippetName to set
+     * @param snippetName
+     *            the snippetName to set
      */
     public void setSnippetName(String snippetName) {
-        if(getEditorInput() instanceof SnipEditorFileInput){
-            this.snippetName=snippetName;
+        if (getEditorInput() instanceof SnipEditorFileInput) {
+            this.snippetName = snippetName;
             setDirty(true);
         }
     }
-    
-    public String getSnippetName(){
+
+    public String getSnippetName() {
         return snippetName;
     }
 
-  
     /**
-     * @param patterns the patterns to set
+     * @param patterns
+     *            the patterns to set
      */
     public void setAliases(String[] aliases) {
-       if(getEditorInput() instanceof SnipEditorFileInput){
-          this.aliases.clear();
-           for(String alias : aliases){
-               System.out.println(alias);
-               this.aliases.add(alias);
-           }
-        
-          setDirty(true);
-       }
+        if (getEditorInput() instanceof SnipEditorFileInput) {
+            this.aliases.clear();
+            for (String alias : aliases) {
+                System.out.println(alias);
+                this.aliases.add(alias);
+            }
+
+            setDirty(true);
+        }
     }
 
-    public ArrayList<String> getAliases(){
+    public ArrayList<String> getAliases() {
         return aliases;
     }
 
     /**
-     * @param types the types to set
+     * @param types
+     *            the types to set
      */
     public void setTypes(ArrayList<String> types) {
         this.types = types;
-        
+
     }
-    public ArrayList<String> getTypes(){
+
+    public ArrayList<String> getTypes() {
         return types;
     }
-    public void setSummary(String summary){
-        this.summary=summary;
+
+    public void setSummary(String summary) {
+        this.summary = summary;
         setDirty(true);
     }
-    public String getSummary(){
+
+    public String getSummary() {
         return summary;
     }
 

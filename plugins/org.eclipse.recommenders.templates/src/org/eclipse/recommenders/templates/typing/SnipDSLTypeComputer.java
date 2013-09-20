@@ -108,7 +108,7 @@ public class SnipDSLTypeComputer extends XbaseWithAnnotationsTypeComputer {
         // TODO Auto-generated method stub
         // simple type computation, the true work is done via the model
         // inferrer.
-       
+
     }
 
     private void _computeTypes(UnaryOperation expression,

@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2013 Stefan Prisca.
+ * Copyright (c) 2013 Stefan.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- *     Stefan Prisca - initial API and implementation
+ *     Stefan - initial API and implementation
  ******************************************************************************/
 package org.eclipse.recommenders.internal.snipmatch.rcp.editors;
 
@@ -114,8 +114,6 @@ public class MultiPageSnipEditor extends FormEditor implements
         }
     }
 
-    
-    
     /**
      * The <code>MultiPageEditorPart</code> implementation of this
      * <code>IWorkbenchPart</code> method disposes all nested editors.
@@ -142,22 +140,21 @@ public class MultiPageSnipEditor extends FormEditor implements
                         .available()];
                 fEditInp.getFile().getContents()
                         .read(contents, 0, contents.length);
-                if(pages.get(1) instanceof MetadataPage){
-                    MetadataPage page2=((MetadataPage) pages.get(1));
+                if (pages.get(1) instanceof MetadataPage) {
+                    MetadataPage page2 = ((MetadataPage) pages.get(1));
                     File snippetFile = new File(fEditInp.getExternalPath());
-                   
-                    Snippet temp =((SnipEditorFileInput) page2.getEditorInput()).getSnippet();
-                    
+
+                    Snippet temp = ((SnipEditorFileInput) page2
+                            .getEditorInput()).getSnippet();
+
                     temp.setName(page2.getSnippetName());
                     temp.setCode(new String(contents));
                     temp.setAliases(page2.getAliases());
-                    System.out.println(temp.getName()+" / "+page2.getSnippetName());
-                    GsonUtil.serialize(temp , snippetFile);
+                    System.out.println(temp.getName() + " / "
+                            + page2.getSnippetName());
+                    GsonUtil.serialize(temp, snippetFile);
                     page2.setDirty(false);
                 }
-                
-               
-               
 
             } catch (IOException e) { // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -167,7 +164,6 @@ public class MultiPageSnipEditor extends FormEditor implements
         }
         typeReferences = computer.getReferenceOwner();
 
-        
     }
 
     /**
@@ -243,20 +239,20 @@ public class MultiPageSnipEditor extends FormEditor implements
         }
     }
 
-	@Override
-	protected void addPages() {
-		// TODO Auto-generated method stub
-		createEditorPage();
-		try {
-			addPage(new MetadataPage(this, "metaPg", "Metadata"));
-		} catch (PartInitException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
-	public ITypeReferenceOwner getTypeReference(){
-	    typeReferences=computer.getReferenceOwner();
-	    return typeReferences;
-	}
+    @Override
+    protected void addPages() {
+        // TODO Auto-generated method stub
+        createEditorPage();
+        try {
+            addPage(new MetadataPage(this, "metaPg", "Metadata"));
+        } catch (PartInitException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    public ITypeReferenceOwner getTypeReference() {
+        typeReferences = computer.getReferenceOwner();
+        return typeReferences;
+    }
 }

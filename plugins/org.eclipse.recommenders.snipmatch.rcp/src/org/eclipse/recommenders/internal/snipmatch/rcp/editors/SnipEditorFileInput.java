@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2013 Stefan Prisca.
+ * Copyright (c) 2013 Stefan.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- *     Stefan Prisca - initial API and implementation
+ *     Stefan - initial API and implementation
  ******************************************************************************/
 package org.eclipse.recommenders.internal.snipmatch.rcp.editors;
 
@@ -68,9 +68,10 @@ public class SnipEditorFileInput implements IFileEditorInput {
         return externalSnippet.getAbsolutePath();
     }
 
-    public Snippet getSnippet(){
+    public Snippet getSnippet() {
         return snippet;
     }
+
     @Override
     public IStorage getStorage() {
         // TODO Auto-generated method stub
@@ -93,7 +94,7 @@ public class SnipEditorFileInput implements IFileEditorInput {
     @Override
     public String getName() {
         // TODO Auto-generated method stub
-        if(snippet.getName()!="")
+        if (snippet.getName() != "")
             return snippet.getName();
         else
             return localSnip.getName();
@@ -140,18 +141,20 @@ public class SnipEditorFileInput implements IFileEditorInput {
         return localSnip.equals(other.getFile());
     }
 
-    public void setName(String newName){
+    public void setName(String newName) {
         snippet.setName(newName);
-        
+
     }
-    public void setAliases(List<String> aliases){
+
+    public void setAliases(List<String> aliases) {
         snippet.setAliases(aliases);
     }
-    
-    public void setCode(String code){
+
+    public void setCode(String code) {
         snippet.setCode(code);
-        
+
     }
+
     public Object getContents(int contentID) {
         System.out.println(snippet);
         switch (contentID) {
