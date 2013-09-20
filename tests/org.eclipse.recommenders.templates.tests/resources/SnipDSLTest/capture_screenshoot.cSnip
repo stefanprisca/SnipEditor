@@ -1,0 +1,21 @@
+${import(java.io.File,java.awt.image.BufferedImage,java.awt.Toolkit,java.awt.Robot,java.awt.Dimension, java.awt.Rectangle)}
+
+
+class ScreenCapturer {
+	
+	public static void captureAndSave(String fileName) throws Exception {
+	 
+	   Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+	   Rectangle screenRectangle = new Rectangle(screenSize);
+	   Robot robot = new Robot();
+	   BufferedImage image = robot.createScreenCapture(screenRectangle);
+	   ImageIO.write(image, "png", new File(fileName)); 
+	}
+}
+
+
+try {
+	//ScreenCapturer.captureAndSave(${filePath}${cursor});
+} catch (Exception ${e:newName(e)}) {
+	// TODO: Handle file saving errors here.
+}

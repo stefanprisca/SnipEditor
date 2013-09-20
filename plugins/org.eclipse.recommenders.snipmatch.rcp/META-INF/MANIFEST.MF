@@ -37,7 +37,8 @@ Require-Bundle: org.eclipse.xtext.ui,
  org.eclipse.core.databinding.beans,
  org.eclipse.core.databinding.observable,
  org.eclipse.core.databinding.property,
- org.eclipse.jface.databinding
+ org.eclipse.jface.databinding,
+ org.eclipse.ui.forms;bundle-version="3.6.0"
 Import-Package: com.google.gson.annotations;version="2.1.0",
  com.google.gson.reflect,
  org.apache.log4j,

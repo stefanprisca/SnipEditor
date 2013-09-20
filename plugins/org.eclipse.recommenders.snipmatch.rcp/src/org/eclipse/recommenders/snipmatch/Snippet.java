@@ -63,8 +63,9 @@ public class Snippet implements Uuidable, Comparable<Snippet> {
 
     public List<String> getAliases() {
         // XXX TODO no real aliases yet
+        //-> Include all the aliases that are added through the editor
         Builder<String> b = ImmutableList.builder();
-        return b.add(getName()).add(getDescription()).build();
+        return b.add(getName()).add(getDescription()).addAll(aliases).build();
     }
 
     public String getCode() {
@@ -95,4 +96,15 @@ public class Snippet implements Uuidable, Comparable<Snippet> {
     public void setCode(String code) {
         this.code = code;
     }
+    
+    public void setName(String name){
+        this.name=name;
+    }
+    
+    public void setAliases(List<String> aliases){
+        this.aliases.clear();
+        this.aliases.addAll(aliases);
+        System.out.println(this.aliases);
+    }
+    
 }

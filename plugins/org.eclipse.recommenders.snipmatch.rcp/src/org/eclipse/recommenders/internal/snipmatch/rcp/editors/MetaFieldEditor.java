@@ -10,6 +10,8 @@
  ******************************************************************************/
 package org.eclipse.recommenders.internal.snipmatch.rcp.editors;
 
+import java.util.ArrayList;
+
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;
@@ -27,10 +29,12 @@ import org.eclipse.swt.widgets.Text;
 public class MetaFieldEditor extends Composite {
 
     private Control editableControl;
+    MetadataPage owner;
 
-    public MetaFieldEditor(Composite parent, int style, Control editable,
+    public MetaFieldEditor(MetadataPage owner,Composite parent, int style, Control editable,
             Point position) {
         super(parent, style);
+        this.owner=owner;
         editableControl = editable;
         Shell sh = new Shell(parent.getShell(), SWT.ON_TOP);
         sh.setLocation(position);
@@ -39,9 +43,10 @@ public class MetaFieldEditor extends Composite {
         // TODO Auto-generated constructor stub
     }
 
-    public MetaFieldEditor(Composite parent, int style, Control editable,
+    public MetaFieldEditor(MetadataPage owner, Composite parent, int style, Control editable,
             Point position, int index) {
         super(parent, style);
+        this.owner=owner;
         editableControl = editable;
         Shell sh = new Shell(parent.getShell(), SWT.ON_TOP);
         sh.setLocation(position);
@@ -82,10 +87,13 @@ public class MetaFieldEditor extends Composite {
                         if (index != -1) {
                             ((List) editableControl).setItem(index,
                                     newItem.getText());
+                            owner.setAliases(((List) editableControl).getItems());
                         } else {
                             if (newItem.getText() != "") {
 
+                                
                                 ((List) editableControl).add(newItem.getText());
+                                owner.setAliases(((List) editableControl).getItems());
                             }
                         }
                     }

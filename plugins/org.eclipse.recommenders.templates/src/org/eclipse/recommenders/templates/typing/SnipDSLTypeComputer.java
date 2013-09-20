@@ -108,31 +108,7 @@ public class SnipDSLTypeComputer extends XbaseWithAnnotationsTypeComputer {
         // TODO Auto-generated method stub
         // simple type computation, the true work is done via the model
         // inferrer.
-        JvmTypeReference type = null;
-        if (expression.getJType().getType() != null) {
-            type = expression.getJType().getType();
-
-        } else if (expression.getJType().getJFaceType() != null) {
-            jFaceDeclarationType jfaceType = expression.getJType()
-                    .getJFaceType();
-            if (jfaceType.getType().contains("array")) {
-                type = typeBuilder.addArrayTypeDimension(typeBuilder
-                        .newTypeRef(expression, Object.class, null));
-
-            } else if (jfaceType.getType().contains("interable")) {
-                type = typeBuilder.newTypeRef(expression, Iterable.class, null);
-            } else if (jfaceType.getType().contains("collection")) {
-                type = typeBuilder.newTypeRef(expression, Collection.class,
-                        null);
-
-            }
-
-        }
-        if (type != null) {
-            state.acceptActualType(state.getConverter().toLightweightReference(
-                    type));
-        }
-
+       
     }
 
     private void _computeTypes(UnaryOperation expression,

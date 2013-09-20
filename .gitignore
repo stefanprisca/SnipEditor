@@ -1,22 +1,36 @@
-<<<<<<< HEAD
-#################
-## Eclipse
-#################
+## no archives
+*.jar
+*.zip
+*.gz
 
-*.pydevproject
-
-.metadata
+## no derived resources
+*.class
 bin/
-tmp/
-*.tmp
-*.bak
-*.swp
-*~.nib
-local.properties
-
 target/
-*-gen/
+src-gen/
+plugin.xml_gen
+.recommenders/
+aggregators/
+screenshots/
+
+## xtend-gen should not be checked in
+xtend-gen/
+
+## jrebel project config files
+rebel.xml
+
+## no settings (except xtend)
+.project
+.metadata/
+.classpath
 .settings/
-.loadpath
+!.settings/org.eclipse.xtend.core.Xtend.prefs
+.checkstyle
 
-
+## various other file types we don't want to have in the repository:
+.DS_Store
+*~
+*#
+*.licensed
+*.aux
+*_trace

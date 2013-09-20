@@ -20,7 +20,6 @@ generate snipDSL "http://www.eclipse.org/recommenders/templates/SnipDSL"
 //TODO:rename it.
 domainmodel:
 	importSection=jFaceImportSection?
-	entity=entity? 
 	//features+=EntityFeature*
     body=dModelBody
 	
@@ -55,11 +54,10 @@ dModelBody returns xbase::XBlockExpression:
 //Any element that can be found in the body of the snippet
 //Question: Should the helpperClassAnnotation still exist?
 abstractElement returns xbase::XExpression:
-	packageDeclare | 
 	entity|
 	helpperClassAnnotation | 
-	method |
-	XExpressionInsideBlock 
+	EntityFeature|
+	XExpression ';'?
 ;
 //simple package declaration. does not support much template syntax
 packageDeclare:
@@ -88,7 +86,7 @@ EntityFeature returns xbase::XExpression:
 //TODO: set the visibility to allow template expression like link
 method:
 	(visibility=Visibility)? 'static'?  (jType=abstractTypeName | "void")
-	name=ValidID'('(params+=FullJvmFormalParameter
+	name=declarativeID'('(params+=FullJvmFormalParameter
 		(','params+=FullJvmFormalParameter)*)?')' 
 		('throws' throwExceptions+=operandID(',' throwExceptions+=operandID)*)?
 	body=XBlockExpression
@@ -388,7 +386,7 @@ jFaceVarID:
 //ID's that can be used in operations (e.g. for feature calls through identifiable elements)
 operandID :
 	ValidID | 
-	('${' =>(ValidID)'}')
+	('${' =>(ValidID)'}') 
 
 ;
 
@@ -402,8 +400,8 @@ jFaceSpecificLiteral returns xbase::XExpression:
 	'${'type=('cursor'|'dollar'|'line_selection'|'date'
 		|'time'|'enclosing_method'|'enclosing_method_arguments'|
 		'enclosing_package'|'enclosing_project'|
-		'file'|'user' |'year'|'primary_type_name'|'return_type'|'enclosing_type'
-	)'}' |{jFaceSpecificLiteral} '${' type='word_selection' '}${}'
+		'file'|'user' |'year'
+	)'}' |{jFaceSpecificLiteral} ('${' type='word_selection' '}')? '${}'
 	|=>jFaceCastExpression
 ;
 
@@ -419,7 +417,7 @@ jFaceSpecificLiteral returns xbase::XExpression:
   * separately in the type computer.
   */
  jFaceDeclarationType:
-	'${'type=('array_type'|'iterable_type'|ValidID )'}'
+	'${'type=(JFACEEXPRASTYPE | 'array_type'|'iterable_type'|ValidID )'}'
 	|('${'ValidID':'('elemType' | 'newType')'('type=( JFACEEXPRASTYPE | 'array_type'|'iterable_type' )')}')
 ;
  
@@ -443,7 +441,8 @@ JvmFormalParameter returns types::JvmFormalParameter:
 	
 FullJvmFormalParameter returns types::JvmFormalParameter:
 {JvmFormalParameter}	
-	(parameterType=referencedType | jFaceType=jFaceDeclarationType) simpleName=(declarativeID|operandID) ;
+	(parameterType=referencedType | jFaceType=jFaceDeclarationType) 
+	(simpleName=(declarativeID|operandID)| jFaceExpr=(jFaceExpression | jFaceSpecificLiteral)) ;
 
 
 helpperClassAnnotation :
@@ -466,7 +465,7 @@ JFACEEXPRID:
 //template expressions that can be used to refer a type
 JFACEEXPRASTYPE:
 	
-	'array' | 'collection' | /*'iterator' |*/ 'iterable' 
+	'array' | 'collection' | /*'iterator' |*/ 'iterable' |'primary_type_name'|'return_type'|'enclosing_type'
 ;
 
 terminal ID:

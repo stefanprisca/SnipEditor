@@ -1,0 +1,31 @@
+
+ArrayStoreException e;
+
+${array_type} arr = new ${array_type}();
+arr.get(0);
+
+${iterable_type} iter = new ${iterable_type}();
+
+iter = ${iterable}
+Object [] p = ${array}.toArray();
+System.out.println(${iterable}); 
+${collection}.isEmpty();
+ 
+${type:newType(array)} elemnt;
+
+
+p.add(${arr:var(java.lang.reflect.AccessibleObject)});
+
+${type:elemType(java.lang.String)} elem = new ${type:elemType(java.lang.Integer)}(new ${type:newType(java.lang.String)}("This is my name"))
+ 
+ 
+else{
+ 	this.main();
+ }
+for(${iterator}:${iterable}){
+	
+}
+
+
+
+

@@ -278,9 +278,14 @@ public class SnipDSLSpecificCompiler extends XbaseCompiler {
             ITreeAppendable appendable, boolean isReferenced) {
         appendable.newLine();
         appendable.append("for (" + obj.getDeclaredParam().getName() + " ;");
-        internalToConvertedExpression(obj.getCondition(), appendable);
+        if(obj.getCondition()!=null){
+              	internalToConvertedExpression(obj.getCondition(), appendable);
+        }
         appendable.append(";");
-        internalToConvertedExpression(obj.getForExpression(), appendable);
+        if(obj.getForExpression()!=null)
+        {
+        	internalToConvertedExpression(obj.getForExpression(), appendable);
+        }
         appendable.append("){");
         // doInternalToJavaStatement(obj.getEachExpression(), appendable,
         // false);

@@ -14,6 +14,7 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -42,7 +43,7 @@ public class SnipEditorFileInput implements IFileEditorInput {
 
     public static final int VAR_CODE = 0;
     public static final int VAR_NAME = 1;
-    public static final int VAR_PATTERNS = 2;
+    public static final int VAR_ALIASES = 2;
     public static final int VAR_AUTHOR = 3;
     public static final int VAR_DESCRIPTION = 5;
     // public static final int FULL_SNIPPET = 2;
@@ -67,6 +68,9 @@ public class SnipEditorFileInput implements IFileEditorInput {
         return externalSnippet.getAbsolutePath();
     }
 
+    public Snippet getSnippet(){
+        return snippet;
+    }
     @Override
     public IStorage getStorage() {
         // TODO Auto-generated method stub
@@ -89,7 +93,10 @@ public class SnipEditorFileInput implements IFileEditorInput {
     @Override
     public String getName() {
         // TODO Auto-generated method stub
-        return localSnip.getName();
+        if(snippet.getName()!="")
+            return snippet.getName();
+        else
+            return localSnip.getName();
     }
 
     @Override
@@ -133,6 +140,18 @@ public class SnipEditorFileInput implements IFileEditorInput {
         return localSnip.equals(other.getFile());
     }
 
+    public void setName(String newName){
+        snippet.setName(newName);
+        
+    }
+    public void setAliases(List<String> aliases){
+        snippet.setAliases(aliases);
+    }
+    
+    public void setCode(String code){
+        snippet.setCode(code);
+        
+    }
     public Object getContents(int contentID) {
         System.out.println(snippet);
         switch (contentID) {
@@ -140,7 +159,7 @@ public class SnipEditorFileInput implements IFileEditorInput {
             return snippet.getCode();
         case VAR_NAME:
             return getName();
-        case VAR_PATTERNS:
+        case VAR_ALIASES:
             return snippet.getAliases();
         case VAR_DESCRIPTION:
             return snippet.getDescription();

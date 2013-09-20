@@ -1,0 +1,12 @@
+${import(java.util.Collection)}
+
+${array_type}[] ${result:newName(array)};
+//add 
+System.arraycopy(${array}, 0, ${result}, 0, ${array}.size());
+${result} [${array}.length]= ${bar};//var is a reserved word!
+//merge
+System.arraycopy(${array}, 0, ${result}, 0, ${array}.size());
+${array_type} ${array1:newName(some.s)} = new ${array_type}();
+System.arraycopy(${array}, 0, ${result}, ${array1}.size(), ${array}.size());
+//convert to array
+(${type:elemType(Collection[])}) ${collection}.toArray(new ${Type}[${collection}.size()]);

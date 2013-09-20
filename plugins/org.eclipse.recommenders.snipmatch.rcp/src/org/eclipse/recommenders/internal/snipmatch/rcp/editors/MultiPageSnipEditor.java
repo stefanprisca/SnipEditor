@@ -40,6 +40,7 @@ import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.*;
 import org.eclipse.ui.editors.text.TextEditor;
+import org.eclipse.ui.forms.editor.FormEditor;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.part.MultiPageEditorPart;
 import org.eclipse.ui.ide.IDE;
@@ -58,7 +59,7 @@ import com.google.inject.Inject;
  * <li>page 2 shows the words in page 0 in sorted order
  * </ul>
  */
-public class MultiPageSnipEditor extends MultiPageEditorPart implements
+public class MultiPageSnipEditor extends FormEditor implements
         IResourceChangeListener {
 
     @Inject
@@ -97,7 +98,7 @@ public class MultiPageSnipEditor extends MultiPageEditorPart implements
     /**
      * Creates page 0 of the multi-page editor, which contains a text editor.
      */
-    void createPage0() {
+    void createEditorPage() {
         try {
 
             editor = snipEditor;
@@ -113,179 +114,8 @@ public class MultiPageSnipEditor extends MultiPageEditorPart implements
         }
     }
 
-    void createPage1() {
-        final Group pageContents = new Group(getContainer(), SWT.V_SCROLL
-                | SWT.H_SCROLL);
-        pageContents.setLayout(new GridLayout(4, false));
-        pageContents.setText("METADATA");
-
-        SnipEditorFileInput editorInp;
-        if (getEditorInput() instanceof SnipEditorFileInput) {
-            editorInp = (SnipEditorFileInput) getEditorInput();
-
-            GridData data = new GridData(GridData.BEGINNING);
-
-            Label snipName = new Label(pageContents, SWT.None);
-            snipName.setText("Snippet Name: ");
-
-            Text snipNameTxt = new Text(pageContents, SWT.BORDER
-                    | SWT.BEGINNING);
-            snipNameTxt.setText(editorInp.getName());
-            // snipNameTxt.setLayoutData(data);
-
-            data = new GridData(GridData.FILL_HORIZONTAL);
-            data.horizontalSpan = 2;
-            Button addTypes = new Button(pageContents, SWT.PUSH);
-            addTypes.setText("Check for types!");
-
-            addTypes.setLayoutData(data);
-
-            Label summary = new Label(pageContents, SWT.None);
-            summary.setText("Description: ");
-            data = new GridData(GridData.BEGINNING);
-
-            data.widthHint = 300;
-            data.heightHint = 50;
-            Text summaryTxt = new Text(pageContents, SWT.BORDER | SWT.V_SCROLL
-                    | SWT.H_SCROLL | SWT.MULTI);
-            summaryTxt.setText(editorInp.getContents(
-                    SnipEditorFileInput.VAR_DESCRIPTION).toString());
-            summaryTxt.setLayoutData(data);
-
-            ListViewer typesListView = new ListViewer(pageContents, SWT.BORDER
-                    | SWT.SHADOW_IN | SWT.V_SCROLL | SWT.H_SCROLL | SWT.MULTI);
-
-            final List typesList = typesListView.getList();
-
-            data = new GridData(GridData.FILL_BOTH);
-            data.heightHint = 100;
-            data.widthHint = 300;
-            data.verticalSpan = 10;
-            data.horizontalSpan = 2;
-            typesList.setLayoutData(data);
-
-            Label patterns = new Label(pageContents, SWT.BEGINNING);
-            patterns.setText("Search Phrases:");
-
-            data = new GridData(GridData.BEGINNING);
-            data.heightHint = 100;
-            data.widthHint = 300;
-            data.verticalSpan = 4;
-
-            final ListViewer patternsListView = new ListViewer(pageContents,
-                    SWT.BORDER | SWT.SHADOW_IN | SWT.V_SCROLL | SWT.H_SCROLL
-                            | SWT.MULTI);
-
-            final List patternsList = patternsListView.getList();
-
-            patternsList.setLayoutData(data);
-
-            java.util.List<String> patternsVal = (java.util.List<String>) editorInp
-                    .getContents(SnipEditorFileInput.VAR_PATTERNS);
-
-            for (String p : patternsVal) {
-                patternsList.add(p);
-
-            }
-
-            data = new GridData(GridData.CENTER);
-            data.widthHint = 100;
-            final Button addNewPatern = new Button(pageContents, SWT.PUSH);
-            addNewPatern.setText("Add New");
-            addNewPatern.setLayoutData(data);
-            final Button editPatern = new Button(pageContents, SWT.PUSH);
-            editPatern.setText("Edit");
-            editPatern.setLayoutData(data);
-            editPatern.setEnabled(false);
-            final Button removePattern = new Button(pageContents, SWT.PUSH);
-            removePattern.setText("Remove");
-            removePattern.setLayoutData(data);
-            removePattern.setEnabled(false);
-
-            patternsList.addSelectionListener(new SelectionAdapter() {
-                public void widgetSelected(SelectionEvent e) {
-                    removePattern.setEnabled(true);
-                    editPatern.setEnabled(true);
-                }
-            });
-
-            addNewPatern.addSelectionListener(new SelectionAdapter() {
-                public void widgetSelected(SelectionEvent e) {
-                    // firePropertyChange(PROP_DIRTY);
-                    Point position = new Point(addNewPatern.getLocation().x
-                            + addNewPatern.getBounds().width, addNewPatern
-                            .getLocation().y);
-                    new MetaFieldEditor(pageContents, SWT.None, patternsList,
-                            pageContents.toDisplay(position));
-                    firePropertyChange(PROP_DIRTY);
-                }
-            });
-            editPatern.addSelectionListener(new SelectionAdapter() {
-                public void widgetSelected(SelectionEvent e) {
-                    // firePropertyChange(PROP_DIRTY);
-                    Point position = new Point(editPatern.getLocation().x
-                            + editPatern.getBounds().width, editPatern
-                            .getLocation().y);
-                    new MetaFieldEditor(pageContents, SWT.None, patternsList,
-                            pageContents.toDisplay(position), patternsList
-                                    .getSelectionIndex());
-
-                }
-            });
-            removePattern.addSelectionListener(new SelectionAdapter() {
-                public void widgetSelected(SelectionEvent e) {
-                    patternsList.remove(patternsList.getSelectionIndex());
-                    // firePropertyChange(PROP_DIRTY);
-
-                }
-            });
-
-            addTypes.addSelectionListener(new SelectionAdapter() {
-                @SuppressWarnings("restriction")
-                public void widgetSelected(SelectionEvent e) {
-                    typesList.removeAll();
-                    if (typeReferences == null) {
-                        typeReferences = computer.getReferenceOwner();
-                    }
-                    for (Resource r : typeReferences.getContextResourceSet()
-                            .getResources()) {
-                        for (EObject content : r.getContents()) {
-                            if (content instanceof JvmType
-                                    && !((JvmType) content).getQualifiedName()
-                                            .contains("CodeSnippet_")) {
-                                // System.out.println(content);
-                                typesList.add(((JvmType) content)
-                                        .getQualifiedName());
-                            }
-                        }
-
-                    }
-
-                }
-            });
-
-        }
-        pageContents.pack();
-        int index = addPage(pageContents);
-        setPageText(index, "Metadata");
-
-    }
-
-    /**
-     * Creates page 2 of the multi-page editor, which shows the sorted text.
-     */
-    void createPage2() {
-    }
-
-    /**
-     * Creates the pages of the multi-page editor.
-     */
-    protected void createPages() {
-        createPage0();
-        createPage1();
-        // createPage2();
-    }
-
+    
+    
     /**
      * The <code>MultiPageEditorPart</code> implementation of this
      * <code>IWorkbenchPart</code> method disposes all nested editors.
@@ -312,13 +142,22 @@ public class MultiPageSnipEditor extends MultiPageEditorPart implements
                         .available()];
                 fEditInp.getFile().getContents()
                         .read(contents, 0, contents.length);
-                File snippetFile = new File(fEditInp.getExternalPath());
-                System.out.println(snippetFile.getAbsolutePath());
-                Snippet snippet = GsonUtil.deserialize(snippetFile,
-                        Snippet.class);
-                snippet.setCode(new String(contents));
-
-                GsonUtil.serialize(snippet, snippetFile);
+                if(pages.get(1) instanceof MetadataPage){
+                    MetadataPage page2=((MetadataPage) pages.get(1));
+                    File snippetFile = new File(fEditInp.getExternalPath());
+                   
+                    Snippet temp =((SnipEditorFileInput) page2.getEditorInput()).getSnippet();
+                    
+                    temp.setName(page2.getSnippetName());
+                    temp.setCode(new String(contents));
+                    temp.setAliases(page2.getAliases());
+                    System.out.println(temp.getName()+" / "+page2.getSnippetName());
+                    GsonUtil.serialize(temp , snippetFile);
+                    page2.setDirty(false);
+                }
+                
+               
+               
 
             } catch (IOException e) { // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -328,6 +167,7 @@ public class MultiPageSnipEditor extends MultiPageEditorPart implements
         }
         typeReferences = computer.getReferenceOwner();
 
+        
     }
 
     /**
@@ -402,4 +242,21 @@ public class MultiPageSnipEditor extends MultiPageEditorPart implements
             });
         }
     }
+
+	@Override
+	protected void addPages() {
+		// TODO Auto-generated method stub
+		createEditorPage();
+		try {
+			addPage(new MetadataPage(this, "metaPg", "Metadata"));
+		} catch (PartInitException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public ITypeReferenceOwner getTypeReference(){
+	    typeReferences=computer.getReferenceOwner();
+	    return typeReferences;
+	}
 }

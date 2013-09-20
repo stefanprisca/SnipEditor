@@ -1,0 +1,11 @@
+//convert $int to String
+${import(java.util.ArrayList)}
+
+
+String ${str:newName(java.lang.String)} = Integer.toString(${int});
+
+//Convert $ArrayList to array
+${type:elemType(ArrayList)} ${a:newName(ArrayList)} = ${ArrayList}.toArray(new ArrayList());//[${ArrayList}.size]->not working!
+
+//Convert $double to String
+String ${str2:newName(java.lang.String)} = Double.toString(${double});

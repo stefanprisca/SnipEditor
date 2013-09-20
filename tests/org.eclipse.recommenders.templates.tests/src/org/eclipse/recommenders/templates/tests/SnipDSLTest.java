@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2013 Stefan Prisca.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *     Stefan Prisca - initial API and implementation
+ ******************************************************************************/
 package org.eclipse.recommenders.templates.tests;
 
 import org.eclipse.recommenders.templates.SnipDSLInjectorProvider;
@@ -33,20 +43,33 @@ public class SnipDSLTest extends XtextTest {
 
     @Test
     public void randomTests() {
-        // suppressSerialization();
-        // testFile("Tests.cSnip");
-        // ignoreUnassertedWarnings();
+        suppressSerialization();
+        testFile("Tests.cSnip");
+        ignoreUnassertedWarnings();
     }
+
+    @Test
+    public void conversionTests() {
+        suppressSerialization();
+        testFile("conversions.cSnip");
+        ignoreUnassertedWarnings();
+    }
+
+    @Test
+    public void arraysTests() {
+        suppressSerialization();
+        testFile("arrays.cSnip");
+        ignoreUnassertedWarnings();
+    }
+
+    @Test
+    public void captureScreenShoot() {
+        suppressSerialization();
+        testFile("capture_screenshoot.cSnip");
+        ignoreUnassertedWarnings();
+    }
+
     /*
-     * @Test public void conversionTests() { suppressSerialization();
-     * testFile("conversions.cSnip"); ignoreUnassertedWarnings(); }
-     * 
-     * @Test public void arraysTests() { suppressSerialization();
-     * testFile("arrays.cSnip"); ignoreUnassertedWarnings(); }
-     * 
-     * @Test public void captureScreenShoot() { suppressSerialization();
-     * testFile("capture_screenshoot.cSnip"); ignoreUnassertedWarnings(); }
-     * 
      * @Test public void createSwingWindow() { suppressSerialization();
      * testFile("createSwingWindow.cSnip"); ignoreUnassertedWarnings(); }
      * 

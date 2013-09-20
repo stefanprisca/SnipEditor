@@ -1,0 +1,344 @@
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for org.eclipse.recommenders.snipmatch:releng:pom:0.2.0-SNAPSHOT
+[WARNING] 'parent.relativePath' points at org.eclipse.recommenders.snipmatch:snipmatch-aggregator instead of org.eclipse.recommenders:releng, please verify your project structure @ line 5, column 10
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for org.eclipse.recommenders.snipmatch:targets:pom:0.2.0-SNAPSHOT
+[WARNING] 'parent.relativePath' points at org.eclipse.recommenders.snipmatch:snipmatch-aggregator instead of org.eclipse.recommenders:targets, please verify your project structure @ line 5, column 10
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for org.eclipse.recommenders.snipmatch:plugins:pom:0.2.0-SNAPSHOT
+[WARNING] 'parent.relativePath' points at org.eclipse.recommenders.snipmatch:snipmatch-aggregator instead of org.eclipse.recommenders:plugins, please verify your project structure @ line 5, column 10
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for org.eclipse.recommenders.snipmatch:tests:pom:0.2.0-SNAPSHOT
+[WARNING] 'parent.relativePath' points at org.eclipse.recommenders.snipmatch:snipmatch-aggregator instead of org.eclipse.recommenders:tests, please verify your project structure @ line 5, column 10
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for org.eclipse.recommenders.snipmatch:features:pom:0.2.0-SNAPSHOT
+[WARNING] 'parent.relativePath' points at org.eclipse.recommenders.snipmatch:snipmatch-aggregator instead of org.eclipse.recommenders:features, please verify your project structure @ line 5, column 10
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for org.eclipse.recommenders.snipmatch:repositories:pom:0.2.0-SNAPSHOT
+[WARNING] 'parent.relativePath' points at org.eclipse.recommenders.snipmatch:snipmatch-aggregator instead of org.eclipse.recommenders:repositories, please verify your project structure @ line 5, column 10
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[WARNING] No explicit target runtime environment configuration. Build is platform dependent.
+[WARNING] No explicit target runtime environment configuration. Build is platform dependent.
+[WARNING] No explicit target runtime environment configuration. Build is platform dependent.
+[WARNING] No explicit target runtime environment configuration. Build is platform dependent.
+[WARNING] No explicit target runtime environment configuration. Build is platform dependent.
+[WARNING] No explicit target runtime environment configuration. Build is platform dependent.
+[WARNING] No explicit target runtime environment configuration. Build is platform dependent.
+[INFO] Computing target platform for MavenProject: org.eclipse.recommenders.snipmatch:org.eclipse.recommenders.snipmatch.rcp:0.2.0-SNAPSHOT @ W:\GitHub\org.eclipse.recommenders.snipmatch\plugins\org.eclipse.recommenders.snipmatch.rcp\pom.xml
+[INFO] Resolving dependencies of MavenProject: org.eclipse.recommenders.snipmatch:org.eclipse.recommenders.snipmatch.rcp:0.2.0-SNAPSHOT @ W:\GitHub\org.eclipse.recommenders.snipmatch\plugins\org.eclipse.recommenders.snipmatch.rcp\pom.xml
+[WARNING] The following locally built units have been used to resolve project dependencies:
+[WARNING]   org.eclipse.recommenders.injection/1.100.0.v20130822-2103
+[INFO] Resolving class path of MavenProject: org.eclipse.recommenders.snipmatch:org.eclipse.recommenders.snipmatch.rcp:0.2.0-SNAPSHOT @ W:\GitHub\org.eclipse.recommenders.snipmatch\plugins\org.eclipse.recommenders.snipmatch.rcp\pom.xml
+[INFO] Computing target platform for MavenProject: org.eclipse.recommenders.snipmatch:org.eclipse.recommenders.templates:0.2.0-SNAPSHOT @ W:\GitHub\org.eclipse.recommenders.snipmatch\plugins\org.eclipse.recommenders.templates\pom.xml
+[INFO] Resolving dependencies of MavenProject: org.eclipse.recommenders.snipmatch:org.eclipse.recommenders.templates:0.2.0-SNAPSHOT @ W:\GitHub\org.eclipse.recommenders.snipmatch\plugins\org.eclipse.recommenders.templates\pom.xml
+[INFO] Resolving class path of MavenProject: org.eclipse.recommenders.snipmatch:org.eclipse.recommenders.templates:0.2.0-SNAPSHOT @ W:\GitHub\org.eclipse.recommenders.snipmatch\plugins\org.eclipse.recommenders.templates\pom.xml
+[INFO] Computing target platform for MavenProject: org.eclipse.recommenders.snipmatch:org.eclipse.recommenders.templates.rcp:0.2.0-SNAPSHOT @ W:\GitHub\org.eclipse.recommenders.snipmatch\plugins\org.eclipse.recommenders.templates.rcp\pom.xml
+[INFO] Resolving dependencies of MavenProject: org.eclipse.recommenders.snipmatch:org.eclipse.recommenders.templates.rcp:0.2.0-SNAPSHOT @ W:\GitHub\org.eclipse.recommenders.snipmatch\plugins\org.eclipse.recommenders.templates.rcp\pom.xml
+[INFO] Resolving class path of MavenProject: org.eclipse.recommenders.snipmatch:org.eclipse.recommenders.templates.rcp:0.2.0-SNAPSHOT @ W:\GitHub\org.eclipse.recommenders.snipmatch\plugins\org.eclipse.recommenders.templates.rcp\pom.xml
+[INFO] Computing target platform for MavenProject: org.eclipse.recommenders.snipmatch:org.eclipse.recommenders.snipmatch.rcp.tests:0.2.0-SNAPSHOT @ W:\GitHub\org.eclipse.recommenders.snipmatch\tests\org.eclipse.recommenders.snipmatch.rcp.tests\pom.xml
+[INFO] Resolving dependencies of MavenProject: org.eclipse.recommenders.snipmatch:org.eclipse.recommenders.snipmatch.rcp.tests:0.2.0-SNAPSHOT @ W:\GitHub\org.eclipse.recommenders.snipmatch\tests\org.eclipse.recommenders.snipmatch.rcp.tests\pom.xml
+[WARNING] The following locally built units have been used to resolve project dependencies:
+[WARNING]   org.eclipse.recommenders.injection/1.100.0.v20130822-2103
+[INFO] Resolving class path of MavenProject: org.eclipse.recommenders.snipmatch:org.eclipse.recommenders.snipmatch.rcp.tests:0.2.0-SNAPSHOT @ W:\GitHub\org.eclipse.recommenders.snipmatch\tests\org.eclipse.recommenders.snipmatch.rcp.tests\pom.xml
+[INFO] Computing target platform for MavenProject: org.eclipse.recommenders.snipmatch:org.eclipse.recommenders.templates.tests:0.2.0-SNAPSHOT @ W:\GitHub\org.eclipse.recommenders.snipmatch\tests\org.eclipse.recommenders.templates.tests\pom.xml
+[INFO] Resolving dependencies of MavenProject: org.eclipse.recommenders.snipmatch:org.eclipse.recommenders.templates.tests:0.2.0-SNAPSHOT @ W:\GitHub\org.eclipse.recommenders.snipmatch\tests\org.eclipse.recommenders.templates.tests\pom.xml
+[INFO] Resolving class path of MavenProject: org.eclipse.recommenders.snipmatch:org.eclipse.recommenders.templates.tests:0.2.0-SNAPSHOT @ W:\GitHub\org.eclipse.recommenders.snipmatch\tests\org.eclipse.recommenders.templates.tests\pom.xml
+[INFO] Computing target platform for MavenProject: org.eclipse.recommenders.snipmatch:org.eclipse.recommenders.snipmatch.rcp.feature:0.2.0-SNAPSHOT @ W:\GitHub\org.eclipse.recommenders.snipmatch\features\org.eclipse.recommenders.snipmatch.rcp.feature\pom.xml
+[INFO] Resolving dependencies of MavenProject: org.eclipse.recommenders.snipmatch:org.eclipse.recommenders.snipmatch.rcp.feature:0.2.0-SNAPSHOT @ W:\GitHub\org.eclipse.recommenders.snipmatch\features\org.eclipse.recommenders.snipmatch.rcp.feature\pom.xml
+[WARNING] The following locally built units have been used to resolve project dependencies:
+[WARNING]   org.eclipse.recommenders.jayes.io/1.100.0.v20130822-2103
+[WARNING]   org.eclipse.recommenders.apidocs/1.100.0.v20130822-2103
+[WARNING]   org.eclipse.recommenders.injection/1.100.0.v20130822-2103
+[WARNING]   org.eclipse.recommenders.jayes/1.100.0.v20130822-2103
+[WARNING]   org.eclipse.recommenders.subwords.rcp/1.100.0.v20130822-2103
+[INFO] Resolving class path of MavenProject: org.eclipse.recommenders.snipmatch:org.eclipse.recommenders.snipmatch.rcp.feature:0.2.0-SNAPSHOT @ W:\GitHub\org.eclipse.recommenders.snipmatch\features\org.eclipse.recommenders.snipmatch.rcp.feature\pom.xml
+[INFO] Computing target platform for MavenProject: org.eclipse.recommenders.snipmatch:head:0.2.0-SNAPSHOT @ W:\GitHub\org.eclipse.recommenders.snipmatch\repositories\head\pom.xml
+[INFO] Resolving dependencies of MavenProject: org.eclipse.recommenders.snipmatch:head:0.2.0-SNAPSHOT @ W:\GitHub\org.eclipse.recommenders.snipmatch\repositories\head\pom.xml
+[WARNING] The following locally built units have been used to resolve project dependencies:
+[WARNING]   org.eclipse.recommenders.jayes.io/1.100.0.v20130822-2103
+[WARNING]   org.eclipse.recommenders.apidocs/1.100.0.v20130822-2103
+[WARNING]   org.eclipse.recommenders.injection/1.100.0.v20130822-2103
+[WARNING]   org.eclipse.recommenders.jayes/1.100.0.v20130822-2103
+[WARNING]   org.eclipse.recommenders.subwords.rcp/1.100.0.v20130822-2103
+[INFO] Resolving class path of MavenProject: org.eclipse.recommenders.snipmatch:head:0.2.0-SNAPSHOT @ W:\GitHub\org.eclipse.recommenders.snipmatch\repositories\head\pom.xml
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] Release Engineering
+[INFO] licenses
+[INFO] Targets Definitions
+[INFO] Target Definition for Eclipse Luna
+[INFO] Plugins
+[INFO] org.eclipse.recommenders.templates
+[INFO] org.eclipse.recommenders.templates.rcp
+[INFO] org.eclipse.recommenders.snipmatch.rcp
+[INFO] Tests
+[INFO] org.eclipse.recommenders.snipmatch.rcp.tests
+[INFO] org.eclipse.recommenders.templates.tests
+[INFO] Features
+[INFO] org.eclipse.recommenders.snipmatch.rcp.feature
+[INFO] repositories
+[INFO] Recommenders Incubator: Snipmatch
+[INFO] snipmatch-aggregator
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Release Engineering 0.2.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.4.1:clean (default-clean) @ releng ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.2:enforce (require-plugin-versions) @ releng ---
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building licenses 0.2.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.4.1:clean (default-clean) @ licenses ---
+[INFO] Deleting W:\GitHub\org.eclipse.recommenders.snipmatch\releng\licenses\target
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.2:enforce (require-plugin-versions) @ licenses ---
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ licenses ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 3 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ licenses ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ licenses ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory W:\GitHub\org.eclipse.recommenders.snipmatch\releng\licenses\src\test\resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:testCompile (default-testCompile) @ licenses ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.14.1:test (default-test) @ licenses ---
+[INFO] No tests to run.
+[INFO] 
+[INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ licenses ---
+[INFO] Building jar: W:\GitHub\org.eclipse.recommenders.snipmatch\releng\licenses\target\licenses-0.2.0-SNAPSHOT.jar
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Targets Definitions 0.2.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.4.1:clean (default-clean) @ targets ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.2:enforce (require-plugin-versions) @ targets ---
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Target Definition for Eclipse Luna 0.2.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.4.1:clean (default-clean) @ luna ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.2:enforce (require-plugin-versions) @ luna ---
+[INFO] 
+[INFO] --- tycho-packaging-plugin:0.18.1:package-target-definition (default-package-target-definition) @ luna ---
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Plugins 0.2.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.4.1:clean (default-clean) @ plugins ---
+[INFO] Deleting W:\GitHub\org.eclipse.recommenders.snipmatch\plugins\target
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.2:enforce (require-about-html) @ plugins ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.2:enforce (enforce-bytecode-version) @ plugins ---
+[INFO] 
+[INFO] --- xtend-maven-plugin:2.4.2:compile (compile) @ plugins ---
+[INFO] skip compiling sources because the configured directory '[W:\GitHub\org.eclipse.recommenders.snipmatch\plugins\src]' does not exists.
+[INFO] 
+[INFO] --- animal-sniffer-maven-plugin:1.9:check (check-signature) @ plugins ---
+[INFO] Checking unresolved references to org.codehaus.mojo.signature:java16:1.0
+[INFO] 
+[INFO] --- tycho-source-plugin:0.18.1:plugin-source (attach-source) @ plugins ---
+[INFO] 
+[INFO] --- maven-checkstyle-plugin:2.10:check (check-coding-conventions) @ plugins ---
+[INFO] 
+[INFO] 
+[INFO] --- maven-license-plugin:1.9.0:check (check-license-headers) @ plugins ---
+[INFO] Checking licenses...
+[WARNING] Property 'strictCheck' is not enabled. Please consider adding <strictCheck>true</strictCheck> in your pom.xml file.
+[WARNING] See http://code.google.com/p/maven-license-plugin/wiki/Configuration for more information.
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building org.eclipse.recommenders.templates 0.2.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.4.1:clean (default-clean) @ org.eclipse.recommenders.templates ---
+[INFO] Deleting W:\GitHub\org.eclipse.recommenders.snipmatch\plugins\org.eclipse.recommenders.templates\target
+[INFO] 
+[INFO] --- tycho-packaging-plugin:0.18.1:build-qualifier (default-build-qualifier) @ org.eclipse.recommenders.templates ---
+[INFO] 
+[INFO] --- tycho-packaging-plugin:0.18.1:validate-id (default-validate-id) @ org.eclipse.recommenders.templates ---
+[INFO] 
+[INFO] --- tycho-packaging-plugin:0.18.1:validate-version (default-validate-version) @ org.eclipse.recommenders.templates ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.2:enforce (require-about-html) @ org.eclipse.recommenders.templates ---
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.2:enforce (enforce-bytecode-version) @ org.eclipse.recommenders.templates ---
+[INFO] 
+[INFO] --- fornax-oaw-m2-plugin:3.3.1:run-workflow (default) @ org.eclipse.recommenders.templates ---
+[INFO] Fornax Model Workflow Maven2 Plugin V3.3.1
+[INFO] 0    INFO  StandaloneSetup    - Registering platform uri 'W:\GitHub\org.eclipse.recommenders.snipmatch\plugins'
+[INFO] 105  INFO  StandaloneSetup    - Adding generated EPackage 'org.eclipse.xtext.xbase.XbasePackage'
+[INFO] 263  INFO  GenModelHelper     - Registered GenModel 'http://www.eclipse.org/Xtext/Xbase/XAnnotations' from 'platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel'
+[INFO] 266  INFO  GenModelHelper     - Registered GenModel 'http://www.eclipse.org/xtext/xbase/Xtype' from 'platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel'
+[INFO] 283  INFO  GenModelHelper     - Registered GenModel 'http://www.eclipse.org/xtext/xbase/Xbase' from 'platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel'
+[INFO] 283  INFO  GenModelHelper     - Registered GenModel 'http://www.eclipse.org/xtext/common/JavaVMTypes' from 'platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel'
+[INFO] 284  INFO  StandaloneSetup    - Registering project org.eclipse.recommenders.templates at 'file:/W:/GitHub/org.eclipse.recommenders.snipmatch/plugins/org.eclipse.recommenders.templates/'
+[INFO] 967  INFO  DirectoryCleaner   - Cleaning W:\GitHub\org.eclipse.recommenders.snipmatch\plugins\org.eclipse.recommenders.templates\..\org.eclipse.recommenders.templates.rcp\target\generated-sources\xtend
+[INFO] 1077 INFO  LanguageConfig     - generating infrastructure for org.eclipse.recommenders.templates.SnipDSL with fragments : ImplicitRuntimeFragment, ImplicitUiFragment, GrammarAccessFragment, EcoreGeneratorFragment, SerializerFragment, ResourceFactoryFragment, XtextAntlrGeneratorFragment, ValidatorFragment, ImportNamespacesScopingFragment, QualifiedNamesFragment, BuilderIntegrationFragment, GeneratorFragment, FormatterFragment, LabelProviderFragment, OutlineTreeProviderFragment, QuickOutlineFragment, QuickfixProviderFragment, ContentAssistFragment, XtextAntlrUiGeneratorFragment, Junit4Fragment, RefactorElementNameFragment, TypesGeneratorFragment, XbaseGeneratorFragment, CodetemplatesGeneratorFragment, CompareFragment
+[INFO] 4495 INFO  GenModelHelper     - Registered GenModel 'http://www.eclipse.org/recommenders/templates/SnipDSL' from 'platform:/resource/org.eclipse.recommenders.templates/target/generated-sources/xtend/org/eclipse/recommenders/templates/SnipDSL.genmodel'
+[WARNING] 13371 WARN  AbstractScopingFragment - Skipping stub generation as Xbase is used
+[INFO] 19069 INFO  Junit4Fragment     - generating Junit4 Test support classes
+[INFO] 19108 INFO  CompareFragment    - generating Compare Framework infrastructure
+[INFO] 19188 INFO  Workflow           - Done.
+[INFO] Workflow 'src/org/eclipse/recommenders/templates/GenerateSnipDSL.mwe2' finished.
+[INFO] 
+[INFO] --- build-helper-maven-plugin:1.7:add-source (add-source) @ org.eclipse.recommenders.templates ---
+[INFO] Source directory: W:\target\generated-sources\xtend added.
+[INFO] 
+[INFO] --- xtend-maven-plugin:2.4.2:compile (compile) @ org.eclipse.recommenders.templates ---
+[ERROR] 
+ERROR: 	SnipDSLJvmModelInferrer.xtend - W:\GitHub\org.eclipse.recommenders.snipmatch\plugins\org.eclipse.recommenders.templates\src\org\eclipse\recommenders\templates\jvmmodel\SnipDSLJvmModelInferrer.xtend
+18: org.eclipse.recommenders.templates.snipDSL.domainmodel cannot be resolved to a type.
+[ERROR] 
+ERROR: 	SnipDSLJvmModelInferrer.xtend - W:\GitHub\org.eclipse.recommenders.snipmatch\plugins\org.eclipse.recommenders.templates\src\org\eclipse\recommenders\templates\jvmmodel\SnipDSLJvmModelInferrer.xtend
+20: org.eclipse.recommenders.templates.snipDSL.method cannot be resolved to a type.
+[ERROR] 
+ERROR: 	SnipDSLJvmModelInferrer.xtend - W:\GitHub\org.eclipse.recommenders.snipmatch\plugins\org.eclipse.recommenders.templates\src\org\eclipse\recommenders\templates\jvmmodel\SnipDSLJvmModelInferrer.xtend
+21: org.eclipse.recommenders.templates.snipDSL.jFaceVariableDeclaration cannot be resolved to a type.
+[ERROR] 
+ERROR: 	SnipDSLJvmModelInferrer.xtend - W:\GitHub\org.eclipse.recommenders.snipmatch\plugins\org.eclipse.recommenders.templates\src\org\eclipse\recommenders\templates\jvmmodel\SnipDSLJvmModelInferrer.xtend
+22: org.eclipse.recommenders.templates.snipDSL.entity cannot be resolved to a type.
+[ERROR] 
+ERROR: 	SnipDSLJvmModelInferrer.xtend - W:\GitHub\org.eclipse.recommenders.snipmatch\plugins\org.eclipse.recommenders.templates\src\org\eclipse\recommenders\templates\jvmmodel\SnipDSLJvmModelInferrer.xtend
+43: domainmodel cannot be resolved to a type.
+[ERROR] 
+ERROR: 	SnipDSLJvmModelInferrer.xtend - W:\GitHub\org.eclipse.recommenders.snipmatch\plugins\org.eclipse.recommenders.templates\src\org\eclipse\recommenders\templates\jvmmodel\SnipDSLJvmModelInferrer.xtend
+89: entity cannot be resolved to a type.
+[ERROR] 
+ERROR: 	SnipDSLJvmModelInferrer.xtend - W:\GitHub\org.eclipse.recommenders.snipmatch\plugins\org.eclipse.recommenders.templates\src\org\eclipse\recommenders\templates\jvmmodel\SnipDSLJvmModelInferrer.xtend
+58: method cannot be resolved to a type.
+[ERROR] 
+ERROR: 	SnipDSLJvmModelInferrer.xtend - W:\GitHub\org.eclipse.recommenders.snipmatch\plugins\org.eclipse.recommenders.templates\src\org\eclipse\recommenders\templates\jvmmodel\SnipDSLJvmModelInferrer.xtend
+99: jFaceVariableDeclaration cannot be resolved to a type.
+[ERROR] 
+ERROR: 	SnipDSLJvmModelInferrer.xtend - W:\GitHub\org.eclipse.recommenders.snipmatch\plugins\org.eclipse.recommenders.templates\src\org\eclipse\recommenders\templates\jvmmodel\SnipDSLJvmModelInferrer.xtend
+113: method cannot be resolved to a type.
+[ERROR] 
+ERROR: 	SnipDSLJvmModelInferrer.xtend - W:\GitHub\org.eclipse.recommenders.snipmatch\plugins\org.eclipse.recommenders.templates\src\org\eclipse\recommenders\templates\jvmmodel\SnipDSLJvmModelInferrer.xtend
+60: The method name is undefined for the type SnipDSLJvmModelInferrer
+[ERROR] 
+ERROR: 	SnipDSLJvmModelInferrer.xtend - W:\GitHub\org.eclipse.recommenders.snipmatch\plugins\org.eclipse.recommenders.templates\src\org\eclipse\recommenders\templates\jvmmodel\SnipDSLJvmModelInferrer.xtend
+61: The method JType is undefined for the type SnipDSLJvmModelInferrer
+[ERROR] 
+ERROR: 	SnipDSLJvmModelInferrer.xtend - W:\GitHub\org.eclipse.recommenders.snipmatch\plugins\org.eclipse.recommenders.templates\src\org\eclipse\recommenders\templates\jvmmodel\SnipDSLJvmModelInferrer.xtend
+61: The method JType is undefined for the type SnipDSLJvmModelInferrer
+[ERROR] 
+ERROR: 	SnipDSLJvmModelInferrer.xtend - W:\GitHub\org.eclipse.recommenders.snipmatch\plugins\org.eclipse.recommenders.templates\src\org\eclipse\recommenders\templates\jvmmodel\SnipDSLJvmModelInferrer.xtend
+65: The method params is undefined for the type SnipDSLJvmModelInferrer
+[ERROR] 
+ERROR: 	SnipDSLJvmModelInferrer.xtend - W:\GitHub\org.eclipse.recommenders.snipmatch\plugins\org.eclipse.recommenders.templates\src\org\eclipse\recommenders\templates\jvmmodel\SnipDSLJvmModelInferrer.xtend
+66: The method name is undefined for the type SnipDSLJvmModelInferrer
+[ERROR] 
+ERROR: 	SnipDSLJvmModelInferrer.xtend - W:\GitHub\org.eclipse.recommenders.snipmatch\plugins\org.eclipse.recommenders.templates\src\org\eclipse\recommenders\templates\jvmmodel\SnipDSLJvmModelInferrer.xtend
+66: The method parameterType is undefined for the type SnipDSLJvmModelInferrer
+[ERROR] 
+ERROR: 	SnipDSLJvmModelInferrer.xtend - W:\GitHub\org.eclipse.recommenders.snipmatch\plugins\org.eclipse.recommenders.templates\src\org\eclipse\recommenders\templates\jvmmodel\SnipDSLJvmModelInferrer.xtend
+68: The method body is undefined for the type SnipDSLJvmModelInferrer
+[ERROR] 
+ERROR: 	SnipDSLJvmModelInferrer.xtend - W:\GitHub\org.eclipse.recommenders.snipmatch\plugins\org.eclipse.recommenders.templates\src\org\eclipse\recommenders\templates\jvmmodel\SnipDSLJvmModelInferrer.xtend
+101: The method simpleName is undefined for the type SnipDSLJvmModelInferrer
+[ERROR] 
+ERROR: 	SnipDSLJvmModelInferrer.xtend - W:\GitHub\org.eclipse.recommenders.snipmatch\plugins\org.eclipse.recommenders.templates\src\org\eclipse\recommenders\templates\jvmmodel\SnipDSLJvmModelInferrer.xtend
+102: The method setSimpleName is undefined for the type SnipDSLJvmModelInferrer
+[ERROR] 
+ERROR: 	SnipDSLJvmModelInferrer.xtend - W:\GitHub\org.eclipse.recommenders.snipmatch\plugins\org.eclipse.recommenders.templates\src\org\eclipse\recommenders\templates\jvmmodel\SnipDSLJvmModelInferrer.xtend
+103: The method simpleName is undefined for the type SnipDSLJvmModelInferrer
+[ERROR] 
+ERROR: 	SnipDSLJvmModelInferrer.xtend - W:\GitHub\org.eclipse.recommenders.snipmatch\plugins\org.eclipse.recommenders.templates\src\org\eclipse\recommenders\templates\jvmmodel\SnipDSLJvmModelInferrer.xtend
+103: The method simpleName is undefined for the type SnipDSLJvmModelInferrer
+[ERROR] 
+ERROR: 	SnipDSLJvmModelInferrer.xtend - W:\GitHub\org.eclipse.recommenders.snipmatch\plugins\org.eclipse.recommenders.templates\src\org\eclipse\recommenders\templates\jvmmodel\SnipDSLJvmModelInferrer.xtend
+104: The method simpleName is undefined for the type SnipDSLJvmModelInferrer
+[ERROR] 
+ERROR: 	SnipDSLJvmModelInferrer.xtend - W:\GitHub\org.eclipse.recommenders.snipmatch\plugins\org.eclipse.recommenders.templates\src\org\eclipse\recommenders\templates\jvmmodel\SnipDSLJvmModelInferrer.xtend
+107: The method JType is undefined for the type SnipDSLJvmModelInferrer
+[ERROR] 
+ERROR: 	SnipDSLJvmModelInferrer.xtend - W:\GitHub\org.eclipse.recommenders.snipmatch\plugins\org.eclipse.recommenders.templates\src\org\eclipse\recommenders\templates\jvmmodel\SnipDSLJvmModelInferrer.xtend
+109: The method JType is undefined for the type SnipDSLJvmModelInferrer
+[ERROR] 
+ERROR: 	SnipDSLJvmModelInferrer.xtend - W:\GitHub\org.eclipse.recommenders.snipmatch\plugins\org.eclipse.recommenders.templates\src\org\eclipse\recommenders\templates\jvmmodel\SnipDSLJvmModelInferrer.xtend
+111: The method simpleName is undefined for the type SnipDSLJvmModelInferrer
+[ERROR] 
+ERROR: 	SnipDSLJvmModelInferrer.xtend - W:\GitHub\org.eclipse.recommenders.snipmatch\plugins\org.eclipse.recommenders.templates\src\org\eclipse\recommenders\templates\jvmmodel\SnipDSLJvmModelInferrer.xtend
+111: The method JType is undefined for the type SnipDSLJvmModelInferrer
+[ERROR] 
+ERROR: 	SnipDSLJvmModelInferrer.xtend - W:\GitHub\org.eclipse.recommenders.snipmatch\plugins\org.eclipse.recommenders.templates\src\org\eclipse\recommenders\templates\jvmmodel\SnipDSLJvmModelInferrer.xtend
+116: The method name is undefined for the type SnipDSLJvmModelInferrer
+[ERROR] 
+ERROR: 	SnipDSLJvmModelInferrer.xtend - W:\GitHub\org.eclipse.recommenders.snipmatch\plugins\org.eclipse.recommenders.templates\src\org\eclipse\recommenders\templates\jvmmodel\SnipDSLJvmModelInferrer.xtend
+117: The method JType is undefined for the type SnipDSLJvmModelInferrer
+[ERROR] 
+ERROR: 	SnipDSLJvmModelInferrer.xtend - W:\GitHub\org.eclipse.recommenders.snipmatch\plugins\org.eclipse.recommenders.templates\src\org\eclipse\recommenders\templates\jvmmodel\SnipDSLJvmModelInferrer.xtend
+117: The method JType is undefined for the type SnipDSLJvmModelInferrer
+[ERROR] 
+ERROR: 	SnipDSLJvmModelInferrer.xtend - W:\GitHub\org.eclipse.recommenders.snipmatch\plugins\org.eclipse.recommenders.templates\src\org\eclipse\recommenders\templates\jvmmodel\SnipDSLJvmModelInferrer.xtend
+121: The method params is undefined for the type SnipDSLJvmModelInferrer
+[ERROR] 
+ERROR: 	SnipDSLJvmModelInferrer.xtend - W:\GitHub\org.eclipse.recommenders.snipmatch\plugins\org.eclipse.recommenders.templates\src\org\eclipse\recommenders\templates\jvmmodel\SnipDSLJvmModelInferrer.xtend
+122: The method name is undefined for the type SnipDSLJvmModelInferrer
+[ERROR] 
+ERROR: 	SnipDSLJvmModelInferrer.xtend - W:\GitHub\org.eclipse.recommenders.snipmatch\plugins\org.eclipse.recommenders.templates\src\org\eclipse\recommenders\templates\jvmmodel\SnipDSLJvmModelInferrer.xtend
+122: The method parameterType is undefined for the type SnipDSLJvmModelInferrer
+[ERROR] 
+ERROR: 	SnipDSLJvmModelInferrer.xtend - W:\GitHub\org.eclipse.recommenders.snipmatch\plugins\org.eclipse.recommenders.templates\src\org\eclipse\recommenders\templates\jvmmodel\SnipDSLJvmModelInferrer.xtend
+124: The method body is undefined for the type SnipDSLJvmModelInferrer
+[WARNING] 
+WARNING: 	SnipDSLJvmModelInferrer.xtend - W:\GitHub\org.eclipse.recommenders.snipmatch\plugins\org.eclipse.recommenders.templates\src\org\eclipse\recommenders\templates\jvmmodel\SnipDSLJvmModelInferrer.xtend
+36: The extension org.eclipse.xtext.naming.IQualifiedNameProvider is not used in SnipDSLJvmModelInferrer
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary:
+[INFO] 
+[INFO] Release Engineering ............................... SUCCESS [0.202s]
+[INFO] licenses .......................................... SUCCESS [0.411s]
+[INFO] Targets Definitions ............................... SUCCESS [0.008s]
+[INFO] Target Definition for Eclipse Luna ................ SUCCESS [0.073s]
+[INFO] Plugins ........................................... SUCCESS [3.342s]
+[INFO] org.eclipse.recommenders.templates ................ FAILURE [29.991s]
+[INFO] org.eclipse.recommenders.templates.rcp ............ SKIPPED
+[INFO] org.eclipse.recommenders.snipmatch.rcp ............ SKIPPED
+[INFO] Tests ............................................. SKIPPED
+[INFO] org.eclipse.recommenders.snipmatch.rcp.tests ...... SKIPPED
+[INFO] org.eclipse.recommenders.templates.tests .......... SKIPPED
+[INFO] Features .......................................... SKIPPED
+[INFO] org.eclipse.recommenders.snipmatch.rcp.feature .... SKIPPED
+[INFO] repositories ...................................... SKIPPED
+[INFO] Recommenders Incubator: Snipmatch ................. SKIPPED
+[INFO] snipmatch-aggregator .............................. SKIPPED
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 1:56.758s
+[INFO] Finished at: Thu Sep 19 16:33:30 EEST 2013
+[INFO] Final Memory: 94M/343M
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.eclipse.xtend:xtend-maven-plugin:2.4.2:compile (compile) on project org.eclipse.recommenders.templates: Error compiling xtend sources in 'W:\GitHub\org.eclipse.recommenders.snipmatch\plugins\org.eclipse.recommenders.templates\src'. -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
+[ERROR] 
+[ERROR] After correcting the problems, you can resume the build with the command
+[ERROR]   mvn <goals> -rf :org.eclipse.recommenders.templates

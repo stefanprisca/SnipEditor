@@ -20,6 +20,8 @@ import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.eclipse.recommenders.templates.snipDSL.method
 import org.eclipse.recommenders.templates.snipDSL.jFaceVariableDeclaration
 import org.eclipse.recommenders.templates.snipDSL.entity
+import org.eclipse.recommenders.templates.snipDSL.jFaceDeclarationType
+import java.util.Collection
 
 /**
  * <p>Infers a JVM model from the source model.</p> 
@@ -44,10 +46,7 @@ class SnipDSLJvmModelInferrer extends AbstractModelInferrer {
 	//	scopeProvider.getScope(element, null);
 		//println(this)
 		var name=new String();
-		if(element.entity !=null){
-			name=element.entity.name
-		}else
-			name = "CodeSnippet_"+System.currentTimeMillis%100
+		name = "CodeSnippet_"+System.currentTimeMillis%100
 	
 		acceptor.accept(element.toClass(name)).initializeLater[
 			if(element.body!=null){
@@ -57,13 +56,10 @@ class SnipDSLJvmModelInferrer extends AbstractModelInferrer {
 			{
 				method :{
    								//if(feature.JType!=null){
-          						  	members+=feature.toMethod(feature.name, 
-          						  		 if (feature.JType.type != null) feature.JType.type 
-          						  		 else newTypeRef(Void.TYPE)
-          						  	) [
+          						  	members+=feature.toMethod(feature.name.convertJfaceName, feature.computeType) [
               						documentation = feature.documentation
               						for (p : feature.params) {
-                					parameters += p.toParameter(p.name, p.parameterType)
+                					parameters += p.toParameter(p.name.convertJfaceName, p.parameterType)
               						}
              	 					body =feature.body  
              	 				]
@@ -98,28 +94,20 @@ class SnipDSLJvmModelInferrer extends AbstractModelInferrer {
    					switch feature{
    						jFaceVariableDeclaration //sets the name of the feature accordingly
    								:{ 
-   									if(feature.simpleName.contains("newName")){
-   										feature.setSimpleName(
-   											'${'+feature.simpleName.substring(feature.simpleName.indexOf('{')+1,
-   												feature.simpleName.indexOf(':')) +'}'
-   										)
-   									}
+   									
    									if(feature.JType.type==null)
    									{
    										feature.JType.setType(newTypeRef(feature, typeof(Object) , null));
    									}
-   									members+=feature.toField(feature.simpleName, feature.JType.type)
+   									members+=feature.toField(feature.simpleName.convertJfaceName, feature.JType.type)
    								}
    						method 
    								:{
    								//if(feature.JType!=null){
-          						  	members += feature.toMethod(feature.name, 
-          						  		 if (feature.JType != null) feature.JType.type 
-          						  		 else newTypeRef(Void::TYPE)
-          						  	) [
+          						  	members += feature.toMethod(feature.name.convertJfaceName,feature.computeType) [
               						documentation = feature.documentation
               						for (p : feature.params) {
-                					parameters += p.toParameter(p.name, p.parameterType)
+                					parameters += p.toParameter(p.name.convertJfaceName, p.parameterType)
               						}
              	 					body =feature.body  
              	 				]
@@ -131,6 +119,38 @@ class SnipDSLJvmModelInferrer extends AbstractModelInferrer {
    		
    			]
    	}
+ 
+ def computeType(method expression){
+ 	var type = expression.newTypeRef(typeof(Object));
+ 	if(expression.JType==null){
+ 		type = expression.newTypeRef(Void.TYPE);
+ 	}else
+ 	if (expression.getJType().getType() != null) {
+            type = expression.getJType().getType();
+
+        } else if (expression.getJType().getJFaceType() != null) {
+            var jfaceType = expression.getJType()
+                    .getJFaceType();
+            if (jfaceType.getType().contains("array")) {
+                type = expression.newTypeRef(typeof(Object)).addArrayTypeDimension;
+
+            } else if (jfaceType.getType().contains("interable")) {
+                type =expression.newTypeRef(typeof(Iterable))
+            } else if (jfaceType.getType().contains("collection")) {
+                type = expression.newTypeRef(typeof(Collection))
+
+            }
+
+        }
+        return type
+ }
+ 
+ def convertJfaceName(String jfaceName){
+ 	if(jfaceName.contains("newName")){
+   						return '${'+jfaceName.substring(jfaceName.indexOf('{')+1,jfaceName.indexOf(':')) +'}'
+   	}
+   	else return jfaceName
+ }
    
 }
 
